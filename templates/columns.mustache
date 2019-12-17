@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_classic/columns
+    @template theme_wwu2019/columns
 
     Admin time setting template.
 
@@ -51,12 +51,8 @@
 
     {{{ output.standard_top_of_body_html }}}
 
-    {{>theme_classic/navbar}}
-
     <div id="page" class="container-fluid">
-
-        {{> theme_boost/flat_navigation }}
-
+        {{{ output.logo_header }}}
         {{{ output.full_header }}}
 
         <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
