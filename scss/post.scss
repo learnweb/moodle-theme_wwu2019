@@ -103,6 +103,7 @@ h5 {
 /* Header and Logos */
 #logo-header {
     padding: 1.25rem 0;
+    margin-bottom: 1.25rem;
 
     a.wwu-logo {
         text-align: left;
@@ -127,5 +128,28 @@ h5 {
 
     a.learnweb-logo img {
         max-height: 81px;
+    }
+}
+
+#main-menu {
+    border-bottom: 4px solid #423c39;
+    padding-bottom: 16px;
+
+    .main-menu-item {
+        &:not(:first-child) {
+            padding-left: 15px;
+        }
+
+        &:not(:last-child) {
+            padding-right: 15px;
+            border-right: 1px solid black;
+        }
+
+        span {
+            color: black;
+            text-transform: uppercase;
+            font-size: 1.34375em;
+            line-height: 1.2em;
+        }
     }
 }
