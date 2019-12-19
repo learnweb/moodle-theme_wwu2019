@@ -46,7 +46,48 @@ class core_renderer extends \core_renderer {
     }
 
     public function main_menu() {
-        return $this->render_from_template('theme_wwu2019/menu', null);
+
+        $templatecontext = [
+                'mainmenu' => [
+                        [
+                                'name' => 'Meine Kurse',
+                                'icon' => 'briefcase',
+                                'menu' => [
+                                        [
+                                                'name' => 'WiSe 2019/2020',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'breaker' => ''
+                                        ],
+                                        [
+                                                'name' => 'SoSe 2019',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'breaker' => 'c3 c2'
+                                        ],
+                                        [
+                                                'name' => 'WiSe 2018/2019',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'breaker' => 'c3'
+                                        ],
+                                        [
+                                                'name' => 'SoSe 2018',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'breaker' => ''
+                                        ],
+                                ]
+                        ],
+                        [
+                                'name' => 'Dieser Kurs',
+                                'icon' => 'book',
+                                'menu' => null
+                        ],
+                ]
+        ];
+
+        return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
     }
 
 }

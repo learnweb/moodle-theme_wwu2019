@@ -27,18 +27,29 @@
 }}
 <div id="main-menu">
     <div class="pull-left">
+        {{# mainmenu }}
         <div class="main-menu-item pull-left">
             <a>
-                <span class="fa fa-briefcase"></span>
-                <span>Meine Kurse</span>
+                <span class="fa fa-{{icon}}"></span>
+                <span>{{name}}</span>
             </a>
+            <div class="sub-menu-wrapper">
+                <div class="sub-menu">
+                    {{# menu }}
+                        <div class="sub-menu-item">
+                            <a>
+                                <span class="fa fa-{{icon}}"></span>
+                                <span>{{ name }}</span>
+                            </a>
+                        </div>
+                        {{# breaker }}
+                            <div class="breaker {{ breaker }}"></div>
+                        {{/ breaker }}
+                    {{/ menu }}
+                </div>
+            </div>
         </div>
-        <div class="main-menu-item pull-left">
-            <a>
-                <span class="fa fa-book"></span>
-                <span>Dieser Kurs</span>
-            </a>
-        </div>
+        {{/ mainmenu }}
     </div>
     <div class="pull-right"></div>
 </div>

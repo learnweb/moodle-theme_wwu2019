@@ -21,14 +21,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$mobile-break-point: 767px;
+$col2-break-point: 945px;
+
+$learnwebblue: #006784;
+$dividergrey: #423c39;
+
 @font-face {
     font-family: 'MetaWebPro-Normal';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot");
-    src:
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot?#iefix") format("embedded-opentype"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.woff") format("woff"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-normal.ttf") format("truetype"),
-        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-normal.svg#metacomppro-normal") format("svg");
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot?#iefix") format("embedded-opentype"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.woff") format("woff"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-normal.ttf") format("truetype"),
+    url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-normal.svg#metacomppro-normal") format("svg");
     font-weight: 400;
     font-style: normal;
 }
@@ -36,11 +41,10 @@
 @font-face {
     font-family: 'MetaWebPro-NormalIta';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot");
-    src:
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot?#iefix") format("embedded-opentype"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.woff") format("woff"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-normalita.ttf") format("truetype"),
-        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-normalita.svg#metacomppro-normalita") format("svg");
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot?#iefix") format("embedded-opentype"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.woff") format("woff"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-normalita.ttf") format("truetype"),
+    url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-normalita.svg#metacomppro-normalita") format("svg");
     font-weight: 400;
     font-style: italic;
 }
@@ -48,11 +52,10 @@
 @font-face {
     font-family: 'MetaWebPro-Bold';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot");
-    src:
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot?#iefix") format("embedded-opentype"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.woff") format("woff"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-bold.ttf") format("truetype"),
-        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-bold.svg#metacomppro-bold") format("svg");
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot?#iefix") format("embedded-opentype"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.woff") format("woff"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-bold.ttf") format("truetype"),
+    url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-bold.svg#metacomppro-bold") format("svg");
     font-weight: 700;
     font-style: normal;
 }
@@ -60,11 +63,10 @@
 @font-face {
     font-family: 'MetaWebPro-BoldIta';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot");
-    src:
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot?#iefix") format("embedded-opentype"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.woff") format("woff"),
-        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-boldita.ttf") format("truetype"),
-        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-boldita.svg#metacomppro-boldita") format("svg");
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot?#iefix") format("embedded-opentype"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.woff") format("woff"),
+    url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-boldita.ttf") format("truetype"),
+    url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-boldita.svg#metacomppro-boldita") format("svg");
     font-weight: 700;
     font-style: italic;
 }
@@ -96,8 +98,13 @@ h5 {
 }
 
 #page {
+    width: 100%;
     max-width: 1440px;
+    padding: 16px;
+    position: relative;
     margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Header and Logos */
@@ -115,7 +122,7 @@ h5 {
         background-repeat: no-repeat;
         background-image: url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg");
 
-        @media (max-width: 767px) {
+        @media (max-width: $mobile-break-point) {
             background-position: -82px center;
             background-size: cover;
             width: 81px;
@@ -132,8 +139,8 @@ h5 {
 }
 
 #main-menu {
-    border-bottom: 4px solid #423c39;
-    padding-bottom: 16px;
+    border-bottom: 4px solid $dividergrey;
+    padding-bottom: 12px;
 
     .main-menu-item {
         &:not(:first-child) {
@@ -150,6 +157,63 @@ h5 {
             text-transform: uppercase;
             font-size: 1.34375em;
             line-height: 1.2em;
+        }
+    }
+
+    .sub-menu-wrapper {
+        margin-top: 16px;
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        background: white;
+        border-bottom: 8px solid white;
+        overflow: hidden;
+
+        .sub-menu {
+            width: calc(100% + 16px - 32px); // TODO Better container.
+            position: relative;
+            display: table;
+            table-layout: fixed;
+            margin-right: -16px;
+            margin-bottom: -1px;
+            border-bottom: 4px solid $dividergrey;
+
+            .sub-menu-item {
+                width: 100%;
+                display: block;
+                padding-right: 16px;
+                line-height: 20px;
+
+                a {
+                    display: block;
+                    width: 100%;
+                    padding: 12px 0;
+                    border-bottom: 1px solid black;
+                }
+
+                span {
+                    font-size: 16px;
+                    color: $learnwebblue;
+                }
+            }
+
+            .breaker {
+                display: none;
+
+                &.c3 {
+                    @media (min-width: $col2-break-point + 1) {
+                        display: table-cell;
+                        width: 0;
+                    }
+                }
+
+                &.c2 {
+                    @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
+                        display: table-cell;
+                        width: 0;
+                    }
+                }
+            }
         }
     }
 }
