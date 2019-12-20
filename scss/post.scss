@@ -141,6 +141,7 @@ h5 {
 #main-menu {
     border-bottom: 4px solid $dividergrey;
     padding-bottom: 12px;
+    position: relative;
 
     .main-menu-item {
         &:not(:first-child) {
@@ -158,59 +159,76 @@ h5 {
             font-size: 1.34375em;
             line-height: 1.2em;
         }
-    }
 
-    .sub-menu-wrapper {
-        margin-top: 16px;
-        position: absolute;
-        width: 100%;
-        z-index: 999;
-        background: white;
-        border-bottom: 8px solid white;
-        overflow: hidden;
+        .sub-menu-wrapper {
+            display: none;
+        }
 
-        .sub-menu {
-            width: calc(100% + 16px - 32px); // TODO Better container.
-            position: relative;
-            display: table;
-            table-layout: fixed;
-            margin-right: -16px;
-            margin-bottom: -1px;
-            border-bottom: 4px solid $dividergrey;
-
-            .sub-menu-item {
-                width: 100%;
+        &.open {
+            .sub-menu-wrapper {
                 display: block;
-                padding-right: 16px;
-                line-height: 20px;
+                margin-top: 16px;
+                position: absolute;
+                width: 100%;
+                z-index: 999;
+                background: white;
+                border-bottom: 8px solid white;
+                overflow: hidden;
+                left: 0;
 
-                a {
+                &::after {
+                    content: "";
                     display: block;
                     width: 100%;
-                    padding: 12px 0;
-                    border-bottom: 1px solid black;
+                    height: 4px;
+                    background: $dividergrey;
                 }
 
-                span {
-                    font-size: 16px;
-                    color: $learnwebblue;
-                }
-            }
+                .sub-menu {
+                    position: relative;
+                    display: table;
+                    table-layout: fixed;
+                    // Hide padding of leftmost items.
+                    margin-right: -16px;
+                    // Hide divider below bottommost items.
+                    margin-bottom: -1px;
+                    width: calc(100% + 16px);
 
-            .breaker {
-                display: none;
+                    .sub-menu-item {
+                        width: 100%;
+                        display: block;
+                        padding-right: 16px;
+                        line-height: 20px;
 
-                &.c3 {
-                    @media (min-width: $col2-break-point + 1) {
-                        display: table-cell;
-                        width: 0;
+                        a {
+                            display: block;
+                            width: 100%;
+                            padding: 12px 0;
+                            border-bottom: 1px solid black;
+                        }
+
+                        span {
+                            font-size: 16px;
+                            color: $learnwebblue;
+                        }
                     }
-                }
 
-                &.c2 {
-                    @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
-                        display: table-cell;
-                        width: 0;
+                    .breaker {
+                        display: none;
+
+                        &.c3 {
+                            @media (min-width: $col2-break-point + 1) {
+                                display: table-cell;
+                                width: 0;
+                            }
+                        }
+
+                        &.c2 {
+                            @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
+                                display: table-cell;
+                                width: 0;
+                            }
+                        }
                     }
                 }
             }

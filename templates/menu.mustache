@@ -33,21 +33,23 @@
                 <span class="fa fa-{{icon}}"></span>
                 <span>{{name}}</span>
             </a>
-            <div class="sub-menu-wrapper">
-                <div class="sub-menu">
-                    {{# menu }}
-                        <div class="sub-menu-item">
-                            <a>
-                                <span class="fa fa-{{icon}}"></span>
-                                <span>{{ name }}</span>
-                            </a>
-                        </div>
-                        {{# breaker }}
-                            <div class="breaker {{ breaker }}"></div>
-                        {{/ breaker }}
-                    {{/ menu }}
+            {{# hasmenu }}
+                <div class="sub-menu-wrapper">
+                    <div class="sub-menu">
+                        {{# menu }}
+                            <div class="sub-menu-item">
+                                <a>
+                                    <span class="fa fa-{{icon}}"></span>
+                                    <span>{{ name }}</span>
+                                </a>
+                            </div>
+                            {{# breaker }}
+                                <div class="breaker {{ breaker }}"></div>
+                            {{/ breaker }}
+                        {{/ menu }}
+                    </div>
                 </div>
-            </div>
+            {{/hasmenu}}
         </div>
         {{/ mainmenu }}
     </div>

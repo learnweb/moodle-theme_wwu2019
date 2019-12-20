@@ -52,29 +52,34 @@ class core_renderer extends \core_renderer {
                         [
                                 'name' => 'Meine Kurse',
                                 'icon' => 'briefcase',
+                                'hasmenu' => 'true',
                                 'menu' => [
                                         [
                                                 'name' => 'WiSe 2019/2020',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
+                                                'hasmenu' => 'false',
                                                 'breaker' => ''
                                         ],
                                         [
                                                 'name' => 'SoSe 2019',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
+                                                'hasmenu' => 'false',
                                                 'breaker' => 'c3 c2'
                                         ],
                                         [
                                                 'name' => 'WiSe 2018/2019',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
+                                                'hasmenu' => 'false',
                                                 'breaker' => 'c3'
                                         ],
                                         [
                                                 'name' => 'SoSe 2018',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
+                                                'hasmenu' => 'false',
                                                 'breaker' => ''
                                         ],
                                 ]
@@ -82,7 +87,36 @@ class core_renderer extends \core_renderer {
                         [
                                 'name' => 'Dieser Kurs',
                                 'icon' => 'book',
-                                'menu' => null
+                                'menu' => [
+                                        [
+                                                'name' => 'WiSe 2019/2020',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'hasmenu' => 'false',
+                                                'breaker' => ''
+                                        ],
+                                        [
+                                                'name' => 'SoSe 2019',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'hasmenu' => 'false',
+                                                'breaker' => 'c3 c2'
+                                        ],
+                                        [
+                                                'name' => 'WiSe 2018/2019',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'hasmenu' => 'false',
+                                                'breaker' => 'c3'
+                                        ],
+                                        [
+                                                'name' => 'SoSe 2018',
+                                                'icon' => 'calendar',
+                                                'menu' => '',
+                                                'hasmenu' => 'false',
+                                                'breaker' => ''
+                                        ],
+                                ]
                         ],
                 ]
         ];
