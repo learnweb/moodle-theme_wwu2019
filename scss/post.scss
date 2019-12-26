@@ -138,6 +138,14 @@ h5 {
     }
 }
 
+/* Navigation */
+
+ul[role="menu"],
+ul[role="menubar"] {
+    list-style: none;
+    padding: 0;
+}
+
 #main-menu {
     border-bottom: 4px solid $dividergrey;
     padding-bottom: 12px;

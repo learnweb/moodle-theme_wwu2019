@@ -25,33 +25,32 @@
         "logo": "https://www.example-moodle.de/theme/wwu2019/pix/logo.svg"
     }
 }}
-<div id="main-menu">
-    <div class="pull-left">
+<nav id="main-menu">
+    <ul role="menubar">
         {{# mainmenu }}
-        <div class="main-menu-item pull-left">
-            <a>
-                <span class="fa fa-{{icon}}"></span>
-                <span>{{name}}</span>
-            </a>
-            {{# hasmenu }}
-                <div class="sub-menu-wrapper">
-                    <div class="sub-menu">
-                        {{# menu }}
-                            <div class="sub-menu-item">
-                                <a>
-                                    <span class="fa fa-{{icon}}"></span>
-                                    <span>{{ name }}</span>
-                                </a>
-                            </div>
-                            {{# breaker }}
-                                <div class="breaker {{ breaker }}"></div>
-                            {{/ breaker }}
-                        {{/ menu }}
+            <li role="none" class="main-menu-item pull-left">
+                <a role="menuitem" tabindex="0" {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/ hasmenu }}>
+                    <span class="fa fa-{{icon}}"></span>
+                    <span>{{name}}</span>
+                </a>
+                {{# hasmenu }}
+                    <div class="sub-menu-wrapper">
+                        <ul role="menu" class="sub-menu">
+                            {{# menu }}
+                                <li role="none" class="sub-menu-item">
+                                    <a role="menuitem">
+                                        <span class="fa fa-{{icon}}"></span>
+                                        <span>{{ name }}</span>
+                                    </a>
+                                </li>
+                                {{# breaker }}
+                                    <div class="breaker {{ breaker }}"></div>
+                                {{/ breaker }}
+                            {{/ menu }}
+                        </ul>
                     </div>
-                </div>
-            {{/hasmenu}}
-        </div>
+                {{/hasmenu}}
+            </li>
         {{/ mainmenu }}
-    </div>
-    <div class="pull-right"></div>
-</div>
+    </ul>
+</nav>
