@@ -46,7 +46,7 @@ class core_renderer extends \core_renderer {
     }
 
     public function main_menu() {
-
+        global $PAGE;
         $templatecontext = [
                 'mainmenu' => [
                         [
@@ -87,40 +87,27 @@ class core_renderer extends \core_renderer {
                         [
                                 'name' => 'Dieser Kurs',
                                 'icon' => 'book',
+                                'hasmenu' => 'true',
                                 'menu' => [
                                         [
-                                                'name' => 'WiSe 2019/2020',
+                                                'name' => 'Etwas ganz anderes',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
                                                 'hasmenu' => 'false',
-                                                'breaker' => ''
+                                                'breaker' => 'c2 c3'
                                         ],
                                         [
-                                                'name' => 'SoSe 2019',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'hasmenu' => 'false',
-                                                'breaker' => 'c3 c2'
-                                        ],
-                                        [
-                                                'name' => 'WiSe 2018/2019',
+                                                'name' => 'Noch etwas anderes',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
                                                 'hasmenu' => 'false',
                                                 'breaker' => 'c3'
-                                        ],
-                                        [
-                                                'name' => 'SoSe 2018',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'hasmenu' => 'false',
-                                                'breaker' => ''
-                                        ],
+                                        ]
                                 ]
                         ],
                 ]
         ];
-
+        $PAGE->requires->js_call_amd('theme_wwu2019/menu', 'init');
         return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
     }
 

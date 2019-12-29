@@ -25,32 +25,36 @@
         "logo": "https://www.example-moodle.de/theme/wwu2019/pix/logo.svg"
     }
 }}
-<nav id="main-menu">
-    <ul role="menubar">
-        {{# mainmenu }}
-            <li role="none" class="main-menu-item pull-left">
-                <a role="menuitem" tabindex="0" {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/ hasmenu }}>
-                    <span class="fa fa-{{icon}}"></span>
-                    <span>{{name}}</span>
-                </a>
-                {{# hasmenu }}
-                    <div class="sub-menu-wrapper">
-                        <ul role="menu" class="sub-menu">
-                            {{# menu }}
-                                <li role="none" class="sub-menu-item">
-                                    <a role="menuitem">
-                                        <span class="fa fa-{{icon}}"></span>
-                                        <span>{{ name }}</span>
-                                    </a>
-                                </li>
-                                {{# breaker }}
-                                    <div class="breaker {{ breaker }}"></div>
-                                {{/ breaker }}
-                            {{/ menu }}
-                        </ul>
-                    </div>
-                {{/hasmenu}}
-            </li>
-        {{/ mainmenu }}
-    </ul>
-</nav>
+<div id="main-menu-placeholder">
+    <nav id="main-menu">
+        <div id="main-menu-border">
+            <ul role="menubar" class="d-flex">
+                {{# mainmenu }}
+                    <li role="none" class="main-menu-item">
+                        <a role="menuitem" tabindex="0" {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/ hasmenu }}>
+                            <span class="fa fa-{{icon}}"></span>
+                            <span class="underline">{{name}}</span>
+                        </a>
+                        {{# hasmenu }}
+                            <div class="sub-menu-wrapper">
+                                <ul role="menu" class="sub-menu">
+                                    {{# menu }}
+                                        <li role="none" class="sub-menu-item">
+                                            <a role="menuitem">
+                                                <span class="fa fa-{{icon}}"></span>
+                                                <span>{{ name }}</span>
+                                            </a>
+                                        </li>
+                                        {{# breaker }}
+                                            <div class="breaker {{ breaker }}"></div>
+                                        {{/ breaker }}
+                                    {{/ menu }}
+                                </ul>
+                            </div>
+                        {{/hasmenu}}
+                    </li>
+                {{/ mainmenu }}
+            </ul>
+        </div>
+    </nav>
+</div>
