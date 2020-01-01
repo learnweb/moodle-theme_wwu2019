@@ -113,8 +113,7 @@ h5 {
 
 /* Header and Logos */
 #logo-header {
-    padding: 1.25rem 0;
-    margin-bottom: 0.5rem;
+    padding-bottom: 1.25rem;
 
     a.wwu-logo {
         text-align: left;
@@ -246,6 +245,19 @@ ul[role="menubar"] {
                             width: 100%;
                             padding: 12px 0;
                             border-bottom: 1px solid black;
+                        }
+
+                        a .arrow {
+                            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+                            width: 21px;
+                            height: 21px;
+                            float: right;
+                            background-size: cover;
+                            margin-top: 2px;
+                        }
+
+                        &.open a .arrow {
+                            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
                         }
 
                         span {

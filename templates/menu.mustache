@@ -43,10 +43,14 @@
                                             <a role="menuitem">
                                                 <span class="fa fa-{{icon}}"></span>
                                                 <span>{{ name }}</span>
+                                                {{# hasmenu }}
+                                                    <div class="arrow"></div>
+                                                {{/ hasmenu }}
                                             </a>
                                         </li>
                                         {{# breaker }}
-                                            <div class="breaker {{ breaker }}"></div>
+                                            <div class="breaker {{ . }}"></div>
+                                            <div></div>
                                         {{/ breaker }}
                                     {{/ menu }}
                                 </ul>

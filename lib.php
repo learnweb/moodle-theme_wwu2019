@@ -36,7 +36,8 @@ function theme_wwu2019_get_main_scss_content($theme) {
     $scss = '';
 
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
-    $pre = file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/pre.scss');
+    $pre = '$wwwroot: "' . $CFG->wwwroot . '";' . "\n";
+    $pre .= file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/pre.scss');
 
     // Main CSS - Get the CSS from theme Classic.
     $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/pre.scss');
@@ -46,6 +47,5 @@ function theme_wwu2019_get_main_scss_content($theme) {
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
     $post = file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/post.scss');
 
-    // Combine them together.
     return $pre . "\n" . $scss . "\n" . $post;
 }

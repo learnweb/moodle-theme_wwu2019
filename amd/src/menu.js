@@ -56,38 +56,95 @@ function stickMenu() {
  * Opens submenu when hovering
  */
 function openMenu() {
-    const delay = 400;
-    let menuitems = $('li.main-menu-item');
+    const delay = 300;
     let openMenu = null;
     let openCandidate = null;
     let openTimeoutId = null;
     let closeTimeoutId = null;
+
+    /**
+     * Opens a menu.
+     * @param {Node} menuItem the menuItem DOM-Element
+     */
+    function open(menuItem) {
+        if (openMenu) {
+            close(openMenu);
+        }
+        abortClose();
+        $(menuItem).addClass('open');
+        openMenu = menuItem;
+        openCandidate = null;
+        openTimeoutId = null;
+    }
+
+    /**
+     * Opens a menu with delay.
+     * @param {Node} menuItem the menuItem DOM-Element
+     */
+    function openWithDelay(menuItem) {
+        openCandidate = menuItem;
+        openTimeoutId = setTimeout(open, delay, menuItem);
+    }
+
+    /**
+     * Closes a menu.
+     * @param {Node} menuItem the menuItem DOM-Element
+     */
+    function close(menuItem) {
+        $(menuItem).removeClass('open');
+        openMenu = null;
+        closeTimeoutId = null;
+    }
+
+    /**
+     * Closes a menu with delay.
+     * @param {Node} menuItem the menuItem DOM-Element
+     */
+    function closeWithDelay(menuItem) {
+        closeTimeoutId = setTimeout(close, delay, menuItem);
+    }
+
+    /**
+     * Aborts the delayed closing of {@link openMenu}
+     */
+    function abortClose() {
+        if (closeTimeoutId) {
+            clearTimeout(closeTimeoutId);
+        }
+    }
+
+    /**
+     * Aborts the delayed opening of {@link openCandidate}
+     */
+    function abortOpen() {
+        openCandidate = null;
+        if (openTimeoutId) {
+            clearTimeout(openTimeoutId);
+        }
+    }
+
+    $('li.main-menu-item > a').click((ev) => {
+        if (ev.currentTarget.parentNode === openMenu) {
+            close(openMenu);
+        } else {
+            open(ev.currentTarget.parentNode);
+        }
+    });
+
+    let menuitems = $('li.main-menu-item');
     menuitems.mouseenter((ev) => {
         if (ev.currentTarget === openMenu) {
-            clearTimeout(closeTimeoutId);
-            return;
+            abortClose();
+        } else {
+            openWithDelay(ev.currentTarget);
         }
-
-        openCandidate = ev.currentTarget;
-        openTimeoutId = setTimeout(() => {
-            $(openMenu).removeClass('open');
-            $(ev.currentTarget).addClass('open');
-            openMenu = ev.currentTarget;
-            openCandidate = null;
-            openTimeoutId = null;
-        }, delay);
     });
     menuitems.mouseleave((ev) => {
         if (openCandidate && ev.currentTarget === openCandidate) {
-            clearTimeout(openTimeoutId);
-            return;
+            abortOpen();
         }
         if (openMenu && ev.currentTarget === openMenu) {
-            closeTimeoutId = setTimeout(() => {
-                $(ev.currentTarget).removeClass('open');
-                openMenu = null;
-                closeTimeoutId = null;
-            }, delay);
+            closeWithDelay(ev.currentTarget);
         }
     });
 }

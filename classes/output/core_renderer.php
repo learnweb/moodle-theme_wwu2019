@@ -52,34 +52,34 @@ class core_renderer extends \core_renderer {
                         [
                                 'name' => 'Meine Kurse',
                                 'icon' => 'briefcase',
-                                'hasmenu' => 'true',
+                                'hasmenu' => true,
                                 'menu' => [
                                         [
                                                 'name' => 'WiSe 2019/2020',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
-                                                'hasmenu' => 'false',
+                                                'hasmenu' => true,
                                                 'breaker' => ''
                                         ],
                                         [
                                                 'name' => 'SoSe 2019',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
-                                                'hasmenu' => 'false',
+                                                'hasmenu' => false,
                                                 'breaker' => 'c3 c2'
                                         ],
                                         [
                                                 'name' => 'WiSe 2018/2019',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
-                                                'hasmenu' => 'false',
+                                                'hasmenu' => false,
                                                 'breaker' => 'c3'
                                         ],
                                         [
                                                 'name' => 'SoSe 2018',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
-                                                'hasmenu' => 'false',
+                                                'hasmenu' => false,
                                                 'breaker' => ''
                                         ],
                                 ]
@@ -87,21 +87,14 @@ class core_renderer extends \core_renderer {
                         [
                                 'name' => 'Dieser Kurs',
                                 'icon' => 'book',
-                                'hasmenu' => 'true',
+                                'hasmenu' => true,
                                 'menu' => [
                                         [
-                                                'name' => 'Etwas ganz anderes',
+                                                'name' => 'Eine einzige Option',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
-                                                'hasmenu' => 'false',
-                                                'breaker' => 'c2 c3'
-                                        ],
-                                        [
-                                                'name' => 'Noch etwas anderes',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'hasmenu' => 'false',
-                                                'breaker' => 'c3'
+                                                'hasmenu' => false,
+                                                'breaker' => ['c2 c3', 'c3']
                                         ]
                                 ]
                         ],
