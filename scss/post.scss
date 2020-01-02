@@ -161,6 +161,27 @@ ul[role="menubar"] {
     z-index: 990;
     background: white;
 
+    a {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    a:focus {
+        outline: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+
+        & > .underline {
+            text-decoration: underline;
+        }
+    }
+
     &.sticky {
         position: fixed;
         max-width: 1440px;
@@ -177,10 +198,6 @@ ul[role="menubar"] {
         position: relative;
         padding: 12px 0;
         border-bottom: 4px solid $dividergrey;
-    }
-
-    a:hover {
-        text-decoration: none;
     }
 
     .main-menu-item {
@@ -200,91 +217,110 @@ ul[role="menubar"] {
             line-height: 1.2em;
         }
 
-        .sub-menu-wrapper {
-            display: none;
-        }
-
-        &:hover span.underline {
+        &.open > a > span.underline {
             text-decoration: underline;
         }
 
-        &.open {
-            span.underline {
-                text-decoration: underline;
-            }
+        .sub-menu-wrapper {
+            display: none;
 
-            .sub-menu-wrapper {
-                display: block;
-                padding-top: 16px;
-                position: absolute;
-                width: 100%;
-                z-index: 999;
-                border-bottom: 4px solid $dividergrey;
-                overflow: hidden;
-                left: 0;
+            padding-top: 16px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            border-bottom: 4px solid $dividergrey;
+            overflow: hidden;
+            left: 0;
 
-                .sub-menu {
-                    position: relative;
-                    display: table;
-                    table-layout: fixed;
-                    // Hide padding of leftmost items.
-                    margin-right: -16px;
-                    // Hide divider below bottommost items.
-                    margin-bottom: -1px;
-                    width: calc(100% + 16px);
-                    background: white;
+            .sub-menu {
+                position: relative;
+                display: table;
+                table-layout: fixed;
+                // Hide padding of leftmost items.
+                margin-right: -16px;
+                // Hide divider below bottommost items.
+                margin-bottom: -1px;
+                width: calc(100% + 16px);
+                background: white;
 
-                    .sub-menu-item {
-                        width: 100%;
-                        display: block;
-                        padding-right: 16px;
-                        line-height: 20px;
+                .breaker {
+                    display: none;
 
-                        a {
-                            display: block;
-                            width: 100%;
-                            padding: 12px 0;
-                            border-bottom: 1px solid black;
-                        }
-
-                        a .arrow {
-                            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
-                            width: 21px;
-                            height: 21px;
-                            float: right;
-                            background-size: cover;
-                            margin-top: 2px;
-                        }
-
-                        &.open a .arrow {
-                            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
-                        }
-
-                        span {
-                            font-size: 16px;
-                            color: $learnwebblue;
+                    &.c3 {
+                        @media (min-width: $col2-break-point + 1) {
+                            display: table-cell;
+                            width: 0;
                         }
                     }
 
-                    .breaker {
-                        display: none;
-
-                        &.c3 {
-                            @media (min-width: $col2-break-point + 1) {
-                                display: table-cell;
-                                width: 0;
-                            }
-                        }
-
-                        &.c2 {
-                            @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
-                                display: table-cell;
-                                width: 0;
-                            }
+                    &.c2 {
+                        @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
+                            display: table-cell;
+                            width: 0;
                         }
                     }
                 }
             }
         }
+
+        &.open {
+            .sub-menu-wrapper {
+                display: block;
+            }
+        }
+    }
+
+    .sub-menu-item {
+        width: 100%;
+        display: block;
+        padding-right: 16px;
+        line-height: 20px;
+
+        & > a {
+            display: block;
+            width: 100%;
+            padding: 12px 12px 12px 0;
+            border-bottom: 1px solid black;
+
+            & > span {
+                font-size: 16px;
+                color: $learnwebblue;
+            }
+
+            & > .arrow {
+                background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+                width: 21px;
+                height: 21px;
+                float: right;
+                background-size: cover;
+                margin-top: 2px;
+            }
+        }
+
+        &.open a .arrow {
+            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+        }
+
+        .sub-sub-menu {
+            display: none;
+            font-size: 10.5px;
+            list-style: none;
+            padding: 4px 0 4px 24px;
+            border-bottom: 1px solid black;
+        }
+
+        &.open .sub-sub-menu {
+            display: block;
+        }
+    }
+
+    .sub-sub-menu-item {
+        cursor: pointer;
+        padding: 2px 0;
+
+        & > a > span.icon {
+            width: 23px;
+        }
+
     }
 }

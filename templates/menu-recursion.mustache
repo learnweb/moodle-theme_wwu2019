@@ -1,0 +1,44 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_wwu2019/menu-recursion
+
+    Displays logo of WWU and Learnweb
+
+    Example context (json):
+    {
+        "wwwroot": "https://www.example-moodle.de/",
+        "logo": "https://www.example-moodle.de/theme/wwu2019/pix/logo.svg"
+    }
+}}
+
+<ul class="sub-sub-menu">
+    {{# menu }}
+    <li class="sub-sub-menu-item">
+        <a role="menuitem">
+            <span class="fa fa-{{icon}}"></span>
+            <span class="underline">{{ name }}</span>
+            {{# hasmenu }}
+                <div class="arrow"></div>
+            {{/ hasmenu }}
+        </a>
+        {{# hasmenu }}
+            {{> theme_wwu2019/menu-recursion }}
+        {{/hasmenu}}
+    </li>
+    {{/ menu }}
+</ul>

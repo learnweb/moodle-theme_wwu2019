@@ -57,7 +57,23 @@ class core_renderer extends \core_renderer {
                                         [
                                                 'name' => 'WiSe 2019/2020',
                                                 'icon' => 'calendar',
-                                                'menu' => '',
+                                                'menu' => [
+                                                        [
+                                                                'name' => 'BT-2019_2',
+                                                                'icon' => 'graduation-cap',
+                                                                'hasmenu' => false
+                                                        ],
+                                                        [
+                                                                'name' => 'SE-2019_2',
+                                                                'icon' => 'graduation-cap',
+                                                                'hasmenu' => false
+                                                        ],
+                                                        [
+                                                                'name' => 'KURS-2019_2',
+                                                                'icon' => 'graduation-cap',
+                                                                'hasmenu' => false
+                                                        ]
+                                                ],
                                                 'hasmenu' => true,
                                                 'breaker' => ''
                                         ],

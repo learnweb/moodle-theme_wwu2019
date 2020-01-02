@@ -147,4 +147,16 @@ function openMenu() {
             closeWithDelay(ev.currentTarget);
         }
     });
+
+    $('li.sub-menu-item').click((ev) => {
+        $(ev.currentTarget).toggleClass('open');
+    });
+
+    $('li.sub-sub-menu-item').click((ev) => {
+        $(ev.currentTarget).toggleClass('open');
+    });
+
+    $('ul.sub-sub-menu').click((ev) => {
+        ev.stopPropagation();
+    });
 }
