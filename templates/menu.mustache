@@ -17,12 +17,10 @@
 {{!
     @template theme_wwu2019/menu
 
-    Displays logo of WWU and Learnweb
+    Displays main menu.
 
     Example context (json):
     {
-        "wwwroot": "https://www.example-moodle.de/",
-        "logo": "https://www.example-moodle.de/theme/wwu2019/pix/logo.svg"
     }
 }}
 <div id="main-menu-placeholder">
@@ -31,7 +29,8 @@
             <ul role="menubar" class="d-flex">
                 {{# mainmenu }}
                     <li role="none" class="main-menu-item">
-                        <a role="menuitem" tabindex="0" {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/ hasmenu }}>
+                        <a role="menuitem" tabindex="0"
+                            {{# href }} href="{{ href }}"{{/href}}>
                             <span class="fa fa-{{icon}}"></span>
                             <span class="underline">{{name}}</span>
                         </a>
@@ -40,7 +39,7 @@
                                 <ul role="menu" class="sub-menu">
                                     {{# menu }}
                                         <li role="none" class="sub-menu-item">
-                                            <a role="menuitem">
+                                            <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
                                                 <span class="fa fa-{{icon}}"></span>
                                                 <span class="underline">{{ name }}</span>
                                                 {{# hasmenu }}
@@ -53,6 +52,7 @@
                                         </li>
                                         {{# breaker }}
                                             <div class="breaker {{ . }}"></div>
+                                            {{! Needed for ensuring last breaker also breaks there is no item follow the breaker (Occurs when menu has one or two items). }}
                                             <div></div>
                                         {{/ breaker }}
                                     {{/ menu }}

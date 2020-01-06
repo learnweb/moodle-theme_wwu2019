@@ -116,6 +116,7 @@ class core_renderer extends \core_renderer {
                                                 'name' => 'Eine einzige Option',
                                                 'icon' => 'calendar',
                                                 'menu' => '',
+                                                'href' => 'https://www.google.de',
                                                 'hasmenu' => false,
                                                 'breaker' => ['c2 c3', 'c3']
                                         ]

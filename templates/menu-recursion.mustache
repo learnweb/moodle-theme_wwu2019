@@ -17,19 +17,17 @@
 {{!
     @template theme_wwu2019/menu-recursion
 
-    Displays logo of WWU and Learnweb
+    Recursively displays sub-sub-(...)-menus.
 
     Example context (json):
     {
-        "wwwroot": "https://www.example-moodle.de/",
-        "logo": "https://www.example-moodle.de/theme/wwu2019/pix/logo.svg"
     }
 }}
 
 <ul class="sub-sub-menu">
     {{# menu }}
     <li class="sub-sub-menu-item">
-        <a role="menuitem">
+        <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
             <span class="icon fa fa-{{icon}}"></span>
             <span class="underline">{{ name }}</span>
             {{# hasmenu }}
