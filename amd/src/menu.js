@@ -148,15 +148,11 @@ function openMenu() {
         }
     });
 
-    $('li.sub-menu-item').click((ev) => {
-        $(ev.currentTarget).toggleClass('open');
+    $('li.sub-menu-item > a').click((ev) => {
+        $(ev.currentTarget.parentNode).toggleClass('open');
     });
 
-    $('li.sub-sub-menu-item').click((ev) => {
-        $(ev.currentTarget).toggleClass('open');
-    });
-
-    $('ul.sub-sub-menu').click((ev) => {
-        ev.stopPropagation();
+    $('li.sub-sub-menu-item > a').click((ev) => {
+        $(ev.currentTarget.parentNode).toggleClass('open');
     });
 }

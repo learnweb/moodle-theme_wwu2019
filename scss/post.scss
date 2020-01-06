@@ -288,7 +288,7 @@ ul[role="menubar"] {
             }
 
             & > .arrow {
-                background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+                background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
                 width: 21px;
                 height: 21px;
                 float: right;
@@ -297,30 +297,62 @@ ul[role="menubar"] {
             }
         }
 
-        &.open a .arrow {
-            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+        &.open > a > .arrow {
+            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
         }
 
         .sub-sub-menu {
             display: none;
             font-size: 10.5px;
             list-style: none;
-            padding: 4px 0 4px 24px;
+            padding: 4px 0 4px 20px;
             border-bottom: 1px solid black;
+
+            // Second level sub-sub-menu.
+            .sub-sub-menu {
+                border-top: 1px solid black;
+            }
         }
 
-        &.open .sub-sub-menu {
+        &.open > .sub-sub-menu {
             display: block;
         }
     }
 
     .sub-sub-menu-item {
         cursor: pointer;
-        padding: 2px 0;
 
-        & > a > span.icon {
-            width: 23px;
+        & > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 2px 2px;
+
+            & > span {
+                line-height: 20px;
+            }
+
+            & > span.icon {
+                margin-right: 5px;
+                vertical-align: top;
+            }
+
+            & > .arrow {
+                background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+                width: 21px;
+                height: 21px;
+                float: right;
+                background-size: cover;
+            }
         }
 
+        &.open > a > .arrow {
+            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+        }
+
+        &.open > .sub-sub-menu {
+            margin: 4px 0;
+            display: block;
+        }
     }
 }

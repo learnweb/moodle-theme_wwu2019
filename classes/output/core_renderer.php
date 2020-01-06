@@ -64,12 +64,19 @@ class core_renderer extends \core_renderer {
                                                                 'hasmenu' => false
                                                         ],
                                                         [
-                                                                'name' => 'SE-2019_2',
-                                                                'icon' => 'graduation-cap',
-                                                                'hasmenu' => false
+                                                                'name' => 'SubSubSub-Menu',
+                                                                'icon' => 'list',
+                                                                'hasmenu' => true,
+                                                                'menu' => [
+                                                                        [
+                                                                                'name' => 'ItemName#3',
+                                                                                'icon' => 'list',
+                                                                                'hasmenu' => false,
+                                                                        ]
+                                                                ]
                                                         ],
                                                         [
-                                                                'name' => 'KURS-2019_2',
+                                                                'name' => 'SE-2019_2',
                                                                 'icon' => 'graduation-cap',
                                                                 'hasmenu' => false
                                                         ]
