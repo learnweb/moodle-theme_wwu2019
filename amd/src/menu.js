@@ -29,6 +29,9 @@ import $ from 'jquery';
 export function init() {
     stickMenu();
     openMenu();
+
+    updateMaxMenuHeight();
+    $(window).resize(updateMaxMenuHeight);
 }
 
 /**
@@ -50,6 +53,15 @@ function stickMenu() {
             sticky = false;
         }
     });
+}
+
+/**
+ * Updates max-height of submenus on page-init and window resize.
+ */
+function updateMaxMenuHeight() {
+    const placeholder = $('#main-menu-placeholder');
+    const botPos = placeholder.offset().top + placeholder.outerHeight() + 24;
+    $('.sub-menu-scroll-container').css('max-height', ($(window).height() - botPos) + 'px');
 }
 
 /**

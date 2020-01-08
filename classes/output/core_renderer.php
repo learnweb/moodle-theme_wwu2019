@@ -86,15 +86,19 @@ class core_renderer extends \core_renderer {
     }
 
     public function main_menu() {
+        $mainmenu = [];
+
+        if ($this->page->settingsnav->has_children()) {
+            $mainmenu[] = [
+                    'name' => get_string('pluginname', 'block_settings'),
+                    'hasmenu' => true,
+                    'menu' => $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')),
+                    'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
+            ];
+        }
+
         $templatecontext = [
-                'mainmenu' => [
-                        [
-                            'name' => get_string('pluginname', 'block_settings'),
-                            'hasmenu' => true,
-                            'menu' => $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')),
-                            'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
-                        ]
-                ]
+                'mainmenu' => $mainmenu
         ];
 
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');

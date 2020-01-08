@@ -222,52 +222,62 @@ ul[role="menubar"] {
             text-decoration: underline;
         }
 
-        .sub-menu-wrapper {
+        .sub-menu-scroll-wrapper {
             display: none;
 
+            border-bottom: 4px solid $dividergrey;
+            z-index: 999;
             padding-top: 16px;
             position: absolute;
+
             width: 100%;
-            z-index: 999;
-            border-bottom: 4px solid $dividergrey;
-            overflow: hidden;
-            left: 0;
 
-            .sub-menu {
-                position: relative;
-                display: table;
-                table-layout: fixed;
-                // Hide padding of leftmost items.
-                margin-right: -16px;
-                // Hide divider below bottommost items.
-                margin-bottom: -1px;
-                width: calc(100% + 16px);
-                background: white;
+            .sub-menu-scroll-container {
+                max-height: 500px;
+                overflow-y: auto;
+                /* For newer Firefoxversions to disable width gain when hovering scrollbar */
+                //noinspection Stylelint
+                scrollbar-width: thin;
 
-                .breaker {
-                    display: none;
+                .sub-menu-wrapper {
+                    width: 100%;
+                    overflow: hidden;
 
-                    &.c3 {
-                        @media (min-width: $col2-break-point + 1) {
-                            display: table-cell;
-                            width: 0;
-                        }
-                    }
+                    .sub-menu {
+                        position: relative;
+                        display: table;
+                        table-layout: fixed;
+                        // Hide padding of leftmost items.
+                        margin-right: -16px;
+                        // Hide divider below bottommost items.
+                        margin-bottom: -1px;
+                        width: calc(100% + 16px);
+                        background: white;
 
-                    &.c2 {
-                        @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
-                            display: table-cell;
-                            width: 0;
+                        .breaker {
+                            display: none;
+
+                            &.c3 {
+                                @media (min-width: $col2-break-point + 1) {
+                                    display: table-cell;
+                                    width: 0;
+                                }
+                            }
+
+                            &.c2 {
+                                @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
+                                    display: table-cell;
+                                    width: 0;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
 
-        &.open {
-            .sub-menu-wrapper {
-                display: block;
-            }
+        &.open .sub-menu-scroll-wrapper {
+            display: block;
         }
     }
 
@@ -307,7 +317,7 @@ ul[role="menubar"] {
             display: none;
             font-size: 10.5px;
             list-style: none;
-            padding: 4px 0 4px 20px;
+            padding: 4px 12px 4px 20px;
             border-bottom: 1px solid black;
 
             // Second level sub-sub-menu.
