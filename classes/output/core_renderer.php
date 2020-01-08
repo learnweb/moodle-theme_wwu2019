@@ -24,6 +24,9 @@
 
 namespace theme_wwu2019\output;
 
+use moodle_page;
+use navigation_node;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -35,6 +38,11 @@ defined('MOODLE_INTERNAL') || die;
  */
 class core_renderer extends \core_renderer {
 
+    public function __construct(moodle_page $page, $target) {
+        parent::__construct($page, $target);
+        navigation_node::require_admin_tree();
+    }
+
     public function logo_header() {
         global $CFG;
 
@@ -45,86 +53,48 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('theme_wwu2019/logo_header', $templatecontext);
     }
 
+
+    private function format_for_template(\navigation_node_collection $node_collection) {
+        $items = [];
+        foreach ($node_collection as $node) {
+            if ($node->display) {
+
+                $templateformat = array(
+                        'name' => $node->get_content()
+                );
+
+                if ($node->icon && !$node->hideicon) {
+                    $templateformat['icon'] = $node->icon->export_for_pix();
+                }
+
+                if ($node->has_children()) {
+                    $templateformat['hasmenu'] = true;
+                    $templateformat['menu'] = $this->format_for_template($node->children);
+                } else {
+                    $templateformat['hasmenu'] = false;
+                    $templateformat['menu'] = null;
+                }
+                if ($node->has_action() && !$node->has_children()) {
+                    $templateformat['href'] = $node->action->out();
+                }
+                $items[] = $templateformat;
+            }
+        }
+        return $items;
+    }
+
     public function main_menu() {
-        global $PAGE;
         $templatecontext = [
                 'mainmenu' => [
                         [
-                                'name' => 'Meine Kurse',
-                                'icon' => 'briefcase',
-                                'hasmenu' => true,
-                                'menu' => [
-                                        [
-                                                'name' => 'WiSe 2019/2020',
-                                                'icon' => 'calendar',
-                                                'menu' => [
-                                                        [
-                                                                'name' => 'BT-2019_2',
-                                                                'icon' => 'graduation-cap',
-                                                                'hasmenu' => false
-                                                        ],
-                                                        [
-                                                                'name' => 'SubSubSub-Menu',
-                                                                'icon' => 'list',
-                                                                'hasmenu' => true,
-                                                                'menu' => [
-                                                                        [
-                                                                                'name' => 'ItemName#3',
-                                                                                'icon' => 'list',
-                                                                                'hasmenu' => false,
-                                                                        ]
-                                                                ]
-                                                        ],
-                                                        [
-                                                                'name' => 'SE-2019_2',
-                                                                'icon' => 'graduation-cap',
-                                                                'hasmenu' => false
-                                                        ]
-                                                ],
-                                                'hasmenu' => true,
-                                                'breaker' => ''
-                                        ],
-                                        [
-                                                'name' => 'SoSe 2019',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'hasmenu' => false,
-                                                'breaker' => 'c3 c2'
-                                        ],
-                                        [
-                                                'name' => 'WiSe 2018/2019',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'hasmenu' => false,
-                                                'breaker' => 'c3'
-                                        ],
-                                        [
-                                                'name' => 'SoSe 2018',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'hasmenu' => false,
-                                                'breaker' => ''
-                                        ],
-                                ]
-                        ],
-                        [
-                                'name' => 'Dieser Kurs',
-                                'icon' => 'book',
-                                'hasmenu' => true,
-                                'menu' => [
-                                        [
-                                                'name' => 'Eine einzige Option',
-                                                'icon' => 'calendar',
-                                                'menu' => '',
-                                                'href' => 'https://www.google.de',
-                                                'hasmenu' => false,
-                                                'breaker' => ['c2 c3', 'c3']
-                                        ]
-                                ]
-                        ],
+                            'name' => 'SITE ADMINISTRATION',
+                            'hasmenu' => true,
+                            'menu' => $this->format_for_template($this->page->settingsnav->children)
+                        ]
                 ]
         ];
-        $PAGE->requires->js_call_amd('theme_wwu2019/menu', 'init');
+
+        $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
         return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
     }
 
