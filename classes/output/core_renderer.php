@@ -54,7 +54,7 @@ class core_renderer extends \core_renderer {
     }
 
 
-    private function format_for_template(\navigation_node_collection $node_collection) {
+    private function format_for_template(\navigation_node_collection $node_collection, \pix_icon $default_icon) {
         $items = [];
         foreach ($node_collection as $node) {
             if ($node->display) {
@@ -65,11 +65,13 @@ class core_renderer extends \core_renderer {
 
                 if ($node->icon && !$node->hideicon) {
                     $templateformat['icon'] = $node->icon->export_for_pix();
+                } else {
+                    $templateformat['icon'] = $default_icon->export_for_pix();
                 }
 
                 if ($node->has_children()) {
                     $templateformat['hasmenu'] = true;
-                    $templateformat['menu'] = $this->format_for_template($node->children);
+                    $templateformat['menu'] = $this->format_for_template($node->children, $default_icon);
                 } else {
                     $templateformat['hasmenu'] = false;
                     $templateformat['menu'] = null;
@@ -87,9 +89,10 @@ class core_renderer extends \core_renderer {
         $templatecontext = [
                 'mainmenu' => [
                         [
-                            'name' => 'SITE ADMINISTRATION',
+                            'name' => get_string('pluginname', 'block_settings'),
                             'hasmenu' => true,
-                            'menu' => $this->format_for_template($this->page->settingsnav->children)
+                            'menu' => $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')),
+                            'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
                         ]
                 ]
         ];

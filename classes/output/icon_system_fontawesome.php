@@ -32,7 +32,8 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
         $iconmap = parent::get_core_icon_map();
 
         $override = array(
-                'core:i/briefcase' => 'fa-briefcase'
+                'core:i/briefcase' => 'fa-briefcase',
+                'core:i/cogs' => 'fa-cogs'
         );
 
         return array_merge($iconmap, $override);
