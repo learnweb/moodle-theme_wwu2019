@@ -85,6 +85,28 @@ class core_renderer extends \core_renderer {
         return $items;
     }
 
+    public function add_breakers(array $menuitems) {
+        if (count($menuitems) == 0) {
+            return;
+        }
+        $c2 = intval(ceil(count($menuitems) / 2.0) - 1);
+        $c3_1 = intval(ceil(count($menuitems) / 3.0) - 1);
+        $c3_2 = intval(min(ceil(count($menuitems) / 3.0) * 2 - 1, count($menuitems) - 1));
+        $menuitems[$c2]['breaker'] = ['c2'];
+        if (array_key_exists('breaker', $menuitems[$c3_1])) {
+            $menuitems[$c3_1]['breaker'][] = 'c3';
+        } else {
+            $menuitems[$c3_1]['breaker'] = ['c3'];
+        }
+        if (array_key_exists('breaker', $menuitems[$c3_2])) {
+            $menuitems[$c3_2]['breaker'][] = 'c3';
+        } else {
+            $menuitems[$c3_2]['breaker'] = ['c3'];
+        }
+
+        return $menuitems;
+    }
+
     public function main_menu() {
         $mainmenu = [];
 
@@ -92,10 +114,12 @@ class core_renderer extends \core_renderer {
             $mainmenu[] = [
                     'name' => get_string('pluginname', 'block_settings'),
                     'hasmenu' => true,
-                    'menu' => $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')),
+                    'menu' => $this->add_breakers($this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', ''))),
                     'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
             ];
         }
+
+
 
         $templatecontext = [
                 'mainmenu' => $mainmenu
