@@ -68,11 +68,16 @@ function updateMaxMenuHeight() {
  * Opens submenu when hovering
  */
 function openMenu() {
-    const delay = 300;
+    const hoverDelay = 100;
+    const closeCooldown = 300;
+
     let openMenu = null;
     let openCandidate = null;
     let openTimeoutId = null;
     let closeTimeoutId = null;
+    /** Date when menu was opened by hovering, to prevent immediately closing it by clicking again.
+     * @type {null|Date} */
+    let openTime = null;
 
     /**
      * Opens a menu.
@@ -95,7 +100,10 @@ function openMenu() {
      */
     function openWithDelay(menuItem) {
         openCandidate = menuItem;
-        openTimeoutId = setTimeout(open, delay, menuItem);
+        openTimeoutId = setTimeout(() => {
+            open(menuItem);
+            openTime = new Date();
+        }, hoverDelay);
     }
 
     /**
@@ -106,6 +114,7 @@ function openMenu() {
         $(menuItem).removeClass('open');
         openMenu = null;
         closeTimeoutId = null;
+        openTime = null;
     }
 
     /**
@@ -113,7 +122,7 @@ function openMenu() {
      * @param {Node} menuItem the menuItem DOM-Element
      */
     function closeWithDelay(menuItem) {
-        closeTimeoutId = setTimeout(close, delay, menuItem);
+        closeTimeoutId = setTimeout(close, hoverDelay, menuItem);
     }
 
     /**
@@ -137,7 +146,9 @@ function openMenu() {
 
     $('li.main-menu-item > a').click((ev) => {
         if (ev.currentTarget.parentNode === openMenu) {
-            close(openMenu);
+            if (new Date() - openTime > closeCooldown) {
+                close(openMenu);
+            }
         } else {
             open(ev.currentTarget.parentNode);
         }

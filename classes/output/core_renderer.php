@@ -53,6 +53,46 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('theme_wwu2019/logo_header', $templatecontext);
     }
 
+    public function main_menu() {
+        global $CFG;
+
+        $mainmenu = [];
+
+        // Add MyCourses menu
+        if (count($courses = $this->get_courses())) {
+            $mainmenu[] = [
+                    'name' => get_string('mycourses', 'theme_wwu2019'),
+                    'hasmenu' => true,
+                    'menu' => $this->add_breakers($courses),
+                    'icon' => (new \pix_icon('i/graduation-cap', ''))->export_for_pix()
+            ];
+        }
+
+        // Add Administration menu
+        if (count($settings = $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')))) {
+            $mainmenu[] = [
+                    'name' => get_string('pluginname', 'block_settings'),
+                    'hasmenu' => true,
+                    'menu' => $this->add_breakers($settings),
+                    'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
+            ];
+        }
+
+        // Add dashboard
+        $mainmenu[] = [
+                'name' => get_string('dashboard', 'theme_wwu2019'),
+                'hasmenu' => false,
+                'menu' => null,
+                'href' => $CFG->wwwroot . '/my/',
+        ];
+
+        $templatecontext = [
+                'mainmenu' => $mainmenu
+        ];
+
+        $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
+        return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
+    }
 
     private function format_for_template(\navigation_node_collection $node_collection, \pix_icon $default_icon) {
         $items = [];
@@ -85,9 +125,9 @@ class core_renderer extends \core_renderer {
         return $items;
     }
 
-    public function add_breakers(array $menuitems) {
+    private function add_breakers(array $menuitems) {
         if (count($menuitems) == 0) {
-            return;
+            return array();
         }
         $c2 = intval(ceil(count($menuitems) / 2.0) - 1);
         $c3_1 = intval(ceil(count($menuitems) / 3.0) - 1);
@@ -107,26 +147,64 @@ class core_renderer extends \core_renderer {
         return $menuitems;
     }
 
-    public function main_menu() {
-        $mainmenu = [];
+    private function get_courses() {
+        global $CFG;
 
-        if ($this->page->settingsnav->has_children()) {
-            $mainmenu[] = [
-                    'name' => get_string('pluginname', 'block_settings'),
+        $courses = enrol_get_my_courses(array(), 'c.startdate DESC');
+        $terms = [];
+
+        $termindependentlimit = new \DateTime("2000-00-00");
+
+        foreach ($courses as $course) {
+            $coursestart = new \DateTime();
+            $coursestart->setTimestamp($course->startdate);
+
+            $year = (int) $coursestart->format('Y');
+            $term = 0;
+            $istermindependent = false;
+
+            $term0start = new \DateTime("$year-04-01");
+            $term1start = new \DateTime("$year-10-01");
+
+            if ($coursestart < $termindependentlimit) {
+                $istermindependent = true;
+            } else if ($coursestart < $term0start) {
+                $year--;
+                $term = 1;
+            } else if ($coursestart < $term1start) {
+                $term = 0;
+            } else {
+                $term = 1;
+            }
+
+            $termid = $istermindependent ? 0 : $year . '_' . $term;
+            if (!array_key_exists($termid, $terms)) {
+                if ($istermindependent) {
+                    $name = get_string('termindependent', 'theme_wwu2019');
+                } else {
+                    if ($term == 0) {
+                        $name = 'SoSe ' . $year;
+                    } else {
+                        $name = 'WiSe ' . $year . '/' . ($year + 1);
+                    }
+                }
+                $terms[$termid] = [
+                    'name' => $name,
+                    'icon' => (new \pix_icon('i/calendar', ''))->export_for_pix(),
                     'hasmenu' => true,
-                    'menu' => $this->add_breakers($this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', ''))),
-                    'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
+                    'menu' => []
+                ];
+            }
+
+            $terms[$termid]['menu'][] = [
+                'name' => $course->shortname,
+                'href' => $CFG->wwwroot . '/course/view.php?id=' . $course->id,
+                'icon' => (new \pix_icon('i/graduation-cap', ''))->export_for_pix(),
+                'hasmenu' => false,
+                'menu' => null
             ];
         }
-
-
-
-        $templatecontext = [
-                'mainmenu' => $mainmenu
-        ];
-
-        $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
-        return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
+        return array_values($terms);
     }
 
 }

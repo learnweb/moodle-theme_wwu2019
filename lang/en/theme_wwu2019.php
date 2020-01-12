@@ -25,3 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'WWU 2019';
+
+$string['mycourses'] = 'My courses';
+$string['termindependent'] = 'Semester independent';
+$string['dashboard'] = 'Dashboard';

@@ -28,7 +28,7 @@
     {{# menu }}
     <li class="sub-sub-menu-item">
         <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
-            {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }}
+            {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
             <span class="underline">{{ name }}</span>
             {{# hasmenu }}
                 <div class="arrow"></div>

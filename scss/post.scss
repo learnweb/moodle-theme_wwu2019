@@ -215,7 +215,6 @@ ul[role="menubar"] {
             color: black;
             text-transform: uppercase;
             font-size: 1.34375em;
-            line-height: 1.2em;
         }
 
         &.open > a > span.underline {
@@ -229,7 +228,7 @@ ul[role="menubar"] {
             z-index: 999;
             padding-top: 16px;
             position: absolute;
-
+            left: 0;
             width: 100%;
 
             .sub-menu-scroll-container {
@@ -305,7 +304,6 @@ ul[role="menubar"] {
                 height: 21px;
                 float: right;
                 background-size: cover;
-                margin-top: 2px;
             }
         }
 
@@ -347,7 +345,6 @@ ul[role="menubar"] {
 
             & > .icon {
                 margin-right: 5px;
-                vertical-align: top;
             }
 
             & > .arrow {
