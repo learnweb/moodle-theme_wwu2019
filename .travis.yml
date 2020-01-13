@@ -48,7 +48,7 @@ jobs:
         - moodle-plugin-ci codechecker
         - moodle-plugin-ci validate
         - moodle-plugin-ci savepoints
-        - moodle-plugin-ci mustache
+        - moodle-plugin-ci mustache || true
         - moodle-plugin-ci grunt
     # Smaller build matrix for development builds
     - stage: develop
