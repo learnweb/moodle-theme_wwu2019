@@ -42,8 +42,8 @@ class core_renderer extends \core_renderer {
      * core_renderer constructor.
      * Overrides parent to require admin tree init in $PAGE->settingsnav
      *
-     * @param moodle_page $page
-     * @param $target
+     * @param moodle_page $page the page we are doing output for.
+     * @param string $target one of rendering target constants.
      */
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
@@ -73,7 +73,7 @@ class core_renderer extends \core_renderer {
 
         $mainmenu = [];
 
-        // Add MyCourses menu
+        // Add MyCourses menu.
         if (count($courses = $this->get_courses())) {
             $mainmenu[] = [
                     'name' => get_string('mycourses', 'theme_wwu2019'),
@@ -83,7 +83,7 @@ class core_renderer extends \core_renderer {
             ];
         }
 
-        // Add Administration menu
+        // Add Administration menu.
         if (count($settings = $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')))) {
             $mainmenu[] = [
                     'name' => get_string('pluginname', 'block_settings'),
@@ -93,7 +93,7 @@ class core_renderer extends \core_renderer {
             ];
         }
 
-        // Add dashboard
+        // Add dashboard.
         $mainmenu[] = [
                 'name' => get_string('dashboard', 'theme_wwu2019'),
                 'hasmenu' => false,

@@ -198,5 +198,4 @@ $THEME->scss = function($theme) {
 
 $THEME->iconsystem = '\\theme_wwu2019\\output\\icon_system_fontawesome';
 
-// Disable
 $THEME->requiredblocks = '';
