@@ -25,7 +25,7 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-// $THEME is defined before this page is included and we can define settings by adding properties to this global object.
+// Variable $THEME is defined before this page is included and we can define settings by adding properties to this global object.
 
 // The first setting we need is the name of the theme. This should be the last part of the component name, and the same
 // as the directory name for our theme.
@@ -60,23 +60,23 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 
 $THEME->prescsscallback = 'theme_wwu2019_get_pre_scss';
 
-// Since we are using 2 parent themes the correct location of the layout files needs to be defined. For this theme we need the multiple
-// column layouts.
+// Since we are using 2 parent themes the correct location of the layout files needs to be defined. For this theme we need the
+// multiple column layouts.
 $THEME->layouts = [
-    // Most backwards compatible layout without the blocks - this is the layout used by default.
+        // Most backwards compatible layout without the blocks - this is the layout used by default.
         'base' => array(
                 'theme' => 'classic',
                 'file' => 'columns.php',
                 'regions' => array(),
         ),
-    // Standard layout with blocks, this is recommended for most pages with general information.
+        // Standard layout with blocks, this is recommended for most pages with general information.
         'standard' => array(
                 'theme' => 'classic',
                 'file' => 'columns.php',
                 'regions' => array('side-pre', 'side-post'),
                 'defaultregion' => 'side-pre',
         ),
-    // Main course page.
+        // Main course page.
         'course' => array(
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
@@ -90,14 +90,14 @@ $THEME->layouts = [
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
         ),
-    // Part of course, typical for modules - default page layout if $cm specified in require_login().
+        // Part of course, typical for modules - default page layout if $cm specified in require_login().
         'incourse' => array(
                 'theme' => 'classic',
                 'file' => 'columns.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
         ),
-    // The site home page.
+        // The site home page.
         'frontpage' => array(
                 'theme' => 'classic',
                 'file' => 'columns.php',
@@ -105,14 +105,14 @@ $THEME->layouts = [
                 'defaultregion' => 'side-pre',
                 'options' => array('nofullheader' => true),
         ),
-    // Server administration scripts.
+        // Server administration scripts.
         'admin' => array(
                 'theme' => 'classic',
                 'file' => 'columns.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
         ),
-    // My dashboard page.
+        // My dashboard page.
         'mydashboard' => array(
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
@@ -120,7 +120,7 @@ $THEME->layouts = [
                 'defaultregion' => 'side-post',
                 'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
         ),
-    // My public page.
+        // My public page.
         'mypublic' => array(
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
@@ -134,55 +134,55 @@ $THEME->layouts = [
                 'options' => array('langmenu' => true),
         ),
 
-    // Pages that appear in pop-up windows - no navigation, no blocks, no header.
+        // Pages that appear in pop-up windows - no navigation, no blocks, no header.
         'popup' => array(
                 'theme' => 'classic',
                 'file' => 'contentonly.php',
                 'regions' => array(),
                 'options' => array('nofooter' => true, 'nonavbar' => true),
         ),
-    // No blocks and minimal footer - used for legacy frame layouts only!
+        // No blocks and minimal footer - used for legacy frame layouts only!
         'frametop' => array(
                 'theme' => 'classic',
                 'file' => 'contentonly.php',
                 'regions' => array(),
                 'options' => array('nofooter' => true, 'nocoursefooter' => true),
         ),
-    // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
+        // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
         'embedded' => array(
                 'theme' => 'boost',
                 'file' => 'embedded.php',
                 'regions' => array()
         ),
-    // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
-    // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
-    // Please be extremely careful if you are modifying this layout.
+        // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
+        // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
+        // Please be extremely careful if you are modifying this layout.
         'maintenance' => array(
                 'theme' => 'boost',
                 'file' => 'maintenance.php',
                 'regions' => array(),
         ),
-    // Should display the content and basic headers only.
+        // Should display the content and basic headers only.
         'print' => array(
                 'theme' => 'classic',
                 'file' => 'contentonly.php',
                 'regions' => array(),
                 'options' => array('nofooter' => true, 'nonavbar' => false),
         ),
-    // The pagelayout used when a redirection is occuring.
+        // The pagelayout used when a redirection is occuring.
         'redirect' => array(
                 'theme' => 'boost',
                 'file' => 'embedded.php',
                 'regions' => array(),
         ),
-    // The pagelayout used for reports.
+        // The pagelayout used for reports.
         'report' => array(
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
         ),
-    // The pagelayout used for safebrowser and securewindow.
+        // The pagelayout used for safebrowser and securewindow.
         'secure' => array(
                 'theme' => 'classic',
                 'file' => 'secure.php',
@@ -199,4 +199,4 @@ $THEME->scss = function($theme) {
 $THEME->iconsystem = '\\theme_wwu2019\\output\\icon_system_fontawesome';
 
 // Disable
-// $THEME->requiredblocks = '';
+$THEME->requiredblocks = '';

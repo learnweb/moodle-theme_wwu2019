@@ -25,9 +25,19 @@ namespace theme_wwu2019\output;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Additional Icons for WWU2019
+ *
+ * @package     theme_wwu2019
+ * @copyright   2020 Justus Dieckmann WWU
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
 
-
+    /**
+     * Mapping of moodle icon names to fontawesome icon names.
+     * @return array the map
+     */
     public function get_core_icon_map() {
         $iconmap = parent::get_core_icon_map();
 

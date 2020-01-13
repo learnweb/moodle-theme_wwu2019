@@ -234,9 +234,8 @@ ul[role="menubar"] {
             .sub-menu-scroll-container {
                 max-height: 500px;
                 overflow-y: auto;
-                /* For newer Firefoxversions to disable width gain when hovering scrollbar */
-                //noinspection Stylelint
-                scrollbar-width: thin;
+                /* For newer Firefox versions to disable width gain of scrollbar when hovering it */
+                scrollbar-width: thin; /* stylelint-disable-line */
 
                 .sub-menu-wrapper {
                     width: 100%;

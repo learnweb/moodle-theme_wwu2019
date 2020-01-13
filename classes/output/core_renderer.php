@@ -38,11 +38,22 @@ defined('MOODLE_INTERNAL') || die;
  */
 class core_renderer extends \core_renderer {
 
+    /**
+     * core_renderer constructor.
+     * Overrides parent to require admin tree init in $PAGE->settingsnav
+     *
+     * @param moodle_page $page
+     * @param $target
+     */
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
         navigation_node::require_admin_tree();
     }
 
+    /**
+     * Renders logo heading.
+     * @return string HTML string.
+     */
     public function logo_header() {
         global $CFG;
 
@@ -53,6 +64,10 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('theme_wwu2019/logo_header', $templatecontext);
     }
 
+    /**
+     * Renders main menu.
+     * @return string HTML string.
+     */
     public function main_menu() {
         global $CFG;
 
@@ -94,9 +109,16 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
     }
 
-    private function format_for_template(\navigation_node_collection $node_collection, \pix_icon $default_icon) {
+    /**
+     * Puts the given $nodecollection into a format properly usable in templates.
+     *
+     * @param \navigation_node_collection $nodecollection
+     * @param \pix_icon $defaulticon The icon to use on items, that have no icon defined.
+     * @return array the array usable in templates.
+     */
+    private function format_for_template(\navigation_node_collection $nodecollection, \pix_icon $defaulticon) {
         $items = [];
-        foreach ($node_collection as $node) {
+        foreach ($nodecollection as $node) {
             if ($node->display) {
 
                 $templateformat = array(
@@ -106,12 +128,12 @@ class core_renderer extends \core_renderer {
                 if ($node->icon && !$node->hideicon) {
                     $templateformat['icon'] = $node->icon->export_for_pix();
                 } else {
-                    $templateformat['icon'] = $default_icon->export_for_pix();
+                    $templateformat['icon'] = $defaulticon->export_for_pix();
                 }
 
                 if ($node->has_children()) {
                     $templateformat['hasmenu'] = true;
-                    $templateformat['menu'] = $this->format_for_template($node->children, $default_icon);
+                    $templateformat['menu'] = $this->format_for_template($node->children, $defaulticon);
                 } else {
                     $templateformat['hasmenu'] = false;
                     $templateformat['menu'] = null;
@@ -125,28 +147,37 @@ class core_renderer extends \core_renderer {
         return $items;
     }
 
+    /**
+     * Adds breakers for submenu items, which causes the items to be divided equally in two or three column menus.
+     * @param array $menuitems
+     * @return array The menuitems with breakers.
+     */
     private function add_breakers(array $menuitems) {
         if (count($menuitems) == 0) {
             return array();
         }
-        $c2 = intval(ceil(count($menuitems) / 2.0) - 1);
-        $c3_1 = intval(ceil(count($menuitems) / 3.0) - 1);
-        $c3_2 = intval(min(ceil(count($menuitems) / 3.0) * 2 - 1, count($menuitems) - 1));
-        $menuitems[$c2]['breaker'] = ['c2'];
-        if (array_key_exists('breaker', $menuitems[$c3_1])) {
-            $menuitems[$c3_1]['breaker'][] = 'c3';
+        $columntwo = intval(ceil(count($menuitems) / 2.0) - 1);
+        $columnthree1 = intval(ceil(count($menuitems) / 3.0) - 1);
+        $columnthree2 = intval(min(ceil(count($menuitems) / 3.0) * 2 - 1, count($menuitems) - 1));
+        $menuitems[$columntwo]['breaker'] = ['c2'];
+        if (array_key_exists('breaker', $menuitems[$columnthree1])) {
+            $menuitems[$columnthree1]['breaker'][] = 'c3';
         } else {
-            $menuitems[$c3_1]['breaker'] = ['c3'];
+            $menuitems[$columnthree1]['breaker'] = ['c3'];
         }
-        if (array_key_exists('breaker', $menuitems[$c3_2])) {
-            $menuitems[$c3_2]['breaker'][] = 'c3';
+        if (array_key_exists('breaker', $menuitems[$columnthree2])) {
+            $menuitems[$columnthree2]['breaker'][] = 'c3';
         } else {
-            $menuitems[$c3_2]['breaker'] = ['c3'];
+            $menuitems[$columnthree2]['breaker'] = ['c3'];
         }
 
         return $menuitems;
     }
 
+    /**
+     * Gets and sorts all of the user's courses into terms.
+     * @return array The sorted courses, ready for use in templates.
+     */
     private function get_courses() {
         global $CFG;
 
