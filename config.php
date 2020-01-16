@@ -92,10 +92,10 @@ $THEME->layouts = [
         ),
         // Part of course, typical for modules - default page layout if $cm specified in require_login().
         'incourse' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         // The site home page.
         'frontpage' => array(
@@ -107,10 +107,10 @@ $THEME->layouts = [
         ),
         // Server administration scripts.
         'admin' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         // My dashboard page.
         'mydashboard' => array(
@@ -124,8 +124,8 @@ $THEME->layouts = [
         'mypublic' => array(
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         'login' => array(
                 'theme' => 'boost',
@@ -179,8 +179,8 @@ $THEME->layouts = [
         'report' => array(
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         // The pagelayout used for safebrowser and securewindow.
         'secure' => array(
