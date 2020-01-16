@@ -86,7 +86,7 @@ class core_renderer extends \core_renderer {
         }
 
         // Add This Course menu.
-        if (count($thiscourse = $this->get_activities())) {
+        if (count($thiscourse = $this->get_activity_menu())) {
             $mainmenu[] = [
                     'name' => get_string('thiscourse', 'theme_wwu2019'),
                     'hasmenu' => true,
@@ -114,7 +114,8 @@ class core_renderer extends \core_renderer {
         ];
 
         $templatecontext = [
-                'mainmenu' => $mainmenu
+                'mainmenu' => $mainmenu,
+                'wwwroot' => $CFG->wwwroot
         ];
 
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
@@ -156,7 +157,7 @@ class core_renderer extends \core_renderer {
                     $templateformat['menu'] = null;
                 }
                 if ($node->has_action() && !$node->has_children()) {
-                    $templateformat['href'] = $node->action->out();
+                    $templateformat['href'] = $node->action->out(false);
                 }
                 $items[] = $templateformat;
             }
@@ -248,7 +249,7 @@ class core_renderer extends \core_renderer {
 
             $terms[$termid]['menu'][] = [
                 'name' => $course->shortname,
-                'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(),
+                'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
                 'icon' => $courseicon,
                 'hasmenu' => false,
                 'menu' => null
@@ -257,7 +258,11 @@ class core_renderer extends \core_renderer {
         return array_values($terms);
     }
 
-    private function get_activities() {
+    /**
+     * Returns all activity types of a course.
+     * @return array The activity types, ready for use in templates.
+     */
+    private function get_activity_menu() {
         $activities = [];
         if (!isguestuser()) {
             if (in_array($this->page->pagelayout, array('course', 'incourse', 'report', 'admin', 'standard')) &&
@@ -268,7 +273,7 @@ class core_renderer extends \core_renderer {
                         'icon' => (new \pix_icon('i/users', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/user/index.php', array('id' => $this->page->course->id)))->out()
+                        'href' => (new moodle_url('/user/index.php', array('id' => $this->page->course->id)))->out(false)
                 ];
 
                 $context = context_course::instance($this->page->course->id);
@@ -281,7 +286,7 @@ class core_renderer extends \core_renderer {
                             'hasmenu' => false,
                             'menu' => null,
                             'href' => (new \moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))
-                                    ->out()
+                                    ->out(false)
                     ];
                 }
                 $activities[] = [
@@ -290,7 +295,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))
-                                ->out()
+                                ->out(false)
                 ];
 
                 $data = $this->get_course_activities();
@@ -303,7 +308,7 @@ class core_renderer extends \core_renderer {
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))
-                                        ->out()
+                                        ->out(false)
                         ];
                     } else {
                         $activities[] = [
@@ -312,7 +317,7 @@ class core_renderer extends \core_renderer {
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))
-                                        ->out()
+                                        ->out(false)
                         ];
                     }
                 }
@@ -321,6 +326,10 @@ class core_renderer extends \core_renderer {
         return $activities;
     }
 
+    /**
+     * Collections information about the course's activities.
+     * @return array in format $modname => $modfullname
+     */
     private function get_course_activities() {
         // A copy of block_activity_modules.
         $course = $this->page->course;
