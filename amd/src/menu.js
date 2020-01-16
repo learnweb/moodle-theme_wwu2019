@@ -114,7 +114,7 @@ function openMenu() {
     function close(menuItem) {
         $(menuItem).removeClass('open');
         openMenu = null;
-        closeTimeoutId = null;
+        abortClose();
         openTime = null;
     }
 
@@ -132,6 +132,7 @@ function openMenu() {
     function abortClose() {
         if (closeTimeoutId) {
             clearTimeout(closeTimeoutId);
+            closeTimeoutId = null;
         }
     }
 
@@ -142,6 +143,7 @@ function openMenu() {
         openCandidate = null;
         if (openTimeoutId) {
             clearTimeout(openTimeoutId);
+            openTimeoutId = null;
         }
     }
 
