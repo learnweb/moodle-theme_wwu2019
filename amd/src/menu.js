@@ -68,7 +68,8 @@ function updateMaxMenuHeight() {
  * Opens submenu when hovering
  */
 function openMenu() {
-    const hoverDelay = 100;
+    const openDelay = 100;
+    const closeDelay = 300;
     const closeCooldown = 300;
 
     let openMenu = null;
@@ -103,7 +104,7 @@ function openMenu() {
         openTimeoutId = setTimeout(() => {
             open(menuItem);
             openTime = new Date();
-        }, hoverDelay);
+        }, openDelay);
     }
 
     /**
@@ -122,7 +123,7 @@ function openMenu() {
      * @param {Node} menuItem the menuItem DOM-Element
      */
     function closeWithDelay(menuItem) {
-        closeTimeoutId = setTimeout(close, hoverDelay, menuItem);
+        closeTimeoutId = setTimeout(close, closeDelay, menuItem);
     }
 
     /**
