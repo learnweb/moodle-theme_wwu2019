@@ -84,7 +84,7 @@ class core_renderer extends \core_renderer {
         }
 
         // Add Administration menu.
-        if (count($settings = $this->format_for_template($this->page->settingsnav->children, new \pix_icon('i/settings', '')))) {
+        if (count($settings = $this->settingsnav_for_template($this->page->settingsnav->children))) {
             $mainmenu[] = [
                     'name' => get_string('pluginname', 'block_settings'),
                     'hasmenu' => true,
@@ -113,11 +113,12 @@ class core_renderer extends \core_renderer {
      * Puts the given $nodecollection into a format properly usable in templates.
      *
      * @param \navigation_node_collection $nodecollection
-     * @param \pix_icon $defaulticon The icon to use on items, that have no icon defined.
      * @return array the array usable in templates.
      */
-    private function format_for_template(\navigation_node_collection $nodecollection, \pix_icon $defaulticon) {
+    private function settingsnav_for_template(\navigation_node_collection $nodecollection) {
         $items = [];
+        $navbranchicon = (new \pix_icon('i/navigationbranch', ''))->export_for_pix();
+        $navitemicon = (new \pix_icon('i/navigationitem', ''))->export_for_pix();
         foreach ($nodecollection as $node) {
             if ($node->display) {
 
@@ -126,14 +127,18 @@ class core_renderer extends \core_renderer {
                 );
 
                 if ($node->icon && !$node->hideicon) {
-                    $templateformat['icon'] = $node->icon->export_for_pix();
+                    if ($node->icon->pix == 'i/navigationitem' && $node->has_children()) {
+                        $templateformat['icon'] = $navbranchicon;
+                    } else {
+                        $templateformat['icon'] = $node->icon->export_for_pix();
+                    }
                 } else {
-                    $templateformat['icon'] = $defaulticon->export_for_pix();
+                    $templateformat['icon'] = $navitemicon;
                 }
 
                 if ($node->has_children()) {
                     $templateformat['hasmenu'] = true;
-                    $templateformat['menu'] = $this->format_for_template($node->children, $defaulticon);
+                    $templateformat['menu'] = $this->settingsnav_for_template($node->children);
                 } else {
                     $templateformat['hasmenu'] = false;
                     $templateformat['menu'] = null;
@@ -184,6 +189,9 @@ class core_renderer extends \core_renderer {
         $courses = enrol_get_my_courses(array(), 'c.startdate DESC');
         $terms = [];
 
+        $calendaricon = (new \pix_icon('i/calendar', ''))->export_for_pix();
+        $courseicon = (new \pix_icon('i/graduation-cap', ''))->export_for_pix();
+
         $termindependentlimit = new \DateTime("2000-00-00");
 
         foreach ($courses as $course) {
@@ -221,7 +229,7 @@ class core_renderer extends \core_renderer {
                 }
                 $terms[$termid] = [
                     'name' => $name,
-                    'icon' => (new \pix_icon('i/calendar', ''))->export_for_pix(),
+                    'icon' => $calendaricon,
                     'hasmenu' => true,
                     'menu' => []
                 ];
@@ -230,7 +238,7 @@ class core_renderer extends \core_renderer {
             $terms[$termid]['menu'][] = [
                 'name' => $course->shortname,
                 'href' => $CFG->wwwroot . '/course/view.php?id=' . $course->id,
-                'icon' => (new \pix_icon('i/graduation-cap', ''))->export_for_pix(),
+                'icon' => $courseicon,
                 'hasmenu' => false,
                 'menu' => null
             ];

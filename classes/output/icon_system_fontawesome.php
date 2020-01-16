@@ -45,7 +45,8 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
                 'core:i/briefcase' => 'fa-briefcase',
                 'core:i/cogs' => 'fa-cogs',
                 'core:i/graduation-cap' => 'fa-graduation-cap',
-                'core:i/navigationitem' => 'fa-wrench'
+                'core:i/navigationbranch' => 'fa-wrench',
+                'core:i/navigationitem' => 'fa-angle-double-right'
         );
 
         return array_merge($iconmap, $override);
