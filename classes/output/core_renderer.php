@@ -24,7 +24,9 @@
 
 namespace theme_wwu2019\output;
 
+use context_course;
 use moodle_page;
+use moodle_url;
 use navigation_node;
 
 defined('MOODLE_INTERNAL') || die;
@@ -80,6 +82,16 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => true,
                     'menu' => $this->add_breakers($courses),
                     'icon' => (new \pix_icon('i/graduation-cap', ''))->export_for_pix()
+            ];
+        }
+
+        // Add This Course menu.
+        if (count($thiscourse = $this->get_activities())) {
+            $mainmenu[] = [
+                    'name' => get_string('thiscourse', 'theme_wwu2019'),
+                    'hasmenu' => true,
+                    'menu' => $this->add_breakers($thiscourse),
+                    'icon' => (new \pix_icon('i/book', ''))->export_for_pix()
             ];
         }
 
@@ -184,7 +196,6 @@ class core_renderer extends \core_renderer {
      * @return array The sorted courses, ready for use in templates.
      */
     private function get_courses() {
-        global $CFG;
 
         $courses = enrol_get_my_courses(array(), 'c.startdate DESC');
         $terms = [];
@@ -237,13 +248,116 @@ class core_renderer extends \core_renderer {
 
             $terms[$termid]['menu'][] = [
                 'name' => $course->shortname,
-                'href' => $CFG->wwwroot . '/course/view.php?id=' . $course->id,
+                'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(),
                 'icon' => $courseicon,
                 'hasmenu' => false,
                 'menu' => null
             ];
         }
         return array_values($terms);
+    }
+
+    private function get_activities() {
+        $activities = [];
+        if (!isguestuser()) {
+            if (in_array($this->page->pagelayout, array('course', 'incourse', 'report', 'admin', 'standard')) &&
+                    (!empty($this->page->course->id) && $this->page->course->id > 1)) {
+
+                $activities[] = [
+                        'name' => get_string('participants'),
+                        'icon' => (new \pix_icon('i/users', ''))->export_for_pix(),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'href' => (new moodle_url('/user/index.php', array('id' => $this->page->course->id)))->out()
+                ];
+
+                $context = context_course::instance($this->page->course->id);
+                if (((has_capability('gradereport/overview:view', $context) ||
+                                        has_capability('gradereport/user:view', $context)) &&
+                                $this->page->course->showgrades) || has_capability('gradereport/grader:view', $context)) {
+                    $activities[] = [
+                            'name' => get_string('grades'),
+                            'icon' => (new \pix_icon('i/grades', ''))->export_for_pix(),
+                            'hasmenu' => false,
+                            'menu' => null,
+                            'href' => (new \moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))
+                                    ->out()
+                    ];
+                }
+                $activities[] = [
+                        'name' => get_string('badgesview', 'badges'),
+                        'icon' => (new \pix_icon('i/trophy', ''))->export_for_pix(),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))
+                                ->out()
+                ];
+
+                $data = $this->get_course_activities();
+                foreach ($data as $modname => $modfullname) {
+                    if ($modname === 'resources') {
+                        $icon = $this->pix_icon('icon', '', 'mod_page', array('class' => 'icon'));
+                        $activities[] = [
+                                'name' => $modfullname,
+                                'icon' => (new \pix_icon('icon', '', 'mod_page'))->export_for_pix(),
+                                'hasmenu' => false,
+                                'menu' => null,
+                                'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))
+                                        ->out()
+                        ];
+                    } else {
+                        $activities[] = [
+                                'name' => $modfullname,
+                                'icon' => (new \pix_icon('icon', '', $modname))->export_for_pix(),
+                                'hasmenu' => false,
+                                'menu' => null,
+                                'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))
+                                        ->out()
+                        ];
+                    }
+                }
+            }
+        }
+        return $activities;
+    }
+
+    private function get_course_activities() {
+        // A copy of block_activity_modules.
+        $course = $this->page->course;
+        $modinfo = get_fast_modinfo($course);
+        $course = \course_get_format($course)->get_course();
+        $modfullnames = array();
+        $archetypes = array();
+
+        foreach ($modinfo->get_section_info_all() as $section => $thissection) {
+            if (((!empty($course->numsections)) and ($section > $course->numsections)) or (empty($modinfo->sections[$section]))) {
+                // This is a stealth section or is empty.
+                continue;
+            }
+            foreach ($modinfo->sections[$thissection->section] as $modnumber) {
+                $cm = $modinfo->cms[$modnumber];
+                // Exclude activities which are not visible or have no link (=label).
+                if (!$cm->uservisible or !$cm->has_view()) {
+                    continue;
+                }
+                if (array_key_exists($cm->modname, $modfullnames)) {
+                    continue;
+                }
+                if (!array_key_exists($cm->modname, $archetypes)) {
+                    $archetypes[$cm->modname] = plugin_supports('mod', $cm->modname, FEATURE_MOD_ARCHETYPE, MOD_ARCHETYPE_OTHER);
+                }
+                if ($archetypes[$cm->modname] == MOD_ARCHETYPE_RESOURCE) {
+                    if (!array_key_exists('resources', $modfullnames)) {
+                        $modfullnames['resources'] = get_string('resources');
+                    }
+                } else {
+                    $modfullnames[$cm->modname] = $cm->modplural;
+                }
+            }
+        }
+        \core_collator::asort($modfullnames);
+
+        return $modfullnames;
     }
 
 }
