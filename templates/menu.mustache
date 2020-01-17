@@ -25,22 +25,20 @@
 }}
 <img src="{{wwwroot}}/theme/wwu2019/pix/arrow_up.svg" alt="" hidden>
 <img src="{{wwwroot}}/theme/wwu2019/pix/arrow_down.svg" alt="" hidden>
-<div id="main-menu-placeholder">
-    <nav id="main-menu">
-        <div id="main-menu-border">
-            <ul role="menubar" class="d-flex">
-                {{# mainmenu }}
-                    <li role="none" class="main-menu-item">
-                        <a role="menuitem" tabindex="0"
-                            {{# href }} href="{{ href }}"{{/href}}>
-                            {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
-                            <span class="underline">{{name}}</span>
-                        </a>
-                        {{# hasmenu }}
-                            <div class="sub-menu-scroll-wrapper">
+<nav id="main-menu">
+    <div id="main-menu-border">
+        <ul role="menubar" id="main-menu-left">
+            {{# mainmenu }}
+                <li role="none" class="main-menu-item">
+                    <a role="menuitem" tabindex="0"
+                        {{# href }} href="{{ href }}"{{/href}}>
+                        {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
+                        <span class="underline">{{name}}</span>
+                    </a>
+                    {{# hasmenu }}
+                        <div class="sub-menu-scroll-wrapper">
                             <div class="sub-menu-scroll-container">
-                            <div class="sub-menu-wrapper">
-
+                                <div class="sub-menu-wrapper">
                                     <ul role="menu" class="sub-menu">
                                         {{# menu }}
                                             <li role="none" class="sub-menu-item">
@@ -64,11 +62,10 @@
                                     </ul>
                                 </div>
                             </div>
-                            </div>
-                        {{/hasmenu}}
-                    </li>
-                {{/ mainmenu }}
-            </ul>
-        </div>
-    </nav>
-</div>
+                        </div>
+                    {{/hasmenu}}
+                </li>
+            {{/ mainmenu }}
+        </ul>
+    </div>
+</nav>

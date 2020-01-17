@@ -150,13 +150,10 @@ ul[role="menubar"] {
     margin: 0;
 }
 
-#main-menu-placeholder {
-    height: 52px;
-    overflow: visible;
-}
-
 #main-menu {
-    position: relative;
+    position: sticky;
+    position: -webkit-sticky; /* stylelint-disable-line */
+    top: 0;
     height: 100%;
     z-index: 990;
     background: white;
@@ -182,32 +179,23 @@ ul[role="menubar"] {
         }
     }
 
-    &.sticky {
-        position: fixed;
-        max-width: 1440px;
-        padding-left: 16px;
-        padding-right: 16px;
-        margin: auto;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: inherit;
-    }
-
     #main-menu-border {
         position: relative;
         padding: 10px 0;
         border-bottom: 4px solid $dividergrey;
     }
 
+    #main-menu-left {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .main-menu-item {
-        &:not(:first-child) {
-            padding-left: 15px;
-        }
 
         &:not(:last-child) {
             padding-right: 15px;
             border-right: 1px solid black;
+            margin-right: 15px;
         }
 
         span,

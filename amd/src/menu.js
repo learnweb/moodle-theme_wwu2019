@@ -27,32 +27,10 @@ import $ from 'jquery';
  * Init function
  */
 export function init() {
-    stickMenu();
     openMenu();
 
     updateMaxMenuHeight();
     $(window).resize(updateMaxMenuHeight);
-}
-
-/**
- * Adds sticky class to main menu nav when needed.
- */
-function stickMenu() {
-    const mainMenu = $('#main-menu');
-    const topPos = mainMenu.offset().top;
-    let sticky = $(window).scrollTop() > topPos;
-    if (sticky) {
-        mainMenu.addClass('sticky');
-    }
-    $(window).scroll(() => {
-        if (!sticky && $(window).scrollTop() > topPos) {
-            mainMenu.addClass('sticky');
-            sticky = true;
-        } else if (sticky && $(window).scrollTop() < topPos) {
-            mainMenu.removeClass('sticky');
-            sticky = false;
-        }
-    });
 }
 
 /**
