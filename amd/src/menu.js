@@ -37,8 +37,8 @@ export function init() {
  * Updates max-height of submenus on page-init and window resize.
  */
 function updateMaxMenuHeight() {
-    const placeholder = $('#main-menu-placeholder');
-    const botPos = placeholder.offset().top + placeholder.outerHeight() + 24;
+    const mainMenu = $('#main-menu');
+    const botPos = mainMenu.offset().top + mainMenu.outerHeight() + 16;
     $('.sub-menu-scroll-container').css('max-height', ($(window).height() - botPos) + 'px');
 }
 
