@@ -182,11 +182,20 @@ ul[role="menubar"] {
     #main-menu-border {
         padding: 10px 0;
         border-bottom: 4px solid $dividergrey;
+
+        display: flex;
+        flex-wrap: wrap-reverse;
     }
 
-    #main-menu-left {
+    #main-menu-left,
+    #main-menu-right {
         display: flex;
         flex-wrap: wrap;
+        flex-grow: 1;
+    }
+
+    #main-menu-right {
+        justify-content: flex-end;
     }
 
     .main-menu-item {
@@ -349,6 +358,19 @@ ul[role="menubar"] {
         &.open > .sub-sub-menu {
             margin: 4px 0;
             display: block;
+        }
+    }
+
+    .main-menu-icon-item {
+
+        &:not(:last-child) {
+            padding-right: 15px;
+        }
+
+        span,
+        .icon {
+            color: black;
+            font-size: 1.34375em;
         }
     }
 }

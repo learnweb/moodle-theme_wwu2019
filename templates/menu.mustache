@@ -30,8 +30,7 @@
         <ul role="menubar" id="main-menu-left">
             {{# mainmenu }}
                 <li role="none" class="main-menu-item">
-                    <a role="menuitem" tabindex="0"
-                        {{# href }} href="{{ href }}"{{/href}}>
+                    <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
                         {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                         <span class="underline">{{name}}</span>
                     </a>
@@ -66,6 +65,20 @@
                     {{/hasmenu}}
                 </li>
             {{/ mainmenu }}
+        </ul>
+        <ul role="menubar" id="main-menu-right">
+            {{# right-menu-icons }}
+            <li role="none" class="main-menu-icon-item">
+                <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
+                    {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
+                </a>
+            </li>
+            {{/ right-menu-icons }}
+            {{# user-menu }}
+            {{/ user-menu }}
+            {{# login }}
+
+            {{/login}}
         </ul>
     </div>
 </nav>
