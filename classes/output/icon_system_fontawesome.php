@@ -48,7 +48,10 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
                 'core:i/navigationbranch' => 'fa-wrench',
                 'core:i/navigationitem' => 'fa-angle-double-right',
                 'core:i/book' => 'fa-book',
-                'core:i/trophy' => 'fa-trophy'
+                'core:i/trophy' => 'fa-trophy',
+                'core:i/key' => 'fa-key',
+                'core:i/comment' => 'fa-comment',
+                'core:i/rss-square' => 'fa-rss-square',
         );
 
         return array_merge($iconmap, $override);

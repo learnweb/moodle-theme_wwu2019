@@ -33,9 +33,7 @@ ul[role="menubar"] {
 
 #main-menu {
     position: sticky;
-    position: -webkit-sticky; /* stylelint-disable-line */
     top: 0;
-    height: 100%;
     z-index: 990;
     background: white;
 
@@ -98,61 +96,61 @@ ul[role="menubar"] {
             text-decoration: underline;
         }
 
-        .sub-menu-scroll-wrapper {
-            display: none;
+        &.open .sub-menu-scroll-wrapper {
+            display: block;
+        }
+    }
 
-            border-bottom: 4px solid $dividergrey;
-            z-index: 999;
-            position: absolute;
-            left: 0;
-            top: 100%; /* #main-menu is offset parent */
-            width: 100%;
+    .sub-menu-scroll-wrapper {
+        display: none;
 
-            .sub-menu-scroll-container {
-                max-height: 500px;
-                overflow-y: auto;
-                /* For newer Firefox versions to disable width gain of scrollbar when hovering it */
-                scrollbar-width: thin; /* stylelint-disable-line */
+        border-bottom: 4px solid $dividergrey;
+        z-index: 999;
+        position: absolute;
+        left: 0;
+        top: 100%; /* #main-menu is offset parent */
+        width: 100%;
 
-                .sub-menu-wrapper {
-                    width: 100%;
-                    overflow: hidden;
+        .sub-menu-scroll-container {
+            max-height: 500px;
+            overflow-y: auto;
+            /* For newer Firefox versions to disable width gain of scrollbar when hovering it */
+            scrollbar-width: thin; /* stylelint-disable-line */
 
-                    .sub-menu {
-                        position: relative;
-                        display: table;
-                        table-layout: fixed;
-                        // Hide padding of leftmost items.
-                        margin-right: -16px;
-                        // Hide divider below bottommost items.
-                        margin-bottom: -1px;
-                        width: calc(100% + 16px);
-                        background: white;
+            .sub-menu-wrapper {
+                width: 100%;
+                overflow: hidden;
 
-                        .breaker {
-                            display: none;
+                .sub-menu {
+                    position: relative;
+                    display: table;
+                    table-layout: fixed;
+                    // Hide padding of leftmost items.
+                    margin-right: -16px;
+                    // Hide divider below bottommost items.
+                    margin-bottom: -1px;
+                    width: calc(100% + 16px);
+                    background: white;
 
-                            &.c3 {
-                                @media (min-width: $col2-break-point + 1) {
-                                    display: table-cell;
-                                    width: 0;
-                                }
+                    .breaker {
+                        display: none;
+
+                        &.c3 {
+                            @media (min-width: $col2-break-point + 1) {
+                                display: table-cell;
+                                width: 0;
                             }
+                        }
 
-                            &.c2 {
-                                @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
-                                    display: table-cell;
-                                    width: 0;
-                                }
+                        &.c2 {
+                            @media (min-width: $mobile-break-point + 1) and (max-width: $col2-break-point) {
+                                display: table-cell;
+                                width: 0;
                             }
                         }
                     }
                 }
             }
-        }
-
-        &.open .sub-menu-scroll-wrapper {
-            display: block;
         }
     }
 
@@ -250,7 +248,7 @@ ul[role="menubar"] {
     }
 
     #main-menu-right {
-        .icon {
+        .main-menu-icon-item .icon {
             vertical-align: text-top;
         }
     }
@@ -258,6 +256,10 @@ ul[role="menubar"] {
 
     #user-menu {
         margin-left: 4px;
+
+        &.open .sub-menu-scroll-wrapper {
+            display: block;
+        }
 
         .user-icon {
             border: 1px solid $learnwebblue;

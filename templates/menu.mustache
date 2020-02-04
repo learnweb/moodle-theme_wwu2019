@@ -80,6 +80,33 @@
                         <img class="user-icon" src="{{pic}}" alt="PICTURE OF {{name}}" />
                         <span class="underline">{{name}}</span>
                     </a>
+                    <div class="sub-menu-scroll-wrapper">
+                        <div class="sub-menu-scroll-container">
+                            <div class="sub-menu-wrapper">
+                                <ul role="menu" class="sub-menu">
+                                    {{# menu }}
+                                        <li role="none" class="sub-menu-item">
+                                            <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
+                                                {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
+                                                <span class="underline">{{ name }}</span>
+                                                {{# hasmenu }}
+                                                    <div class="arrow"></div>
+                                                {{/ hasmenu }}
+                                            </a>
+                                            {{# hasmenu }}
+                                                {{> theme_wwu2019/menu-recursion }}
+                                            {{/hasmenu}}
+                                        </li>
+                                        {{# breaker }}
+                                            <div class="breaker {{ . }}"></div>
+                                            {{! Needed for ensuring last breaker also breaks there is no item follow the breaker (Occurs when menu has one or two items). }}
+                                            <div></div>
+                                        {{/ breaker }}
+                                    {{/ menu }}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             {{/ user-menu }}
             {{# login }}

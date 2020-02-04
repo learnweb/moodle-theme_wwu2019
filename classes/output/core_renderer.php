@@ -113,13 +113,6 @@ class core_renderer extends \core_renderer {
                 'href' => $CFG->wwwroot . '/my/',
         ];
 
-        $userpic = new \user_picture($USER);
-
-        $usermenu = [
-            'name' => sprintf('%.1s. %s', $USER->firstname, $USER->lastname),
-            'pic' => $userpic->get_url($this->page)->out(true)
-        ];
-
         $templatecontext = [
                 'left-menu' => $mainmenu,
                 'wwwroot' => $CFG->wwwroot,
@@ -134,7 +127,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix(),
                         ]
                 ],
-                'user-menu' => $usermenu
+                'user-menu' => $this->get_user_menu()
         ];
 
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
@@ -386,6 +379,114 @@ class core_renderer extends \core_renderer {
         \core_collator::asort($modfullnames);
 
         return $modfullnames;
+    }
+
+
+    private function get_user_menu() {
+        global $USER;
+
+        $menucontent = [];
+
+        // Link Profile page.
+        if (\core\session\manager::is_loggedinas()) {
+            $realuser = \core\session\manager::get_realuser();
+            $menucontent[] = [
+                    'name' => get_string('loggedinas', 'theme_wwu2019',
+                            array('real' => fullname($realuser, true), 'fake' => fullname($USER, true))),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
+                    'icon' => (new \pix_icon('i/key', ''))->export_for_pix()
+            ];
+        } else {
+            $menucontent[] = [
+                    'name' => fullname($USER, true),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
+                    'icon' => (new \pix_icon('i/user', ''))->export_for_pix()
+            ];
+        }
+
+        // Preferences Submenu.
+        $menucontent[] = [
+                'name' => get_string('settings'),
+                'hasmenu' => true,
+                'menu' => $this->get_user_settings_submenu(),
+                'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
+        ];
+
+        $userpic = new \user_picture($USER);
+
+        $usermenu = [
+                'name' => sprintf('%.1s. %s', $USER->firstname, $USER->lastname),
+                'pic' => $userpic->get_url($this->page)->out(true),
+                'menu' => $this->add_breakers($menucontent)
+        ];
+
+        return $usermenu;
+
+    }
+
+    private function get_user_settings_submenu() {
+        global $USER, $CFG;
+
+        $menu = [];
+
+        $menu[] = [
+                'name' => get_string('user'),
+                'icon' => (new \pix_icon('i/user', ''))->export_for_pix(),
+                'href' => (new moodle_url('/user/preferences.php', array('userid' => $USER->id)))->out(false),
+                'hasmenu' => false,
+        ];
+
+        /* ??? */
+        $course = $this->page->course;
+        $context = context_course::instance($course->id);
+
+        if (has_capability('moodle/user:editownprofile', $context)) {
+            $menu[] = [
+                    'name' => get_string('editmyprofile'),
+                    'icon' => (new \pix_icon('i/edit', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/user/edit.php', array('id' => $USER->id)))->out(false),
+                    'hasmenu' => false,
+            ];
+        }
+
+        if (has_capability('moodle/user:changeownpassword', $context)) {
+            $menu[] = [
+                    'name' => get_string('changepassword'),
+                    'icon' => (new \pix_icon('i/key', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/login/change_password.php'))->out(false),
+                    'hasmenu' => false,
+            ];
+        }
+        if (has_capability('moodle/user:editownmessageprofile', $context)) {
+            $menu[] = [
+                    'name' => get_string('message', 'message'),
+                    'icon' => (new \pix_icon('i/comment', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/message/edit.php', array('id' => $USER->id)))->out(false),
+                    'hasmenu' => false,
+            ];
+        }
+        if ($CFG->enableblogs) {
+            $menu[] = [
+                    'name' => get_string('blog', 'blog'),
+                    'icon' => (new \pix_icon('i/rss-square', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/blog/preferences.php'))->out(false),
+                    'hasmenu' => false,
+            ];
+        }
+        if ($CFG->enablebadges && has_capability('moodle/badges:manageownbadges', $context)) {
+            $menu[] = [
+                    'name' => get_string('badgepreferences', 'theme_wwu2019'),
+                    'icon' => (new \pix_icon('i/badge', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/badge/preferences.php'))->out(false),
+                    'hasmenu' => false,
+            ];
+        }
+
+        return $menu;
     }
 
 }

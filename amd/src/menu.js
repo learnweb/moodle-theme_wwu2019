@@ -125,7 +125,7 @@ function openMenu() {
         }
     }
 
-    $('li.main-menu-item > a').click((ev) => {
+    $('li.main-menu-item > a, li#user-menu > a').click((ev) => {
         if (ev.currentTarget.parentNode === openMenu) {
             if (new Date() - openTime > closeCooldown) {
                 close(openMenu);
@@ -135,7 +135,7 @@ function openMenu() {
         }
     });
 
-    let menuitems = $('li.main-menu-item');
+    let menuitems = $('li.main-menu-item, li#user-menu');
     menuitems.mouseenter((ev) => {
         if (ev.currentTarget === openMenu) {
             abortClose();
