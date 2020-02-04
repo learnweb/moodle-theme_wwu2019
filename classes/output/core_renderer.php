@@ -381,7 +381,12 @@ class core_renderer extends \core_renderer {
         return $modfullnames;
     }
 
-
+    /**
+     * Returns Array for displaying User-Sub-Menu in Template
+     * @return array
+     * @throws \coding_exception
+     * @throws \moodle_exception
+     */
     private function get_user_menu() {
         global $USER;
 
@@ -428,6 +433,12 @@ class core_renderer extends \core_renderer {
 
     }
 
+    /**
+     * Returns Array for Template that displays the settings submenu in the user menu.
+     * @return array
+     * @throws \coding_exception
+     * @throws \moodle_exception
+     */
     private function get_user_settings_submenu() {
         global $USER, $CFG;
 
