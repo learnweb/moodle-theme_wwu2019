@@ -1,0 +1,136 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * WWU 2019 General SCSS
+ *
+ * @package    theme_wwu2019
+ * @copyright  2019 Justus Dieckmann WWU
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+@font-face {
+    font-family: 'MetaWebPro-Normal';
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot");
+    src:
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot?#iefix") format("embedded-opentype"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.woff") format("woff"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-normal.ttf") format("truetype"),
+        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-normal.svg#metacomppro-normal") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MetaWebPro-NormalIta';
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot");
+    src:
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot?#iefix") format("embedded-opentype"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.woff") format("woff"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-normalita.ttf") format("truetype"),
+        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-normalita.svg#metacomppro-normalita") format("svg");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'MetaWebPro-Bold';
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot");
+    src:
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot?#iefix") format("embedded-opentype"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.woff") format("woff"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-bold.ttf") format("truetype"),
+        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-bold.svg#metacomppro-bold") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MetaWebPro-BoldIta';
+    src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot");
+    src:
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot?#iefix") format("embedded-opentype"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.woff") format("woff"),
+        url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metacomppro-boldita.ttf") format("truetype"),
+        url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/fonts/metacomppro-boldita.svg#metacomppro-boldita") format("svg");
+    font-weight: 700;
+    font-style: italic;
+}
+
+body {
+    background-color: #fff;
+    font-family: 'MetaWebPro-Normal', sans-serif;
+}
+
+h1 {
+    font-size: 1.4em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
+h3,
+#adminsettings h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+#page {
+    width: 100%;
+    max-width: 1440px;
+    padding: 16px;
+    position: relative;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header and Logos */
+#logo-header {
+    padding-bottom: 1.25rem;
+
+    a.wwu-logo {
+        text-align: left;
+        display: block;
+        height: 81px;
+        width: 280px;
+        background-size: contain;
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-image: url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg");
+
+        @media (max-width: $mobile-break-point) {
+            background-position: -82px center;
+            background-size: cover;
+            width: 81px;
+        }
+
+        @media (max-width: 290px) {
+            display: none;
+        }
+    }
+
+    a.learnweb-logo img {
+        max-height: 81px;
+    }
+}
