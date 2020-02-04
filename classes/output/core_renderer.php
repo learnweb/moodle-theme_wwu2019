@@ -71,7 +71,7 @@ class core_renderer extends \core_renderer {
      * @return string HTML string.
      */
     public function main_menu() {
-        global $CFG;
+        global $CFG, $USER;
 
         $mainmenu = [];
 
@@ -113,8 +113,15 @@ class core_renderer extends \core_renderer {
                 'href' => $CFG->wwwroot . '/my/',
         ];
 
+        $userpic = new \user_picture($USER);
+
+        $usermenu = [
+            'name' => sprintf('%.1s. %s', $USER->firstname, $USER->lastname),
+            'pic' => $userpic->get_url($this->page)->out(true)
+        ];
+
         $templatecontext = [
-                'mainmenu' => $mainmenu,
+                'left-menu' => $mainmenu,
                 'wwwroot' => $CFG->wwwroot,
                 'right-menu-icons' => [
                         [
@@ -127,7 +134,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix(),
                         ]
                 ],
-                'user-menu' => true
+                'user-menu' => $usermenu
         ];
 
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');

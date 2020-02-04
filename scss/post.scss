@@ -179,6 +179,13 @@ ul[role="menubar"] {
         }
     }
 
+    span,
+    .icon {
+        color: black;
+        font-size: 1.34375em;
+        text-transform: uppercase;
+    }
+
     #main-menu-border {
         padding: 10px 0;
         border-bottom: 4px solid $dividergrey;
@@ -204,13 +211,6 @@ ul[role="menubar"] {
             padding-right: 15px;
             border-right: 1px solid black;
             margin-right: 15px;
-        }
-
-        span,
-        .icon {
-            color: black;
-            text-transform: uppercase;
-            font-size: 1.34375em;
         }
 
         &.open > a > span.underline {
@@ -366,11 +366,25 @@ ul[role="menubar"] {
         &:not(:last-child) {
             padding-right: 15px;
         }
+    }
 
-        span,
+    #main-menu-right {
         .icon {
-            color: black;
-            font-size: 1.34375em;
+            vertical-align: text-top;
+        }
+    }
+
+
+    #user-menu {
+        margin-left: 8px;
+
+        .user-icon {
+            border: 1px solid $learnwebblue;
+            height: 28px;
+            width: 28px;
+            border-radius: 4px;
+            margin-right: 4px;
+            vertical-align: top;
         }
     }
 }
