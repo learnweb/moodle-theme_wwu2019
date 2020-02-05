@@ -545,7 +545,7 @@ class core_renderer extends \core_renderer {
 
     /**
      * Returns Array for Template that displays the settings submenu in the user menu.
-     * @param $context \context context to check privileges for.
+     * @param \context $context context to check privileges for.
      * @return array
      * @throws \coding_exception
      * @throws \moodle_exception
