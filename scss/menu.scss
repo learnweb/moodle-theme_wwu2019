@@ -257,6 +257,23 @@ ul[role="menubar"] {
     #user-menu {
         margin-left: 4px;
 
+        .sub-menu-scroll-wrapper {
+            border: 2px solid #423c39;
+            border-top: 0;
+            right: 0;
+            left: auto;
+            width: auto;
+
+            .sub-menu-scroll-container .sub-menu-wrapper .sub-menu {
+                min-width: 250px;
+                width: auto;
+            }
+        }
+
+        .sub-menu-item > a {
+            padding: 8px;
+        }
+
         &.open .sub-menu-scroll-wrapper {
             display: block;
         }
