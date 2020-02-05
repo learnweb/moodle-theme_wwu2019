@@ -29,7 +29,7 @@
     <li class="sub-sub-menu-item">
         <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
             {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
-            <span class="underline">{{ name }}</span>
+            <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
             {{# hasmenu }}
                 <div class="arrow"></div>
             {{/ hasmenu }}

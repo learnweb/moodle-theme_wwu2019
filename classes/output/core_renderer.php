@@ -215,10 +215,17 @@ class core_renderer extends \core_renderer {
 
         $calendaricon = (new \pix_icon('i/calendar', ''))->export_for_pix();
         $courseicon = (new \pix_icon('i/graduation-cap', ''))->export_for_pix();
+        $hiddencourseicon = (new \pix_icon('i/hidden', ''))->export_for_pix();
 
         $termindependentlimit = new \DateTime("2000-00-00");
 
         foreach ($courses as $course) {
+
+            if (!$course->visible &&
+                    !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
+                continue;
+            }
+
             $coursestart = new \DateTime();
             $coursestart->setTimestamp($course->startdate);
 
@@ -260,9 +267,10 @@ class core_renderer extends \core_renderer {
             }
 
             $terms[$termid]['menu'][] = [
-                'name' => $course->shortname,
+                'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
+                'dontescape' => !$course->visible,
                 'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
-                'icon' => $courseicon,
+                'icon' => $course->visible ? $courseicon : $hiddencourseicon,
                 'hasmenu' => false,
                 'menu' => null
             ];
