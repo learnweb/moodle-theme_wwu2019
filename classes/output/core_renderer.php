@@ -396,9 +396,15 @@ class core_renderer extends \core_renderer {
      * @throws \moodle_exception
      */
     private function get_user_menu() {
-        global $USER;
+        global $USER, $CFG;
 
         $menucontent = [];
+
+        /* ??? */
+        $course = $this->page->course;
+        $context = context_course::instance($course->id);
+
+        // TODO Roleswitcher.
 
         // Link Profile page.
         if (\core\session\manager::is_loggedinas()) {
@@ -425,9 +431,105 @@ class core_renderer extends \core_renderer {
         $menucontent[] = [
                 'name' => get_string('settings'),
                 'hasmenu' => true,
-                'menu' => $this->get_user_settings_submenu(),
+                'menu' => $this->get_user_settings_submenu($context),
                 'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
         ];
+
+        // TODO Add divider here.
+
+        // Calendar.
+        if (has_capability('moodle/calendar:manageownentries', $context)) {
+            $menucontent[] = [
+                    'name' => get_string('pluginname', 'block_calendar_month'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new \pix_icon('i/calendar', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/calendar/view.php'))->out(false)
+            ];
+        }
+
+        // Messaging.
+        if (!empty($CFG->messaging)) {
+            $menucontent[] = [
+                    'name' => get_string('messages', 'message'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new \pix_icon('i/comment', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/message/index.php'))->out(false)
+            ];
+        }
+
+        // Files.
+        if (has_capability('moodle/user:manageownfiles', $context)) {
+            $menucontent[] = [
+                    'name' => get_string('privatefiles', 'block_private_files'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new \pix_icon('i/files', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/user/files.php'))->out(false)
+            ];
+        }
+
+        // Forum.
+        $menucontent[] = [
+                'name' => get_string('forumposts', 'mod_forum'),
+                'hasmenu' => false,
+                'menu' => null,
+                'icon' => (new \pix_icon('i/log', ''))->export_for_pix(),
+                'href' => (new moodle_url('/mod/forum/user.php', array('id' => $USER->id)))->out(false),
+        ];
+
+        if (has_capability('mod/forum:viewdiscussion', $context)) {
+            $menucontent[] = [
+                    'name' => get_string('discussions', 'mod_forum'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new \pix_icon('i/list', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/mod/forum/user.php',
+                            array('id' => $USER->id, 'mode' => 'discussions')))->out(false)
+            ];
+        }
+
+        // TODO Add divider here.
+
+        // Grades.
+        $menucontent[] = [
+                'name' => get_string('mygrades', 'theme_wwu2019'),
+                'hasmenu' => false,
+                'menu' => null,
+                'icon' => (new \pix_icon('i/grades', ''))->export_for_pix(),
+                'href' => (new moodle_url('/grade/report/overview/index.php',
+                        array('userid' => $USER->id)))->out(false)
+        ];
+
+        // Badges.
+        if (!empty($CFG->enablebadges) && has_capability('moodle/badges:manageownbadges', $context)) {
+            $menucontent[] = [
+                    'name' => get_string('badges'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new \pix_icon('i/badge', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/badges/mybadges.php'))->out(false)
+            ];
+        }
+
+        // TODO Add divider here.
+
+        // Logout.
+        if (\core\session\manager::is_loggedinas()) {
+            $branchurl = new moodle_url('/course/loginas.php', array('id' => $course->id, 'sesskey' => sesskey()));
+        } else {
+            $branchurl = new moodle_url('/login/logout.php', array('sesskey' => sesskey()));
+        }
+        $menucontent[] = [
+                'name' => get_string('logout'),
+                'hasmenu' => false,
+                'menu' => null,
+                'icon' => (new \pix_icon('i/logout', ''))->export_for_pix(),
+                'href' => $branchurl->out(false)
+        ];
+
+        // TODO Add Help link.
 
         $userpic = new \user_picture($USER);
 
@@ -443,11 +545,12 @@ class core_renderer extends \core_renderer {
 
     /**
      * Returns Array for Template that displays the settings submenu in the user menu.
+     * @param $context \context context to check privileges for.
      * @return array
      * @throws \coding_exception
      * @throws \moodle_exception
      */
-    private function get_user_settings_submenu() {
+    private function get_user_settings_submenu($context) {
         global $USER, $CFG;
 
         $menu = [];
@@ -458,10 +561,6 @@ class core_renderer extends \core_renderer {
                 'href' => (new moodle_url('/user/preferences.php', array('userid' => $USER->id)))->out(false),
                 'hasmenu' => false,
         ];
-
-        /* ??? */
-        $course = $this->page->course;
-        $context = context_course::instance($course->id);
 
         if (has_capability('moodle/user:editownprofile', $context)) {
             $menu[] = [

@@ -36,3 +36,4 @@ $string['thiscourse'] = 'This Course';
 /* User menu */
 $string['loggedinas'] = '{$a->real} logged in as {$a->fake}';
 $string['badgepreferences'] = 'Badge';
+$string['mygrades'] = 'My grades';

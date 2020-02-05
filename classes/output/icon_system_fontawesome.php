@@ -52,7 +52,9 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
                 'core:i/key' => 'fa-key',
                 'core:i/comment' => 'fa-comment',
                 'core:i/rss-square' => 'fa-rss-square',
-                'core:i/hidden' => 'fa-eye-slash'
+                'core:i/hidden' => 'fa-eye-slash',
+                'core:i/list' => 'fa-list',
+                'core:i/logout' => 'fa-sign-out'
         );
 
         return array_merge($iconmap, $override);
