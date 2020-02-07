@@ -14,19 +14,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * WWU 2019 Theme SCSS
+ * WWU 2019 Block SCSS
  *
  * @package    theme_wwu2019
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$mobile-break-point: 767px;
-$col2-break-point: 945px;
+.block.card {
+    border-radius: 0;
+    background: white;
 
-$learnwebblue: #006784;
-$dividergrey: #423c39;
+    & > .card-body {
+        & > .block-header {
+            background-color: $learnwebblue;
+            color: white;
+            padding: 4px 12px;
+            font-size: 16px;
+            line-height: 16px;
+            border: 2px solid darken($learnwebblue, 5%);
+            border-bottom: none;
+        }
 
-@import "general";
-@import "menu";
-@import "blocks";
+        & > .card-text {
+            border: 2px solid #bec6c8;
+            border-top: none;
+        }
+    }
+}
