@@ -14,17 +14,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * WWU 2019
+ * WWU 2019 Form SCSS
  *
  * @package    theme_wwu2019
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$mobile-break-point: 767px;
-$col2-break-point: 945px;
+/* Buttons */
 
-$learnwebblue: #006784;
-$wwugreen: #578014;
-$dividergrey: #423c39;
-$outlinegrey: #bec6c8;
+.btn {
+    border-radius: 0;
+}
+
+@each $color, $value in $theme-colors {
+    .btn-outline-#{$color} {
+        @include button-variant($value, $value);
+    }
+}
+
+/* Form control */
+.form-control {
+    border-radius: 0;
+}
+
+.custom-select {
+    border-radius: 0;
+}
+
+/* Pagination */
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    border-radius: 0;
+}

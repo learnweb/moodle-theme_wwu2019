@@ -41,7 +41,7 @@ function theme_wwu2019_get_main_scss_content($theme) {
 
     // Main CSS - Get the CSS from theme Classic.
     $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/pre.scss');
-    $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/preset/default.scss');
+    $scss .= file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/preset/default.scss');
     $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/post.scss');
 
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
