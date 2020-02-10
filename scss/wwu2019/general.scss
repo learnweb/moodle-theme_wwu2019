@@ -22,7 +22,7 @@
  */
 
 @font-face {
-    font-family: 'MetaWebPro-Normal';
+    font-family: 'MetaWebPro';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot");
     src:
         url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normal.eot?#iefix") format("embedded-opentype"),
@@ -34,7 +34,7 @@
 }
 
 @font-face {
-    font-family: 'MetaWebPro-NormalIta';
+    font-family: 'MetaWebPro';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot");
     src:
         url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-normalita.eot?#iefix") format("embedded-opentype"),
@@ -46,7 +46,7 @@
 }
 
 @font-face {
-    font-family: 'MetaWebPro-Bold';
+    font-family: 'MetaWebPro';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot");
     src:
         url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-bold.eot?#iefix") format("embedded-opentype"),
@@ -58,7 +58,7 @@
 }
 
 @font-face {
-    font-family: 'MetaWebPro-BoldIta';
+    font-family: 'MetaWebPro';
     src: url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot");
     src:
         url("https://www.uni-muenster.de/imperia/md/content/allgemein/farbunabhaengig/fonts/metawebpro-boldita.eot?#iefix") format("embedded-opentype"),
@@ -71,7 +71,7 @@
 
 body {
     background-color: #fff;
-    font-family: 'MetaWebPro-Normal', sans-serif;
+    font-family: 'MetaWebPro', sans-serif;
 }
 
 h1 {
