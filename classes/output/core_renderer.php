@@ -28,6 +28,7 @@ use context_course;
 use moodle_page;
 use moodle_url;
 use navigation_node;
+use pix_icon;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -81,7 +82,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('mycourses', 'theme_wwu2019'),
                     'hasmenu' => true,
                     'menu' => $this->add_breakers($courses),
-                    'icon' => (new \pix_icon('i/graduation-cap', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/graduation-cap', ''))->export_for_pix()
             ];
         }
 
@@ -91,7 +92,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('thiscourse', 'theme_wwu2019'),
                     'hasmenu' => true,
                     'menu' => $this->add_breakers($thiscourse),
-                    'icon' => (new \pix_icon('i/book', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/book', ''))->export_for_pix()
             ];
         }
 
@@ -101,7 +102,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('pluginname', 'block_settings'),
                     'hasmenu' => true,
                     'menu' => $this->add_breakers($settings),
-                    'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
             ];
         }
 
@@ -118,13 +119,13 @@ class core_renderer extends \core_renderer {
                 'wwwroot' => $CFG->wwwroot,
                 'right-menu-icons' => [
                         [
-                                'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix(),
+                                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
                         ],
                         [
-                                'icon' => (new \pix_icon('i/book', ''))->export_for_pix(),
+                                'icon' => (new pix_icon('i/book', ''))->export_for_pix(),
                         ],
                         [
-                                'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix(),
+                                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
                         ]
                 ],
                 'user-menu' => $this->get_user_menu()
@@ -142,8 +143,8 @@ class core_renderer extends \core_renderer {
      */
     private function settingsnav_for_template(\navigation_node_collection $nodecollection) {
         $items = [];
-        $navbranchicon = (new \pix_icon('i/navigationbranch', ''))->export_for_pix();
-        $navitemicon = (new \pix_icon('i/navigationitem', ''))->export_for_pix();
+        $navbranchicon = (new pix_icon('i/navigationbranch', ''))->export_for_pix();
+        $navitemicon = (new pix_icon('i/navigationitem', ''))->export_for_pix();
         foreach ($nodecollection as $node) {
             if ($node->display) {
 
@@ -213,9 +214,9 @@ class core_renderer extends \core_renderer {
         $courses = enrol_get_my_courses(array(), 'c.startdate DESC');
         $terms = [];
 
-        $calendaricon = (new \pix_icon('i/calendar', ''))->export_for_pix();
-        $courseicon = (new \pix_icon('i/graduation-cap', ''))->export_for_pix();
-        $hiddencourseicon = (new \pix_icon('i/hidden', ''))->export_for_pix();
+        $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
+        $courseicon = (new pix_icon('i/graduation-cap', ''))->export_for_pix();
+        $hiddencourseicon = (new pix_icon('i/hidden', ''))->export_for_pix();
 
         $termindependentlimit = new \DateTime("2000-00-00");
 
@@ -290,7 +291,7 @@ class core_renderer extends \core_renderer {
 
                 $activities[] = [
                         'name' => get_string('participants'),
-                        'icon' => (new \pix_icon('i/users', ''))->export_for_pix(),
+                        'icon' => (new pix_icon('i/users', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/user/index.php', array('id' => $this->page->course->id)))->out(false)
@@ -302,16 +303,16 @@ class core_renderer extends \core_renderer {
                                 $this->page->course->showgrades) || has_capability('gradereport/grader:view', $context)) {
                     $activities[] = [
                             'name' => get_string('grades'),
-                            'icon' => (new \pix_icon('i/grades', ''))->export_for_pix(),
+                            'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
                             'hasmenu' => false,
                             'menu' => null,
-                            'href' => (new \moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))
+                            'href' => (new moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))
                                     ->out(false)
                     ];
                 }
                 $activities[] = [
                         'name' => get_string('badgesview', 'badges'),
-                        'icon' => (new \pix_icon('i/trophy', ''))->export_for_pix(),
+                        'icon' => (new pix_icon('i/trophy', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))
@@ -321,10 +322,9 @@ class core_renderer extends \core_renderer {
                 $data = $this->get_course_activities();
                 foreach ($data as $modname => $modfullname) {
                     if ($modname === 'resources') {
-                        $icon = $this->pix_icon('icon', '', 'mod_page', array('class' => 'icon'));
                         $activities[] = [
                                 'name' => $modfullname,
-                                'icon' => (new \pix_icon('icon', '', 'mod_page'))->export_for_pix(),
+                                'icon' => (new pix_icon('icon', '', 'mod_page'))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))
@@ -333,7 +333,7 @@ class core_renderer extends \core_renderer {
                     } else {
                         $activities[] = [
                                 'name' => $modfullname,
-                                'icon' => (new \pix_icon('icon', '', $modname))->export_for_pix(),
+                                'icon' => (new pix_icon('icon', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))
@@ -415,7 +415,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
                     'menu' => null,
                     'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
-                    'icon' => (new \pix_icon('i/key', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/key', ''))->export_for_pix()
             ];
         } else {
             $menucontent[] = [
@@ -423,7 +423,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
                     'menu' => null,
                     'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
-                    'icon' => (new \pix_icon('i/user', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/user', ''))->export_for_pix()
             ];
         }
 
@@ -432,7 +432,7 @@ class core_renderer extends \core_renderer {
                 'name' => get_string('settings'),
                 'hasmenu' => true,
                 'menu' => $this->get_user_settings_submenu($context),
-                'icon' => (new \pix_icon('i/cogs', ''))->export_for_pix()
+                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
         ];
 
         // TODO Add divider here.
@@ -443,7 +443,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('pluginname', 'block_calendar_month'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new \pix_icon('i/calendar', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/calendar', ''))->export_for_pix(),
                     'href' => (new moodle_url('/calendar/view.php'))->out(false)
             ];
         }
@@ -454,7 +454,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('messages', 'message'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new \pix_icon('i/comment', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/comment', ''))->export_for_pix(),
                     'href' => (new moodle_url('/message/index.php'))->out(false)
             ];
         }
@@ -465,7 +465,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('privatefiles', 'block_private_files'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new \pix_icon('i/files', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/files', ''))->export_for_pix(),
                     'href' => (new moodle_url('/user/files.php'))->out(false)
             ];
         }
@@ -475,7 +475,7 @@ class core_renderer extends \core_renderer {
                 'name' => get_string('forumposts', 'mod_forum'),
                 'hasmenu' => false,
                 'menu' => null,
-                'icon' => (new \pix_icon('i/log', ''))->export_for_pix(),
+                'icon' => (new pix_icon('i/log', ''))->export_for_pix(),
                 'href' => (new moodle_url('/mod/forum/user.php', array('id' => $USER->id)))->out(false),
         ];
 
@@ -484,7 +484,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('discussions', 'mod_forum'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new \pix_icon('i/list', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/list', ''))->export_for_pix(),
                     'href' => (new moodle_url('/mod/forum/user.php',
                             array('id' => $USER->id, 'mode' => 'discussions')))->out(false)
             ];
@@ -497,7 +497,7 @@ class core_renderer extends \core_renderer {
                 'name' => get_string('mygrades', 'theme_wwu2019'),
                 'hasmenu' => false,
                 'menu' => null,
-                'icon' => (new \pix_icon('i/grades', ''))->export_for_pix(),
+                'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
                 'href' => (new moodle_url('/grade/report/overview/index.php',
                         array('userid' => $USER->id)))->out(false)
         ];
@@ -508,7 +508,7 @@ class core_renderer extends \core_renderer {
                     'name' => get_string('badges'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new \pix_icon('i/badge', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/badge', ''))->export_for_pix(),
                     'href' => (new moodle_url('/badges/mybadges.php'))->out(false)
             ];
         }
@@ -525,7 +525,7 @@ class core_renderer extends \core_renderer {
                 'name' => get_string('logout'),
                 'hasmenu' => false,
                 'menu' => null,
-                'icon' => (new \pix_icon('i/logout', ''))->export_for_pix(),
+                'icon' => (new pix_icon('i/logout', ''))->export_for_pix(),
                 'href' => $branchurl->out(false)
         ];
 
@@ -557,7 +557,7 @@ class core_renderer extends \core_renderer {
 
         $menu[] = [
                 'name' => get_string('user'),
-                'icon' => (new \pix_icon('i/user', ''))->export_for_pix(),
+                'icon' => (new pix_icon('i/user', ''))->export_for_pix(),
                 'href' => (new moodle_url('/user/preferences.php', array('userid' => $USER->id)))->out(false),
                 'hasmenu' => false,
         ];
@@ -565,7 +565,7 @@ class core_renderer extends \core_renderer {
         if (has_capability('moodle/user:editownprofile', $context)) {
             $menu[] = [
                     'name' => get_string('editmyprofile'),
-                    'icon' => (new \pix_icon('i/edit', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/edit', ''))->export_for_pix(),
                     'href' => (new moodle_url('/user/edit.php', array('id' => $USER->id)))->out(false),
                     'hasmenu' => false,
             ];
@@ -574,7 +574,7 @@ class core_renderer extends \core_renderer {
         if (has_capability('moodle/user:changeownpassword', $context)) {
             $menu[] = [
                     'name' => get_string('changepassword'),
-                    'icon' => (new \pix_icon('i/key', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/key', ''))->export_for_pix(),
                     'href' => (new moodle_url('/login/change_password.php'))->out(false),
                     'hasmenu' => false,
             ];
@@ -582,7 +582,7 @@ class core_renderer extends \core_renderer {
         if (has_capability('moodle/user:editownmessageprofile', $context)) {
             $menu[] = [
                     'name' => get_string('message', 'message'),
-                    'icon' => (new \pix_icon('i/comment', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/comment', ''))->export_for_pix(),
                     'href' => (new moodle_url('/message/edit.php', array('id' => $USER->id)))->out(false),
                     'hasmenu' => false,
             ];
@@ -590,7 +590,7 @@ class core_renderer extends \core_renderer {
         if ($CFG->enableblogs) {
             $menu[] = [
                     'name' => get_string('blog', 'blog'),
-                    'icon' => (new \pix_icon('i/rss-square', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/rss-square', ''))->export_for_pix(),
                     'href' => (new moodle_url('/blog/preferences.php'))->out(false),
                     'hasmenu' => false,
             ];
@@ -598,13 +598,58 @@ class core_renderer extends \core_renderer {
         if ($CFG->enablebadges && has_capability('moodle/badges:manageownbadges', $context)) {
             $menu[] = [
                     'name' => get_string('badgepreferences', 'theme_wwu2019'),
-                    'icon' => (new \pix_icon('i/badge', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/badge', ''))->export_for_pix(),
                     'href' => (new moodle_url('/badge/preferences.php'))->out(false),
                     'hasmenu' => false,
             ];
         }
 
         return $menu;
+    }
+
+    /**
+     * Wrapper for header elements.
+     *
+     * @return string HTML to display the main header.
+     */
+    public function full_header() {
+        global $PAGE;
+
+        if ($PAGE->include_region_main_settings_in_header_actions() && !$PAGE->blocks->is_block_present('settings')) {
+            // Only include the region main settings if the page has requested it and it doesn't already have
+            // the settings block on it. The region main settings are included in the settings block and
+            // duplicating the content causes behat failures.
+            $PAGE->add_header_action(\html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
+            ));
+        }
+
+        $header = new \stdClass();
+        $header->hasnavbar = empty($PAGE->layout_options['nonavbar']);
+        $header->navbar = $this->navbar();
+        $header->pageheadingbutton = $this->page_heading_button();
+        return $this->render_from_template('theme_wwu2019/full_header', $header);
+    }
+
+    /**
+     * Returns course-specific information to be output immediately above content on any course page
+     * (for the current course)
+     *
+     * @param bool $onlyifnotcalledbefore output content only if it has not been output before
+     * @return string
+     */
+    public function course_content_header($onlyifnotcalledbefore = false) {
+        $output = parent::course_content_header($onlyifnotcalledbefore);
+
+        if ($this->page->course->id == SITEID) {
+            return $output;
+        }
+
+        // TODO Do this nicely.
+        $output .= '<h2>' . $this->page->course->fullname . '</h2>';
+        return $output;
     }
 
 }

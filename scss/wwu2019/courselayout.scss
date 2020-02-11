@@ -14,15 +14,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * WWU 2019 Theme SCSS
+ * WWU 2019 Courselayout SCSS
  *
  * @package    theme_wwu2019
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-@import "wwu2019/general";
-@import "wwu2019/menu";
-@import "wwu2019/blocks";
-@import "wwu2019/forms";
-@import "wwu2019/courselayout";
+#region-main {
+    border: 2px solid $outlinegrey;
+    border-radius: 0;
+}
