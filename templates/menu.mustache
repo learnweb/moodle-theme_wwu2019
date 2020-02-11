@@ -29,7 +29,7 @@
     <div id="main-menu-border">
         <ul role="menubar" id="main-menu-left">
             {{# left-menu }}
-                <li role="none" class="main-menu-item">
+                <li role="none" class="main-menu-item {{# class }}{{class}}{{/class}}">
                     <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
                         {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                         <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
@@ -40,7 +40,7 @@
                                 <div class="sub-menu-wrapper">
                                     <ul role="menu" class="sub-menu">
                                         {{# menu }}
-                                            <li role="none" class="sub-menu-item">
+                                            <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}">
                                                 <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
                                                     {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                                                     <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
@@ -85,7 +85,7 @@
                             <div class="sub-menu-wrapper">
                                 <ul role="menu" class="sub-menu">
                                     {{# menu }}
-                                        <li role="none" class="sub-menu-item">
+                                        <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}">
                                             <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
                                                 {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                                                 <span class="underline">{{ name }}</span>

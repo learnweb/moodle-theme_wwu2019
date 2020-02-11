@@ -400,16 +400,15 @@ class core_renderer extends \core_renderer {
 
         $menucontent = [];
 
-        /* ??? */
         $course = $this->page->course;
         $context = context_course::instance($course->id);
 
-        // Output profile link.
+        // Create Roleswitcher.
         $rolemenuitem = null;
         $rolename = null;
         if (\is_role_switched($course->id)) { // Has switched roles.
             if ($role = $DB->get_record('role', array('id' => $USER->access['rsw'][$context->path]))) {
-                $menucontent[] = [
+                $menuitem = [
                         'name' => get_string('switchrolereturn'),
                         'hasmenu' => false,
                         'menu' => null,
@@ -423,7 +422,7 @@ class core_renderer extends \core_renderer {
         } else {
             $roles = \get_switchable_roles($context);
             if (is_array($roles) && (count($roles) > 0)) {
-                $menucontent[] = [
+                $menuitem = [
                         'name' => get_string('switchroleto'),
                         'hasmenu' => false,
                         'menu' => null,
@@ -457,6 +456,10 @@ class core_renderer extends \core_renderer {
             ];
         }
 
+        if ($rolemenuitem) {
+            $menucontent[] = $rolemenuitem;
+        }
+
         // Preferences Submenu.
         $menucontent[] = [
                 'name' => get_string('settings'),
@@ -465,7 +468,7 @@ class core_renderer extends \core_renderer {
                 'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
         ];
 
-        // TODO Add divider here.
+        $menucontent[count($menucontent) - 1]['class'] = 'divider';
 
         // Calendar.
         if (has_capability('moodle/calendar:manageownentries', $context)) {
@@ -520,7 +523,7 @@ class core_renderer extends \core_renderer {
             ];
         }
 
-        // TODO Add divider here.
+        $menucontent[count($menucontent) - 1]['class'] = 'divider';
 
         // Grades.
         $menucontent[] = [
@@ -543,7 +546,7 @@ class core_renderer extends \core_renderer {
             ];
         }
 
-        // TODO Add divider here.
+        $menucontent[count($menucontent) - 1]['class'] = 'divider';
 
         // Logout.
         if (\core\session\manager::is_loggedinas()) {
@@ -559,7 +562,16 @@ class core_renderer extends \core_renderer {
                 'href' => $branchurl->out(false)
         ];
 
-        // TODO Add Help link.
+        // Help link.
+        if ($url = get_config('theme_wwu2019', 'helpurl')) {
+            $menucontent[] = [
+                    'name' => get_string('help'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new pix_icon('i/help', ''))->export_for_pix(),
+                    'href' => $url
+            ];
+        }
 
         $userpic = new \user_picture($USER);
 

@@ -15,29 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * WWU 2019
+ * WWU2019 theme settings file.
  *
  * @package    theme_wwu2019
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die;
 
-defined('MOODLE_INTERNAL') || die();
+if ($ADMIN->fulltree) {
 
-$string['pluginname'] = 'WWU 2019';
+    $settings = new theme_boost_admin_settingspage_tabs('themesettingwwu2019',
+            get_string('pluginname', 'theme_wwu2019'));
+    $page = new admin_settingpage('theme_classic_wwu2019', get_string('generalsettings', 'theme_boost'));
 
-/* Main menu */
-$string['mycourses'] = 'My courses';
-$string['termindependent'] = 'Semester independent';
-$string['dashboard'] = 'Dashboard';
+    $setting = new admin_setting_configtext('theme_wwu2019/helpurl',
+            get_string('helpurl', 'theme_wwu2019'),
+            get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
 
-$string['thiscourse'] = 'This Course';
+    $page->add($setting);
 
-/* User menu */
-$string['loggedinas'] = '{$a->real} logged in as {$a->fake}';
-$string['badgepreferences'] = 'Badge';
-$string['mygrades'] = 'My grades';
-
-/* Settings */
-$string['helpurl'] = 'Help URL';
-$string['helpurl_desc'] = 'URL to helppage that will be linked to in the usermenu';
+    $settings->add($page);
+}

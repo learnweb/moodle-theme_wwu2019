@@ -272,6 +272,19 @@ ul[role="menubar"] {
 
         .sub-menu-item > a {
             padding: 6px 8px;
+            border: none;
+        }
+
+        .sub-menu-item.divider > a {
+            border-bottom: 1px dashed black;
+        }
+
+        .sub-menu-item.open > a {
+            border-bottom: 1px solid black;
+        }
+
+        &.open > a > span.underline {
+            text-decoration: underline;
         }
 
         &.open .sub-menu-scroll-wrapper {

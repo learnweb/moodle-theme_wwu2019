@@ -26,7 +26,7 @@
 
 <ul class="sub-sub-menu">
     {{# menu }}
-    <li class="sub-sub-menu-item">
+    <li class="sub-sub-menu-item {{# class }}{{class}}{{/class}}">
         <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
             {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
             <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
