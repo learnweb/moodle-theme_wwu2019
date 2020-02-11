@@ -396,7 +396,7 @@ class core_renderer extends \core_renderer {
      * @throws \moodle_exception
      */
     private function get_user_menu() {
-        global $USER, $CFG;
+        global $USER, $CFG, $DB;
 
         $menucontent = [];
 
@@ -404,14 +404,44 @@ class core_renderer extends \core_renderer {
         $course = $this->page->course;
         $context = context_course::instance($course->id);
 
-        // TODO Roleswitcher.
+        // Output profile link.
+        $rolemenuitem = null;
+        $rolename = null;
+        if (\is_role_switched($course->id)) { // Has switched roles.
+            if ($role = $DB->get_record('role', array('id' => $USER->access['rsw'][$context->path]))) {
+                $menucontent[] = [
+                        'name' => get_string('switchrolereturn'),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id, 'sesskey' => sesskey(),
+                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false))))
+                                ->out(false),
+                        'icon' => (new pix_icon('i/user', ''))->export_for_pix()
+                ];
+                $rolename = ' - '.role_get_name($role, $context);
+            }
+        } else {
+            $roles = \get_switchable_roles($context);
+            if (is_array($roles) && (count($roles) > 0)) {
+                $menucontent[] = [
+                        'name' => get_string('switchroleto'),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id,
+                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false))))
+                                ->out(false),
+                        'icon' => (new pix_icon('i/users', ''))->export_for_pix()
+                ];
+            }
+        }
 
         // Link Profile page.
         if (\core\session\manager::is_loggedinas()) {
             $realuser = \core\session\manager::get_realuser();
             $menucontent[] = [
                     'name' => get_string('loggedinas', 'theme_wwu2019',
-                            array('real' => fullname($realuser, true), 'fake' => fullname($USER, true))),
+                            array('real' => fullname($realuser, true), 'fake' => fullname($USER, true))) .
+                            ($rolename ? $rolename : ''),
                     'hasmenu' => false,
                     'menu' => null,
                     'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
@@ -419,7 +449,7 @@ class core_renderer extends \core_renderer {
             ];
         } else {
             $menucontent[] = [
-                    'name' => fullname($USER, true),
+                    'name' => fullname($USER, true) . ($rolename ? $rolename : ''),
                     'hasmenu' => false,
                     'menu' => null,
                     'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
