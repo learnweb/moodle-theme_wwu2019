@@ -678,7 +678,7 @@ class core_renderer extends \core_renderer {
         }
 
         // TODO Do this nicely.
-        $output .= '<h2>' . $this->page->course->fullname . '</h2>';
+        $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
         return $output;
     }
 

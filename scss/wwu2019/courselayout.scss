@@ -24,4 +24,14 @@
 #region-main {
     border: 2px solid $outlinegrey;
     border-radius: 0;
+    padding: 12px;
+}
+
+.page-title {
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-size: 22px;
 }
