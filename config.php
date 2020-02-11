@@ -71,10 +71,10 @@ $THEME->layouts = [
         ),
         // Standard layout with blocks, this is recommended for most pages with general information.
         'standard' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre', 'side-post'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         // Main course page.
         'course' => array(

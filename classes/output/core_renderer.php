@@ -116,7 +116,9 @@ class core_renderer extends \core_renderer {
 
         $templatecontext = [
                 'left-menu' => $mainmenu,
-                'wwwroot' => $CFG->wwwroot,
+                'user-menu' => $this->get_user_menu(),
+                'langs' => $this->get_languages(),
+                'isadmin' => has_capability('moodle/site:config', \context_system::instance()),
                 'right-menu-icons' => [
                         [
                                 'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
@@ -128,7 +130,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
                         ]
                 ],
-                'user-menu' => $this->get_user_menu()
+                'wwwroot' => $CFG->wwwroot,
         ];
 
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
@@ -647,6 +649,30 @@ class core_renderer extends \core_renderer {
         }
 
         return $menu;
+    }
+
+    /**
+     * Returns an array of languages to use in theme_wwu2019/menu template.
+     * @return array|null
+     * @throws \moodle_exception
+     */
+    private function get_languages() {
+        global $CFG;
+
+        $langs = get_string_manager()->get_list_of_translations();
+        $templateobj = [];
+
+        if (count($langs) < 2 || empty($CFG->langmenu) || ($this->page->course != SITEID && !empty($this->page->course->lang))) {
+            return null;
+        }
+        foreach ($langs as $langtype => $langname) {
+            $templateobj[] = [
+                    'short' => $langtype,
+                    'full' => $langname,
+                    'href' => (new moodle_url($this->page->url, array('lang' => $langtype)))->out(false)
+            ];
+        }
+        return $templateobj;
     }
 
     /**

@@ -47,3 +47,11 @@
 .page-item:last-child .page-link {
     border-radius: 0;
 }
+
+.icon-button {
+    appearance: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 0 6px;
+}

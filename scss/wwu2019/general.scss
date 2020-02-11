@@ -134,3 +134,8 @@ h5 {
         max-height: 81px;
     }
 }
+
+/* Breadcrumbs */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}

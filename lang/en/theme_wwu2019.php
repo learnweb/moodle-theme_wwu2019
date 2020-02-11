@@ -32,6 +32,7 @@ $string['termindependent'] = 'Semester independent';
 $string['dashboard'] = 'Dashboard';
 
 $string['thiscourse'] = 'This Course';
+$string['searchadmin'] = 'Admin search';
 
 /* User menu */
 $string['loggedinas'] = '{$a->real} logged in as {$a->fake}';

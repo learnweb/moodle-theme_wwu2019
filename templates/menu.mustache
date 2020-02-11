@@ -110,3 +110,32 @@
         </ul>
     </div>
 </nav>
+<div id="menu-bottom">
+    <div>
+        {{# isadmin }}
+            <form action="{{wwwroot}}/admin/search.php" method="get" class="form-inline search" id="admin-search">
+                <input class="form-control form-control-sm search-field" type="text" name="query" value="" size="12"
+                        placeholder="{{#str}}searchadmin, theme_wwu2019{{/str}}"/>
+                <button type="submit" class="icon-button">
+                    {{# pix }} i/search, core, {{#str}} search {{/str}} {{/pix}}
+                    <i class="icon-user icon-dark"></i>
+                </button>
+            </form>
+        {{/isadmin}}
+    </div>
+    <div class="d-inline-flex">
+            <form id="global-search" action="{{wwwroot}}/search/index.php" method="get" class="form-inline search">
+                <input class="form-control form-control-sm search-field" type="text" name="q" value="" size="12"
+                        placeholder="{{#str}}search{{/str}}"/>
+                <button type="submit" class="icon-button">
+                    {{# pix }} i/search, core, {{#str}} search {{/str}} {{/pix}}
+                    <i class="icon-user icon-dark"></i>
+                </button>
+            </form>
+        <div id="lang-menu">
+            {{# langs }}
+                <a title="{{full}}" href="{{href}}"><span class="underline">{{short}}</span></a>
+            {{/langs}}
+        </div>
+    </div>
+</div>
