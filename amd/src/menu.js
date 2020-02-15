@@ -68,6 +68,7 @@ function openMenu() {
         }
         abortClose();
         $(menuItem).addClass('open');
+        $(menuItem).attr('aria-expanded', 'true');
         openMenu = menuItem;
         openCandidate = null;
         openTimeoutId = null;
@@ -91,6 +92,7 @@ function openMenu() {
      */
     function close(menuItem) {
         $(menuItem).removeClass('open');
+        $(menuItem).attr('aria-expanded', 'false');
         openMenu = null;
         abortClose();
         openTime = null;
@@ -125,7 +127,7 @@ function openMenu() {
         }
     }
 
-    $('li.main-menu-item > a, li#user-menu > a').click((ev) => {
+    $('li.main-menu-item[aria-haspopup="true"] > a, li#user-menu[aria-haspopup="true"] > a').click((ev) => {
         if (ev.currentTarget.parentNode === openMenu) {
             if (new Date() - openTime > closeCooldown) {
                 close(openMenu);
@@ -135,7 +137,7 @@ function openMenu() {
         }
     });
 
-    let menuitems = $('li.main-menu-item, li#user-menu');
+    let menuitems = $('li.main-menu-item[aria-haspopup="true"], li#user-menu[aria-haspopup="true"]');
     menuitems.mouseenter((ev) => {
         if (ev.currentTarget === openMenu) {
             abortClose();
@@ -152,11 +154,9 @@ function openMenu() {
         }
     });
 
-    $('li.sub-menu-item > a').click((ev) => {
-        $(ev.currentTarget.parentNode).toggleClass('open');
-    });
-
-    $('li.sub-sub-menu-item > a').click((ev) => {
-        $(ev.currentTarget.parentNode).toggleClass('open');
+    $('li.sub-menu-item[aria-haspopup="true"] > a, li.sub-sub-menu-item[aria-haspopup="true"] > a').click((ev) => {
+        let node = $(ev.currentTarget.parentNode);
+        node.toggleClass('open');
+        node.attr('aria-expanded', !(node.attr('aria-expanded') === 'true'));
     });
 }

@@ -410,7 +410,7 @@ class core_renderer extends \core_renderer {
         $rolename = null;
         if (\is_role_switched($course->id)) { // Has switched roles.
             if ($role = $DB->get_record('role', array('id' => $USER->access['rsw'][$context->path]))) {
-                $menuitem = [
+                $rolemenuitem = [
                         'name' => get_string('switchrolereturn'),
                         'hasmenu' => false,
                         'menu' => null,
@@ -424,7 +424,7 @@ class core_renderer extends \core_renderer {
         } else {
             $roles = \get_switchable_roles($context);
             if (is_array($roles) && (count($roles) > 0)) {
-                $menuitem = [
+                $rolemenuitem = [
                         'name' => get_string('switchroleto'),
                         'hasmenu' => false,
                         'menu' => null,
