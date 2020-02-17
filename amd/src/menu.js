@@ -28,19 +28,10 @@ import $ from 'jquery';
  */
 export function init() {
     openMenu();
-
-    updateMaxMenuHeight();
-    $(window).resize(updateMaxMenuHeight);
 }
 
-/**
- * Updates max-height of submenus on page-init and window resize.
- */
-function updateMaxMenuHeight() {
-    const mainMenu = $('#main-menu');
-    const botPos = mainMenu.offset().top + mainMenu.outerHeight() + 16;
-    $('.sub-menu-scroll-container').css('max-height', ($(window).height() - botPos) + 'px');
-}
+const onecolumnbreakpoint = 767;
+
 
 /**
  * Opens submenu when hovering
@@ -127,6 +118,17 @@ function openMenu() {
         }
     }
 
+    /**
+     * Closes the open menu and resets timeouts;
+     */
+    function reset() {
+        abortClose();
+        abortOpen();
+        if (openMenu) {
+            close(openMenu);
+        }
+    }
+
     $('li.main-menu-item[aria-haspopup="true"] > a, li#user-menu[aria-haspopup="true"] > a').click((ev) => {
         if (ev.currentTarget.parentNode === openMenu) {
             if (new Date() - openTime > closeCooldown) {
@@ -139,18 +141,24 @@ function openMenu() {
 
     let menuitems = $('li.main-menu-item[aria-haspopup="true"], li#user-menu[aria-haspopup="true"]');
     menuitems.mouseenter((ev) => {
-        if (ev.currentTarget === openMenu) {
-            abortClose();
-        } else {
-            openWithDelay(ev.currentTarget);
+        let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        if (width > onecolumnbreakpoint) {
+            if (ev.currentTarget === openMenu) {
+                abortClose();
+            } else {
+                openWithDelay(ev.currentTarget);
+            }
         }
     });
     menuitems.mouseleave((ev) => {
-        if (openCandidate && ev.currentTarget === openCandidate) {
-            abortOpen();
-        }
-        if (openMenu && ev.currentTarget === openMenu) {
-            closeWithDelay(ev.currentTarget);
+        let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        if (width > onecolumnbreakpoint) {
+            if (openCandidate && ev.currentTarget === openCandidate) {
+                abortOpen();
+            }
+            if (openMenu && ev.currentTarget === openMenu) {
+                closeWithDelay(ev.currentTarget);
+            }
         }
     });
 
@@ -159,4 +167,35 @@ function openMenu() {
         node.toggleClass('open');
         node.attr('aria-expanded', !(node.attr('aria-expanded') === 'true'));
     });
+
+    let hamburgertoggle = $('#main-menu-hamburger > a');
+    hamburgertoggle.click(() => {
+        hamburgertoggle.parent().toggleClass('open');
+    });
+
+    let oneColLayoutBefore = false;
+
+    /**
+     * Updates max-height of submenus on page-init and window resize.
+     */
+    function updateMaxMenuHeight() {
+        const mainMenu = $('#main-menu');
+        const botPos = mainMenu.offset().top + mainMenu.outerHeight() + 16;
+        let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        let oneColLayout = width < onecolumnbreakpoint;
+        if (oneColLayout) {
+            $('.sub-menu-scroll-container').css('max-height', null);
+            $('#main-menu-left').css('max-height', ($(window).height() - botPos) + 'px');
+        } else {
+            $('.sub-menu-scroll-container').css('max-height', ($(window).height() - botPos) + 'px');
+            $('#main-menu-left').css('max-height', null);
+        }
+        if (oneColLayout !== oneColLayoutBefore) {
+            reset();
+            oneColLayoutBefore = oneColLayout;
+        }
+    }
+
+    updateMaxMenuHeight();
+    $(window).resize(updateMaxMenuHeight);
 }

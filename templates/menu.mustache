@@ -27,47 +27,55 @@
 <img src="{{wwwroot}}/theme/wwu2019/pix/arrow_down.svg" alt="" hidden>
 <nav id="main-menu">
     <div id="main-menu-border">
-        <ul role="menubar" id="main-menu-left">
-            {{# left-menu }}
-                <li role="none" class="main-menu-item {{# class }}{{class}}{{/class}}"
-                    {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
-                    <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
-                        {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
-                        <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
-                    </a>
-                    {{# hasmenu }}
-                        <div class="sub-menu-scroll-wrapper">
-                            <div class="sub-menu-scroll-container">
-                                <div class="sub-menu-wrapper">
-                                    <ul role="menu" class="sub-menu">
-                                        {{# menu }}
-                                            <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}"
-                                                {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
-                                                <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
-                                                    {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
-                                                    <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
+        <div id="main-menu-hamburger">
+            <a id="hamburger-toggle">
+                {{#pix }} i/hamburger {{/pix}}
+            </a>
+            <ul role="menubar" id="main-menu-left">
+                {{# left-menu }}
+                    <li role="none" class="main-menu-item {{# class }}{{class}}{{/class}}"
+                        {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
+                        <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
+                            {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
+                            <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
+                            {{# hasmenu }}
+                                <div class="arrow"></div>
+                            {{/ hasmenu }}
+                        </a>
+                        {{# hasmenu }}
+                            <div class="sub-menu-scroll-wrapper">
+                                <div class="sub-menu-scroll-container">
+                                    <div class="sub-menu-wrapper">
+                                        <ul role="menu" class="sub-menu">
+                                            {{# menu }}
+                                                <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}"
+                                                    {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
+                                                    <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
+                                                        {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
+                                                        <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
+                                                        {{# hasmenu }}
+                                                            <div class="arrow"></div>
+                                                        {{/ hasmenu }}
+                                                    </a>
                                                     {{# hasmenu }}
-                                                        <div class="arrow"></div>
-                                                    {{/ hasmenu }}
-                                                </a>
-                                                {{# hasmenu }}
-                                                    {{> theme_wwu2019/menu-recursion }}
-                                                {{/hasmenu}}
-                                            </li>
-                                            {{# breaker }}
-                                                <div class="breaker {{ . }}"></div>
-                                                {{! Needed for ensuring last breaker also breaks there is no item follow the breaker (Occurs when menu has one or two items). }}
-                                                <div></div>
-                                            {{/ breaker }}
-                                        {{/ menu }}
-                                    </ul>
+                                                        {{> theme_wwu2019/menu-recursion }}
+                                                    {{/hasmenu}}
+                                                </li>
+                                                {{# breaker }}
+                                                    <div class="breaker {{ . }}"></div>
+                                                    {{! Needed for ensuring last breaker also breaks there is no item follow the breaker (Occurs when menu has one or two items). }}
+                                                    <div></div>
+                                                {{/ breaker }}
+                                            {{/ menu }}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {{/hasmenu}}
-                </li>
-            {{/ left-menu }}
-        </ul>
+                        {{/hasmenu}}
+                    </li>
+                {{/ left-menu }}
+            </ul>
+        </div>
         <ul role="menubar" id="main-menu-right">
             {{# right-menu-icons }}
             <li role="none" class="main-menu-icon-item">
@@ -117,7 +125,7 @@
     <div>
         {{# isadmin }}
             <form action="{{wwwroot}}/admin/search.php" method="get" class="form-inline search" id="admin-search">
-                <input class="form-control form-control-sm search-field" type="text" name="query" value="" size="12"
+                <input class="form-control form-control-sm search-field hide-600" type="text" name="query" value="" size="12"
                         placeholder="{{#str}}searchadmin, theme_wwu2019{{/str}}"/>
                 <button type="submit" class="icon-button">
                     {{# pix }} i/search, core, {{#str}} search {{/str}} {{/pix}}
@@ -128,7 +136,7 @@
     </div>
     <div class="d-inline-flex">
             <form id="global-search" action="{{wwwroot}}/search/index.php" method="get" class="form-inline search">
-                <input class="form-control form-control-sm search-field" type="text" name="q" value="" size="12"
+                <input class="form-control form-control-sm search-field hide-600" type="text" name="q" value="" size="12"
                         placeholder="{{#str}}search{{/str}}"/>
                 <button type="submit" class="icon-button">
                     {{# pix }} i/search, core, {{#str}} search {{/str}} {{/pix}}

@@ -115,7 +115,6 @@ ul[role="menubar"] {
         width: 100%;
 
         .sub-menu-scroll-container {
-            max-height: 500px;
             overflow-y: auto;
             /* For newer Firefox versions to disable width gain of scrollbar when hovering it */
             scrollbar-width: thin; /* stylelint-disable-line */
@@ -303,6 +302,99 @@ ul[role="menubar"] {
             vertical-align: top;
         }
     }
+
+    #main-menu-hamburger > a#hamburger-toggle > i.icon {
+        display: none;
+    }
+
+    @media (max-width: $hamburger-menu-break-point) {
+        #main-menu-hamburger {
+            margin: -4px 0;
+
+            & > a#hamburger-toggle > i.icon {
+                display: inline-block;
+                width: 40px;
+                height: 36px;
+                line-height: 36px;
+                font-size: 28px;
+                margin: 0;
+                color: white;
+                background: $learnwebblue;
+                cursor: pointer;
+            }
+
+            #main-menu-left {
+                display: none;
+                position: absolute;
+                top: 100%;
+                background: white;
+                width: 100%;
+                border-bottom: 4px solid $dividergrey;
+                padding: 8px 0;
+
+                .sub-menu-scroll-wrapper {
+                    top: calc(100% + 4px);
+                }
+            }
+
+            &.open #main-menu-left {
+                display: flex;
+            }
+        }
+    }
+
+    @media (max-width: $onecolumn-break-point) {
+        #main-menu-hamburger #main-menu-left {
+            padding: 0;
+            overflow-y: scroll;
+            scrollbar-width: thin; /* stylelint-disable-line */
+
+            .main-menu-item {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+
+                & > a {
+                    display: block;
+                    width: 100%;
+                    padding: 8px 0;
+
+                    & > .arrow {
+                        background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+                        width: 21px;
+                        height: 21px;
+                        float: right;
+                        background-size: cover;
+                        margin: 5px 8px;
+                    }
+                }
+
+                &.open > a > .arrow {
+                    background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+                }
+
+                .sub-menu-scroll-wrapper {
+                    position: relative;
+                    padding: 0 12px 0 20px;
+                    border-top: 1px solid black;
+                    border-bottom: none;
+                    top: unset;
+                    left: unset;
+                    z-index: unset;
+
+                    .sub-menu-scroll-container {
+                        overflow-y: visible;
+                    }
+                }
+            }
+        }
+
+        .main-menu-item:not(:last-child) {
+            border-right: none;
+            border-bottom: 1px solid black;
+        }
+    }
+
 }
 
 #menu-bottom {

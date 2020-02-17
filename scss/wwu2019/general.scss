@@ -139,3 +139,10 @@ h5 {
 .breadcrumb-item + .breadcrumb-item::before {
     content: ">";
 }
+
+
+.hide-600 {
+    @media (max-width: 600px) {
+        display: none !important; /* stylelint-disable-line */
+    }
+}
