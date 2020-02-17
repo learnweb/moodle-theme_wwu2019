@@ -184,11 +184,11 @@ function openMenu() {
         let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         let oneColLayout = width < onecolumnbreakpoint;
         if (oneColLayout) {
-            $('.sub-menu-scroll-container').css('max-height', null);
+            $('.sub-menu-scroll-container').css('max-height', '');
             $('#main-menu-left').css('max-height', ($(window).height() - botPos) + 'px');
         } else {
             $('.sub-menu-scroll-container').css('max-height', ($(window).height() - botPos) + 'px');
-            $('#main-menu-left').css('max-height', null);
+            $('#main-menu-left').css('max-height', '');
         }
         if (oneColLayout !== oneColLayoutBefore) {
             reset();
