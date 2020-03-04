@@ -393,12 +393,16 @@ class core_renderer extends \core_renderer {
 
     /**
      * Returns Array for displaying User-Sub-Menu in Template
-     * @return array
+     * @return array|false
      * @throws \coding_exception
      * @throws \moodle_exception
      */
     private function get_user_menu() {
         global $USER, $CFG, $DB;
+
+        if (!isloggedin()) {
+            return false;
+        }
 
         $menucontent = [];
 
