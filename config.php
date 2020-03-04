@@ -99,11 +99,10 @@ $THEME->layouts = [
         ),
         // The site home page.
         'frontpage' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre', 'side-post'),
-                'defaultregion' => 'side-pre',
-                'options' => array('nofullheader' => true),
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         // Server administration scripts.
         'admin' => array(
