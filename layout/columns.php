@@ -24,6 +24,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+// Autologin if access takes place via SSO.
+if(!isloggedin() && wwusso_username()) {
+    global $CFG;
+    $url = qualified_me();
+    // Do not require for /login/index.php because that would yield an infinite redirect loop.
+    if ($url != $CFG->wwwroot . '/login/index.php') {
+        require_login();
+        die();
+    }
+}
+
 $bodyattributes = $OUTPUT->body_attributes();
 $blockspost = $OUTPUT->blocks('side-post');
 
