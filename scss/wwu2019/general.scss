@@ -146,3 +146,57 @@ h5 {
         display: none !important; /* stylelint-disable-line */
     }
 }
+
+footer#wwu-footer {
+    width: 100%;
+    max-width: 1440px;
+    padding: 16px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+    .wwu-card {
+        background-color: $wwu-footer;
+        color: #fff;
+        padding: 21px 21px 16px;
+
+        a {
+          color: $footer-link-color;
+          text-decoration: underline;
+        }
+
+        h2 {
+            border-bottom: 1px solid #fff;
+            font-size: 1.47em;
+            font-weight: 600;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        ul.linkliste {
+            list-style: none;
+            padding-left:0;
+        }
+
+        .claim {
+            font-size: 36px;
+            font-weight: bold;
+            padding-right: 0;
+            letter-spacing: -.05em;
+            overflow: hidden;
+        }
+    }
+
+    .wwu-fin {
+        margin-top: 15px;
+
+        nav > ul {
+            list-style: none;
+            padding-left:0;
+
+            li {
+                margin-right: 5px;
+            }
+        }
+    }
+}
