@@ -1,0 +1,129 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Alert styles, ported from theme_essential
+ *
+ * @package    theme_wwu2019
+ * @copyright  2020 Jan C. Dageförde WWU
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+.useralerts .close {
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+.useralerts [class^="fa-stack"] {
+    margin-right: 5px;
+}
+.useralerts .title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.alert .fa-info {
+    background-color: #3a87ad;
+}
+.alert .fa-warning {
+    background-color: #b94a48;
+}
+.alert .fa-bullhorn {
+    background-color: #468847;
+}
+.alert .fa-info,
+.alert .fa-warning,
+.alert .fa-bullhorn {
+    color: #fff;
+}
+.alert .fa-info:hover,
+.alert .fa-warning:hover,
+.alert .fa-bullhorn:hover,
+.alert .fa-info:focus,
+.alert .fa-warning:focus,
+.alert .fa-bullhorn:focus {
+    color: #fff;
+}
+.alert.alert-info .close .fa {
+    color: #3a87ad;
+}
+.alert.alert-info .close:hover .fa,
+.alert.alert-info .close:focus .fa {
+    color: #3a87ad;
+}
+.alert.alert-error .close .fa {
+    color: #b94a48;
+}
+.alert.alert-error .close:hover .fa,
+.alert.alert-error .close:focus .fa {
+    color: #b94a48;
+}
+.alert.alert-success .close .fa {
+    color: #468847;
+}
+.alert.alert-success .close:hover .fa,
+.alert.alert-success .close:focus .fa {
+    color: #468847;
+}
+
+
+.alert {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.alert,
+.alert h4 {
+    color: #8a6d3b;
+}
+.alert h4 {
+    margin: 0;
+}
+.alert .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    line-height: 20px;
+}
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+}
+.alert-success h4 {
+    color: #468847;
+}
+.alert-danger,
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+}
+.alert-danger h4,
+.alert-error h4 {
+    color: #b94a48;
+}
+.alert-info {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #3a87ad;
+}
+.alert-info h4 {
+    color: #3a87ad;
+}

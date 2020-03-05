@@ -47,12 +47,15 @@ $templatecontext = [
     'haspostblocks' => $hassidepost,
     'bodyattributes' => $bodyattributes,
     'footer' => $OUTPUT->get_footer_context(),
+    'alerts' => \theme_wwu2019\alerts::get_alerts(),
 ];
 
 $nav = $PAGE->flatnav;
 
 $templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+
+$PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
 
 echo $OUTPUT->render_from_template('theme_wwu2019/columns', $templatecontext);
 
