@@ -1,0 +1,11 @@
+.section {
+    .activity {
+        .stealth {
+            @extend .text-muted;
+        }
+        a.stealth,
+        a.stealth:hover {
+            color: lighten($link-color, 10%) !important; /* stylelint-disable-line declaration-no-important */
+        }
+    }
+}
