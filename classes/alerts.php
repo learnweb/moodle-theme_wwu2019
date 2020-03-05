@@ -28,8 +28,20 @@ defined('MOODLE_INTERNAL') || die;
 
 namespace theme_wwu2019;
 
+/**
+ * Port of essential alerts to WWUCD theme.
+ *
+ * @package    theme_wwu2019
+ * @copyright  2020 Jan C. Dageförde, WWU
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class alerts {
 
+    /**
+     * Get a string containing the rendered alerts.
+     *
+     * @return string
+     */
     public static function get_alerts() {
         global $CFG, $DB;
         $pluginconfig = get_config('theme_essential');
