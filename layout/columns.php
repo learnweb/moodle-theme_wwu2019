@@ -45,7 +45,8 @@ $templatecontext = [
     'output' => $OUTPUT,
     'sidepostblocks' => $blockspost,
     'haspostblocks' => $hassidepost,
-    'bodyattributes' => $bodyattributes
+    'bodyattributes' => $bodyattributes,
+    'footer' => $OUTPUT->get_footer_context(),
 ];
 
 $nav = $PAGE->flatnav;

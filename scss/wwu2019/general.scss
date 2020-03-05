@@ -196,6 +196,11 @@ footer#wwu-footer {
 
             li {
                 margin-right: 5px;
+
+                a {
+                    color: $wwu-footer;
+                    text-decoration: underline;
+                }
             }
         }
     }

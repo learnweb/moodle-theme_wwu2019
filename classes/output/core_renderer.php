@@ -742,4 +742,19 @@ class core_renderer extends \core_renderer {
         return ['url' => $loginurl, 'ssourl' => $ssologinurl];
     }
 
+    /**
+     * Provide data for the footer
+     */
+    public function get_footer_context() {
+        global $CFG;
+        $elements = [
+            'wwwroot' => $CFG->wwwroot,
+            'year' => userdate(time(), '%Y'),
+        ];
+        if (!empty($CFG->sitepolicyhandler) && $CFG->sitepolicyhandler == 'tool_policy') {
+            $elements['policyurl'] = (new moodle_url('/admin/tool/policy/view.php', ['policyid' => 1]))->out();
+        }
+        return $elements;
+    }
+
 }

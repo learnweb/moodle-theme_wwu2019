@@ -19,17 +19,16 @@
 }}
 <footer id="wwu-footer" class="py-3">
     <div class="row ml-0 mr-0">
-        <a class="nav-slideup" href="#top">nach oben</a>
+        <a class="nav-slideup" href="#">nach oben</a>
     </div>
     <div class="row ml-0 mr-0 wwu-card">
         <aside class="col-6 col-md-4">
             <h2>Kontakt</h2>
-            <address class="h-card"><span class="p-org">Westfälische Wilhelms-Universität Münster </span><br><span
-                    class="p-name">Verwaltung</span><br>
-                <p class="p-adr h-adr"><a href="/uv/wwuaz/lageplan/0351" class="p-street-adress">Schlossplatz
-                    2</a><br><span class="p-postal-code">48149</span> <span class="p-locality">Münster</span></p>Tel:
-                <span class="p-tel">+49 251 83-0</span><br>Fax: <span class="p-tel-fax">+49 251 83-24831</span><br><a
-                        class="u-email" href="mailto:verwaltung@uni-muenster.de">verwaltung@uni-muenster.de</a>
+            <address class="h-card"><span class="p-org">Learnweb-Support</span><br><span
+                    class="p-name">ZHLdigital</span><br>
+
+                Tel: <span class="p-tel">+49 251 83-22408</span><br>
+                <a class="u-email" href="mailto:learnweb@uni-muenster.de">learnweb@uni-muenster.de</a>
             </address>
         </aside>
         <aside class="col-6 col-md-4">
@@ -48,14 +47,16 @@
     <div class="row ml-0 mr-0 wwu-fin">
         <nav class="col-6">
             <ul class="d-flex flex-row">
-                <li><a href="/uv/wwuaz/unilist">Index</a></li>
-                <li><a href="/de/sitemap.html">Site Map</a></li>
-                <li><a href="/de/impressum.html">Impressum</a></li>
-                <li><a href="/de/datenschutzerklaerung.html">Datenschutzhinweis</a></li>
+                <li><a href="{{footer.wwwroot}}">Index</a></li>
+                <li><a href="{{footer.wwwroot}}/mod/page/view.php?id=1082629">Karriere</a></li>
+                {{#footer.policyurl}}
+                    <li><a href="{{footer.policyurl}}">{{#str}}userpolicysettings, tool_policy{{/str}}</a></li>
+                {{/footer.policyurl}}
+                <li><a href="{{footer.wwwroot}}/mod/page/view.php?id=743522">Impressum</a></li>
             </ul>
         </nav>
         <div class="col-6 text-right">
-            <p>© 2020 Universität Münster</p>
+            <p>© {{footer.year}} Universität Münster</p>
         </div>
     </div>
 </footer>
