@@ -84,6 +84,18 @@
                 </a>
             </li>
             {{/ right-menu-icons }}
+            {{# login }}
+                <li role="none" class="main-menu-icon-item">
+                    <a role="menuitem" href="{{{ssourl}}}"><span class="underline">
+                        {{#str}}loginSSO_link, auth_sso{{/str}}
+                    </span></a>
+                </li>
+                <li role="none" class="main-menu-icon-item">
+                    <a role="menuitem" href="{{{url}}}"><span class="underline">
+                        {{#str}}login{{/str}}
+                    </span></a>
+                </li>
+            {{/login}}
             {{# user-menu }}
                 <li role="none" id="user-menu" aria-haspopup="true" aria-expanded="false">
                     <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>

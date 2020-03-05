@@ -116,6 +116,7 @@ class core_renderer extends \core_renderer {
 
         $templatecontext = [
                 'left-menu' => $mainmenu,
+                'login' => $this->get_login(),
                 'user-menu' => $this->get_user_menu(),
                 'langs' => $this->get_languages(),
                 'isadmin' => has_capability('moodle/site:config', \context_system::instance()),
@@ -722,6 +723,23 @@ class core_renderer extends \core_renderer {
         // TODO Do this nicely.
         $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
         return $output;
+    }
+
+    /**
+     * returns false if user is logged in, or an array of urls otherwise.
+     */
+    private function get_login() {
+        global $CFG;
+
+        if (isloggedin()) {
+            return false;
+        }
+
+        $loginurl = get_login_url();
+        $wwwhost = htmlentities(selfmsp(true));
+        $ssologinurl = str_ireplace($wwwhost,'https://sso.uni-muenster.de', $CFG->wwwroot);
+
+        return ['url' => $loginurl, 'ssourl' => $ssologinurl];
     }
 
 }
