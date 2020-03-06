@@ -36,6 +36,10 @@ $wwu-messages-width: 560px;
         flex-grow: 0;
     }
 
+    .body-container {
+        overflow-y: hidden;
+    }
+
     .overview-section-toggle {
         .collapsed-icon-container {
             display: none;
