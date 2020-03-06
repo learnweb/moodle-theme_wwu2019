@@ -213,7 +213,7 @@ class core_renderer extends \core_renderer {
         $hiddencourseicon = (new pix_icon('i/hidden', ''))->export_for_pix();
 
         // TODO: get for a course the customfieldvalue
-        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname FROM mdl_course as cs INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid ';
+        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname FROM mdl_course as cs INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid ORDER BY cs.startdate DESC';
         $courseswithsemester = $DB->get_records_sql($fromtable);
         $terms = [];
 
@@ -233,22 +233,23 @@ class core_renderer extends \core_renderer {
             if ($integerrepresentation != 0 && $integerrepresentation !=1) {
                 // Even numbers are WS.
                 if ($integerrepresentation % 2 == 0) {
-                    $term = 1;
+                    $term = 0;
                 } else {
                     // Odd values are SS
-                    $term = 0;
+                    $term = 1;
                 }
             } else {
                 $istermindependent = true;
             }
             $yearstring = '';
-            $year = $integerrepresentation - 8;
+            $year = $integerrepresentation - 7;
             if ($integerrepresentation % 2 == 0){
                 $yearstring = '20' . strval($year);
             } else {
-                $previousyear = strval($integerrepresentation - 9);
+                $previousyear = strval($integerrepresentation - 8);
                 $yearstring = '20' . $previousyear . '/' . '20' . strval($year);
             }
+
             $termid = $istermindependent ? 0 : $yearstring . '_' . $term;
             if (!array_key_exists($termid, $terms)) {
                 if ($istermindependent) {
