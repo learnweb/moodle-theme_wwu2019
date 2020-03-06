@@ -127,8 +127,8 @@ $THEME->layouts = [
                 'defaultregion' => 'side-post',
         ),
         'login' => array(
-                'theme' => 'boost',
-                'file' => 'login.php',
+                'theme' => 'wwu2019',
+                'file' => 'columns.php',
                 'regions' => array(),
                 'options' => array('langmenu' => true),
         ),
