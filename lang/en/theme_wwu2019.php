@@ -25,6 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'WWU 2019';
+$string['choosereadme'] = 'This theme is based on moodle\'s classic theme and aligned with the corporate design of the University of Münster';
 
 /* Main menu */
 $string['mycourses'] = 'My courses';
