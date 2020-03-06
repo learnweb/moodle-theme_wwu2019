@@ -19,6 +19,14 @@ $wwu-messages-width: 560px;
         opacity: 1;
         border: 1px solid rgba(0,0,0,.3);
         border-radius: .3rem;
+
+        @media (max-width: $wwu-messages-width) {
+            left: 0;
+            top: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
     }
 
     &.hidden {
