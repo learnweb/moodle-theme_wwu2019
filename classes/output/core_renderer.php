@@ -121,9 +121,6 @@ class core_renderer extends \core_renderer {
                 'langs' => $this->get_languages(),
                 'isadmin' => has_capability('moodle/site:config', \context_system::instance()),
                 'right-menu-icons' => [
-                        /*[
-                                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
-                        ],*/
                 ],
                 'navbaradditions' => $this->navbar_plugin_output(),
                 'wwwroot' => $CFG->wwwroot,
@@ -776,7 +773,7 @@ class core_renderer extends \core_renderer {
         // t_reis06@wwu: Set the context variables for the mustache template.
         global $CFG, $SESSION;
         $wwwhost = htmlentities(selfmsp(true));
-        $context->ssofield = (stripos($wwwhost, "www") !== FALSE && stripos($CFG->wwwroot, $wwwhost) !== FALSE);
+        $context->ssofield = (stripos($wwwhost, "www") !== false && stripos($CFG->wwwroot, $wwwhost) !== false);
         $wantsurl = empty($SESSION->wantsurl) ? $CFG->wwwroot : $SESSION->wantsurl;
         $context->ssoactionurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
         $context->xssoactionurl = str_ireplace($wwwhost, 'https://xsso.uni-muenster.de', $wantsurl);
@@ -787,7 +784,7 @@ class core_renderer extends \core_renderer {
         $params = array();
         parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
         $paramsmustache = array();
-        foreach($params as $key => $val) {
+        foreach ($params as $key => $val) {
             $paramsmustache[] = ["key" => $key, "value" => $val];
         }
         $context->ssoparams = $paramsmustache;
