@@ -44,7 +44,7 @@ class alerts {
      */
     public static function get_alerts() {
         global $CFG, $DB;
-        $pluginconfig = get_config('theme_essential');
+        $pluginconfig = get_config('theme_wwu2019');
 
         // Fetch alerts -- but only if they are not suppressed by user cookie.
         if (isset($_COOKIE['essentialalert-1']) && $_COOKIE['essentialalert-1'] === "closed") {

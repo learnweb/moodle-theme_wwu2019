@@ -34,6 +34,7 @@ if ($ADMIN->fulltree) {
         get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
     $page->add($setting);
 
+    // Matomo.
     $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteurl',
         get_string('matomo_siteurl', 'theme_wwu2019'),
         get_string('matomo_siteurl_desc', 'theme_wwu2019'), '');
@@ -42,6 +43,75 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteid',
         get_string('matomo_siteid', 'theme_wwu2019'),
         get_string('matomo_siteid_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    // Alerts.
+    $setting = new admin_setting_configcheckbox('theme_wwu2019/enable1alert',
+        get_string('enable1alert', 'theme_wwu2019'),
+        get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
+    $page->add($setting);
+
+    $alertinfo = get_string('alert_info', 'theme_wwu2019');
+    $alertwarning = get_string('alert_warning', 'theme_essential');
+    $alertgeneral = get_string('alert_general', 'theme_wwu2019');
+    $alerttypedefault = 'info';
+    $alerttypechoices = array('info' => $alertinfo, 'error' => $alertwarning, 'success' => $alertgeneral);
+    $setting = new essential_admin_setting_configselect('theme_wwu2019/alert1type',
+        get_string('alert1type', 'theme_wwu2019'),
+        get_string('alerttype_desc', 'theme_wwu2019'),
+        $alerttypedefault, $alerttypechoices);
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/alert1title',
+        get_string('alert1title', 'theme_wwu2019'),
+        get_string('alerttitle_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/alert1text',
+        get_string('alert1text', 'theme_wwu2019'),
+        get_string('alerttext_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configcheckbox('theme_wwu2019/enable2alert',
+        get_string('enable2alert', 'theme_wwu2019'),
+        get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
+    $page->add($setting);
+
+    $setting = new essential_admin_setting_configselect('theme_wwu2019/alert2type',
+        get_string('alert2type', 'theme_wwu2019'),
+        get_string('alerttype_desc', 'theme_wwu2019'),
+        $alerttypedefault, $alerttypechoices);
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/alert2title',
+        get_string('alert2title', 'theme_wwu2019'),
+        get_string('alerttitle_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/alert2text',
+        get_string('alert2text', 'theme_wwu2019'),
+        get_string('alerttext_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configcheckbox('theme_wwu2019/enable3alert',
+        get_string('enable2alert', 'theme_wwu2019'),
+        get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
+    $page->add($setting);
+
+    $setting = new essential_admin_setting_configselect('theme_wwu2019/alert3type',
+        get_string('alert3type', 'theme_wwu2019'),
+        get_string('alerttype_desc', 'theme_wwu2019'),
+        $alerttypedefault, $alerttypechoices);
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/alert3title',
+        get_string('alert3title', 'theme_wwu2019'),
+        get_string('alerttitle_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/alert3text',
+        get_string('alert3text', 'theme_wwu2019'),
+        get_string('alerttext_desc', 'theme_wwu2019'), '');
     $page->add($setting);
 
     $settings->add($page);

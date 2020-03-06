@@ -47,3 +47,24 @@ $string['matomo_siteurl'] = 'Analytics URL';
 $string['matomo_siteurl_desc'] = 'Enter your "Matomo Analytics" URL without http(s) or a trailing slash. For example "mysite.com/analytics".';
 $string['matomo_siteid'] = 'Analytics Site ID';
 $string['matomo_siteid_desc'] = 'Enter your "Matomo Analytics" site id.';
+$string['enable1alert'] = 'Show alert 1';
+$string['enable2alert'] = 'Show alert 2';
+$string['enable3alert'] = 'Show alert 3';
+$string['enablealert_desc'] = 'Show/hide a specific alert.';
+$string['alert1type'] = 'Alert type (alert 1)';
+$string['alert1title'] = 'Alert title (alert 1)';
+$string['alert1text'] = 'Alert text (alert 1)';
+$string['alert2type'] = 'Alert type (alert 2)';
+$string['alert2title'] = 'Alert title (alert 2)';
+$string['alert2text'] = 'Alert text (alert 2)';
+$string['alert3type'] = 'Alert type (alert 3)';
+$string['alert3title'] = 'Alert title (alert 3)';
+$string['alert3text'] = 'Alert text (alert 3)';
+$string['alerttype_desc'] = 'Type of alert (similar to debug levels).';
+$string['alerttitle_desc'] = 'First part of the alert (printed in bold).';
+$string['alerttext_desc'] = 'Second part of the alert.';
+
+
+$string['alert_info'] = 'Info';
+$string['alert_warning'] = 'Warning';
+$string['alert_general'] = 'General';
