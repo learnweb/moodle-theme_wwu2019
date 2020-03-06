@@ -117,23 +117,23 @@
                     <div class="subcontent loginsub">
                         <p>{{#str}} login_via_sso_desc, auth_sso {{/str}}</p>
 
-                        <div class="guestform">
-                            <form style="display: inline;" action="{{ssoactionurl}}" method="get" id="ssologin">
-                                {{#ssoparams}}
-                                    <input type='hidden' name='{{key}}' value='{{value}}'>
-                                {{/ssoparams}}
-                                <input class="btn btn-secondary" type="submit" value="{{#str}} loginSSO_long, auth_sso {{/str}}" />
-                            </form>
-
-                            <div class="clearer"><!-- --></div>
-
-                            <form style="display: inline;" action="{{xssoactionurl}}" method="get" id="xssologin">
-                                {{#ssoparams}}
-                                    <input type='hidden' name='{{key}}' value='{{value}}'>
-                                {{/ssoparams}}
-                                <input class="btn btn-secondary" type="submit" value="{{#str}} loginXSSO_long, auth_sso {{/str}}" />
-                            </form>
-
+                        <div class="ssologins">
+                            <div class="mb-1">
+                                <form style="display: inline;" action="{{ssoactionurl}}" method="get" id="ssologin">
+                                    {{#ssoparams}}
+                                        <input type='hidden' name='{{key}}' value='{{value}}'>
+                                    {{/ssoparams}}
+                                    <input class="btn btn-secondary" type="submit" value="{{#str}} loginSSO_long, auth_sso {{/str}}" />
+                                </form>
+                            </div>
+                            <div>
+                                <form style="display: inline;" action="{{xssoactionurl}}" method="get" id="xssologin">
+                                    {{#ssoparams}}
+                                        <input type='hidden' name='{{key}}' value='{{value}}'>
+                                    {{/ssoparams}}
+                                    <input class="btn btn-secondary" type="submit" value="{{#str}} loginXSSO_long, auth_sso {{/str}}" />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
