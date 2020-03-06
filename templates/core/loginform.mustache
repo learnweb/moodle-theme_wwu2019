@@ -161,33 +161,25 @@
                 <div class="card-text content text-center p-3">
                     <div class="subcontent loginsub">
                         <form action="{{loginurl}}" method="post" id="login" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6 text-right">
-                                        <label for="username">
-                                            {{^canloginbyemail}}
-                                                {{#str}} username {{/str}}
-                                            {{/canloginbyemail}}
-                                            {{#canloginbyemail}}
-                                                {{#str}} usernameemail {{/str}}
-                                            {{/canloginbyemail}}
-                                        </label>
-                                    </div>
-                                    <div class="col-6 text-left p-l-0">
-                                        <input type="text" name="username" id="username" size="15" value="{{username}}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 text-right">
-                                        <label for="password">{{#str}} password {{/str}}</label>
-                                    </div>
-                                    <div class="col-6 text-left p-l-0">
-                                        <input type="password" name="password" id="password" size="15" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
-                                    </div>
+                            <div class="form-group row">
+                                <label for="username" class="col-5 col-form-label text-right">
+                                        {{^canloginbyemail}}
+                                            {{#str}} username {{/str}}
+                                        {{/canloginbyemail}}
+                                        {{#canloginbyemail}}
+                                            {{#str}} usernameemail {{/str}}
+                                        {{/canloginbyemail}}
+                                </label>
+                                <div class="col-7">
+                                    <input type="text" class="form-control" id="username" value="{{username}}">
                                 </div>
                             </div>
-
-                            <div class="clearer"><!-- --></div>
+                            <div class="form-group row">
+                                <label for="password" class="col-5 col-form-label text-right">{{#str}} password {{/str}}</label>
+                                <div class="col-7">
+                                    <input type="text" class="form-control" id="password" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
+                                </div>
+                            </div>
                             {{#rememberusername}}
                                 <div class="rememberpass">
                                     <input type="checkbox" name="rememberusername" id="rememberusername" value="1" {{#username}}checked="checked"{{/username}} />
