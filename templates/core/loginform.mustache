@@ -91,17 +91,15 @@
     }
 }}
 
-{{#error}}
-{{! error during regular login}}
-    <div class="loginerrors alert alert-error">
-        <button type="button" class="close" data-dismiss="alert"><span class="fa fa-times-circle" aria-hidden="true"></span></button>
-
-        <span class="fa-stack"><span aria-hidden="true" class="fa fa-warning fa-stack-1x fa-inverse"></span></span>
-        {{error}}
-    </div>
-{{/error}}
-
 <div class="container">
+
+    {{#error}}
+        <div class="loginerrors mt-3">
+            <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
+            <div class="alert alert-danger" role="alert" data-aria-autofocus="true">{{error}}</div>
+        </div>
+    {{/error}}
+
     <div class="row">
     <div class="col-6">
         <section id="ssologinblock" class="block card mb-3">
