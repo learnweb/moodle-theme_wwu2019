@@ -1,0 +1,72 @@
+$wwu-messages-width: 560px;
+
+.wwu-message-drawer {
+    display: flex;
+    flex-direction: column;
+
+    &.drawer {
+        z-index: $zindex-sticky;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        right: 0;
+        margin-left: -#{$wwu-messages-width/2};
+        height: 80%;
+        width: $wwu-messages-width;
+        box-shadow: 0 3px 7px rgba(0,0,0,.3);
+        padding: 0;
+        visibility: visible;
+        opacity: 1;
+        border: 1px solid rgba(0,0,0,.3);
+        border-radius: .3rem;
+    }
+
+    &.hidden {
+        display: block;
+        right: $wwu-messages-width * -1;
+        // Turn off visibility so that nothing in the drawer can receive focus when
+        // it is hidden.
+        visibility: hidden;
+        opacity: 0;
+        // Delay visibility changes until after the slide right animation has completed.
+        @include transition(right .2s ease-in-out, visibility 0s ease-in-out .2s, opacity 0s ease-in-out .2s);
+    }
+
+    .header-container {
+        flex-grow: 0;
+    }
+
+    .overview-section-toggle {
+        .collapsed-icon-container {
+            display: none;
+        }
+        .expanded-icon-container {
+            display: inline-block;
+        }
+
+        &.collapsed {
+            .collapsed-icon-container {
+                display: inline-block;
+            }
+            .expanded-icon-container {
+                display: none;
+            }
+        }
+    }
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: #{$zindex-sticky - 10};
+    background-color: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+
+    &.fade {
+        opacity: 0;
+    }
+}

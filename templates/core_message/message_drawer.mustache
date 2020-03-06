@@ -39,16 +39,16 @@
 }}
 <div
         id="message-drawer-{{uniqid}}"
-        class="message-drawer drawer bg-white hidden modal"
+        class="wwu-message-drawer message-drawer drawer bg-white hidden modal"
         aria-expanded="false"
         aria-hidden="true"
         data-region="right-hand-drawer"
         role="region"
         tabindex="-1"
 >
-    <div class="p-2 border-bottom bg-secondary modal-header">
+    <div class="p-2 border-bottom bg-primary text-light modal-header">
         {{#str}} messages, message {{/str}}
-        <a id="message-drawer-close-{{uniqid}}" class="pull-right" href="#">
+        <a id="message-drawer-close-{{uniqid}}" class="pull-right text-light" href="#">
             {{#pix}} i/window_close, core, {{#str}} togglemessagemenu, message {{/str}} {{/pix}}
         </a>
     </div>
@@ -74,6 +74,7 @@
 </div>
 <div id="message-drawer-backdrop" class="modal-backdrop fade in hidden"></div>
 
+
 {{#js}}
 require(
 [
@@ -93,23 +94,15 @@ function(
     var toggle = $('#message-drawer-close-{{uniqid}}');
     Popover.init(toggle);
 
-    /*$(document).ready(function() {
+    $(document).ready(function() {
         var backdrop = $('#message-drawer-backdrop');
-        var navbar = $('#main-menu');
         var checkState = function() {
             if (root.hasClass('hidden')) {
                 backdrop.addClass('hidden');
-                navbar.removeClass('modal-layer');
             } else {
                 backdrop.removeClass('hidden');
-                navbar.addClass('modal-layer');
             }
-        };
-
-        toggle.click(function() {
-            checkState();
-        });
-    });*/
-
+        }
+    });
 });
 {{/js}}
