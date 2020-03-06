@@ -13,11 +13,11 @@ $wwu-messages-width: 560px;
         margin-left: -#{$wwu-messages-width/2};
         height: 80%;
         width: $wwu-messages-width;
-        box-shadow: 0 3px 7px rgba(0,0,0,.3);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, .3);
         padding: 0;
         visibility: visible;
         opacity: 1;
-        border: 1px solid rgba(0,0,0,.3);
+        border: 1px solid rgba(0, 0, 0, .3);
         border-radius: .3rem;
 
         @media (max-width: $wwu-messages-width) {
