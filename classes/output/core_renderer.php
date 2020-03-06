@@ -205,53 +205,59 @@ class core_renderer extends \core_renderer {
      * @return array The sorted courses, ready for use in templates.
      */
     private function get_courses() {
-
+        global $DB;
         $courses = enrol_get_my_courses(array(), 'c.startdate DESC');
-        $terms = [];
 
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
         $courseicon = (new pix_icon('i/graduation-cap', ''))->export_for_pix();
         $hiddencourseicon = (new pix_icon('i/hidden', ''))->export_for_pix();
 
-        $termindependentlimit = new \DateTime("2000-00-00");
+        // TODO: get for a course the customfieldvalue
+        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname FROM mdl_course as cs INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid ';
+        $courseswithsemester = $DB->get_records_sql($fromtable);
+        $terms = [];
 
-        foreach ($courses as $course) {
-
-            if (!$course->visible &&
-                    !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
+        foreach ($courseswithsemester as $key => $course) {
+            if (!array_key_exists($course->id, $courses)) {
                 continue;
             }
 
-            $coursestart = new \DateTime();
-            $coursestart->setTimestamp($course->startdate);
-
-            $year = (int) $coursestart->format('Y');
-            $term = 0;
+            if (!$course->visible &&
+                !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
+                continue;
+            }
             $istermindependent = false;
 
-            $term0start = new \DateTime("$year-04-01");
-            $term1start = new \DateTime("$year-10-01");
-
-            if ($coursestart < $termindependentlimit) {
-                $istermindependent = true;
-            } else if ($coursestart < $term0start) {
-                $year--;
-                $term = 1;
-            } else if ($coursestart < $term1start) {
-                $term = 0;
+            $term = 0;
+            $integerrepresentation = intval($course->value);
+            if ($integerrepresentation != 0 && $integerrepresentation !=1) {
+                // Even numbers are WS.
+                if ($integerrepresentation % 2 == 0) {
+                    $term = 1;
+                } else {
+                    // Odd values are SS
+                    $term = 0;
+                }
             } else {
-                $term = 1;
+                $istermindependent = true;
             }
-
-            $termid = $istermindependent ? 0 : $year . '_' . $term;
+            $yearstring = '';
+            $year = $integerrepresentation - 8;
+            if ($integerrepresentation % 2 == 0){
+                $yearstring = '20' . strval($year);
+            } else {
+                $previousyear = strval($integerrepresentation - 9);
+                $yearstring = '20' . $previousyear . '/' . '20' . strval($year);
+            }
+            $termid = $istermindependent ? 0 : $yearstring . '_' . $term;
             if (!array_key_exists($termid, $terms)) {
                 if ($istermindependent) {
                     $name = get_string('termindependent', 'theme_wwu2019');
                 } else {
                     if ($term == 0) {
-                        $name = 'SoSe ' . $year;
+                        $name = 'SoSe ' . $yearstring;
                     } else {
-                        $name = 'WiSe ' . $year . '/' . ($year + 1);
+                        $name = 'WiSe ' . $yearstring;
                     }
                 }
                 $terms[$termid] = [
