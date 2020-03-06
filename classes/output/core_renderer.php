@@ -121,16 +121,11 @@ class core_renderer extends \core_renderer {
                 'langs' => $this->get_languages(),
                 'isadmin' => has_capability('moodle/site:config', \context_system::instance()),
                 'right-menu-icons' => [
-                        [
+                        /*[
                                 'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
-                        ],
-                        [
-                                'icon' => (new pix_icon('i/book', ''))->export_for_pix(),
-                        ],
-                        [
-                                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
-                        ]
+                        ],*/
                 ],
+                'navbaradditions' => $this->navbar_plugin_output(),
                 'wwwroot' => $CFG->wwwroot,
         ];
 

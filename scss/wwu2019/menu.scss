@@ -87,6 +87,22 @@ ul[role="menubar"] {
         justify-content: flex-end;
     }
 
+    .main-menu-additions-item {
+        display: flex;
+
+        .nav-link {
+            padding: 0 15px 0 0;
+        }
+
+        .popover-region-container {
+            top: 1.96875rem;
+
+            .icon {
+                font-size: initial;
+            }
+        }
+    }
+
     .main-menu-item {
 
         &:not(:last-child) {
