@@ -124,7 +124,7 @@
                                 {{#ssoparams}}
                                     <input type='hidden' name='{{key}}' value='{{value}}'>
                                 {{/ssoparams}}
-                                <input type="submit" value="{{#str}} loginSSO_long, auth_sso {{/str}}" />
+                                <input class="btn btn-secondary" type="submit" value="{{#str}} loginSSO_long, auth_sso {{/str}}" />
                             </form>
 
                             <div class="clearer"><!-- --></div>
@@ -133,7 +133,7 @@
                                 {{#ssoparams}}
                                     <input type='hidden' name='{{key}}' value='{{value}}'>
                                 {{/ssoparams}}
-                                <input type="submit" value="{{#str}} loginXSSO_long, auth_sso {{/str}}" />
+                                <input class="btn btn-secondary" type="submit" value="{{#str}} loginXSSO_long, auth_sso {{/str}}" />
                             </form>
 
                         </div>
@@ -197,7 +197,7 @@
                             <input id="anchor" type="hidden" name="anchor" value="" />
                             <script>document.getElementById('anchor').value = location.hash;</script>
                             <input type="hidden" name="logintoken" value="{{logintoken}}">
-                            <input type="submit" id="loginbtn" value={{#quote}}{{#str}} login {{/str}}{{/quote}} />
+                            <input class="btn btn-secondary"  type="submit" id="loginbtn" value={{#quote}}{{#str}} login {{/str}}{{/quote}} />
                             <div class="forgetpass">
                                 <a href="{{forgotpasswordurl}}">{{#str}} forgotten {{/str}}</a>
                             </div>
@@ -218,7 +218,7 @@
                                     <input type="hidden" name="logintoken" value="{{logintoken}}">
                                     <input type="hidden" name="username" value="guest" />
                                     <input type="hidden" name="password" value="guest" />
-                                    <input type="submit" value={{#quote}}{{#str}} loginguest {{/str}}{{/quote}} />
+                                    <input class="btn btn-secondary"  type="submit" value={{#quote}}{{#str}} loginguest {{/str}}{{/quote}} />
                                 </div>
                             </form>
                         </div>
@@ -249,7 +249,7 @@
                             <div class="signupform">
                                 <form action="{{signupurl}}" method="get" id="signup">
                                     <div>
-                                        <input type="submit" value={{#quote}}{{#str}} startsignup {{/str}}{{/quote}} />
+                                        <input class="btn btn-secondary" type="submit" value={{#quote}}{{#str}} startsignup {{/str}}{{/quote}} />
                                     </div>
                                 </form>
                             </div>
