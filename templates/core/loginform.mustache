@@ -115,7 +115,7 @@
 
                 </div>
                 {{! Block contents }}
-                <div class="card-text content p-3">
+                <div class="card-text content p-3 text-center">
                     <div class="subcontent loginsub">
                         <p>{{#str}} login_via_sso_desc, auth_sso {{/str}}</p>
 
@@ -160,29 +160,32 @@
 
                 </div>
                 {{! Block contents }}
-                <div class="card-text content p-3">
+                <div class="card-text content text-center p-3">
                     <div class="subcontent loginsub">
                         <form action="{{loginurl}}" method="post" id="login" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
-                            <div class="loginform">
-                                <div class="form-label">
-                                    <label for="username">
-                                        {{^canloginbyemail}}
-                                            {{#str}} username {{/str}}
-                                        {{/canloginbyemail}}
-                                        {{#canloginbyemail}}
-                                            {{#str}} usernameemail {{/str}}
-                                        {{/canloginbyemail}}
-                                    </label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6 text-right">
+                                        <label for="username">
+                                            {{^canloginbyemail}}
+                                                {{#str}} username {{/str}}
+                                            {{/canloginbyemail}}
+                                            {{#canloginbyemail}}
+                                                {{#str}} usernameemail {{/str}}
+                                            {{/canloginbyemail}}
+                                        </label>
+                                    </div>
+                                    <div class="col-6 text-left p-l-0">
+                                        <input type="text" name="username" id="username" size="15" value="{{username}}">
+                                    </div>
                                 </div>
-                                <div class="form-input">
-                                    <input type="text" name="username" id="username" size="15" value="{{username}}">
-                                </div>
-                                <div class="clearer"><!-- --></div>
-                                <div class="form-label">
-                                    <label for="password">{{#str}} password {{/str}}</label>
-                                </div>
-                                <div class="form-input">
-                                    <input type="password" name="password" id="password" size="15" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
+                                <div class="row">
+                                    <div class="col-6 text-right">
+                                        <label for="password">{{#str}} password {{/str}}</label>
+                                    </div>
+                                    <div class="col-6 text-left p-l-0">
+                                        <input type="password" name="password" id="password" size="15" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
+                                    </div>
                                 </div>
                             </div>
 
