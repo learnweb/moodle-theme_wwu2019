@@ -793,4 +793,111 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('core/loginform', $context);
     }
 
+    private function matomo_trackurl() {
+        global $DB, $PAGE;
+        $pageinfo = get_context_info_array($PAGE->context->id);
+        // Adds page title.
+        $trackurl = "'";
+
+        if ((isset($pageinfo[1]->category)) || (isset($pageinfo[1]->fullname)) || (isset($pageinfo[2]->name))) {
+            // Adds course category name.
+            if (isset($pageinfo[1]->category)) {
+                if ($category = $DB->get_record('course_categories', array('id' => $pageinfo[1]->category))) {
+                    $cats = explode("/", $category->path);
+                    foreach (array_filter($cats) as $cat) {
+                        if ($categorydepth = $DB->get_record("course_categories", array("id" => $cat))) {
+                            $trackurl .= $categorydepth->name . '/';
+                        }
+                    }
+                }
+            }
+
+            // Adds course full name.
+            if (isset($pageinfo[1]->fullname)) {
+                if (isset($pageinfo[2]->name)) {
+                    $trackurl .= $pageinfo[1]->fullname . '/';
+                } else if ($PAGE->user_is_editing()) {
+                    $trackurl .= $pageinfo[1]->fullname . '/' . get_string('edit');
+                } else {
+                    $trackurl .= $pageinfo[1]->fullname . '/' . get_string('view');
+                }
+            }
+
+            // Adds activity name.
+            if (isset($pageinfo[2]->name)) {
+                $trackurl .= $pageinfo[2]->modname . '/' . $pageinfo[2]->name;
+            }
+        } else {
+            $trackurl .= $PAGE->title;
+        }
+
+        $trackurl .= "'";
+        return $trackurl;
+    }
+
+    /**
+     * Insert code that triggers ~~piwik~~matomo.
+     */
+    public function matomo_insert_html() {
+        $siteurl = get_config('theme_wwu2019', 'matomo_siteurl');
+        $tracking = '';
+
+        if (!empty($siteurl)) {
+            $imagetrack = true;
+            $siteid = get_config('theme_wwu2019', 'matomo_siteid');
+            $trackadmin = false;
+            $useuserid = false;
+            $cleanurl = true;
+
+            if ($imagetrack) {
+                $addition = '<noscript><p><img src="//'.$siteurl.'/piwik.php?idsite='.$siteid;
+                $addition .= '" style="border:0" alt="" /></p></noscript>';
+            } else {
+                $addition = '';
+            }
+
+            if ($useuserid) {
+                global $USER;
+                if ($USER->id) {
+                    $userid = "".PHP_EOL."_paq.push(['setUserId', '".$USER->id."']);";
+                } else {
+                    $userid = "";
+                }
+            } else {
+                $userid = "";
+            }
+
+            if ($cleanurl) {
+                $doctitle = "".PHP_EOL."_paq.push(['setDocumentTitle', " . $this->matomo_trackurl() . "]);";
+            } else {
+                $doctitle = "";
+            }
+
+            if (!is_siteadmin() || $trackadmin) {
+                $tracking = "
+<script type='text/javascript'>
+var _paq = _paq || [];".$doctitle."
+_paq.push(['setCookieDomain', '*.uni-muenster.de']);
+_paq.push(['setDomains', ['*.uni-muenster.de/LearnWeb']]);
+_paq.push(['enableLinkTracking']);".$userid."
+_paq.push(['trackPageView']);
+(function(){
+    var u=(('https:' == document.location.protocol) ? 'https' : 'http') + '://" . $siteurl . "/';
+    _paq.push(['setSiteId', " . $siteid . "]);
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    var d=document,
+        g=d.createElement('script'),
+        s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript';
+    g.defer=true;
+    g.async=true;
+    g.src=u+'piwik.js';
+    s.parentNode.insertBefore(g,s);
+})();
+</script>".$addition;
+            }
+        }
+        return $tracking;
+    }
+
 }

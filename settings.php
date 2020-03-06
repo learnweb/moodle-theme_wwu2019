@@ -30,9 +30,18 @@ if ($ADMIN->fulltree) {
     $page = new admin_settingpage('theme_classic_wwu2019', get_string('generalsettings', 'theme_boost'));
 
     $setting = new admin_setting_configtext('theme_wwu2019/helpurl',
-            get_string('helpurl', 'theme_wwu2019'),
-            get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
+        get_string('helpurl', 'theme_wwu2019'),
+        get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
+    $page->add($setting);
 
+    $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteurl',
+        get_string('matomo_siteurl', 'theme_wwu2019'),
+        get_string('matomo_siteurl_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteid',
+        get_string('matomo_siteid', 'theme_wwu2019'),
+        get_string('matomo_siteid_desc', 'theme_wwu2019'), '');
     $page->add($setting);
 
     $settings->add($page);
