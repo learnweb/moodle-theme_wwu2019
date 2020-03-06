@@ -100,7 +100,7 @@ $THEME->layouts = [
         // The site home page.
         'frontpage' => array(
                 'theme' => 'wwu2019',
-                'file' => 'columns.php',
+                'file' => 'frontpage.php',
                 'regions' => array('side-post'),
                 'defaultregion' => 'side-post',
         ),
