@@ -899,5 +899,51 @@ _paq.push(['trackPageView']);
         }
         return $tracking;
     }
+    /**
+     * Renders the slideshow.
+     * @return string
+     */
+    public function slideshow() {
+        global $CFG, $OUTPUT, $USER;
+
+        $output = '';
+
+        if (file_exists($CFG->dirroot . '/local/marketing/locallib.php')) {
+            // Retrieve slides if none are cached.
+            // Also, force re-cache if user has changed ID recently (i.e., a login has occurred).
+            if (!isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
+                $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id
+            ) {
+                require_once($CFG->dirroot . '/local/marketing/locallib.php');
+                $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
+                $_SESSION["theme_wwu2019_slides_cachedfor"] = $USER->id;
+            }
+            require_once($CFG->dirroot . '/local/marketing/locallib.php');
+            $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
+            $slides = $_SESSION["theme_wwu2019_slides"];
+
+            if ($slides) {
+                $index = 0;
+                foreach ($slides as $slide) {
+                    // Add slide index for slide navigation in the mustache template
+                    $slide->index = $index++;
+                    // Get slide image or fallback to default.
+                    $slideimage = $slide->image;
+                    if ($slideimage) {
+                        $component = 'local_marketing';
+                        require_once($CFG->libdir . '/weblib.php');
+                        $slideimage = \moodle_url::make_pluginfile_url(1, $component, 'slidesfilearea', $slide->id, '/', $slideimage);
+                        $slideimage = preg_replace('|^https?://|i', '//', $slideimage->out(false));
+                    } else {
+                        $slideimage = self::pix_url('default_slide', 'theme');
+                    }
+                    $slide->image = $slideimage;
+                }
+                $slides[0]->active = true;
+                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
+            }
+        }
+        return $output;
+    }
 
 }

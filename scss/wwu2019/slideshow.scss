@@ -1,0 +1,97 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * WWU 2019 SCSS for main-menu.
+ *
+ * @package    theme_wwu2019
+ * @copyright  2020 Tobias Reischmann WWU
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+
+/* Slideshow */
+#wwuCarousel.carousel {
+  border: 2px solid #bec6c8;
+}
+
+#wwuCarousel.carousel .carousel-indicators li{
+  border: initial;
+  border-radius: 20px;
+  width: 12px;
+  height: 12px;
+  margin: 5px 7px;
+  display: inline-block;
+  float: none;
+}
+
+#wwuCarousel.carousel .carousel-indicators {
+  background-color: rgba(0, 103, 132, .7);
+  height: 26px;
+  padding-right: 65px;
+  margin: 0px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#wwuCarousel.carousel .carousel-image-container {
+  height: 260px;
+}
+
+#wwuCarousel.carousel .carousel-image-container img{
+  padding: 8px;
+}
+
+#wwuCarousel.carousel .carousel-inner .side-caption div.the-side-caption{
+  padding-left: 16%;
+}
+
+#wwuCarousel.carousel .carousel-control {
+  visibility: hidden;
+}
+
+#wwuCarousel.carousel:hover .carousel-control {
+  visibility: visible;
+}
+
+#wwuCarousel.carousel .carousel-control:hover {
+  background-color: rgb(134, 151, 145);
+  opacity: .9;
+}
+
+#wwuCarousel.carousel .carousel-control {
+  width: 6%;
+  max-width: 50px;
+  background-color: rgb(134, 151, 145);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  top: 0;
+  bottom: 0;
+  height: initial;
+  margin-top: initial;
+  border-radius: initial;
+  z-index: 6;
+}
+
+#wwuCarousel.carousel .carousel-control-prev-icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAoCAYAAAAc7cGiAAAA8ElEQVRIx7WWWxGDQAxFd6oACUhAAhIqAQmVsA6QgAQkrATqAAkr4fSLllIe2SS938yZJbk3SQhGAQ9gBGorqOGjbAFVQF7BsIAmvpW0sIFftdqCbzVoQHf2VWs6l3dAUVPweQeUgcrauUWdR+cA5lJQz7HaElB3AkoeFljUWC1QZlABKIsMeuKlMoNeeOlthUuDCkEygwpBk6TmtxDCU/BdUf6S4HXRI8zlE0II7E0bxzRVBSkYLcsV8yZyG0ErYDQl4m9jWxC5qIEdebBs1Qks02t/t3U5Dy4OlzFo5XZSnXQ4WWA+Z6j7gbzJ8AhUL7tLXm+4j0seAAAAAElFTkSuQmCC)
+}
+
+#wwuCarousel.carousel .carousel-control-next-icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAoCAYAAAAc7cGiAAAA8UlEQVRIx8WWYRHDIAxGe1OAhEqohEqoBCRUQh1MAhImoRKYg0pAwtuf7cZ1hYbArZ+AdwEeSTrAAA9g7moDBL4Za2FxAtDXwNYd0ANGCxv4jaupzh0AZy2s3z3EJ5MWuBzAAjBoYCZR3aZ6EMByHK8Fbgmg08BG0rm3EDmO1ahCS6DLwMqUyaiiBi4nxw1iZd7VbSdAXwK0nKcIuEqAN+H1SbrvU1LVLKmqhR7y+xKoIQb1Asf6/36nkzZUNqybtSBgyoCWa9p2RlB/3ahrNoQzgk6aadRmcUkIqlupjpa9lmuoqYHFOgxdTaLV3XaVeQF/715BGu4YSgAAAABJRU5ErkJggg==);
+}
+#wwuCarousel.carousel .carousel-control-next-icon, #wwuCarousel.carousel .carousel-control-prev-icon {
+  height: 35px;
+}
