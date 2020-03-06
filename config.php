@@ -85,10 +85,10 @@ $THEME->layouts = [
                 'options' => array('langmenu' => true),
         ),
         'coursecategory' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
         ),
         // Part of course, typical for modules - default page layout if $cm specified in require_login().
         'incourse' => array(
