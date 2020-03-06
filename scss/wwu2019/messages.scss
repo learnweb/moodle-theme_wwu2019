@@ -48,6 +48,14 @@ $wwu-messages-width: 560px;
         overflow-y: hidden;
     }
 
+    .footer-container {
+        border-top: 0 none;
+    }
+
+    .footer-container > div {
+        flex-grow: 1;
+    }
+
     .overview-section-toggle {
         .collapsed-icon-container {
             display: none;
