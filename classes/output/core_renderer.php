@@ -755,6 +755,49 @@ class core_renderer extends \core_renderer {
             $elements['policyurl'] = (new moodle_url('/admin/tool/policy/view.php', ['policyid' => 1]))->out();
         }
         return $elements;
+
+    }
+
+    /**
+     * Renders the login form.
+     *
+     * @param \core_auth\output\login $form The renderable.
+     * @return string
+     * @throws \moodle_exception
+     */
+    public function render_login(\core_auth\output\login $form) {
+        global $CFG;
+
+        $context = $form->export_for_template($this);
+
+        // Override because rendering is not supported in template yet.
+        if ($CFG->rememberusername == 0) {
+            $context->cookieshelpiconformatted = $this->help_icon('cookiesenabledonlysession');
+        } else {
+            $context->cookieshelpiconformatted = $this->help_icon('cookiesenabled');
+        }
+        $context->errorformatted = $this->error_text($context->error);
+
+        // t_reis06@wwu: Set the context variables for the mustache template.
+        global $CFG, $SESSION;
+        $wwwhost = htmlentities(selfmsp(true));
+        $context->ssofield = (stripos($wwwhost, "www") !== FALSE && stripos($CFG->wwwroot, $wwwhost) !== FALSE);
+        $wantsurl = empty($SESSION->wantsurl) ? $CFG->wwwroot : $SESSION->wantsurl;
+        $context->ssoactionurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
+        $context->xssoactionurl = str_ireplace($wwwhost, 'https://xsso.uni-muenster.de', $wantsurl);
+        // read parameters from url, thus they can be used in form as hidden fields
+        // $wantsurl can contain parameters e.g. user/view.php?id=5&course=10
+        // form method needs to be 'get', because an xsso forward would drop post values.
+        // within the get action of a form query string values are dropped as well.
+        $params = array();
+        parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
+        $paramsmustache = array();
+        foreach($params as $key => $val) {
+            $paramsmustache[] = ["key" => $key, "value" => $val];
+        }
+        $context->ssoparams = $paramsmustache;
+
+        return $this->render_from_template('core/loginform', $context);
     }
 
 }
