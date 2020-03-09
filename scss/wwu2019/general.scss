@@ -221,3 +221,20 @@ footer#wwu-footer {
 .performanceinfo .cachesused .cache-definition-stats-heading {
     color: map-get($theme-colors, 'light');
 }
+
+.fp-navbar {
+
+    background: #f2f2f2;
+
+    & .fp-toolbar,
+    & .fp-viewbar {
+        & .btn.btn-secondary {
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-bottom: 1px solid #b3b3b3;
+            border-radius: 4px;
+            background: #fff;
+            color: $gray-800;
+        }
+    }
+}
