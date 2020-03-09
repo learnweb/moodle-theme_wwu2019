@@ -114,10 +114,8 @@ if ($ADMIN->fulltree) {
         get_string('alerttext_desc', 'theme_wwu2019'), '');
     $page->add($setting);
 
-    $settings->add($page);
-
     // Marketing spot settings.
-    $essentialsettingsfrontpage->add(new admin_setting_heading('theme_wwu2019_marketing',
+    $page->add(new admin_setting_heading('theme_wwu2019_marketing',
         get_string('marketingheading', 'theme_wwu2019'),
         format_text(get_string('marketingdesc', 'theme_wwu2019'), FORMAT_MARKDOWN)));
 
@@ -127,7 +125,7 @@ if ($ADMIN->fulltree) {
         $heading = get_string('marketing' . $marketingspotnumber, 'theme_wwu2019');
         $information = get_string('marketinginfodesc', 'theme_wwu2019');
         $setting = new admin_setting_heading($name, $heading, $information);
-        $essentialsettingsfrontpage->add($setting);
+        $page->add($setting);
 
         // Marketing spot.
         $name = 'theme_wwu2019/marketing' . $marketingspotnumber;
@@ -135,15 +133,15 @@ if ($ADMIN->fulltree) {
         $description = get_string('marketingtitledesc', 'theme_wwu2019');
         $default = '';
         $setting = new admin_setting_configtext($name, $title, $description, $default);
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $essentialsettingsfrontpage->add($setting);
+        $page->add($setting);
 
         $name = 'theme_wwu2019/marketing' . $marketingspotnumber . 'content';
         $title = get_string('marketingcontent', 'theme_wwu2019');
         $description = get_string('marketingcontentdesc', 'theme_wwu2019');
         $default = '';
         $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $essentialsettingsfrontpage->add($setting);
+        $page->add($setting);
     }
+
+    $settings->add($page);
 }
