@@ -207,27 +207,8 @@ class core_renderer extends \core_renderer {
      */
     private function get_courses() {
         global $DB;
-        // Remark: The function always returns the basefields.
-        $courses = enrol_get_my_courses('id');
-
-        $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
         $courseicon = (new pix_icon('i/graduation-cap', ''))->export_for_pix();
         $hiddencourseicon = (new pix_icon('i/hidden', ''))->export_for_pix();
-        // Transform the ids of all enrolled courses to an string to use in the in-sql clause.
-        $instring = '(';
-        foreach (array_keys($courses) as $key => $value){
-            $instring = $instring . strval($value) . ',';
-        }
-        $instring = substr($instring, 0, -1);
-        $instring = $instring . ')';
-
-        // Get for each course where the user is enrolled the customfield value (here encoded as number).
-        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname
-                        FROM mdl_course as cs
-                        INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid
-                        WHERE cs.id IN ' . $instring . '
-                        ORDER BY cs.startdate DESC';
-        $courseswithsemester = $DB->get_records_sql($fromtable);
         $terms = [];
 
         // Create an array where the key points to the string representation of the customfield value.
@@ -235,6 +216,9 @@ class core_renderer extends \core_renderer {
         $fieldcontroller = field_controller::create($field->id);
         $configdata = $fieldcontroller->get('configdata');
         $semesterinarray = explode("\n", $configdata['options']);
+
+        $courseswithsemester = $this->get_courses_with_semester($field->id);
+
         // Render each course.
         foreach ($courseswithsemester as $key => $course) {
             if (!$course->visible &&
@@ -243,26 +227,15 @@ class core_renderer extends \core_renderer {
             }
             $istermindependent = false;
 
-            $integerrepresentation = intval($course->value);
-            if ($integerrepresentation == 0 || $integerrepresentation == 1) {
+            $customfieldvalue = intval($course->value);
+            if ($customfieldvalue == 0 || $customfieldvalue == 1) {
                 $istermindependent = true;
             }
 
-            $yearstring = $semesterinarray[$integerrepresentation-1];
-
+            $yearstring = $semesterinarray[$customfieldvalue-1];
             $termid = $istermindependent ? 0 : $yearstring;
             if (!array_key_exists($termid, $terms)) {
-                if ($istermindependent) {
-                    $name = get_string('termindependent', 'theme_wwu2019');
-                } else {
-                    $name = $yearstring;
-                }
-                $terms[$termid] = [
-                    'name' => $name,
-                    'icon' => $calendaricon,
-                    'hasmenu' => true,
-                    'menu' => []
-                ];
+                $terms[$termid] = $this->create_term($istermindependent, $yearstring);
             }
             $terms[$termid]['menu'][] = [
                 'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
@@ -274,6 +247,54 @@ class core_renderer extends \core_renderer {
             ];
         }
         return array_values($terms);
+    }
+    /**
+     * Creates the entry for one entry of the navigation.
+     * @param $istermindependent int Is the current item without semester?
+     * @param $yearstring int Which semester is the course?
+     * @return array The sorted courses, ready for use in templates.
+     */
+    private function create_term($istermindependent, $yearstring){
+        $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
+
+        if ($istermindependent) {
+            $name = get_string('termindependent', 'theme_wwu2019');
+        } else {
+            $name = $yearstring;
+        }
+        return [
+            'name' => $name,
+            'icon' => $calendaricon,
+            'hasmenu' => true,
+            'menu' => []
+        ];
+    }
+
+    /**
+     * Returns all courses the current user is enrolled with the value of the customfield semester
+     * @param $fieldid int id of the semesterfield
+     * @return array The sorted courses, ready for use in templates.
+     */
+    private function get_courses_with_semester($fieldid){
+        global $DB;
+        // Remark: The function always returns the basefields.
+        $courses = enrol_get_my_courses();
+        // Transform the ids of all enrolled courses to an string to use in the in-sql clause.
+        $instring = '(';
+        foreach (array_keys($courses) as $key => $value){
+            $instring = $instring . strval($value) . ',';
+        }
+        $instring = substr($instring, 0, -1);
+        $instring = $instring . ')';
+
+        // Get for each course where the user is enrolled the customfield value (here encoded as number).
+        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname
+                                FROM mdl_course as cs
+                                INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid
+                                WHERE cs.id IN ' . $instring . '
+                                AND cd.fieldid = ' . $fieldid . '
+                                ORDER BY cs.startdate DESC';
+        return $DB->get_records_sql($fromtable);
     }
 
     /**
