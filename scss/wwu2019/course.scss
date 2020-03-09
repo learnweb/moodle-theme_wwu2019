@@ -7,5 +7,9 @@
         a.stealth:hover {
             color: lighten($link-color, 10%) !important; /* stylelint-disable-line declaration-no-important */
         }
+
+        .spinner {
+            left: calc(100% - 16px);
+        }
     }
 }
