@@ -27,7 +27,7 @@
     border: 2px solid #bec6c8;
 
     .carousel-indicators {
-        background-color: rgba(0, 103, 132, .7);
+        background-color: rgba($learnwebblue, .7);
         height: 26px;
         padding-right: 65px;
         margin: 0;
@@ -69,7 +69,6 @@
         visibility: hidden;
 
         &:hover {
-            background-color: rgb(134, 151, 145);
             opacity: .9;
         }
     }
