@@ -771,14 +771,14 @@ class core_renderer extends \core_renderer {
         }
         $context->errorformatted = $this->error_text($context->error);
 
-        // t_reis06@wwu: Set the context variables for the mustache template.
+        // Set the context variables for the mustache template.
         global $CFG, $SESSION;
         $wwwhost = htmlentities(selfmsp(true));
         $context->ssofield = (stripos($wwwhost, "www") !== false && stripos($CFG->wwwroot, $wwwhost) !== false);
         $wantsurl = empty($SESSION->wantsurl) ? $CFG->wwwroot : $SESSION->wantsurl;
         $context->ssoactionurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
         $context->xssoactionurl = str_ireplace($wwwhost, 'https://xsso.uni-muenster.de', $wantsurl);
-        // read parameters from url, thus they can be used in form as hidden fields
+        // Read parameters from url, thus they can be used in form as hidden fields
         // $wantsurl can contain parameters e.g. user/view.php?id=5&course=10
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
@@ -925,14 +925,15 @@ _paq.push(['trackPageView']);
             if ($slides) {
                 $index = 0;
                 foreach ($slides as $slide) {
-                    // Add slide index for slide navigation in the mustache template
+                    // Add slide index for slide navigation in the mustache template.
                     $slide->index = $index++;
                     // Get slide image or fallback to default.
                     $slideimage = $slide->image;
                     if ($slideimage) {
                         $component = 'local_marketing';
                         require_once($CFG->libdir . '/weblib.php');
-                        $slideimage = \moodle_url::make_pluginfile_url(1, $component, 'slidesfilearea', $slide->id, '/', $slideimage);
+                        $slideimage = \moodle_url::make_pluginfile_url(1, $component,
+                            'slidesfilearea', $slide->id, '/', $slideimage);
                         $slideimage = preg_replace('|^https?://|i', '//', $slideimage->out(false));
                     } else {
                         $slideimage = self::pix_url('default_slide', 'theme');
