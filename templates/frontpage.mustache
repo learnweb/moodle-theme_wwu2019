@@ -15,11 +15,11 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_wwu2019/columns
-
-    Admin time setting template.
+    @template theme_wwu2019/frontpage
 
     Classic 1-3 column layout template.
+
+    Additionaly it provides a slideshow and three marketing boxes on top of the main content.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -28,6 +28,7 @@
     * hasblocks - true if there are blocks on this page
     * regionmainsettingsmenu - HTML for the region main settings menu
     * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+    * marketingboxes - Array with three entries with title and content of marketingboxes.
 
     Example context (json):
     {
@@ -36,11 +37,26 @@
             "doctype": "<!DOCTYPE html>",
             "page_title": "Test page",
             "favicon": "favicon.ico",
-            "main_content": "<h1>Headings make html validators happier</h1>"
+            "main_content": "<h1>Headings make html validators happier</h1>",
+            "slideshow": "<h2>Slideshow html goes here</h2>"
          },
         "bodyattributes":"",
         "sidepostblocks": "<h2>Blocks html goes here</h2>",
-        "haspostblocks":true
+        "haspostblocks":true,
+        "marketingboxes": [
+            {
+                "title": "Marketing box 1",
+                "content": "Content of marketing box 1"
+            },
+            {
+                "title" : "Marketing box 2",
+                "content": "Content of marketing box 2"
+            },
+            {
+                "title" : "Marketing box 3",
+                "content": "Content of marketing box 3"
+            }
+        ]
     }
 }}
 {{> theme_boost/head }}

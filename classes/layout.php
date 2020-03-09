@@ -28,7 +28,6 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * This class provides functions for the different layouts of the theme.
  * @package    theme_wwu2019
- * @group      theme_wwu2019
  * @copyright  20120 Tobias Reischmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
