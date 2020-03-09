@@ -22,11 +22,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_wwu2019\output;
+namespace theme_wwu2019;
 
 defined('MOODLE_INTERNAL') || die;
-
-namespace theme_wwu2019;
 
 /**
  * Port of essential alerts to WWUCD theme.
