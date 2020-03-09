@@ -36,7 +36,8 @@ function theme_wwu2019_get_main_scss_content($theme) {
     $scss = '';
 
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
-    $pre = '$wwwroot: "' . $CFG->wwwroot . '";' . "\n";
+    $wwwnormalizedroot = preg_replace('/https?:\/\/(www|[xs]sso|sso\d?)\./i',  'https://www.', $CFG->wwwroot, 1);
+    $pre = '$wwwroot: "' . $wwwnormalizedroot . '";' . "\n";
     $pre .= file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/pre.scss');
 
     // Main CSS - Get the CSS from theme Classic.
