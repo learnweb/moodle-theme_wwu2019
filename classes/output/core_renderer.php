@@ -301,8 +301,7 @@ class core_renderer extends \core_renderer {
                             'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
                             'hasmenu' => false,
                             'menu' => null,
-                            'href' => (new moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))
-                                    ->out(false)
+                            'href' => (new moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))->out(false)
                     ];
                 }
                 $activities[] = [
@@ -310,8 +309,7 @@ class core_renderer extends \core_renderer {
                         'icon' => (new pix_icon('i/trophy', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))
-                                ->out(false)
+                        'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))->out(false)
                 ];
 
                 $data = $this->get_course_activities();
@@ -322,8 +320,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('icon', '', 'mod_page'))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))
-                                        ->out(false)
+                                'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))->out(false)
                         ];
                     } else {
                         $activities[] = [
@@ -331,8 +328,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('icon', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))
-                                        ->out(false)
+                                'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))->out(false)
                         ];
                     }
                 }
@@ -412,8 +408,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id, 'sesskey' => sesskey(),
-                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false))))
-                                ->out(false),
+                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false))))->out(false),
                         'icon' => (new pix_icon('i/user', ''))->export_for_pix()
                 ];
                 $rolename = ' - '.role_get_name($role, $context);
@@ -426,8 +421,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id,
-                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false))))
-                                ->out(false),
+                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false))))->out(false),
                         'icon' => (new pix_icon('i/users', ''))->export_for_pix()
                 ];
             }
@@ -940,7 +934,7 @@ _paq.push(['trackPageView']);
                         $slideimage = self::pix_url('default_slide', 'theme');
                     }
                     $slide->image = $slideimage;
-                    $outputslides []= $slide;
+                    $outputslides [] = $slide;
                 }
                 $outputslides[0]->active = true;
                 $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $outputslides));
