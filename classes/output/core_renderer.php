@@ -25,6 +25,7 @@
 namespace theme_wwu2019\output;
 
 use context_course;
+use customfield_select\field_controller;
 use moodle_page;
 use moodle_url;
 use navigation_node;
@@ -201,65 +202,60 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * Gets and sorts all of the user's courses into terms.
+     * Gets and sorts all of the user's courses into terms based on a customfield.
      * @return array The sorted courses, ready for use in templates.
      */
     private function get_courses() {
         global $DB;
-        $courses = enrol_get_my_courses(array(), 'c.startdate DESC');
+        // Remark: The function always returns the basefields.
+        $courses = enrol_get_my_courses('id');
 
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
         $courseicon = (new pix_icon('i/graduation-cap', ''))->export_for_pix();
         $hiddencourseicon = (new pix_icon('i/hidden', ''))->export_for_pix();
+        // Transform the ids of all enrolled courses to an string to use in the in-sql clause.
+        $instring = '(';
+        foreach (array_keys($courses) as $key => $value){
+            $instring = $instring . strval($value) . ',';
+        }
+        $instring = substr($instring, 0, -1);
+        $instring = $instring . ')';
 
-        // TODO: get for a course the customfieldvalue
-        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname FROM mdl_course as cs INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid ORDER BY cs.startdate DESC';
+        // Get for each course where the user is enrolled the customfield value (here encoded as number).
+        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname
+                        FROM mdl_course as cs
+                        INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid
+                        WHERE cs.id IN ' . $instring . '
+                        ORDER BY cs.startdate DESC';
         $courseswithsemester = $DB->get_records_sql($fromtable);
         $terms = [];
 
+        // Create an array where the key points to the string representation of the customfield value.
+        $field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'));
+        $fieldcontroller = field_controller::create($field->id);
+        $configdata = $fieldcontroller->get('configdata');
+        $semesterinarray = explode("\n", $configdata['options']);
+        // Render each course.
         foreach ($courseswithsemester as $key => $course) {
-            if (!array_key_exists($course->id, $courses)) {
-                continue;
-            }
-
             if (!$course->visible &&
                 !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
                 continue;
             }
             $istermindependent = false;
 
-            $term = 0;
             $integerrepresentation = intval($course->value);
-            if ($integerrepresentation != 0 && $integerrepresentation !=1) {
-                // Even numbers are WS.
-                if ($integerrepresentation % 2 == 0) {
-                    $term = 0;
-                } else {
-                    // Odd values are SS
-                    $term = 1;
-                }
-            } else {
+            if ($integerrepresentation == 0 || $integerrepresentation == 1) {
                 $istermindependent = true;
             }
-            $yearstring = '';
-            $year = $integerrepresentation - 7;
-            if ($integerrepresentation % 2 == 0){
-                $yearstring = '20' . strval($year);
-            } else {
-                $previousyear = strval($integerrepresentation - 8);
-                $yearstring = '20' . $previousyear . '/' . '20' . strval($year);
-            }
 
-            $termid = $istermindependent ? 0 : $yearstring . '_' . $term;
+            $yearstring = $semesterinarray[$integerrepresentation-1];
+
+            $termid = $istermindependent ? 0 : $yearstring;
             if (!array_key_exists($termid, $terms)) {
                 if ($istermindependent) {
                     $name = get_string('termindependent', 'theme_wwu2019');
                 } else {
-                    if ($term == 0) {
-                        $name = 'SoSe ' . $yearstring;
-                    } else {
-                        $name = 'WiSe ' . $yearstring;
-                    }
+                    $name = $yearstring;
                 }
                 $terms[$termid] = [
                     'name' => $name,
@@ -268,7 +264,6 @@ class core_renderer extends \core_renderer {
                     'menu' => []
                 ];
             }
-
             $terms[$termid]['menu'][] = [
                 'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
                 'dontescape' => !$course->visible,
