@@ -196,11 +196,23 @@ footer#wwu-footer {
             padding-left: 0;
 
             li {
-                margin-right: 5px;
+                padding: 0 5px;
+                text-decoration: none;
+                line-height: 1;
 
                 a {
                     color: $wwu-footer;
+                    text-transform: uppercase;
                 }
+
+                &:hover {
+                    text-shadow: 1px 0 0 black;
+                    text-decoration: none;
+                }
+            }
+
+            li ~ li {
+                border-left: 1px solid $wwu-footer;
             }
         }
     }
