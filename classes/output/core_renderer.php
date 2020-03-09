@@ -922,6 +922,7 @@ _paq.push(['trackPageView']);
             $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
             $slides = $_SESSION["theme_wwu2019_slides"];
 
+            $outputslides = array();
             if ($slides) {
                 $index = 0;
                 foreach ($slides as $slide) {
@@ -939,9 +940,10 @@ _paq.push(['trackPageView']);
                         $slideimage = self::pix_url('default_slide', 'theme');
                     }
                     $slide->image = $slideimage;
+                    $outputslides []= $slide;
                 }
-                $slides[0]->active = true;
-                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
+                $outputslides[0]->active = true;
+                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $outputslides));
             }
         }
         return $output;

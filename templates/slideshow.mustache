@@ -33,7 +33,7 @@
     <div class="carousel-inner">
         {{#slides}}
             {{#link}}
-            <a href="{{link}}" target="{{urltarget}}" class="carousel-item item {{#active}}active{{/active}}">
+            <a href="{{link}}" target="{{target}}" class="carousel-item item {{#active}}active{{/active}}">
             {{/link}}
             {{^link}}
             <div class="carousel-item item {{#active}}active{{/active}}">
@@ -53,11 +53,11 @@
                         </div>
                     </div>
                 </div>
-            {{#link}}
-                </a>
-            {{/link}}
             {{^link}}
-                </div>
+            </div>
+            {{/link}}
+            {{#link}}
+            </a>
             {{/link}}
         {{/slides}}
     </div>
