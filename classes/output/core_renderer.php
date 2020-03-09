@@ -184,7 +184,13 @@ class core_renderer extends \core_renderer {
                     $templateformat['menu'] = null;
                 }
                 if ($node->has_action() && !$node->has_children()) {
-                    $templateformat['href'] = $node->action->out(false);
+                    if (is_string($node->action)) {
+                        $templateformat['href'] = $node->action;
+                    } else if ($node->action instanceof moodle_url) {
+                        $templateformat['href'] = $node->action->out(false);
+                    } else if ($node->action instanceof action_link) {
+                        $templateformat['href'] = $node->action->url->out(false);
+                    }
                 }
                 $items[] = $templateformat;
             }
