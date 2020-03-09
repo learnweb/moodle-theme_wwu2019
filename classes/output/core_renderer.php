@@ -253,10 +253,9 @@ class core_renderer extends \core_renderer {
 
     /**
      * Creates the entry for one entry of the navigation.
-     * @param $istermindependent int is the current item without semester?
-     * @param $yearstring string current semester
+     * @param int $istermindependent int is the current item without semester?
+     * @param string $yearstring current semester
      * @return array
-     * @throws \coding_exception
      */
     private function create_term($istermindependent, $yearstring) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
@@ -277,10 +276,8 @@ class core_renderer extends \core_renderer {
 
     /**
      * Get all courses the user is enrolled with the customfield defining the semester.
-     * @param $fieldid int id of the customfield containing the semester
+     * @param int $fieldid
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
      */
     private function get_courses_with_semester($fieldid) {
         global $DB;
