@@ -226,14 +226,16 @@ class core_renderer extends \core_renderer {
                 continue;
             }
             $istermindependent = false;
-
             $customfieldvalue = intval($course->value);
+            $yearstring = $semesterinarray[$customfieldvalue - 1];
+
             if ($customfieldvalue == 0 || $customfieldvalue == 1) {
                 $istermindependent = true;
+                $termid = 0;
+            } else {
+                $termid = $yearstring;
             }
 
-            $yearstring = $semesterinarray[$customfieldvalue - 1];
-            $termid = $istermindependent ? 0 : $yearstring;
             if (!array_key_exists($termid, $terms)) {
                 $terms[$termid] = $this->create_term($istermindependent, $yearstring);
             }
