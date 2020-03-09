@@ -147,6 +147,7 @@ h5 {
     }
 }
 
+/* Footer */
 footer#wwu-footer {
     width: 100%;
     max-width: 1440px;
@@ -203,4 +204,8 @@ footer#wwu-footer {
             }
         }
     }
+}
+
+.performanceinfo .cachesused .cache-definition-stats-heading {
+    color: map-get($theme-colors, 'light');
 }
