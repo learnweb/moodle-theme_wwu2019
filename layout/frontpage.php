@@ -68,4 +68,3 @@ $templatecontext['marketingboxes'] = $marketingboxes;
 $PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
 
 echo $OUTPUT->render_from_template('theme_wwu2019/frontpage', $templatecontext);
-
