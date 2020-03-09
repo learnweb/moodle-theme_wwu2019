@@ -1,0 +1,126 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_wwu2019/frontpage
+
+    Classic 1-3 column layout template.
+
+    Additionaly it provides a slideshow and three marketing boxes on top of the main content.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * hasblocks - true if there are blocks on this page
+    * regionmainsettingsmenu - HTML for the region main settings menu
+    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+    * marketingboxes - Array with three entries with title and content of marketingboxes.
+
+    Example context (json):
+    {
+        "sitename": "Moodle",
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Test page",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Headings make html validators happier</h1>",
+            "slideshow": "<h2>Slideshow html goes here</h2>"
+         },
+        "bodyattributes":"",
+        "sidepostblocks": "<h2>Blocks html goes here</h2>",
+        "haspostblocks":true,
+        "marketingboxes": [
+            {
+                "title": "Marketing box 1",
+                "content": "Content of marketing box 1"
+            },
+            {
+                "title" : "Marketing box 2",
+                "content": "Content of marketing box 2"
+            },
+            {
+                "title" : "Marketing box 3",
+                "content": "Content of marketing box 3"
+            }
+        ]
+    }
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+
+<div id="page-wrapper">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    <div id="page">
+        {{{ output.logo_header }}}
+        {{{ output.main_menu }}}
+        {{{ output.full_header }}}
+
+        <div id="region-slideshow" class="region-slideshow-content mb-3">
+            {{{ output.slideshow }}}
+        </div>
+
+        {{{alerts}}}
+        <div id="region-marketing" class="region-marketing-content">
+            <div class="row">
+                {{#marketingboxes}}
+                    <div class="col-4 block card mb-3">
+                        <div class="card-body p-0">
+                            {{! Block header }}
+                            <div class="block-header">
+                                <h5 class="card-title d-inline">{{title}}</h5>
+                            </div>
+                            <div class="card-text content p-3">
+                                <div class="subcontent loginsub">
+                                    {{{content}}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/marketingboxes}}
+            </div>
+        </div>
+
+        <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
+            <div id="region-main-box" class="region-main">
+                <section id="region-main" class="region-main-content" aria-label="{{#str}}content{{/str}}">
+                    {{{ output.main_content }}}
+                </section>
+            </div>
+
+            <div class="columnright blockcolumn {{#haspostblocks}} has-blocks {{/haspostblocks}}">
+                <section data-region="blocks-column" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
+                    {{{ sidepostblocks }}}
+                </section>
+            </div>
+        </div>
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+    {{> theme_wwu2019/footer }}
+
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+  M.util.js_complete('theme_boost/loader');
+});
+{{/js}}

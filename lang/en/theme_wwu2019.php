@@ -68,3 +68,16 @@ $string['alerttext_desc'] = 'Second part of the alert.';
 $string['alert_info'] = 'Info';
 $string['alert_warning'] = 'Warning';
 $string['alert_general'] = 'General';
+
+// Marketing Spots.
+$string['marketingheading'] = 'Marketing spots';
+$string['marketinginfodesc'] = 'Enter the settings for your marketing spot.';
+$string['marketingdesc'] = 'This theme provides the option of enabling three "marketing" or "ad" spots just under the slide show.  These allow you to easily identify core information to your users and provide direct links.';
+$string['marketing1'] = 'Marketing spot one';
+$string['marketing2'] = 'Marketing spot two';
+$string['marketing3'] = 'Marketing spot three';
+
+$string['marketingtitle'] = 'Title';
+$string['marketingtitledesc'] = 'Title to show in this marketing spot';
+$string['marketingcontent'] = 'Content';
+$string['marketingcontentdesc'] = 'Content to display in the marketing box.  Keep it short and sweet.';

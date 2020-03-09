@@ -1,0 +1,72 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_wwu2019/slideshow
+
+    Displays the slideshow of the frontpage.
+
+    Example context (json):
+    {
+    }
+}}
+
+<div id="wwuCarousel" class="carousel slide" data-interval="8000" data-ride="carousel">
+    <ol class="carousel-indicators d-flex">
+        {{#slides}}
+            <li data-target="#wwuCarousel" data-slide-to="{{index}}" {{#active}}class="ml-auto active"{{/active}}></li>
+        {{/slides}}
+    </ol>
+    <div class="carousel-inner">
+        {{#slides}}
+            {{#link}}
+            <a href="{{link}}" target="{{target}}" class="carousel-item item {{#active}}active{{/active}}">
+            {{/link}}
+            {{^link}}
+            <div class="carousel-item item {{#active}}active{{/active}}">
+            {{/link}}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-5 side-caption my-auto">
+                            <div class="the-side-caption ">
+                                {{#title}}<h1>{{title}}</h1>{{/title}}
+                                {{#caption}}<div>{{{caption}}}</div>{{/caption}}
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="carousel-image-container text-center">
+                                <img class="h-100" src="{{image}}" alt="First slide"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{^link}}
+            </div>
+            {{/link}}
+            {{#link}}
+            </a>
+            {{/link}}
+        {{/slides}}
+    </div>
+    <a class="carousel-control carousel-control-prev" href="#wwuCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">{{# str }} prev {{/ str }}</span>
+    </a>
+    <a class="carousel-control carousel-control-next" href="#wwuCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">{{# str }} next {{/ str }}</span>
+    </a>
+</div>

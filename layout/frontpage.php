@@ -30,7 +30,16 @@ $layout->sso_auto_login();
 
 $templatecontext = $layout->get_default_template_context();
 
+$marketingboxes = [];
+for ($i = 0; $i < 3; $i++) {
+    $marketingboxes[$i] = new stdClass();
+    $marketingspot = $i + 1;
+    $marketingboxes[$i]->index = $i;
+    $marketingboxes[$i]->title = get_config('theme_wwu2019', 'marketing' . $marketingspot);
+    $marketingboxes[$i]->content = get_config('theme_wwu2019', 'marketing' . $marketingspot . 'content');
+}
+$templatecontext['marketingboxes'] = $marketingboxes;
+
 $PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
 
-echo $OUTPUT->render_from_template('theme_wwu2019/columns', $templatecontext);
-
+echo $OUTPUT->render_from_template('theme_wwu2019/frontpage', $templatecontext);

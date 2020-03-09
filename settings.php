@@ -114,5 +114,34 @@ if ($ADMIN->fulltree) {
         get_string('alerttext_desc', 'theme_wwu2019'), '');
     $page->add($setting);
 
+    // Marketing spot settings.
+    $page->add(new admin_setting_heading('theme_wwu2019_marketing',
+        get_string('marketingheading', 'theme_wwu2019'),
+        format_text(get_string('marketingdesc', 'theme_wwu2019'), FORMAT_MARKDOWN)));
+
+    foreach (range(1, 3) as $marketingspotnumber) {
+        // This is the descriptor for Marketing Spot in $marketingspotnumber.
+        $name = 'theme_wwu2019/marketing' . $marketingspotnumber . 'info';
+        $heading = get_string('marketing' . $marketingspotnumber, 'theme_wwu2019');
+        $information = get_string('marketinginfodesc', 'theme_wwu2019');
+        $setting = new admin_setting_heading($name, $heading, $information);
+        $page->add($setting);
+
+        // Marketing spot.
+        $name = 'theme_wwu2019/marketing' . $marketingspotnumber;
+        $title = get_string('marketingtitle', 'theme_wwu2019');
+        $description = get_string('marketingtitledesc', 'theme_wwu2019');
+        $default = '';
+        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $page->add($setting);
+
+        $name = 'theme_wwu2019/marketing' . $marketingspotnumber . 'content';
+        $title = get_string('marketingcontent', 'theme_wwu2019');
+        $description = get_string('marketingcontentdesc', 'theme_wwu2019');
+        $default = '';
+        $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
+        $page->add($setting);
+    }
+
     $settings->add($page);
 }

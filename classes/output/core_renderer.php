@@ -301,8 +301,7 @@ class core_renderer extends \core_renderer {
                             'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
                             'hasmenu' => false,
                             'menu' => null,
-                            'href' => (new moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))
-                                    ->out(false)
+                            'href' => (new moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))->out(false)
                     ];
                 }
                 $activities[] = [
@@ -310,8 +309,7 @@ class core_renderer extends \core_renderer {
                         'icon' => (new pix_icon('i/trophy', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))
-                                ->out(false)
+                        'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))->out(false)
                 ];
 
                 $data = $this->get_course_activities();
@@ -322,8 +320,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('icon', '', 'mod_page'))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))
-                                        ->out(false)
+                                'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))->out(false)
                         ];
                     } else {
                         $activities[] = [
@@ -331,8 +328,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('icon', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))
-                                        ->out(false)
+                                'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))->out(false)
                         ];
                     }
                 }
@@ -412,8 +408,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id, 'sesskey' => sesskey(),
-                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false))))
-                                ->out(false),
+                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false))))->out(false),
                         'icon' => (new pix_icon('i/user', ''))->export_for_pix()
                 ];
                 $rolename = ' - '.role_get_name($role, $context);
@@ -426,8 +421,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id,
-                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false))))
-                                ->out(false),
+                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false))))->out(false),
                         'icon' => (new pix_icon('i/users', ''))->export_for_pix()
                 ];
             }
@@ -771,14 +765,14 @@ class core_renderer extends \core_renderer {
         }
         $context->errorformatted = $this->error_text($context->error);
 
-        // t_reis06@wwu: Set the context variables for the mustache template.
+        // Set the context variables for the mustache template.
         global $CFG, $SESSION;
         $wwwhost = htmlentities(selfmsp(true));
         $context->ssofield = (stripos($wwwhost, "www") !== false && stripos($CFG->wwwroot, $wwwhost) !== false);
         $wantsurl = empty($SESSION->wantsurl) ? $CFG->wwwroot : $SESSION->wantsurl;
         $context->ssoactionurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
         $context->xssoactionurl = str_ireplace($wwwhost, 'https://xsso.uni-muenster.de', $wantsurl);
-        // read parameters from url, thus they can be used in form as hidden fields
+        // Read parameters from url, thus they can be used in form as hidden fields
         // $wantsurl can contain parameters e.g. user/view.php?id=5&course=10
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
@@ -904,6 +898,55 @@ _paq.push(['trackPageView']);
             }
         }
         return $tracking;
+    }
+    /**
+     * Renders the slideshow.
+     * @return string
+     */
+    public function slideshow() {
+        global $CFG, $OUTPUT, $USER;
+
+        $output = '';
+
+        if (file_exists($CFG->dirroot . '/local/marketing/locallib.php')) {
+            // Retrieve slides if none are cached.
+            // Also, force re-cache if user has changed ID recently (i.e., a login has occurred).
+            if (!isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
+                $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id
+            ) {
+                require_once($CFG->dirroot . '/local/marketing/locallib.php');
+                $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
+                $_SESSION["theme_wwu2019_slides_cachedfor"] = $USER->id;
+            }
+            require_once($CFG->dirroot . '/local/marketing/locallib.php');
+            $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
+            $slides = $_SESSION["theme_wwu2019_slides"];
+
+            $outputslides = array();
+            if ($slides) {
+                $index = 0;
+                foreach ($slides as $slide) {
+                    // Add slide index for slide navigation in the mustache template.
+                    $slide->index = $index++;
+                    // Get slide image or fallback to default.
+                    $slideimage = $slide->image;
+                    if ($slideimage) {
+                        $component = 'local_marketing';
+                        require_once($CFG->libdir . '/weblib.php');
+                        $slideimage = \moodle_url::make_pluginfile_url(1, $component,
+                            'slidesfilearea', $slide->id, '/', $slideimage);
+                        $slideimage = preg_replace('|^https?://|i', '//', $slideimage->out(false));
+                    } else {
+                        $slideimage = self::pix_url('default_slide', 'theme');
+                    }
+                    $slide->image = $slideimage;
+                    $outputslides [] = $slide;
+                }
+                $outputslides[0]->active = true;
+                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $outputslides));
+            }
+        }
+        return $output;
     }
 
 }
