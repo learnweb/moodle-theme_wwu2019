@@ -220,7 +220,7 @@ class core_renderer extends \core_renderer {
         $courseswithsemester = $this->get_courses_with_semester($field->id);
 
         // Render each course.
-        foreach ($courseswithsemester as $key => $course) {
+        foreach ($courseswithsemester as $course) {
             if (!$course->visible &&
                 !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
                 continue;
@@ -250,11 +250,13 @@ class core_renderer extends \core_renderer {
         }
         return array_values($terms);
     }
+
     /**
      * Creates the entry for one entry of the navigation.
-     * @param $istermindependent int Is the current item without semester?
-     * @param $yearstring int Which semester is the course?
-     * @return object navigationitem
+     * @param $istermindependent int is the current item without semester?
+     * @param $yearstring string current semester
+     * @return array
+     * @throws \coding_exception
      */
     private function create_term($istermindependent, $yearstring) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
@@ -272,10 +274,13 @@ class core_renderer extends \core_renderer {
         ];
     }
 
+
     /**
-     * Returns all courses the current user is enrolled with the value of the customfield semester
-     * @param $fieldid int id of the semesterfield
-     * @return array The sorted courses, with corresponding customfield.
+     * Get all courses the user is enrolled with the customfield defining the semester.
+     * @param $fieldid int id of the customfield containing the semester
+     * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private function get_courses_with_semester($fieldid) {
         global $DB;
@@ -283,7 +288,7 @@ class core_renderer extends \core_renderer {
         $courses = enrol_get_my_courses();
         // Transform the ids of all enrolled courses to an string to use in the in-sql clause.
         $instring = '(';
-        foreach (array_keys($courses) as $key => $value) {
+        foreach (array_keys($courses) as $value) {
             $instring = $instring . strval($value) . ',';
         }
         $instring = substr($instring, 0, -1);
