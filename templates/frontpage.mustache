@@ -72,33 +72,33 @@
         {{{ output.main_menu }}}
         {{{ output.full_header }}}
 
-        <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
-            <div id="region-main-box" class="region-main">
+        <div id="region-slideshow" class="region-slideshow-content mb-3">
+            {{{ output.slideshow }}}
+        </div>
 
-                <section id="region-slideshow" class="region-slideshow-content mb-4">
-                {{{ output.slideshow }}}
-                </section>
-
-                {{{alerts}}}
-                <section id="region-marketing" class="region-marketing-content">
-                    <div class="row">
-                    {{#marketingboxes}}
-                        <div class="col-4 block card mb-3">
-                            <div class="card-body p-0">
-                                {{! Block header }}
-                                <div class="block-header">
-                                    <h5 id="instance-1-header" class="card-title d-inline">{{title}}</h5>
-                                </div>
-                                <div class="card-text content p-3">
-                                    <div class="subcontent loginsub">
-                                        {{{content}}}
-                                    </div>
+        {{{alerts}}}
+        <div id="region-marketing" class="region-marketing-content">
+            <div class="row">
+                {{#marketingboxes}}
+                    <div class="col-4 block card mb-3">
+                        <div class="card-body p-0">
+                            {{! Block header }}
+                            <div class="block-header">
+                                <h5 id="instance-1-header" class="card-title d-inline">{{title}}</h5>
+                            </div>
+                            <div class="card-text content p-3">
+                                <div class="subcontent loginsub">
+                                    {{{content}}}
                                 </div>
                             </div>
                         </div>
-                    {{/marketingboxes}}
                     </div>
-                </section>
+                {{/marketingboxes}}
+            </div>
+        </div>
+
+        <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
+            <div id="region-main-box" class="region-main">
                 <section id="region-main" class="region-main-content" aria-label="{{#str}}content{{/str}}">
                     {{{ output.main_content }}}
                 </section>
