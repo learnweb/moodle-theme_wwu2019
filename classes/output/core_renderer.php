@@ -232,7 +232,7 @@ class core_renderer extends \core_renderer {
                 $istermindependent = true;
             }
 
-            $yearstring = $semesterinarray[$customfieldvalue-1];
+            $yearstring = $semesterinarray[$customfieldvalue - 1];
             $termid = $istermindependent ? 0 : $yearstring;
             if (!array_key_exists($termid, $terms)) {
                 $terms[$termid] = $this->create_term($istermindependent, $yearstring);
@@ -254,7 +254,7 @@ class core_renderer extends \core_renderer {
      * @param $yearstring int Which semester is the course?
      * @return array The sorted courses, ready for use in templates.
      */
-    private function create_term($istermindependent, $yearstring){
+    private function create_term($istermindependent, $yearstring) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
 
         if ($istermindependent) {
@@ -275,13 +275,13 @@ class core_renderer extends \core_renderer {
      * @param $fieldid int id of the semesterfield
      * @return array The sorted courses, ready for use in templates.
      */
-    private function get_courses_with_semester($fieldid){
+    private function get_courses_with_semester($fieldid) {
         global $DB;
         // Remark: The function always returns the basefields.
         $courses = enrol_get_my_courses();
         // Transform the ids of all enrolled courses to an string to use in the in-sql clause.
         $instring = '(';
-        foreach (array_keys($courses) as $key => $value){
+        foreach (array_keys($courses) as $key => $value) {
             $instring = $instring . strval($value) . ',';
         }
         $instring = substr($instring, 0, -1);
