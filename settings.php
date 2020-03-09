@@ -52,11 +52,11 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     $alertinfo = get_string('alert_info', 'theme_wwu2019');
-    $alertwarning = get_string('alert_warning', 'theme_essential');
+    $alertwarning = get_string('alert_warning', 'theme_wwu2019');
     $alertgeneral = get_string('alert_general', 'theme_wwu2019');
     $alerttypedefault = 'info';
     $alerttypechoices = array('info' => $alertinfo, 'error' => $alertwarning, 'success' => $alertgeneral);
-    $setting = new essential_admin_setting_configselect('theme_wwu2019/alert1type',
+    $setting = new admin_setting_configselect('theme_wwu2019/alert1type',
         get_string('alert1type', 'theme_wwu2019'),
         get_string('alerttype_desc', 'theme_wwu2019'),
         $alerttypedefault, $alerttypechoices);
@@ -77,7 +77,7 @@ if ($ADMIN->fulltree) {
         get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
     $page->add($setting);
 
-    $setting = new essential_admin_setting_configselect('theme_wwu2019/alert2type',
+    $setting = new admin_setting_configselect('theme_wwu2019/alert2type',
         get_string('alert2type', 'theme_wwu2019'),
         get_string('alerttype_desc', 'theme_wwu2019'),
         $alerttypedefault, $alerttypechoices);
@@ -98,7 +98,7 @@ if ($ADMIN->fulltree) {
         get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
     $page->add($setting);
 
-    $setting = new essential_admin_setting_configselect('theme_wwu2019/alert3type',
+    $setting = new admin_setting_configselect('theme_wwu2019/alert3type',
         get_string('alert3type', 'theme_wwu2019'),
         get_string('alerttype_desc', 'theme_wwu2019'),
         $alerttypedefault, $alerttypechoices);
