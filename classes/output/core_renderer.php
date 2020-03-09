@@ -793,6 +793,12 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('core/loginform', $context);
     }
 
+    /**
+     * Constructs and returns the trackurl for matomo (piwik).
+     * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     private function matomo_trackurl() {
         global $DB, $PAGE;
         $pageinfo = get_context_info_array($PAGE->context->id);
