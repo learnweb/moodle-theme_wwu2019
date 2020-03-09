@@ -14,10 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This class provides functions for the different layouts of the theme.
+ * @package    theme_wwu2019
+ * @copyright  2020 Tobias Reischmann WWU
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace theme_wwu2019;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * This class provides functions for the different layouts of the theme.
+ * @package    theme_wwu2019
+ * @group      theme_wwu2019
+ * @copyright  20120 Tobias Reischmann WWU
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class layout {
 
     /**
