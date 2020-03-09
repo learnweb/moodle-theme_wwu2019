@@ -238,3 +238,18 @@ footer#wwu-footer {
         }
     }
 }
+
+.nav-tabs {
+
+    .nav-link {
+        border-radius: 0;
+        border: 2px solid transparent;
+    }
+    & > li {
+        margin-left: 10px;
+        & > a {
+            color: $gray-700;
+            background-color: $gray-500;
+        }
+    }
+}
