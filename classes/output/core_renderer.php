@@ -995,4 +995,18 @@ _paq.push(['trackPageView']);
         return $output;
     }
 
+    /**
+     * For a specific set of users, add current hostname to standard footer.
+     * @return string|void
+     */
+    public function standard_footer_html() {
+        $standardfooter = parent::standard_footer_html();
+        if (!is_siteadmin()) {
+            return $standardfooter;
+        }
+
+        return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()), array('class'=>'hostname')) .
+            $standardfooter;
+    }
+
 }
