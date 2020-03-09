@@ -60,10 +60,6 @@ $alert-border-width:                0 !default;
 
 $card-group-margin: .25rem;
 
-// Slideshow
-$slideshow-next-icon: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAoCAYAAAAc7cGiAAAA8UlEQVRIx8WWYRHDIAxGe1OAhEqohEqoBCRUQh1MAhImoRKYg0pAwtuf7cZ1hYbArZ+AdwEeSTrAAA9g7moDBL4Za2FxAtDXwNYd0ANGCxv4jaupzh0AZy2s3z3EJ5MWuBzAAjBoYCZR3aZ6EMByHK8Fbgmg08BG0rm3EDmO1ahCS6DLwMqUyaiiBi4nxw1iZd7VbSdAXwK0nKcIuEqAN+H1SbrvU1LVLKmqhR7y+xKoIQb1Asf6/36nkzZUNqybtSBgyoCWa9p2RlB/3ahrNoQzgk6aadRmcUkIqlupjpa9lmuoqYHFOgxdTaLV3XaVeQF/715BGu4YSgAAAABJRU5ErkJggg==);
-$slideshow-prev-icon: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAoCAYAAAAc7cGiAAAA8ElEQVRIx7WWWxGDQAxFd6oACUhAAhIqAQmVsA6QgAQkrATqAAkr4fSLllIe2SS938yZJbk3SQhGAQ9gBGorqOGjbAFVQF7BsIAmvpW0sIFftdqCbzVoQHf2VWs6l3dAUVPweQeUgcrauUWdR+cA5lJQz7HaElB3AkoeFljUWC1QZlABKIsMeuKlMoNeeOlthUuDCkEygwpBk6TmtxDCU/BdUf6S4HXRI8zlE0II7E0bxzRVBSkYLcsV8yZyG0ErYDQl4m9jWxC5qIEdebBs1Qks02t/t3U5Dy4OlzFo5XZSnXQ4WWA+Z6j7gbzJ8AhUL7tLXm+4j0seAAAAAElFTkSuQmCC);
-
 // stylelint-disable
 $theme-colors: () !default;
 $theme-colors: map-merge((

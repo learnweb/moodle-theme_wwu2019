@@ -63,12 +63,9 @@
         background-color: rgb(134, 151, 145);
         background-position: 50%;
         background-repeat: no-repeat;
-        top: 0;
-        bottom: 0;
         height: initial;
         margin-top: initial;
         border-radius: initial;
-        z-index: 6;
         visibility: hidden;
 
         &:hover {
@@ -79,14 +76,6 @@
 
     &:hover .carousel-control {
         visibility: visible;
-    }
-
-    .carousel-control-prev-icon {
-        background-image: $slideshow-prev-icon;
-    }
-
-    .carousel-control-next-icon {
-        background-image: $slideshow-prev-icon;
     }
 
     .carousel-control-next-icon,
