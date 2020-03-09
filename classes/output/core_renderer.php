@@ -254,7 +254,7 @@ class core_renderer extends \core_renderer {
      * Creates the entry for one entry of the navigation.
      * @param $istermindependent int Is the current item without semester?
      * @param $yearstring int Which semester is the course?
-     * @return array The sorted courses, ready for use in templates.
+     * @return object navigationitem
      */
     private function create_term($istermindependent, $yearstring) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
@@ -275,7 +275,7 @@ class core_renderer extends \core_renderer {
     /**
      * Returns all courses the current user is enrolled with the value of the customfield semester
      * @param $fieldid int id of the semesterfield
-     * @return array The sorted courses, ready for use in templates.
+     * @return array The sorted courses, with corresponding customfield.
      */
     private function get_courses_with_semester($fieldid) {
         global $DB;
