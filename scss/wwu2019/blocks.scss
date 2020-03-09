@@ -32,6 +32,9 @@
             color: white;
             padding: 0 12px;
             font-size: 18px;
+            border-color: $outlinegrey;
+            border-style: solid;
+            border-width: 2px 2px 0 2px;
             line-height: $block-header-height;
             height: $block-header-height;
         }

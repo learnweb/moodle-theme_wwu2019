@@ -26,15 +26,6 @@
     border-radius: 0;
 }
 
-.page-title {
-    font-weight: bold;
-    width: 100%;
-    border-bottom: 1px solid #dee2e6;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-    font-size: 22px;
-}
-
 body.pagelayout-course {
 
     #region-main {
@@ -43,10 +34,11 @@ body.pagelayout-course {
     }
 
     .page-title {
+        font-weight: bold;
         color: white;
         background: $learnwebblue;
-        border: 2px solid $outlinegrey;
         padding: 16px 16px 14px 16px;
+        border: 2px solid $outlinegrey;
         font-size: 26px;
         text-transform: uppercase;
     }
@@ -62,6 +54,9 @@ body.pagelayout-course {
             display: flex;
             width: 100%;
             height: 30px;
+            border-color: $outlinegrey;
+            border-style: solid;
+            border-width: 2px 2px 0 2px;
 
             .sectionname {
                 padding: 0;
