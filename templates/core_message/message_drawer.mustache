@@ -72,7 +72,7 @@
         {{> core_message/message_drawer_view_conversation_footer }}
     </div>
 </div>
-<div id="message-drawer-backdrop" class="modal-backdrop fade in hidden"></div>
+<div id="message-drawer-backdrop" class="modal-backdrop hidden"></div>
 
 
 {{#js}}
@@ -102,7 +102,10 @@ function(
             } else {
                 backdrop.removeClass('hidden');
             }
-        }
+        };
+        toggle.click(function() {
+            checkState();
+        });
     });
 });
 {{/js}}
