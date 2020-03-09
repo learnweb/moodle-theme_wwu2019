@@ -29,6 +29,7 @@ use customfield_select\field_controller;
 use moodle_page;
 use moodle_url;
 use navigation_node;
+use navigation_node_collection;
 use pix_icon;
 
 defined('MOODLE_INTERNAL') || die;
@@ -160,7 +161,24 @@ class core_renderer extends \core_renderer {
 
                 if ($node->has_children()) {
                     $templateformat['hasmenu'] = true;
-                    $templateformat['menu'] = $this->settingsnav_for_template($node->children);
+                    if (!$node->has_action()) {
+                        $children = $node->children;
+                    } else {
+                        // Create artificial first element in submenu that duplicates the parent's action.
+                        // We have to rewrite the entire collection because generally there is no way to prepend an item to the collection.
+                        // That is, unless we know the first child's key, which does not always exist in any submenu.
+                        $children = new navigation_node_collection();
+                        $duplicatedaction = new navigation_node([
+                            'text' => $node->text,
+                            'action' => $node->action,
+                            'parent' => $node,
+                        ]);
+                        $children->add($duplicatedaction);
+                        foreach ($node->children as $c) {
+                            $children->add($c);
+                        }
+                    }
+                    $templateformat['menu'] = $this->settingsnav_for_template($children);
                 } else {
                     $templateformat['hasmenu'] = false;
                     $templateformat['menu'] = null;
