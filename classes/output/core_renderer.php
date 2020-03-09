@@ -1011,7 +1011,7 @@ _paq.push(['trackPageView']);
             return $standardfooter;
         }
 
-        return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()), array('class'=>'hostname')) .
+        return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()), array('class' => 'hostname')) .
             $standardfooter;
     }
 
