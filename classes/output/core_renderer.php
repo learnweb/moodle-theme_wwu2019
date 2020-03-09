@@ -232,7 +232,7 @@ class core_renderer extends \core_renderer {
                 $istermindependent = true;
             }
 
-            $yearstring = $semesterinarray[$customfieldvalue-1];
+            $yearstring = $semesterinarray[$customfieldvalue - 1];
             $termid = $istermindependent ? 0 : $yearstring;
             if (!array_key_exists($termid, $terms)) {
                 $terms[$termid] = $this->create_term($istermindependent, $yearstring);
