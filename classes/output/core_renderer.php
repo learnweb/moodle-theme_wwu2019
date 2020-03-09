@@ -302,21 +302,22 @@ class core_renderer extends \core_renderer {
         // Remark: The function always returns the basefields.
         $courses = enrol_get_my_courses();
         // Transform the ids of all enrolled courses to an string to use in the in-sql clause.
-        $instring = '(';
-        foreach (array_keys($courses) as $value) {
-            $instring = $instring . strval($value) . ',';
+        $courseids = array_keys($courses);
+        if (count($courseids) === 0) {
+            return [];
         }
-        $instring = substr($instring, 0, -1);
-        $instring = $instring . ')';
+
+        list ($instring, $params) = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED);
 
         // Get for each course where the user is enrolled the customfield value (here encoded as number).
         $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname
                                 FROM mdl_course as cs
                                 INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid
-                                WHERE cs.id IN ' . $instring . '
-                                AND cd.fieldid = ' . $fieldid . '
+                                WHERE cs.id ' . $instring . '
+                                AND cd.fieldid = :fieldid
                                 ORDER BY cs.startdate DESC';
-        return $DB->get_records_sql($fromtable);
+        $params['fieldid'] = $fieldid;
+        return $DB->get_records_sql($fromtable, $params);
     }
 
     /**
