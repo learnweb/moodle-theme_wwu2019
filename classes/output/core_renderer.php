@@ -977,14 +977,13 @@ _paq.push(['trackPageView']);
             // Retrieve slides if none are cached.
             // Also, force re-cache if user has changed ID recently (i.e., a login has occurred).
             if (!isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
-                $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id
+                $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id || empty($_SESSION["theme_wwu2019_slides"])
             ) {
                 require_once($CFG->dirroot . '/local/marketing/locallib.php');
                 $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
                 $_SESSION["theme_wwu2019_slides_cachedfor"] = $USER->id;
             }
-            require_once($CFG->dirroot . '/local/marketing/locallib.php');
-            $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
+
             $slides = $_SESSION["theme_wwu2019_slides"];
 
             $outputslides = array();
