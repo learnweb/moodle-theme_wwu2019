@@ -230,8 +230,7 @@ class core_renderer extends \core_renderer {
         $terms = [];
 
         // Create an array where the key points to the string representation of the customfield value.
-        if ($DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'))) {
-            $field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'));
+        if ($field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'))) {
             $fieldcontroller = field_controller::create($field->id);
             $configdata = $fieldcontroller->get('configdata');
             $semesterinarray = explode("\n", $configdata['options']);
