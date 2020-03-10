@@ -22,13 +22,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_wwu2019\layout;
+
 defined('MOODLE_INTERNAL') || die();
 
-$layout = new \theme_wwu2019\layout();
+layout::sso_auto_login();
 
-$layout->sso_auto_login();
-
-$templatecontext = $layout->get_default_template_context();
+$templatecontext = layout::get_default_template_context();
 
 $PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
 

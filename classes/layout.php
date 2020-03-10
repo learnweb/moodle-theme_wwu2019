@@ -36,7 +36,7 @@ class layout {
     /**
      * Autologin if access takes place via SSO.
      */
-    public function sso_auto_login() {
+    public static function sso_auto_login() {
         if (!isloggedin() && wwusso_username()) {
             global $CFG;
             $url = qualified_me();
@@ -52,7 +52,7 @@ class layout {
      * Returns the default context for the columns layout, which can be reused for other layouts.
      * @return array
      */
-    public function get_default_template_context() {
+    public static function get_default_template_context() {
         global $OUTPUT, $PAGE, $SITE;
         $bodyattributes = $OUTPUT->body_attributes();
         $blockspost = $OUTPUT->blocks('side-post');
