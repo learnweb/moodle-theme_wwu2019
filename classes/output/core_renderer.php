@@ -194,7 +194,6 @@ class core_renderer extends \core_renderer {
      */
     private function switch_pagetype() {
         $pagetype = $this->page->pagetype;
-        //var_dump($pagetype);
         if (strpos($pagetype, 'admin-setting') !== false) {
             $pagetype = 'admin-setting'; // Deal with all setting page types.
         } else if ((strpos($pagetype, 'mod-') !== false) &&
