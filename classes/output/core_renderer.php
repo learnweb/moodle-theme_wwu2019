@@ -282,7 +282,7 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * Adds a end_of_page button to every page.
+     * Adds a end_of_page button.
      * @return string html for endofpage button
      */
     private function add_endofpage_button() {
