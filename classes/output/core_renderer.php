@@ -236,41 +236,54 @@ class core_renderer extends \core_renderer {
         $terms = [];
 
         // Create an array where the key points to the string representation of the customfield value.
-        $field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'), '*', MUST_EXIST);
-        $fieldcontroller = field_controller::create($field->id);
-        $configdata = $fieldcontroller->get('configdata');
-        $semesterinarray = explode("\n", $configdata['options']);
+        if ($field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'))) {
+            $fieldcontroller = field_controller::create($field->id);
+            $configdata = $fieldcontroller->get('configdata');
+            $semesterinarray = explode("\n", $configdata['options']);
 
-        $courseswithsemester = $this->get_courses_with_semester($field->id);
+            $courseswithsemester = $this->get_courses_with_semester($field->id);
 
-        // Render each course.
-        foreach ($courseswithsemester as $course) {
-            if (!$course->visible &&
-                !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
-                continue;
+            // Render each course.
+            foreach ($courseswithsemester as $course) {
+                if (!$course->visible &&
+                    !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
+                    continue;
+                }
+                $istermindependent = false;
+                $customfieldvalue = intval($course->value);
+                $yearstring = $semesterinarray[$customfieldvalue - 1];
+
+                if ($customfieldvalue == 0 || $customfieldvalue == 1) {
+                    $istermindependent = true;
+                    $termid = 0;
+                } else {
+                    $termid = $yearstring;
+                }
+
+                if (!array_key_exists($termid, $terms)) {
+                    $terms[$termid] = $this->create_term($istermindependent, $yearstring);
+                }
+                $terms[$termid]['menu'][] = [
+                    'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
+                    'dontescape' => !$course->visible,
+                    'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
+                    'icon' => $course->visible ? $courseicon : $hiddencourseicon,
+                    'hasmenu' => false,
+                    'menu' => null
+                ];
             }
-            $istermindependent = false;
-            $customfieldvalue = intval($course->value);
-            $yearstring = $semesterinarray[$customfieldvalue - 1];
-
-            if ($customfieldvalue == 0 || $customfieldvalue == 1) {
-                $istermindependent = true;
-                $termid = 0;
-            } else {
-                $termid = $yearstring;
+        } else {
+            $courses = enrol_get_my_courses();
+            foreach ($courses as $course) {
+                $terms['Kurse']['menu'][] = [
+                    'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
+                    'dontescape' => !$course->visible,
+                    'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
+                    'icon' => $course->visible ? $courseicon : $hiddencourseicon,
+                    'hasmenu' => false,
+                    'menu' => null
+                ];
             }
-
-            if (!array_key_exists($termid, $terms)) {
-                $terms[$termid] = $this->create_term($istermindependent, $yearstring);
-            }
-            $terms[$termid]['menu'][] = [
-                'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
-                'dontescape' => !$course->visible,
-                'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
-                'icon' => $course->visible ? $courseicon : $hiddencourseicon,
-                'hasmenu' => false,
-                'menu' => null
-            ];
         }
         return array_values($terms);
     }
