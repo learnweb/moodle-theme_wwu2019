@@ -67,6 +67,7 @@ ul[role="menubar"] {
     top: 0;
     z-index: 990;
     background: white;
+    height: $main-menu-height;
 
     #main-menu-border {
         padding: 10px 0;
@@ -409,6 +410,21 @@ ul[role="menubar"] {
             border-right: none;
             border-bottom: 1px solid black;
         }
+    }
+
+    & #main-menu-sticky-floater {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        height: $main-menu-height;
+        width: 100%;
+        background-color: $white;
+    }
+
+    & #main-menu-fixed-placeholder {
+        visibility: hidden;
+        position: fixed;
+        min-height: $main-menu-height;
     }
 
 }
