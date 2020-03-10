@@ -26,7 +26,8 @@
     border-radius: 0;
 }
 
-body.pagelayout-course {
+body.pagelayout-course,
+body.pagelayout-incourse {
 
     #region-main {
         border: 0;
@@ -42,6 +43,20 @@ body.pagelayout-course {
         font-size: 26px;
         text-transform: uppercase;
     }
+
+}
+
+body.pagelayout-incourse {
+
+    & #region-main-body {
+        border: 2px solid $outlinegrey;
+        border-radius: 0;
+        padding: 1.25rem;
+        margin-top: 1rem;
+    }
+}
+
+body.pagelayout-course {
 
     li.section.main {
         border-style: none;
@@ -93,4 +108,19 @@ body.pagelayout-course {
         margin-top: -8px;
     }
 
+}
+
+body.pagelayout-incourse {
+
+    /* Enrol users Button */
+    & .userlist ~ .float-right {
+        /* This calculation is used to move the button exactly its height up
+         * - 1.5 is the line-height of the button
+         * - #{$font-size-base} is the font-size of the button
+         * .375 rem is the top-margin of the inner button
+         * the other two .375 rem are probably the inner padding of the button, however the padding is actually .25 rem.
+         * So far it works! ;)
+         */
+        margin-top: calc((-1.5 * #{$font-size-base}) - (3 * .375rem));
+    }
 }
