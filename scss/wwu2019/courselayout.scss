@@ -27,7 +27,8 @@
 }
 
 body.pagelayout-course,
-body.pagelayout-incourse {
+body.pagelayout-incourse,
+body.pagelayout-report {
 
     #region-main {
         border: 0;
@@ -46,7 +47,8 @@ body.pagelayout-incourse {
 
 }
 
-body.pagelayout-incourse {
+body.pagelayout-incourse,
+body.pagelayout-report {
 
     & #region-main-body {
         border: 2px solid $outlinegrey;
