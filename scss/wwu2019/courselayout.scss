@@ -126,3 +126,11 @@ body.pagelayout-incourse {
         margin-top: calc((-1.5 * #{$font-size-base}) - (3 * .375rem));
     }
 }
+
+/* Gradebook */
+
+#page-content.blocks-post .columnright {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+}
