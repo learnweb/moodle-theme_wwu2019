@@ -158,7 +158,7 @@ class core_renderer extends \core_renderer {
      */
     private function add_edit_button() {
         $html = '';
-        $url = $this->switch_pagetype();
+        $url = $this->get_edit_button_url_by_pagetype();
         $url->param('sesskey', sesskey());
 
         if ($this->page->user_is_editing()) {
@@ -179,7 +179,7 @@ class core_renderer extends \core_renderer {
      * TODO: n_herr03 the switch statement is not exhaustive. Moreover, not all cases are tested.
      * @return object url with the required edit options
      */
-    private function switch_pagetype() {
+    private function get_edit_button_url_by_pagetype() {
         $pagetype = $this->page->pagetype;
         if (strpos($pagetype, 'admin-setting') !== false) {
             $pagetype = 'admin-setting'; // Deal with all setting page types.
