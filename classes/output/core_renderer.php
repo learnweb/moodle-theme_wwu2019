@@ -131,6 +131,158 @@ class core_renderer extends \core_renderer {
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
         return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
     }
+    /**
+     * Add additional items to edit and to go to bottom of page.
+     * Allow plugins to provide some content to be rendered in the navbar.
+     * The plugin must define a PLUGIN_render_navbar_output function that returns
+     * the HTML they wish to add to the navbar.
+     *
+     * @return string HTML for the navbar
+     */
+    public function navbar_plugin_output() {
+        $output = '';
+        if ($this->page->user_allowed_editing()) {
+            $output .= $this->add_edit_button();
+        }
+        if (!$this->is_login_page()) {
+            $output .= $this->add_endofpage_button();
+        }
+        $output .= parent::navbar_plugin_output();
+
+        return $output;
+    }
+
+    /**
+     * Renders an edit button.
+     * @return string HTML for editbutton
+     */
+    private function add_edit_button() {
+        $html = '';
+        $url = $this->get_edit_button_url_by_pagetype();
+        $url->param('sesskey', sesskey());
+
+        if ($this->page->user_is_editing()) {
+            $icon = 'power-off';
+        } else {
+            $icon = 'edit';
+        }
+        $attributes['class'] = 'icon fa fa-' . $icon;
+        $attributes['aria-hidden'] = 'true';
+        $attributes['href'] = $url;
+        $tag = \html_writer::tag('a', '', $attributes);
+        $html .= \html_writer::div($tag, 'nav-link');
+        return $html;
+    }
+
+    /**
+     * Checks the current pagetype and sets the edit param based on the pagetype.
+     * TODO: n_herr03 Not all cases of the switch statement are tested. Moreover, there might exist pages that are currently ...
+     * TODO cont. ... handeled by the default case but would require other url parameters.
+     * @return object url with the required edit parameter
+     */
+    private function get_edit_button_url_by_pagetype() {
+        $pagetype = $this->page->pagetype;
+        if (strpos($pagetype, 'admin-setting') !== false) {
+            $pagetype = 'admin-setting'; // Deal with all setting page types.
+        } else if ((strpos($pagetype, 'mod-') !== false) &&
+            ((strpos($pagetype, 'edit') !== false) ||
+                (strpos($pagetype, 'view') !== false) ||
+                (strpos($pagetype, '-mod') !== false))) {
+            $pagetype = 'mod-edit-view'; // Deal with all mod edit / view / -mod page types.
+        } else if (strpos($pagetype, 'mod-data-field') !== false) {
+            $pagetype = 'mod-data-field'; // Deal with all mod data field page types.
+        } else if (strpos($pagetype, 'mod-lesson') !== false) {
+            $pagetype = 'mod-lesson'; // Deal with all mod lesson page types.
+        }
+        switch ($pagetype) {
+            case 'site-index':
+            case 'calendar-view':  // Slightly faulty as even the navigation link goes back to the frontpage.  TODO: MDL.
+                $url = new moodle_url('/course/view.php');
+                $url->param('id', 1);
+                if ($this->page->user_is_editing()) {
+                    $url->param('edit', 'off');
+                } else {
+                    $url->param('edit', 'on');
+                }
+                break;
+            case 'admin-index':
+            case 'admin-search':
+            case 'admin-setting':
+                $url = $this->page->url;
+                if ($this->page->user_is_editing()) {
+                    $url->param('adminedit', 0);
+                } else {
+                    $url->param('adminedit', 1);
+                }
+                break;
+            case 'course-index':
+            case 'course-management':
+            case 'course-search':
+            case 'mod-resource-mod':
+            case 'tag-search':
+                $url = new moodle_url('/tag/search.php');
+                if ($this->page->user_is_editing()) {
+                    $url->param('edit', 'off');
+                } else {
+                    $url->param('edit', 'on');
+                }
+                break;
+            case 'mod-data-field':
+            case 'mod-edit-view':
+            case 'mod-forum-discuss':
+            case 'mod-forum-index':
+            case 'mod-forum-search':
+            case 'mod-forum-subscribers':
+            case 'mod-lesson':
+            case 'mod-quiz-index':
+            case 'mod-scorm-player':
+                $url = new moodle_url('/course/view.php');
+                $url->param('id', $this->page->course->id);
+                $url->param('return', $this->page->url->out_as_local_url(false));
+                if ($this->page->user_is_editing()) {
+                    $url->param('edit', 'off');
+                } else {
+                    $url->param('edit', 'on');
+                }
+                break;
+            case 'my-index':
+            case 'user-profile':
+                $url = $this->page->url;
+                // Umm! Both /user/profile.php and /user/profilesys.php have the same page type but different parameters!
+                if ($this->page->user_is_editing()) {
+                    $url->param('adminedit', 0);
+                    $url->param('edit', 0);
+                } else {
+                    $url->param('adminedit', 1);
+                    $url->param('edit', 1);
+                }
+                break;
+            default:
+                $url = $this->page->url;
+                if ($this->page->user_is_editing()) {
+                    $url->param('edit', 'off');
+                } else {
+                    $url->param('edit', 'on');
+                }
+                break;
+        }
+        return $url;
+    }
+
+    /**
+     * Adds a end_of_page button.
+     * @return string html for endofpage button
+     */
+    private function add_endofpage_button() {
+        $html = '';
+        $attributes['class'] = 'icon fa fa-arrow-circle-o-down';
+        $attributes['aria-hidden'] = 'true';
+        $attributes['href'] = new moodle_url('#wwu-footer');
+        $tag = \html_writer::tag('a', '', $attributes);
+        $html .= \html_writer::div($tag, 'nav-link');
+
+        return $html;
+    }
 
     /**
      * Puts the given $nodecollection into a format properly usable in templates.
