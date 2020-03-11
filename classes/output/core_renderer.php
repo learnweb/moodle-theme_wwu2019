@@ -147,21 +147,8 @@ class core_renderer extends \core_renderer {
         if (!$this->is_login_page()) {
             $output .= $this->add_endofpage_button();
         }
-        // Give subsystems an opportunity to inject extra html content. The callback
-        // must always return a string containing valid html.
-        foreach (\core_component::get_core_subsystems() as $name => $path) {
-            if ($path) {
-                $output .= component_callback($name, 'render_navbar_output', [$this], '');
-            }
-        }
+        $output .= parent::navbar_plugin_output();
 
-        if ($pluginsfunction = get_plugins_with_function('render_navbar_output')) {
-            foreach ($pluginsfunction as $plugintype => $plugins) {
-                foreach ($plugins as $pluginfunction) {
-                    $output .= $pluginfunction($this);
-                }
-            }
-        }
         return $output;
     }
 
