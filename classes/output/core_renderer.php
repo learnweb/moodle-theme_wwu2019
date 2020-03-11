@@ -176,8 +176,9 @@ class core_renderer extends \core_renderer {
 
     /**
      * Checks the current pagetype and sets the edit param based on the pagetype.
-     * TODO: n_herr03 the switch statement is not exhaustive. Moreover, not all cases are tested.
-     * @return object url with the required edit options
+     * TODO: n_herr03 Not all cases of the switch statement are tested. Moreover, there might exist pages that are currently ...
+     * TODO cont. ... handeled by the default case but would require other url parameters.
+     * @return object url with the required edit parameter
      */
     private function get_edit_button_url_by_pagetype() {
         $pagetype = $this->page->pagetype;
