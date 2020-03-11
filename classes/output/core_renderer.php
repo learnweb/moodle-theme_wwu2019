@@ -170,7 +170,7 @@ class core_renderer extends \core_renderer {
         $attributes['aria-hidden'] = 'true';
         $attributes['href'] = $url;
         $tag = \html_writer::tag('a', '', $attributes);
-        $html .= \html_writer::div($tag, 'popover-region-toggle nav-link');
+        $html .= \html_writer::div($tag, 'nav-link');
         return $html;
     }
 
@@ -278,7 +278,7 @@ class core_renderer extends \core_renderer {
         $attributes['aria-hidden'] = 'true';
         $attributes['href'] = new moodle_url('#wwu-footer');
         $tag = \html_writer::tag('a', '', $attributes);
-        $html .= \html_writer::div($tag, 'popover-region-toggle nav-link');
+        $html .= \html_writer::div($tag, 'nav-link');
 
         return $html;
     }
