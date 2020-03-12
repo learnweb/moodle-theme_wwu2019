@@ -412,21 +412,22 @@ ul[role="menubar"] {
         }
     }
 
-    & #main-menu-sticky-floater {
-        position: absolute;
-        left: 100%;
-        top: 0;
-        height: $main-menu-height;
-        width: 100%;
-        background-color: $white;
-    }
-
     & #main-menu-fixed-placeholder {
         visibility: hidden;
         position: fixed;
         min-height: $main-menu-height;
     }
 
+}
+
+
+#page-grade-report-grader-index #main-menu-sticky-floater {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: $main-menu-height;
+    width: 100%;
+    background-color: $white;
 }
 
 #menu-bottom {
