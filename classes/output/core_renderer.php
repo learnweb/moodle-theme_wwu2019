@@ -1155,7 +1155,7 @@ _paq.push(['trackPageView']);
                     } else {
                         $slideimage = self::pix_url('default_slide', 'theme');
                     }
-                    $slide->image = $slideimage;
+                    $slide->slideimage = $slideimage;
                     $outputslides [] = $slide;
                 }
                 $outputslides[0]->active = true;
