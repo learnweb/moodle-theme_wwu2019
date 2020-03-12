@@ -21,6 +21,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-.block.card .card-body .card-text {
+#region-marketing .block.card .card-body .card-text {
     height: calc(100% - #{$block-header-height});
+}
+
+@media (max-width: $onecolumn-break-point) {
+    #region-marketing .block.card {
+        min-width: 100%;
+    }
 }
