@@ -72,7 +72,7 @@ ul[role="menubar"] {
     #main-menu-border {
         padding: 10px 0;
         border-bottom: 4px solid $dividergrey;
-
+        height: 100%;
         display: flex;
         flex-wrap: wrap-reverse;
     }
@@ -90,6 +90,14 @@ ul[role="menubar"] {
 
     .main-menu-additions-item {
         display: flex;
+
+        @for $i from 1 through 4 {
+            & > :nth-child(#{$i}) {
+                @media (max-width: #{500 - $i * 40}px) {
+                    display: none;
+                }
+            }
+        }
 
         .nav-link {
             padding: 0 15px 0 0;
@@ -317,6 +325,16 @@ ul[role="menubar"] {
             border-radius: 4px;
             margin-right: 4px;
             vertical-align: top;
+        }
+
+        .user-name {
+            max-width: 170px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 100%;
+            display: inline-block;
+            vertical-align: bottom;
+            white-space: nowrap;
         }
     }
 
