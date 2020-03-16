@@ -72,7 +72,7 @@ ul[role="menubar"] {
     #main-menu-border {
         padding: 10px 0;
         border-bottom: 4px solid $dividergrey;
-
+        height: 100%;
         display: flex;
         flex-wrap: wrap-reverse;
     }
@@ -90,6 +90,15 @@ ul[role="menubar"] {
 
     .main-menu-additions-item {
         display: flex;
+
+        @for $i from 1 through 4 {
+            & > :nth-child(#{$i}) {
+                // First item should disappear at 460px, second at 420px...
+                @media (max-width: #{500 - $i * 40}px) {
+                    display: none;
+                }
+            }
+        }
 
         .nav-link {
             padding: 0 15px 0 0;
@@ -318,6 +327,16 @@ ul[role="menubar"] {
             margin-right: 4px;
             vertical-align: top;
         }
+
+        .user-name {
+            max-width: 170px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 100%;
+            display: inline-block;
+            vertical-align: bottom;
+            white-space: nowrap;
+        }
     }
 
     #main-menu-hamburger > a#hamburger-toggle > i.icon {
@@ -444,6 +463,7 @@ ul[role="menubar"] {
     }
 
     .search {
+        margin-top: 0;
         height: 100%;
 
         .search-field {
