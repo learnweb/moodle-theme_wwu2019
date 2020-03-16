@@ -93,6 +93,7 @@ ul[role="menubar"] {
 
         @for $i from 1 through 4 {
             & > :nth-child(#{$i}) {
+                // First item should disappear at 460px, second at 420px...
                 @media (max-width: #{500 - $i * 40}px) {
                     display: none;
                 }
