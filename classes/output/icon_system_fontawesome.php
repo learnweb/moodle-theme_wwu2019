@@ -35,6 +35,11 @@ defined('MOODLE_INTERNAL') || die();
 class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
 
     /**
+     * @var array $map Cached map of moodle icon names to font awesome icon names.
+     */
+    private $map = [];
+
+    /**
      * Mapping of moodle icon names to fontawesome icon names.
      * @return array the map
      */
@@ -60,6 +65,35 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
         );
 
         return array_merge($iconmap, $override);
+    }
+
+    /**
+     * Overridable function to get a mapping of all icons.
+     * Default is to do no mapping.
+     */
+    public function get_icon_name_map() {
+        if ($this->map === []) {
+            $cache = \cache::make('theme_wwu2019', 'fontawesomeiconmapping');
+
+            $this->map = $cache->get('mapping');
+
+            if (empty($this->map)) {
+                $this->map = $this->get_core_icon_map();
+                $callback = 'get_fontawesome_icon_map';
+
+                if ($pluginsfunction = get_plugins_with_function($callback)) {
+                    foreach ($pluginsfunction as $plugintype => $plugins) {
+                        foreach ($plugins as $pluginfunction) {
+                            $pluginmap = $pluginfunction();
+                            $this->map += $pluginmap;
+                        }
+                    }
+                }
+                $cache->set('mapping', $this->map);
+            }
+
+        }
+        return $this->map;
     }
 
 }
