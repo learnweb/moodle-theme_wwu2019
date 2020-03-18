@@ -72,6 +72,7 @@
 body {
     background-color: #fff;
     font-family: 'MetaWebPro', sans-serif;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -190,10 +191,13 @@ footer#wwu-footer {
 
     .wwu-fin {
         margin-top: 15px;
+        justify-content: space-between;
+        line-height: 1;
 
         nav > ul {
             list-style: none;
             padding-left: 0;
+            flex-wrap: wrap;
 
             li {
                 padding: 0 5px;
@@ -214,6 +218,12 @@ footer#wwu-footer {
             li ~ li {
                 border-left: 1px solid $wwu-footer;
             }
+        }
+
+        div.copyright {
+            display: flex;
+            flex-grow: 1;
+            justify-content: end;
         }
     }
 }
