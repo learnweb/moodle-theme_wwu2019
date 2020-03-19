@@ -107,7 +107,7 @@ body.pagelayout-course {
         // Highlighted section
         &.current {
             .header {
-                background-color: $accentorange;
+                background-color: $wwugreen;
 
                 .sectionname {
                     font-weight: bold;
@@ -115,7 +115,7 @@ body.pagelayout-course {
             }
 
             .content {
-                background-color: change_color($accentorange, $lightness: 97.5%);
+                background-color: change_color($wwugreen, $lightness: 97.5%);
             }
         }
     }
