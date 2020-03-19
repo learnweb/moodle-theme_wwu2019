@@ -103,6 +103,21 @@ body.pagelayout-course {
                 margin: 0;
             }
         }
+
+        // Highlighted section
+        &.current {
+            .header {
+                background-color: $wwugreen;
+
+                .sectionname {
+                    font-weight: bold;
+                }
+            }
+
+            .content {
+                background-color: change_color($wwugreen, $lightness: 97.5%);
+            }
+        }
     }
 
     .completionprogress {
