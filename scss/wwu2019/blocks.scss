@@ -25,6 +25,7 @@
     border: none;
     border-radius: 0;
     background: white;
+    word-break: break-word;
 
     & > .card-body {
         & > .block-header {
@@ -35,8 +36,14 @@
             border-color: $outlinegrey;
             border-style: solid;
             border-width: 2px 2px 0 2px;
-            line-height: $block-header-height;
-            height: $block-header-height;
+            line-height: #{$block-header-height - 2px};
+            display: flex;
+            justify-content: space-between;
+
+            & > .card-title {
+                margin-bottom: 0;
+                line-height: #{$block-header-height - 2px};
+            }
         }
 
         & > .card-text {
