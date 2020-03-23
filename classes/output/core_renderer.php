@@ -486,7 +486,7 @@ class core_renderer extends \core_renderer {
                                 INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid
                                 WHERE cs.id ' . $instring . '
                                 AND cd.fieldid = :fieldid
-                                ORDER BY cs.startdate DESC';
+                                ORDER BY cd.value DESC, cs.shortname ASC';
         $params['fieldid'] = $fieldid;
         return $DB->get_records_sql($fromtable, $params);
     }
