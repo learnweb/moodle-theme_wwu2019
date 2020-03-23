@@ -68,6 +68,9 @@ ul[role="menubar"] {
     z-index: 990;
     background: white;
     height: $main-menu-height;
+    margin: 0 #{-$page-padding};
+    border-left: $page-padding solid white;
+    border-right: $page-padding solid white;
 
     #main-menu-border {
         padding: 10px 0;
