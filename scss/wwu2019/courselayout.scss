@@ -70,7 +70,6 @@ body.pagelayout-course {
             color: white;
             display: flex;
             width: 100%;
-            height: 30px;
             border-color: $outlinegrey;
             border-style: solid;
             border-width: 2px 2px 0 2px;
@@ -78,8 +77,7 @@ body.pagelayout-course {
             .sectionname {
                 padding: 0;
                 font-size: 18px;
-                line-height: 30px;
-                margin: 0;
+                margin: 4px 0;
                 flex-grow: 1;
             }
 
