@@ -1395,4 +1395,15 @@ _paq.push(['trackPageView']);
             }
         }
     }
+
+    /**
+     * @return string Doctype string, if not already printed.
+     */
+    public function doctype_if_necessary() : string {
+        if (empty($this->contenttype)) {
+            return $this->doctype();
+        } else {
+            return '';
+        }
+    }
 }

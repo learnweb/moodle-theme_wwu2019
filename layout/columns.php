@@ -31,6 +31,6 @@ layout::sso_auto_login();
 $templatecontext = layout::get_default_template_context();
 
 $PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
-
+echo $OUTPUT->doctype_if_necessary();
 echo $OUTPUT->render_from_template('theme_wwu2019/columns', $templatecontext);
 

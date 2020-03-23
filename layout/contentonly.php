@@ -33,5 +33,6 @@ $templatecontext = [
         'output' => $OUTPUT
 ];
 
+echo $OUTPUT->doctype_if_necessary();
 echo $OUTPUT->render_from_template('theme_wwu2019/contentonly', $templatecontext);
 
