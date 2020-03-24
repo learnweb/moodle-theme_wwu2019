@@ -261,3 +261,8 @@ footer#wwu-footer {
 #region-main-body {
     overflow-x: auto;
 }
+
+/* Turn editing off button */
+.red-edit-button > form > button {
+    @extend .btn-danger;
+}
