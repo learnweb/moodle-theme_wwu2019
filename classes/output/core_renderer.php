@@ -153,6 +153,27 @@ class core_renderer extends \core_renderer {
     }
 
     /**
+     * Returns HTML to display a "Turn editing on/off" button in a form.
+     *
+     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @return string HTML the button
+     */
+    public function edit_button(moodle_url $url) {
+        $url->param('sesskey', sesskey());
+        $class = '';
+        if ($this->page->user_is_editing()) {
+            $url->param('edit', 'off');
+            $editstring = get_string('turneditingoff');
+            $class = 'red-edit-button';
+        } else {
+            $url->param('edit', 'on');
+            $editstring = get_string('turneditingon');
+        }
+
+        return $this->single_button($url, $editstring, 'post', array('class' => 'singlebutton ' . $class));
+    }
+
+    /**
      * Renders an edit button.
      * @return string HTML for editbutton
      */
