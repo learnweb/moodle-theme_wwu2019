@@ -34,7 +34,7 @@
             <ul role="menubar" id="main-menu-left">
                 {{# left-menu }}
                     <li role="none" class="main-menu-item {{# class }}{{class}}{{/class}}"
-                        {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
+                        {{# hasmenu }} aria-haspopup="true" aria-expanded="{{isexpanded}}" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
                         <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
                             {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                             <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
@@ -49,7 +49,7 @@
                                         <ul role="menu" class="sub-menu">
                                             {{# menu }}
                                                 <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}"
-                                                    {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
+                                                    {{# hasmenu }} aria-haspopup="true" aria-expanded="{{isexpanded}}" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
                                                     <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
                                                         {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                                                         <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
@@ -109,7 +109,7 @@
                                 <ul role="menu" class="sub-menu">
                                     {{# menu }}
                                         <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}"
-                                            {{# hasmenu }} aria-haspopup="true" aria-expanded="false" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
+                                            {{# hasmenu }} aria-haspopup="true" aria-expanded="{{isexpanded}}" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
                                             <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
                                                 {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                                                 <span class="underline">{{ name }}</span>

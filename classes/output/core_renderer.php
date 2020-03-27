@@ -24,6 +24,7 @@
 
 namespace theme_wwu2019\output;
 
+use action_link;
 use context_course;
 use customfield_select\field_controller;
 use moodle_page;
@@ -127,7 +128,6 @@ class core_renderer extends \core_renderer {
                 'navbaradditions' => $this->navbar_plugin_output(),
                 'wwwroot' => $CFG->wwwroot,
         ];
-
         $this->page->requires->js_call_amd('theme_wwu2019/menu', 'init');
         return $this->render_from_template('theme_wwu2019/menu', $templatecontext);
     }
@@ -319,7 +319,8 @@ class core_renderer extends \core_renderer {
             if ($node->display) {
 
                 $templateformat = array(
-                        'name' => $node->get_content()
+                        'name' => $node->get_content(),
+                        'class' => ''
                 );
 
                 if ($node->icon && !$node->hideicon) {
@@ -334,6 +335,11 @@ class core_renderer extends \core_renderer {
 
                 if ($node->has_children()) {
                     $templateformat['hasmenu'] = true;
+
+                    $templateformat['isexpanded'] = $node->forceopen;
+                    if ($node->forceopen) {
+                        $templateformat['class'] = 'open';
+                    }
                     if (!$node->has_action()) {
                         $children = $node->children;
                     } else {
