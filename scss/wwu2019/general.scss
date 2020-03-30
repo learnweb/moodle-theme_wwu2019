@@ -266,3 +266,12 @@ footer#wwu-footer {
 .red-edit-button > form > button {
     @extend .btn-danger;
 }
+
+/* Quiznavigation */
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+    color: black;
+
+    .thispageholder {
+        border-color: black;
+    }
+}
