@@ -28,7 +28,10 @@ defined('MOODLE_INTERNAL') || die();
 
 layout::sso_auto_login();
 
-$templatecontext = layout::get_default_template_context();
+$templatecontext = [
+        'bodyattributes' => $OUTPUT->body_attributes(),
+        'output' => $OUTPUT
+];
 
-echo $OUTPUT->render_from_template('theme_wwu2019/secure', $templatecontext);
+echo $OUTPUT->render_from_template('theme_wwu2019/contentonly', $templatecontext);
 

@@ -65,7 +65,7 @@ $THEME->prescsscallback = 'theme_wwu2019_get_pre_scss';
 $THEME->layouts = [
         // Most backwards compatible layout without the blocks - this is the layout used by default.
         'base' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'columns.php',
                 'regions' => array(),
         ),
@@ -136,14 +136,14 @@ $THEME->layouts = [
 
         // Pages that appear in pop-up windows - no navigation, no blocks, no header.
         'popup' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'contentonly.php',
                 'regions' => array(),
                 'options' => array('nofooter' => true, 'nonavbar' => true),
         ),
         // No blocks and minimal footer - used for legacy frame layouts only!
         'frametop' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'contentonly.php',
                 'regions' => array(),
                 'options' => array('nofooter' => true, 'nocoursefooter' => true),
@@ -164,7 +164,7 @@ $THEME->layouts = [
         ),
         // Should display the content and basic headers only.
         'print' => array(
-                'theme' => 'classic',
+                'theme' => 'wwu2019',
                 'file' => 'contentonly.php',
                 'regions' => array(),
                 'options' => array('nofooter' => true, 'nonavbar' => false),
