@@ -95,10 +95,12 @@ h5 {
     font-size: 1em;
 }
 
+$page-padding: 1rem;
+
 #page {
     width: 100%;
     max-width: 1440px;
-    padding: 16px;
+    padding: $page-padding;
     position: relative;
     margin-top: 0;
     margin-left: auto;
@@ -190,10 +192,13 @@ footer#wwu-footer {
 
     .wwu-fin {
         margin-top: 15px;
+        justify-content: space-between;
+        line-height: 1;
 
         nav > ul {
             list-style: none;
             padding-left: 0;
+            flex-wrap: wrap;
 
             li {
                 padding: 0 5px;
@@ -214,6 +219,12 @@ footer#wwu-footer {
             li ~ li {
                 border-left: 1px solid $wwu-footer;
             }
+        }
+
+        div.copyright {
+            display: flex;
+            flex-grow: 1;
+            justify-content: flex-end;
         }
     }
 }
@@ -252,6 +263,10 @@ footer#wwu-footer {
             background-color: $gray-500;
         }
     }
+}
+
+#page-wrapper #page #page-content {
+    overflow-x: auto;
 }
 
 #region-main-box {
