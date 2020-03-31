@@ -96,4 +96,57 @@ trait wwu_format_trait {
         $o .= html_writer::end_tag('div');
         return $o;
     }
+
+    /**
+     * Generate a summary of a section for display on the 'course index page'
+     *
+     * @param stdClass $section The course_section entry from DB
+     * @param stdClass $course The course entry from DB
+     * @param array $mods (argument not used)
+     * @return string HTML to output.
+     */
+    protected function wwu_section_summary($section, $course, $mods) {
+        $classattr = 'section main section-summary clearfix';
+        $linkclasses = '';
+
+        // If section is hidden then display grey section link
+        if (!$section->visible) {
+            $classattr .= ' hidden';
+            $linkclasses .= ' dimmed_text';
+        } else if (course_get_format($course)->is_section_current($section)) {
+            $classattr .= ' current';
+        }
+
+        $title = get_section_name($course, $section);
+        $o = '';
+        $o .= html_writer::start_tag('li', array('id' => 'section-' . $section->section,
+                'class' => $classattr, 'role' => 'region', 'aria-label' => $title));
+
+        if ($section->uservisible) {
+            $title = html_writer::tag('a', "» $title",
+                    array('href' => course_get_url($course, $section->section), 'class' => $linkclasses));
+        }
+        $o .= html_writer::start_div('header');
+        $o .= html_writer::tag('div', '', array('class' => 'left side'));
+        $o .= $this->output->heading($title, 3, 'section-title sectionname');
+        $o .= html_writer::tag('div', '', array('class' => 'right side'));
+        $o .= html_writer::end_div();
+
+        $o .= html_writer::start_div('content');
+        $o .= $this->section_availability($section);
+        $o .= html_writer::start_tag('div', array('class' => 'summarytext'));
+
+        if ($section->uservisible || $section->visible) {
+            // Show summary if section is available or has availability restriction information.
+            // Do not show summary if section is hidden but we still display it because of course setting
+            // "Hidden sections are shown in collapsed form".
+            $o .= $this->format_summary_text($section);
+        }
+        $o .= html_writer::end_tag('div');
+        $o .= $this->section_activity_summary($section, $course, null);
+        $o .= html_writer::end_div();
+        $o .= html_writer::end_tag('li');
+
+        return $o;
+    }
 }

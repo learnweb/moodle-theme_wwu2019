@@ -89,6 +89,12 @@ body.pagelayout-course {
             .side.right {
                 margin: auto;
             }
+
+            // section-title is used for section summaries.
+            .section-title > a {
+                display: inline-block;
+                width: 100%;
+            }
         }
 
         .content {
@@ -99,6 +105,10 @@ body.pagelayout-course {
 
             .section {
                 margin: 0;
+            }
+
+            .summarytext {
+                margin: 2px 12px;
             }
         }
 

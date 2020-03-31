@@ -53,4 +53,16 @@ class format_topics_renderer extends \format_topics_renderer {
         return $this->wwu_section_header($section, $course, $onsectionpage);
     }
 
+    /**
+     * Generate a summary of a section for display on the 'course index page'
+     *
+     * @param stdClass $section The course_section entry from DB
+     * @param stdClass $course The course entry from DB
+     * @param array    $mods (argument not used)
+     * @return string HTML to output.
+     */
+    protected function section_summary($section, $course, $mods) {
+        return $this->wwu_section_summary($section, $course, $mods);
+    }
+
 }
