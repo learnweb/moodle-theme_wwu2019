@@ -37,7 +37,7 @@ class layout {
      * Autologin if access takes place via SSO.
      */
     public static function sso_auto_login() {
-        if (!isloggedin() && wwusso_username()) {
+        if (!isloggedin() && function_exists('wwusso_username') && wwusso_username()) {
             global $CFG;
             $url = qualified_me();
             // Do not require for /login/index.php because that would yield an infinite redirect loop.

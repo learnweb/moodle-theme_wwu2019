@@ -960,6 +960,8 @@ class core_renderer extends \core_renderer {
             return false;
         }
 
+        return ['url' => get_login_url()];
+
         $loginurl = get_login_url();
         $wwwhost = htmlentities(selfmsp(true));
         $ssologinurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $CFG->wwwroot);
