@@ -65,4 +65,18 @@ class format_topics_renderer extends \format_topics_renderer {
         return $this->wwu_section_summary($section, $course, $mods);
     }
 
+    /**
+     * Output the html for a single section page .
+     *
+     * @param stdClass $course The course entry from DB
+     * @param array $sections (argument not used)
+     * @param array $mods (argument not used)
+     * @param array $modnames (argument not used)
+     * @param array $modnamesused (argument not used)
+     * @param int $displaysection The section number in the course which is being displayed
+     */
+    public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
+        $this->wwu_print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection);
+    }
+
 }
