@@ -144,6 +144,8 @@ trait wwu_format_trait {
         }
         $o .= html_writer::end_tag('div');
         $o .= $this->section_activity_summary($section, $course, null);
+        $o .= html_writer::link(course_get_url($course, $section->section), get_string('viewfullsection', 'theme_wwu2019'),
+                array('class' => 'mdl-right pr-2 summary-view-full'));
         $o .= html_writer::end_div();
         $o .= html_writer::end_tag('li');
 

@@ -110,6 +110,13 @@ body.pagelayout-course {
             .summarytext {
                 margin: 2px 12px;
             }
+
+            .summary-view-full {
+                font-size: .8203125rem;
+                display: block;
+                color: $learnwebblue;
+                text-decoration: underline;
+            }
         }
 
         // Highlighted section
