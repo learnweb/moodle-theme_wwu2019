@@ -110,6 +110,13 @@ body.pagelayout-course {
             .summarytext {
                 margin: 2px 12px;
             }
+
+            .summary-view-full {
+                font-size: .8203125rem;
+                display: block;
+                color: $learnwebblue;
+                text-decoration: underline;
+            }
         }
 
         // Highlighted section
@@ -131,6 +138,10 @@ body.pagelayout-course {
     .completionprogress {
         margin-bottom: 8px;
         margin-top: -8px;
+    }
+
+    .single-section h3.sectionname {
+        text-align: left;
     }
 
 }

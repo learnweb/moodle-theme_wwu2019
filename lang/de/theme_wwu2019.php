@@ -81,3 +81,6 @@ $string['marketingtitle'] = 'Titel';
 $string['marketingtitledesc'] = 'Title to show in this marketing spot';
 $string['marketingcontent'] = 'Beschreibung';
 $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Keep it short and sweet.';
+
+
+$string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
