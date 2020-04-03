@@ -225,6 +225,11 @@ footer#wwu-footer {
     }
 }
 
+// Remove padding from standard moodle-footer.
+footer#wwu-footer + div > div.container {
+    padding: 0;
+}
+
 .performanceinfo .cachesused .cache-definition-stats-heading {
     color: map-get($theme-colors, 'light');
 }
