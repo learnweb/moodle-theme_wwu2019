@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Overriden functions for format_topics_renderer and format_section_renderer_base.
+ * Overriden functions for format_topcoll_renderer and format_section_renderer_base.
  *
  * @package theme_wwu2019
  * @copyright 2020 Justus Dieckmann WWU
@@ -31,10 +31,10 @@ use moodle_url;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot . '/course/format/topics/renderer.php');
+require_once($CFG->dirroot . '/course/format/topcoll/renderer.php');
 
 /**
- * Overriden functions for format_topics_renderer and format_section_renderer_base.
+ * Overriden functions for format_topcoll_renderer and format_section_renderer_base.
  *
  * @copyright 2020 Justus Dieckmann WWU
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -85,31 +85,17 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
         }
         $o .= html_writer::start_tag('li', $liattributes);
 
-        if ((($this->mobiletheme === false) && ($this->tablettheme === false)) || ($this->userisediting)) {
-            if ($this->rtl) {
-                // Swap content.
-                $rightcontent = '';
-                if (($section->section != 0) && $this->userisediting && has_capability('moodle/course:update', $context)) {
-                    $url = new moodle_url('/course/editsection.php', array('id' => $section->id, 'sr' => $sectionreturn));
-
-                    $rightcontent .= html_writer::link($url,
-                            $this->output->pix_icon('t/edit', get_string('edit')),
-                            array('title' => get_string('editsection', 'format_topcoll'), 'class' => 'tceditsection'));
-                }
-                $rightcontent .= $this->section_right_content($section, $course, $onsectionpage);
-                $o .= html_writer::tag('div', $rightcontent, array('class' => 'right side'));
-            } else {
-                $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
-                $o .= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
-            }
-        }
-        $o .= html_writer::start_tag('div', array('class' => 'content'));
-
         if (($onsectionpage == false) && ($section->section != 0)) {
+
+            $o .= $this->section_availability($section);
+
             $o .= html_writer::start_tag('div',
-                    array('class' => 'sectionhead toggle toggle-'.$this->tcsettings['toggleiconset'],
+                    array('class' => 'header sectionhead toggle toggle-'.$this->tcsettings['toggleiconset'],
                             'id' => 'toggle-'.$section->section, 'tabindex' => '0')
             );
+
+            $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
+            $o .= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
 
             if ((!($section->toggle === null)) && ($section->toggle == true)) {
                 $toggleclass = 'toggle_open';
@@ -121,9 +107,6 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
                 $sectionclass = '';
             }
             $toggleclass .= ' the_toggle ' . $this->tctoggleiconsize;
-            $o .= html_writer::start_tag('span',
-                    array('class' => $toggleclass, 'role' => 'button', 'aria-expanded' => $ariaexpanded)
-            );
 
             if (empty($this->tcsettings)) {
                 $this->tcsettings = $this->courseformat->get_settings();
@@ -134,23 +117,21 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
             } else {
                 $title = $this->courseformat->get_topcoll_section_name($course, $section, true);
             }
-            if ((($this->mobiletheme === false) && ($this->tablettheme === false)) || ($this->userisediting)) {
-                $o .= $this->output->heading($title, 3, 'sectionname');
-            } else {
-                $o .= html_writer::tag('h3', $title); // Moodle H3's look bad on mobile / tablet with CT so use plain.
-            }
 
-            $o .= $this->section_availability($section);
+            $o .= html_writer::tag('span', $title, array('class' => 'sectionname ' . $toggleclass, 'role' => 'button',
+                    'aria-expanded' => $ariaexpanded));
 
-            $o .= html_writer::end_tag('span');
-            $o .= html_writer::end_tag('div');
+            $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
+            $o .= html_writer::tag('div', $rightcontent, array('class' => 'right side'));
+
+            $o .= html_writer::end_div();
 
             if ($this->tcsettings['showsectionsummary'] == 2) {
                 $o .= $this->section_summary_container($section);
             }
 
             $o .= html_writer::start_tag('div',
-                    array('class' => 'sectionbody toggledsection' . $sectionclass,
+                    array('class' => 'content sectionbody toggledsection' . $sectionclass,
                             'id' => 'toggledsection-' . $section->section)
             );
 
@@ -161,36 +142,67 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
                         array('class' => 'hidden', 'aria-hidden' => 'true'));
             }
 
-            if ($this->userisediting && has_capability('moodle/course:update', $context)) {
-                $url = new moodle_url('/course/editsection.php', array('id' => $section->id, 'sr' => $sectionreturn));
-                $o .= html_writer::link($url,
-                        $this->output->pix_icon('t/edit', get_string('edit')),
-                        array('title' => get_string('editsection', 'format_topcoll'))
-                );
-            }
-
             if ($this->tcsettings['showsectionsummary'] == 1) {
                 $o .= $this->section_summary_container($section);
             }
         } else {
             // When on a section page, we only display the general section title, if title is not the default one.
-            $hasnamesecpg = ($section->section == 0 && (string) $section->name !== '');
 
-            if ($hasnamesecpg) {
-                $o .= $this->output->heading($this->section_title($section, $course), 3, 'section-title');
-            }
+            // Swap content.
+            $o .= html_writer::start_div('header');
+            $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
+            $o .= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
+            $o .= $this->output->heading($this->section_title($section, $course), 3, 'section-title sectionname');
+            $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
+            $o .= html_writer::tag('div', $rightcontent, array('class' => 'right side'));
+            $o .= html_writer::end_div();
+
+            $o .= html_writer::start_div('content');
             $o .= $this->section_availability($section);
             $o .= html_writer::start_tag('div', array('class' => 'summary'));
+
             $o .= $this->format_summary_text($section);
 
-            if ($this->userisediting && has_capability('moodle/course:update', $context)) {
-                $url = new moodle_url('/course/editsection.php', array('id' => $section->id, 'sr' => $sectionreturn));
-                $o .= html_writer::link($url,
-                        $this->output->pix_icon('t/edit', get_string('edit')),
-                        array('title' => get_string('editsection', 'format_topcoll'))
-                );
+            $o .= html_writer::end_div();
+        }
+        return $o;
+    }
+
+    /**
+     * Generate the display of the footer part of a section after
+     * course modules are included.
+     *
+     * @param stdClass $section The course_section entry from DB.
+     * @param stdClass $course The course entry from DB.
+     * @param bool $onsectionpage true if being printed on a section page.
+     * @param int $sectionreturn The section to return to after an action.
+     * @return string HTML to output.
+     */
+    protected function topcoll_section_footer($section, $course, $onsectionpage, $sectionreturn = null) {
+        $o = html_writer::end_tag('li');
+        return $o;
+    }
+
+    /**
+     * Generate the content to displayed on the left part of a section
+     * before course modules are included.
+     *
+     * @param stdClass $section The course_section entry from DB.
+     * @param stdClass $course The course entry from DB.
+     * @param bool $onsectionpage true if being printed on a section page.
+     * @return string HTML to output.
+     */
+    protected function section_left_content($section, $course, $onsectionpage) {
+        $o = '';
+
+        if (($section->section != 0) && (!$onsectionpage)) {
+            // Only in the non-general sections.
+            if ($this->courseformat->is_section_current($section)) {
+                $o .= get_accesshide(get_string('currentsection', 'format_' . $course->format));
             }
-            $o .= html_writer::end_tag('div');
+            if (empty($this->tcsettings)) {
+                $this->tcsettings = $this->courseformat->get_settings();
+            }
         }
         return $o;
     }

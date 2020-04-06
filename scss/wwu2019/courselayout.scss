@@ -60,25 +60,23 @@ body.pagelayout-report {
 
 body.pagelayout-course {
 
-    li.section.main {
-        border-style: none;
+    .course-content ul li.section.main {
         border-radius: 0;
         padding-bottom: 0;
+        border: 2px solid $outlinegrey;
 
         .header {
             background-color: $learnwebblue;
             color: white;
             display: flex;
             width: 100%;
-            border-color: $outlinegrey;
-            border-style: solid;
-            border-width: 2px 2px 0 2px;
 
             .sectionname {
                 padding: 0;
                 font-size: 18px;
                 margin: 4px 0;
                 flex-grow: 1;
+                line-height: 1.2;
             }
 
             a {
@@ -100,8 +98,6 @@ body.pagelayout-course {
         .content {
             margin: 0;
             padding: 12px 4px;
-            border: 2px solid $outlinegrey;
-            border-top: none;
 
             .section {
                 margin: 0;
@@ -136,8 +132,8 @@ body.pagelayout-course {
     }
 
     .completionprogress {
+        float: none;
         margin-bottom: 8px;
-        margin-top: -8px;
     }
 
     .single-section h3.sectionname {
@@ -159,6 +155,71 @@ body.pagelayout-incourse {
          */
         margin-top: calc((-1.5 * #{$font-size-base}) - (3 * .375rem));
     }
+}
+
+body.format-topcoll {
+    .course-content ul.ctopics li.section.main .content,
+    .course-content ul.ctopics li.tcsection .content {
+        margin: 0;
+    }
+
+    li.section.main .header .side.left,
+    li.section.main .header .side.right {
+        margin: unset;
+        padding: 4px 6px;
+    }
+
+    .course-content ul.ctopics li.section .right,
+    .course-content ul.ctopics li.tcsection .right {
+        position: unset;
+    }
+
+    .course-content ul.ctopics li.section.main .side,
+    .course-content ul.ctopics li.tcsection .side,
+    .editing .course-content ul.ctopics li.section.main .side,
+    .editing .course-content ul.ctopics li.tcsection .side {
+        width: unset;
+    }
+
+    .course-content ul.ctopics li.section .right .cps_centre,
+    .dir-rtl .course-content ul.ctopics li.section .left .cps_centre {
+        min-height: unset;
+    }
+
+    .course-content ul.ctopics li.section.main {
+        border-bottom: 2px solid $outlinegrey;
+        margin-bottom: 16px;
+
+        .content.sectionbody {
+            min-height: 32px;
+            padding: 10px;
+        }
+    }
+
+    .course-content ul.ctopics li.section .header span.the_toggle {
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+        padding-left: 26px;
+        background-size: 21px;
+        background-repeat: no-repeat;
+        filter: brightness(0) invert(100);
+        user-select: none;
+        cursor: pointer;
+
+        &.toggle_closed {
+            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+        }
+    }
+
+    #toggle-all #toggles-all-opened {
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+        padding-left: 30px;
+    }
+
+    #toggle-all #toggles-all-closed {
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+        padding-left: 30px;
+    }
+
 }
 
 /* Gradebook */
