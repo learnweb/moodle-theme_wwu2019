@@ -1159,16 +1159,10 @@ _paq.push(['trackPageView']);
                 $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id || empty($_SESSION["theme_wwu2019_slides"])
             ) {
                 require_once($CFG->dirroot . '/local/marketing/locallib.php');
-                $_SESSION["theme_wwu2019_slides"] = \local_marketing\slide_manager::get_slides_for();
-                $_SESSION["theme_wwu2019_slides_cachedfor"] = $USER->id;
-            }
-
-            $slides = $_SESSION["theme_wwu2019_slides"];
-
-            $outputslides = array();
-            if ($slides) {
+                $allslides = \local_marketing\slide_manager::get_slides_for();
+                $slides = array();
                 $index = 0;
-                foreach ($slides as $slide) {
+                foreach ($allslides as $slide) {
                     // Add slide index for slide navigation in the mustache template.
                     $slide->index = $index++;
                     // Get slide image or fallback to default.
@@ -1189,10 +1183,20 @@ _paq.push(['trackPageView']);
                     $titleslug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $slide->title)));
                     $slide->link .= $concatenate . 'pk_medium=local_marketing&pk_campaign=' . $titleslug;
 
-                    $outputslides [] = $slide;
+                    $slides[] = $slide;
                 }
-                $outputslides[0]->active = true;
-                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $outputslides));
+                if ($index > 0) {
+                    $slides[0]->active = true;
+                }
+
+                $_SESSION["theme_wwu2019_slides"] = $slides;
+                $_SESSION["theme_wwu2019_slides_cachedfor"] = $USER->id;
+            } else {
+                $slides = $_SESSION["theme_wwu2019_slides"];
+            }
+
+            if ($slides) {
+                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
             }
         }
         return $output;
