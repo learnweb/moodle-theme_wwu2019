@@ -1181,7 +1181,7 @@ _paq.push(['trackPageView']);
                     // Attach tracking params for matomo.
                     $concatenate = strpos($slide->link, '?') !== false ? '&' : '?';
                     $titleslug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $slide->title)));
-                    $slide->link .= $concatenate . 'pk_medium=local_marketing&pk_campaign=' . $titleslug;
+                    $slide->link .= $concatenate . 'pk_medium=local_marketing&pk_campaign=' . $slide->id . '--' . $titleslug;
 
                     $slides[] = $slide;
                 }
