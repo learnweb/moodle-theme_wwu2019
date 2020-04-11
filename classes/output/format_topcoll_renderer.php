@@ -87,8 +87,6 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
 
         if (($onsectionpage == false) && ($section->section != 0)) {
 
-            $o .= $this->section_availability($section);
-
             $o .= html_writer::start_tag('div',
                     array('class' => 'header sectionhead toggle toggle-'.$this->tcsettings['toggleiconset'],
                             'id' => 'toggle-'.$section->section, 'tabindex' => '0')
@@ -120,6 +118,8 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
 
             $o .= html_writer::tag('span', $title, array('class' => 'sectionname ' . $toggleclass, 'role' => 'button',
                     'aria-expanded' => $ariaexpanded));
+
+            $o .= $this->section_availability($section);
 
             $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
             $o .= html_writer::tag('div', $rightcontent, array('class' => 'right side'));

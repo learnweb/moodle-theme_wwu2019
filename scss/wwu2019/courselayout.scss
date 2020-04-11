@@ -158,6 +158,8 @@ body.pagelayout-incourse {
 }
 
 body.format-topcoll {
+
+    /** Unset topcoll css */
     .course-content ul.ctopics li.section.main .content,
     .course-content ul.ctopics li.tcsection .content {
         margin: 0;
@@ -190,11 +192,24 @@ body.format-topcoll {
         border-bottom: 2px solid $outlinegrey;
         margin-bottom: 16px;
 
+        .header {
+            .sectionname {
+                flex-grow: 0;
+            }
+
+            .section_availability {
+                flex-grow: 1;
+                margin-top: 3px;
+            }
+        }
+
         .content.sectionbody {
             min-height: 32px;
             padding: 10px;
         }
     }
+
+    /** Toggle **/
 
     .course-content ul.ctopics li.section .header span.the_toggle {
         background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
