@@ -447,6 +447,7 @@ class core_renderer extends \core_renderer {
                     'dontescape' => !$course->visible,
                     'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
                     'icon' => $course->visible ? $courseicon : $hiddencourseicon,
+                    'class' => $course->visible ? '' : 'dimmed_text',
                     'hasmenu' => false,
                     'menu' => null
                 ];
@@ -459,6 +460,7 @@ class core_renderer extends \core_renderer {
                     'dontescape' => !$course->visible,
                     'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
                     'icon' => $course->visible ? $courseicon : $hiddencourseicon,
+                    'class' => $course->visible ? '' : 'dimmed_text',
                     'hasmenu' => false,
                     'menu' => null
                 ];

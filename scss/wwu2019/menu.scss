@@ -54,6 +54,10 @@ ul[role="menubar"] {
         }
     }
 
+    .dimmed_text > a > span {
+        @extend .text-muted;
+    }
+
     span,
     .icon {
         color: black;
