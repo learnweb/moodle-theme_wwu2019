@@ -73,8 +73,7 @@ class course_renderer extends \core_course_renderer {
         $data->inputid = $inputid;
         $data->inputsize = $inputsize;
         $data->value = $value;
-        $data->areaids = 'core_course-course';
-        $data->globalsearch = (new \moodle_url('/search/index.php'));
+        $data->globalsearch = (new \moodle_url('/search/index.php'))->out(false);
 
         if ($format != 'navbar') {
             $helpicon = new \help_icon('coursesearch', 'core');
