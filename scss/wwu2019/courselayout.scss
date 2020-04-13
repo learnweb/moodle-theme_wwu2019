@@ -131,6 +131,11 @@ body.pagelayout-course {
         }
     }
 
+    .course-content ul li.section.hidden .sectionname > span {
+        /* !important is needed in order to overwrite .text-muted */
+        color: #ddd !important; /* stylelint-disable-line */
+    }
+
     .completionprogress {
         float: none;
         margin-bottom: 8px;
@@ -158,15 +163,18 @@ body.pagelayout-incourse {
 }
 
 body.format-topcoll {
+
+    /** Unset topcoll css */
     .course-content ul.ctopics li.section.main .content,
     .course-content ul.ctopics li.tcsection .content {
         margin: 0;
     }
 
-    li.section.main .header .side.left,
-    li.section.main .header .side.right {
-        margin: unset;
-        padding: 4px 6px;
+    .course-content ul.ctopics li.section.main .header .side.left,
+    .course-content ul.ctopics li.section.main .header .side.right {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0 4px;
     }
 
     .course-content ul.ctopics li.section .right,
@@ -190,23 +198,36 @@ body.format-topcoll {
         border-bottom: 2px solid $outlinegrey;
         margin-bottom: 16px;
 
+        .header {
+            .sectionname {
+                flex-grow: 0;
+            }
+
+            .section_availability {
+                flex-grow: 1;
+                margin-top: 3px;
+            }
+        }
+
         .content.sectionbody {
             min-height: 32px;
             padding: 10px;
         }
     }
 
+    /** Toggle **/
+
     .course-content ul.ctopics li.section .header span.the_toggle {
-        background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_up.svg);
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/w_arrow_up.svg);
         padding-left: 26px;
         background-size: 21px;
         background-repeat: no-repeat;
-        filter: brightness(0) invert(100);
+        background-position-y: center;
         user-select: none;
         cursor: pointer;
 
         &.toggle_closed {
-            background-image: url(#{$wwwroot}/theme/wwu2019/pix/arrow_down.svg);
+            background-image: url(#{$wwwroot}/theme/wwu2019/pix/w_arrow_down.svg);
         }
     }
 
