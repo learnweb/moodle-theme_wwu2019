@@ -26,7 +26,6 @@ namespace theme_wwu2019\output;
 
 use action_link;
 use context_course;
-use customfield_semester\data_controller;
 use moodle_page;
 use moodle_url;
 use navigation_node;
@@ -466,7 +465,7 @@ class core_renderer extends \core_renderer {
     private function create_term($termid) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
 
-        $name = data_controller::get_name_for_semester($termid);
+        $name = \customfield_semester\data_controller::get_name_for_semester($termid);
         return [
             'name' => $name,
             'icon' => $calendaricon,
