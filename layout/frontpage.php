@@ -36,7 +36,9 @@ for ($i = 0; $i < 3; $i++) {
     $marketingspot = $i + 1;
     $marketingboxes[$i]->index = $i;
     $marketingboxes[$i]->title = get_config('theme_wwu2019', 'marketing' . $marketingspot);
-    $marketingboxes[$i]->content = format_text(get_config('theme_wwu2019', 'marketing' . $marketingspot . 'content'));
+    $marketingboxes[$i]->content = format_text(get_config('theme_wwu2019', 'marketing' . $marketingspot . 'content'), FORMAT_HTML,
+        array('trusted' => true, 'noclean' => true));
+
 }
 $templatecontext['marketingboxes'] = $marketingboxes;
 
