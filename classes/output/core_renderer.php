@@ -465,7 +465,7 @@ class core_renderer extends \core_renderer {
     private function create_term($termid) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
 
-        $name = data_controller::get_name_for_semester($termid);
+        $name = \customfield_semester\data_controller::get_name_for_semester($termid);
         return [
             'name' => $name,
             'icon' => $calendaricon,
