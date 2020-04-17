@@ -274,11 +274,6 @@ footer#wwu-footer + div > div.container {
     width: 100%;
 }
 
-#region-main-body {
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
 /* Turn editing off button */
 .red-edit-button > form > button {
     @extend .btn-danger;
