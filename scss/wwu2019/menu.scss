@@ -67,7 +67,8 @@ ul[role="menubar"] {
 }
 
 #main-menu {
-    position: sticky;
+    position: relative; // Fallback for IE.
+    position: sticky; /* stylelint-disable-line */
     top: 0;
     z-index: 990;
     background: white;
