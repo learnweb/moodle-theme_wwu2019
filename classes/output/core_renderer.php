@@ -417,6 +417,7 @@ class core_renderer extends \core_renderer {
         if (($field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'semester')))
                 && class_exists('customfield_semester\data_controller')) {
 
+            $currenttermid = \customfield_semester\data_controller::get_semester_for_datetime(new \DateTime('now'));
             $courseswithsemester = $this->get_courses_with_semester($field->id);
 
             // Render each course.
@@ -429,6 +430,9 @@ class core_renderer extends \core_renderer {
 
                 if (!array_key_exists($termid, $terms)) {
                     $terms[$termid] = $this->create_term($termid);
+                    if ($termid == $currenttermid) {
+                        $terms[$termid]['class'] = 'open';
+                    }
                 }
                 $terms[$termid]['menu'][] = [
                     'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
