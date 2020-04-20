@@ -441,6 +441,10 @@ class core_renderer extends \core_renderer {
 
                 if (!array_key_exists($termid, $terms)) {
                     $terms[$termid] = $this->create_term($istermindependent, $yearstring);
+                    // Really hacky solution, because it only needs to work this semester.
+                    if ($customfieldvalue == 28) {
+                        $terms[$termid]['class'] = 'open';
+                    }
                 }
                 $terms[$termid]['menu'][] = [
                     'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
