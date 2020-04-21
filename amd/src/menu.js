@@ -31,6 +31,7 @@ export function init() {
 }
 
 const onecolumnbreakpoint = 767;
+const hamburgerbreakpoint = 1080;
 
 
 /**
@@ -179,14 +180,18 @@ function openMenu() {
      * Updates max-height of submenus on page-init and window resize.
      */
     function updateMaxMenuHeight() {
-        const mainMenu = $('#main-menu');
-        const botPos = mainMenu.offset().top + mainMenu.outerHeight() + 16;
+        const menuButtom = $('#menu-bottom');
+        let botPos = menuButtom.offset().top + 16;
         let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-        let oneColLayout = width < onecolumnbreakpoint;
+        let oneColLayout = width <= onecolumnbreakpoint;
         if (oneColLayout) {
             $('.sub-menu-scroll-container').css('max-height', '');
             $('#main-menu-left').css('max-height', ($(window).height() - botPos) + 'px');
         } else {
+            // If Menu is expanded down, add the height of the #main-menu-left container
+            if (width <= hamburgerbreakpoint) {
+                botPos += 50;
+            }
             $('.sub-menu-scroll-container').css('max-height', ($(window).height() - botPos) + 'px');
             $('#main-menu-left').css('max-height', '');
         }
