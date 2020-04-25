@@ -70,11 +70,6 @@ class layout {
             'alerts' => alerts::get_alerts(),
         ];
 
-        $nav = $PAGE->flatnav;
-
-        $templatecontext['flatnavigation'] = $nav;
-        $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-
         return $templatecontext;
     }
 
