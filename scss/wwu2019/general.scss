@@ -298,3 +298,16 @@ select#menumovecoursesto,
 select#menumovecategoriesto {
     width: 100%;
 }
+
+/* Hide Elements in PDFAnnotator-Fullscreen */
+body.fullscreenWrapper {
+    #user-notifications,
+    h1.page-title,
+    #menu-bottom,
+    #wwu-footer,
+    #wwu-footer + div,
+    div.columnright {
+        visibility: hidden;
+        display: none;
+    }
+}
