@@ -922,13 +922,11 @@ class core_renderer extends \core_renderer {
      * @return string HTML to display the main header.
      */
     public function full_header() {
-        global $PAGE;
-
-        if ($PAGE->include_region_main_settings_in_header_actions() && !$PAGE->blocks->is_block_present('settings')) {
+        if ($this->page->include_region_main_settings_in_header_actions() && !$this->page->blocks->is_block_present('settings')) {
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $PAGE->add_header_action(\html_writer::div(
+            $this->page->add_header_action(\html_writer::div(
                     $this->region_main_settings_menu(),
                     'd-print-none',
                     ['id' => 'region-main-settings-menu']
@@ -936,9 +934,9 @@ class core_renderer extends \core_renderer {
         }
 
         $header = new \stdClass();
-        $header->hasnavbar = empty($PAGE->layout_options['nonavbar']);
+        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
         $header->navbar = $this->navbar();
-        $header->contextheader = $PAGE->pagelayout === 'mypublic' ? $this->context_header() : '';
+        $header->contextheader = $this->page->pagelayout === 'mypublic' ? $this->context_header() : '';
         $header->pageheadingbutton = $this->page_heading_button();
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
@@ -1044,8 +1042,8 @@ class core_renderer extends \core_renderer {
      * @throws \dml_exception
      */
     private function matomo_trackurl() {
-        global $DB, $PAGE;
-        $pageinfo = get_context_info_array($PAGE->context->id);
+        global $DB;
+        $pageinfo = get_context_info_array($this->page->context->id);
         // Adds page title.
         $trackurl = "'";
 
@@ -1066,7 +1064,7 @@ class core_renderer extends \core_renderer {
             if (isset($pageinfo[1]->fullname)) {
                 if (isset($pageinfo[2]->name)) {
                     $trackurl .= $pageinfo[1]->fullname . '/';
-                } else if ($PAGE->user_is_editing()) {
+                } else if ($this->page->user_is_editing()) {
                     $trackurl .= $pageinfo[1]->fullname . '/' . get_string('edit');
                 } else {
                     $trackurl .= $pageinfo[1]->fullname . '/' . get_string('view');
@@ -1078,7 +1076,7 @@ class core_renderer extends \core_renderer {
                 $trackurl .= $pageinfo[2]->modname . '/' . $pageinfo[2]->name;
             }
         } else {
-            $trackurl .= $PAGE->title;
+            $trackurl .= $this->page->title;
         }
 
         $trackurl .= "'";
@@ -1154,7 +1152,7 @@ _paq.push(['trackPageView']);
      * @return string
      */
     public function slideshow() {
-        global $CFG, $OUTPUT, $USER;
+        global $CFG, $USER;
 
         $output = '';
 
@@ -1202,7 +1200,7 @@ _paq.push(['trackPageView']);
             }
 
             if ($slides) {
-                $output .= $OUTPUT->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
+                $output .= $this->output->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
             }
         }
         return $output;
