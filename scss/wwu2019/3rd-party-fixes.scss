@@ -14,22 +14,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * WWU 2019 Theme SCSS
+ * WWU 2019 3rd-party-fixes SCSS
  *
  * @package    theme_wwu2019
- * @copyright  2019 Justus Dieckmann WWU
+ * @copyright  2020 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-@import "wwu2019/general";
-@import "wwu2019/menu";
-@import "wwu2019/blocks";
-@import "wwu2019/forms";
-@import "wwu2019/courselayout";
-@import "wwu2019/course";
-@import "wwu2019/alerts";
-@import "wwu2019/messages";
-@import "wwu2019/slideshow";
-@import "wwu2019/marketingboxes";
-@import "wwu2019/tables";
-@import "wwu2019/3rd-party-fixes";
+/* Hide Elements in PDFAnnotator-Fullscreen */
+body.fullscreenWrapper {
+    #user-notifications,
+    h1.page-title,
+    #menu-bottom,
+    #wwu-footer,
+    #wwu-footer + div,
+    div.columnright {
+        visibility: hidden;
+        display: none;
+    }
+}
