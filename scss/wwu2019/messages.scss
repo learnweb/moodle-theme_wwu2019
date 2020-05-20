@@ -74,10 +74,6 @@ $wwu-messages-width: 560px;
     }
 }
 
-.w50rem {
-    width: 50rem;
-}
-
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -88,4 +84,18 @@ $wwu-messages-width: 560px;
     background-color: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
+}
+
+#page-message-index {
+    #page-content {
+        #region-main-box {
+            /* The entire view overflowed badly in case of long messages. This fixes it. */
+            max-width: 100%;
+
+            #region-main {
+                /* From .pagelayout-mydashboard #region-main there was a margin-top: -1px that led to a useless scrollbar. */
+                margin-top: initial;
+            }
+        }
+    }
 }
