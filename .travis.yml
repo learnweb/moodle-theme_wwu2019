@@ -2,8 +2,7 @@ language: php
 os: linux
 
 addons:
-  firefox: "47.0.1"
-  postgresql: "9.4"
+  postgresql: "9.5"
 
 cache:
   directories:
@@ -12,10 +11,12 @@ cache:
 
 services:
   - mysql
+  - docker
 
 php:
   - 7.2
   - 7.3
+  - 7.4
 
 env:
   jobs:
@@ -24,8 +25,8 @@ env:
 
 before_install:
   - phpenv config-rm xdebug.ini
-  - nvm install 8.9
-  - nvm use 8.9
+  - nvm install v14
+  - nvm use v14
   - cd ../..
   - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci dev-master
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
@@ -52,15 +53,11 @@ jobs:
     - stage: develop
       php: 7.3
       env: DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE
-      install:
-        - moodle-plugin-ci install
-      script:
-        - moodle-plugin-ci phpunit --coverage-clover
-        - moodle-plugin-ci behat
   fast_finish: true
 
 # Unit tests and behat tests against full matrix.
 install:
+  - docker run -d -p 127.0.0.1:4444:4444 --net=host -v /dev/shm:/dev/shm selenium/standalone-firefox:2.53.1
   - moodle-plugin-ci install
 script:
   - moodle-plugin-ci phpunit --coverage-clover
