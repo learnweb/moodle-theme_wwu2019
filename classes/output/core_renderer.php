@@ -864,7 +864,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
             ];
         }
-        if (has_capability('moodle/user:editownmessageprofile', $context)) {
+        if (!empty($CFG->messaging) && has_capability('moodle/user:editownmessageprofile', $context)) {
             $menu[] = [
                     'name' => get_string('message', 'message'),
                     'icon' => (new pix_icon('i/comment', ''))->export_for_pix(),
