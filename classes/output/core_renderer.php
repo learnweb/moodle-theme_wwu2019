@@ -1200,7 +1200,7 @@ _paq.push(['trackPageView']);
             }
 
             if ($slides) {
-                $output .= $this->output->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
+                $output .= $this->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
             }
         }
         return $output;
