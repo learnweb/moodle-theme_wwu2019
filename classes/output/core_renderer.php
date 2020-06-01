@@ -515,8 +515,8 @@ class core_renderer extends \core_renderer {
 
         // Get for each course where the user is enrolled the customfield value (here encoded as number).
         $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname
-                                FROM mdl_course as cs
-                                INNER JOIN mdl_customfield_data as cd ON cs.id=cd.instanceid
+                                FROM {course} as cs
+                                INNER JOIN {customfield_data} as cd ON cs.id=cd.instanceid
                                 WHERE cs.id ' . $instring . '
                                 AND cd.fieldid = :fieldid
                                 ORDER BY cd.intvalue DESC, cs.shortname ASC';
