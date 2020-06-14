@@ -53,7 +53,7 @@ class layout {
      * @return array
      */
     public static function get_default_template_context() {
-        global $OUTPUT, $PAGE, $SITE;
+        global $OUTPUT, $PAGE, $SITE, $CFG;
         $bodyattributes = $OUTPUT->body_attributes();
         $blockspost = $OUTPUT->blocks('side-post');
 
@@ -68,6 +68,7 @@ class layout {
             'bodyattributes' => $bodyattributes,
             'footer' => $OUTPUT->get_footer_context(),
             'alerts' => alerts::get_alerts(),
+            'supportemail' => $CFG->supportemail,
         ];
 
         return $templatecontext;
