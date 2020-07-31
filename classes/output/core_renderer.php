@@ -26,7 +26,6 @@ namespace theme_wwu2019\output;
 
 use action_link;
 use context_course;
-use customfield_select\field_controller;
 use moodle_page;
 use moodle_url;
 use navigation_node;
@@ -415,11 +414,10 @@ class core_renderer extends \core_renderer {
         $terms = [];
 
         // Create an array where the key points to the string representation of the customfield value.
-        if ($field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'select'))) {
-            $fieldcontroller = field_controller::create($field->id);
-            $configdata = $fieldcontroller->get('configdata');
-            $semesterinarray = explode("\n", $configdata['options']);
+        if (($field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'semester')))
+                && class_exists('customfield_semester\data_controller')) {
 
+            $currenttermid = \customfield_semester\data_controller::get_semester_for_datetime(new \DateTime('now'));
             $courseswithsemester = $this->get_courses_with_semester($field->id);
 
             // Render each course.
@@ -428,21 +426,11 @@ class core_renderer extends \core_renderer {
                     !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
                     continue;
                 }
-                $istermindependent = false;
-                $customfieldvalue = intval($course->value);
-                $yearstring = $semesterinarray[$customfieldvalue - 1];
-
-                if ($customfieldvalue == 0 || $customfieldvalue == 1) {
-                    $istermindependent = true;
-                    $termid = 0;
-                } else {
-                    $termid = $yearstring;
-                }
+                $termid = intval($course->value);
 
                 if (!array_key_exists($termid, $terms)) {
-                    $terms[$termid] = $this->create_term($istermindependent, $yearstring);
-                    // Really hacky solution, because it only needs to work this semester.
-                    if ($customfieldvalue == 28) {
+                    $terms[$termid] = $this->create_term($termid);
+                    if ($termid == $currenttermid) {
                         $terms[$termid]['class'] = 'open';
                     }
                 }
@@ -475,18 +463,13 @@ class core_renderer extends \core_renderer {
 
     /**
      * Creates the entry for one entry of the navigation.
-     * @param int $istermindependent int is the current item without semester?
-     * @param string $yearstring current semester
+     * @param int $termid the termid as given by the customfield_semester plugin.
      * @return array
      */
-    private function create_term($istermindependent, $yearstring) {
+    private function create_term($termid) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
 
-        if ($istermindependent) {
-            $name = get_string('termindependent', 'theme_wwu2019');
-        } else {
-            $name = $yearstring;
-        }
+        $name = \customfield_semester\data_controller::get_name_for_semester($termid);
         return [
             'name' => $name,
             'icon' => $calendaricon,
