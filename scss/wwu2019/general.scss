@@ -298,3 +298,36 @@ select#menumovecoursesto,
 select#menumovecategoriesto {
     width: 100%;
 }
+
+// MDL-67874
+.aalink.focus,
+.aalink:focus,
+#page-footer a:not([class]).focus,
+#page-footer a:not([class]):focus,
+.arrow_link.focus,
+.arrow_link:focus,
+a:not([class]).focus,
+a:not([class]):focus,
+.activityinstance > a.focus,
+.activityinstance > a:focus {
+    outline: unset;
+    color: unset;
+    background-color: unset;
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+}
+
+@mixin button-old-focus($color) {
+    &:focus,
+    &.focus {
+        outline: unset;
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($color), $color, 15%), .5);
+    }
+}
+
+@each $color, $value in $theme-colors {
+    .btn-#{$color},
+    .btn-outline-#{$color} {
+        @include button-old-focus($value);
+    }
+}
