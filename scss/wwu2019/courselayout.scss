@@ -215,6 +215,17 @@ body.format-topcoll {
         }
     }
 
+    .course-content .current::before {
+        content: none;
+    }
+
+    &:not(.editing) .course-content ul.topics li.section .left,
+    &:not(.editing) .course-content ul.topics li.section .right,
+    &:not(.editing) .course-content ul.weeks li.section .left,
+    &:not(.editing) .course-content ul.weeks li.section .right {
+        display: inherit;
+    }
+
     /** Toggle **/
 
     .course-content ul.ctopics li.section .header span.the_toggle {
