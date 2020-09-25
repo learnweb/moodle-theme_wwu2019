@@ -43,6 +43,9 @@ defined('MOODLE_INTERNAL') || die;
  */
 class core_renderer extends \core_renderer {
 
+    /** @var string The theme color. */
+    public const THEMECOLOR = '#006784';
+
     /**
      * core_renderer constructor.
      * Overrides parent to require admin tree init in $PAGE->settingsnav
@@ -1201,6 +1204,19 @@ _paq.push(['trackPageView']);
 
         return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()), array('class' => 'hostname')) .
             $standardfooter;
+    }
+
+    /**
+     * The standard tags (meta tags, links to stylesheets and JavaScript, etc.)
+     * that should be included in the <head> tag. Designed to be called in theme
+     * layout.php files.
+     *
+     * @return string HTML fragment.
+     */
+    public function standard_head_html() {
+        $output = parent::standard_head_html();
+        $output .= \html_writer::empty_tag('meta', ['name' => 'theme-color', 'content' => self::THEMECOLOR]);
+        return $output;
     }
 
 }
