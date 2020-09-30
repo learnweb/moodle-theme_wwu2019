@@ -145,6 +145,13 @@ body.pagelayout-course {
         text-align: left;
     }
 
+    &:not(.editing) .course-content ul.topics li.section .left,
+    &:not(.editing) .course-content ul.topics li.section .right,
+    &:not(.editing) .course-content ul.weeks li.section .left,
+    &:not(.editing) .course-content ul.weeks li.section .right {
+        display: inherit;
+    }
+
 }
 
 body.pagelayout-incourse {
@@ -217,13 +224,6 @@ body.format-topcoll {
 
     .course-content .current::before {
         content: none;
-    }
-
-    &:not(.editing) .course-content ul.topics li.section .left,
-    &:not(.editing) .course-content ul.topics li.section .right,
-    &:not(.editing) .course-content ul.weeks li.section .left,
-    &:not(.editing) .course-content ul.weeks li.section .right {
-        display: inherit;
     }
 
     /** Toggle **/
