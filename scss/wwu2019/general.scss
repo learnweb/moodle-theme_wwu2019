@@ -141,6 +141,22 @@ $page-padding: 1rem;
 .breadcrumb-item + .breadcrumb-item::before {
     content: ">";
 }
+// Unset Breadcrumb margin and border.
+#page-navbar {
+    width: unset;
+}
+
+.breadcrumb:not(:empty) {
+    width: unset;
+    border: none;
+    padding: 0.25rem 0;
+    margin-bottom: unset;
+
+    .breadcrumb-item {
+        padding-top: unset;
+        padding-bottom: unset;
+    }
+}
 
 
 .hide-600 {
