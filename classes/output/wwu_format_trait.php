@@ -75,8 +75,9 @@ trait wwu_format_trait {
         $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
         $o .= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
 
-        global $CFG;
-        $o .= html_writer::img($CFG->wwwroot . "/pix/t/expanded.png", "collapsed", array("id" => "collapseicon" . $section->section));
+        global $OUTPUT;
+        $arrowurl = $OUTPUT->image_url("t/expanded", "core");
+        $o .= html_writer::img($arrowurl, "collapse", array("id" => "collapseicon" . $section->section));
         $this->page->requires->js_call_amd('theme_wwu2019/collapse', 'init', array($section->section));
 
         $sectionname = html_writer::tag('span', $this->section_title($section, $course));
