@@ -43,5 +43,6 @@ for ($i = 0; $i < 3; $i++) {
 $templatecontext['marketingboxes'] = $marketingboxes;
 
 $PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
+$PAGE->requires->js_call_amd('theme_wwu2019/snow', 'init');
 
 echo $OUTPUT->render_from_template('theme_wwu2019/frontpage', $templatecontext);
