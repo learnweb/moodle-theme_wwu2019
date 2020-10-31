@@ -25,7 +25,8 @@
 /* Navigation */
 
 ul[role="menu"],
-ul[role="menubar"] {
+ul[role="menubar"],
+ul.main-menubar {
     list-style: none;
     padding: 0;
     margin: 0;

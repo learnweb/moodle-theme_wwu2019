@@ -60,7 +60,7 @@ function openMenu() {
         }
         abortClose();
         $(menuItem).addClass('open');
-        $(menuItem).attr('aria-expanded', 'true');
+        $(menuItem).children('a').attr('aria-expanded', 'true');
         openMenu = menuItem;
         openCandidate = null;
         openTimeoutId = null;
@@ -84,7 +84,7 @@ function openMenu() {
      */
     function close(menuItem) {
         $(menuItem).removeClass('open');
-        $(menuItem).attr('aria-expanded', 'false');
+        $(menuItem).children('a').attr('aria-expanded', 'false');
         openMenu = null;
         abortClose();
         openTime = null;
@@ -130,7 +130,7 @@ function openMenu() {
         }
     }
 
-    $('li.main-menu-item[aria-haspopup="true"] > a, li#user-menu[aria-haspopup="true"] > a').click((ev) => {
+    $('li.main-menu-item > a[aria-haspopup="true"], li#user-menu > a[aria-haspopup="true"]').click((ev) => {
         if (ev.currentTarget.parentNode === openMenu) {
             if (new Date() - openTime > closeCooldown) {
                 close(openMenu);
@@ -140,7 +140,7 @@ function openMenu() {
         }
     });
 
-    let menuitems = $('li.main-menu-item[aria-haspopup="true"], li#user-menu[aria-haspopup="true"]');
+    let menuitems = $('li.main-menu-item > a[aria-haspopup="true"], li#user-menu > a[aria-haspopup="true"]').parent();
     menuitems.mouseenter((ev) => {
         let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         if (width > onecolumnbreakpoint) {
@@ -163,18 +163,22 @@ function openMenu() {
         }
     });
 
-    $('li.sub-menu-item[aria-haspopup="true"] > a, li.sub-sub-menu-item[aria-haspopup="true"] > a').click((ev) => {
-        let node = $(ev.currentTarget.parentNode);
-        node.toggleClass('open');
-        node.attr('aria-expanded', !(node.attr('aria-expanded') === 'true'));
+    $('li.sub-menu-item > a[aria-haspopup="true"], li.sub-sub-menu-item > a[aria-haspopup="true"]').click((ev) => {
+        let link = $(ev.currentTarget);
+        let item = link.parent();
+        item.toggleClass('open');
+        link.attr('aria-expanded', item.hasClass('open'));
     });
 
     let hamburgertoggle = $('#main-menu-hamburger > a');
+    let hamburgerparent = hamburgertoggle.parent();
     hamburgertoggle.click(() => {
-        hamburgertoggle.parent().toggleClass('open');
+        hamburgerparent.toggleClass('open');
+        hamburgertoggle.attr('aria-expanded', hamburgerparent.hasClass('open'));
     });
 
     let oneColLayoutBefore = false;
+    let hamburgerLayoutBefore = false;
 
     /**
      * Updates max-height of submenus on page-init and window resize.
@@ -198,6 +202,13 @@ function openMenu() {
         if (oneColLayout !== oneColLayoutBefore) {
             reset();
             oneColLayoutBefore = oneColLayout;
+        }
+
+        // Switch hamburger toggle role between button and none, based on whether it is hidden.
+        let hamburgerLayout = width <= hamburgerbreakpoint;
+        if (hamburgerLayout !== hamburgerLayoutBefore) {
+            hamburgertoggle.attr('role', hamburgerLayout ? 'button' : 'none');
+            hamburgerLayoutBefore = hamburgerLayout;
         }
     }
 

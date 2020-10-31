@@ -35,10 +35,16 @@ $string['dashboard'] = 'Dashboard';
 $string['thiscourse'] = 'Dieser Kurs';
 $string['searchadmin'] = 'Administrationssuche';
 
+$string['openmainmenu'] = 'Hauptmenü öffnen';
+$string['mainmenu'] = 'Hauptmenü';
+
 /* User menu */
 $string['loggedinas'] = '{$a->real}, als {$a->fake}';
 $string['badgepreferences'] = 'Badge';
 $string['mygrades'] = 'Meine Noten';
+
+$string['openusermenu'] = 'Nutzermenü öffnen';
+$string['usermenu'] = 'Nutzermenü';
 
 /* Settings */
 $string['helpurl'] = 'Hilfe-URL';
