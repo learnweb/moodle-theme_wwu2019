@@ -182,7 +182,16 @@ body.format-tiles {
     }
 
     .course-content ul.tiles .tile {
+        border-top-color: $primary;
         background-color: rgba(22, 112, 204, 0.05);
+    }
+
+    .course-content ul.tiles .tile:hover {
+        border-top-color: $secondary;
+    }
+
+    ul.tiles .tile.selected {
+        border-top-color: $secondary;
     }
 }
 
