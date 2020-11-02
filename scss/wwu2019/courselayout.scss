@@ -177,6 +177,10 @@ body.format-tiles {
         max-width: none !important; // override style attribute
     }
 
+    #page .course-content ul li.section.main.moveablesection {
+        max-width: none !important; // override style attribute
+    }
+
     &.jsenabled ul.tiles {
         max-width: unset;
     }
