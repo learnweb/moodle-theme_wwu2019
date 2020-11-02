@@ -41,6 +41,9 @@ $THEME->sheets = [];
 // as the previous setting - listing a file in the /styles/ folder.
 $THEME->editor_sheets = [];
 
+// This setting is used to include a script in the footer section.
+$THEME->javascripts_footer = ['footer'];
+
 // This is a critical setting. We want to inherit from theme_classic because it provides a great starting point for SCSS bootstrap4
 // themes. We have added add more than one parent here to inherit from multiple parents, and if we did they would be processed in
 // order of importance (later themes overriding earlier ones). Things we will inherit from the parent theme include
