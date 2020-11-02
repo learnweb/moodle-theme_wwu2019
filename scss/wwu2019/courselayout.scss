@@ -169,6 +169,23 @@ body.pagelayout-incourse {
     }
 }
 
+body.format-tiles {
+    ul.tiles#multi_section_tiles {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: none !important; // override style attribute
+    }
+
+    &.jsenabled ul.tiles {
+        max-width: unset;
+    }
+
+    .course-content ul.tiles .tile {
+        background-color: rgba(22, 112, 204, 0.05);
+    }
+}
+
 body.format-topcoll {
 
     /** Unset topcoll css */
