@@ -28,6 +28,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+require.undef("format_tiles/course");
 define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_tiles/browser_storage",
         "core/notification", "core/str", "format_tiles/tile_fitter"],
     function ($, Templates, ajax, browserStorage, Notification, str, tileFitter) {
