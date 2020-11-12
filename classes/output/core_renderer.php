@@ -86,6 +86,7 @@ class core_renderer extends \core_renderer {
             $mainmenu[] = [
                     'name' => get_string('mycourses', 'theme_wwu2019'),
                     'hasmenu' => true,
+                    'isexpanded' => false,
                     'menu' => $this->add_breakers($courses),
                     'icon' => (new pix_icon('i/graduation-cap', ''))->export_for_pix()
             ];
@@ -96,6 +97,7 @@ class core_renderer extends \core_renderer {
             $mainmenu[] = [
                     'name' => get_string('thiscourse', 'theme_wwu2019'),
                     'hasmenu' => true,
+                    'isexpanded' => false,
                     'menu' => $this->add_breakers($thiscourse),
                     'icon' => (new pix_icon('i/book', ''))->export_for_pix()
             ];
@@ -106,6 +108,7 @@ class core_renderer extends \core_renderer {
             $mainmenu[] = [
                     'name' => get_string('pluginname', 'block_settings'),
                     'hasmenu' => true,
+                    'isexpanded' => false,
                     'menu' => $this->add_breakers($settings),
                     'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
             ];
@@ -435,6 +438,7 @@ class core_renderer extends \core_renderer {
                     $terms[$termid] = $this->create_term($termid);
                     if ($termid == $currenttermid) {
                         $terms[$termid]['class'] = 'open';
+                        $terms[$termid]['isexpanded'] = true;
                     }
                 }
                 $terms[$termid]['menu'][] = [
@@ -477,6 +481,7 @@ class core_renderer extends \core_renderer {
             'name' => $name,
             'icon' => $calendaricon,
             'hasmenu' => true,
+            'isexpanded' => false,
             'menu' => []
         ];
     }
@@ -693,6 +698,7 @@ class core_renderer extends \core_renderer {
         $menucontent[] = [
                 'name' => get_string('settings'),
                 'hasmenu' => true,
+                'isexpanded' => false,
                 'menu' => $this->get_user_settings_submenu($context),
                 'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
         ];

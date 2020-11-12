@@ -24,11 +24,12 @@
     }
 }}
 
-<ul class="sub-sub-menu">
+<ul class="sub-sub-menu" role="menu">
     {{# menu }}
-    <li class="sub-sub-menu-item {{# class }}{{class}}{{/class}}"
-        {{# hasmenu }} aria-haspopup="true" aria-expanded="{{isexpanded}}" {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
-        <a role="menuitem" {{# href }} href="{{ href }}"{{/href}}>
+    <li class="sub-sub-menu-item {{# class }}{{class}}{{/class}}">
+        <a role="menuitem" {{# href }} href="{{ href }}"{{/href}} tabindex="-1"
+            {{# hasmenu }} aria-haspopup="true" aria-expanded="{{# isexpanded }}{{isexpanded}}{{/isexpanded}}{{^isexpanded}}false{{/isexpanded}}"
+            {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
             {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
             <span class="underline">{{# dontescape }}{{{name}}}{{/dontescape}}{{^ dontescape }}{{name}}{{/dontescape}}</span>
             {{# hasmenu }}
