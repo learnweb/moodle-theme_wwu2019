@@ -109,7 +109,7 @@ let angle = 0;
 
 function moveFlakes() {
     angle += 0.01;
-    let basemovement = noise.simplex2(angle * 0.1, 0) * 4;
+    let basemovement = noise.simplex2(angle * 0.1, 0) * 2.5;
     for (let i = 0; i < flakes.length; i++) {
         // Store current flake
         let f = flakes[i];
