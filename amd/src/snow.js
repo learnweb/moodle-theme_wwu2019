@@ -105,12 +105,13 @@ let angle = 0;
 
 function moveFlakes() {
     angle += 0.01;
+    let basemovement = Math.sin(angle / 2) * 2;
     for (let i = 0; i < flakes.length; i++) {
         // Store current flake
         let f = flakes[i];
         // Update X and Y coordinates of each snowflakes
         f.y += Math.pow(f.d, 2) + 1;
-        f.x += Math.sin(angle) * 2;
+        f.x += basemovement + Math.sin(f.d * 8 + angle) * 0.5;
 
         // If the snowflake reaches the bottom, send a new one to the top
         if (f.y > canvas.height + 10) {
