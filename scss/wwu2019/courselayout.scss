@@ -174,11 +174,13 @@ body.format-tiles {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        /* stylelint-disable declaration-no-important */
         max-width: none !important; // override style attribute
     }
 
     #page .course-content ul li.section.main.moveablesection {
         max-width: none !important; // override style attribute
+        /* stylelint-enable declaration-no-important */
     }
 
     &.jsenabled ul.tiles {
