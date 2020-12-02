@@ -2,7 +2,7 @@ language: php
 os: linux
 
 addons:
-  postgresql: "9.5"
+  postgresql: "9.6"
 
 cache:
   directories:
@@ -20,15 +20,13 @@ php:
 
 env:
   jobs:
-    - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
+    - DB=pgsql MOODLE_BRANCH=MOODLE_39_STABLE
     - DB=pgsql MOODLE_BRANCH=master
 
 before_install:
   - phpenv config-rm xdebug.ini
-  - nvm install v14
-  - nvm use v14
   - cd ../..
-  - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci dev-master
+  - composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^3
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 jobs:
@@ -36,7 +34,7 @@ jobs:
     # Prechecks against latest Moodle stable only.
     - stage: static
       php: 7.3
-      env: DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE
+      env: DB=mysqli MOODLE_BRANCH=MOODLE_39_STABLE
       install:
         - moodle-plugin-ci install --no-init
       script:
@@ -52,7 +50,7 @@ jobs:
     # Smaller build matrix for development builds
     - stage: develop
       php: 7.3
-      env: DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE
+      env: DB=mysqli MOODLE_BRANCH=MOODLE_39_STABLE
   fast_finish: true
 
 # Unit tests and behat tests against full matrix.
