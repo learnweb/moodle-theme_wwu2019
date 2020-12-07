@@ -37,6 +37,7 @@ jobs:
       env: DB=mysqli MOODLE_BRANCH=MOODLE_39_STABLE
       install:
         - moodle-plugin-ci install --no-init
+        - wget -o ${TRAVIS_HOME}/build/moodle/GruntfileComponents.js https://raw.githubusercontent.com/moodle/moodle/master/GruntfileComponents.js
       script:
         - moodle-plugin-ci phpdoc
         - moodle-plugin-ci phplint
