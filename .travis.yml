@@ -47,7 +47,8 @@ jobs:
         - moodle-plugin-ci validate
         - moodle-plugin-ci savepoints
         - moodle-plugin-ci mustache || true
-        - moodle-plugin-ci grunt
+        - cd ${TRAVIS_HOME}/build/moodle/theme/wwu2019
+        - ls -l ${TRAVIS_HOME}/build/moodle/lib | grep components.json
     # Smaller build matrix for development builds
     - stage: develop
       php: 7.3
