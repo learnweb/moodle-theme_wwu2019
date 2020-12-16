@@ -67,9 +67,6 @@ trait wwu_format_trait {
             'class' => 'section main clearfix' . $sectionstyle, 'role' => 'region',
             'aria-label' => get_section_name($course, $section)));
 
-        // Create a span that contains the section title to be used to create the keyboard section move menu.
-        $o .= html_writer::tag('span', get_section_name($course, $section), array('class' => 'hidden sectionname'));
-
         $o .= html_writer::start_div('header');
 
         $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
