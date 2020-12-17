@@ -71,7 +71,7 @@ ul.main-menubar {
     position: relative; // Fallback for IE.
     position: sticky; /* stylelint-disable-line */
     top: 0;
-    z-index: 990;
+    z-index: #{$zindex-sticky + 1};
     background: white;
     height: $main-menu-height;
     margin: 0 #{-$page-padding};
@@ -143,7 +143,7 @@ ul.main-menubar {
         display: none;
 
         border-bottom: 4px solid $dividergrey;
-        z-index: 999;
+        z-index: #{$zindex-sticky + 5};
         position: absolute;
         left: 0;
         top: 100%; /* #main-menu is offset parent */
