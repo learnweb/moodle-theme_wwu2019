@@ -54,7 +54,7 @@ export function init() {
     canvas.style.position = 'fixed';
     canvas.style.top = '0';
     canvas.style.left = '0';
-    canvas.style.zIndex = '1000';
+    canvas.style.zIndex = '1010';
     canvas.style.opacity = '0.8';
     canvas.style.pointerEvents = 'none';
     $(window).resize(() => {
