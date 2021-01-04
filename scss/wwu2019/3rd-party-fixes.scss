@@ -37,4 +37,5 @@ body.fullscreenWrapper {
 /* Put Quiztimer a bit higher to prevent overlapping the question */
 #quiz-timer-wrapper {
     top: 0;
+    z-index: unset;
 }

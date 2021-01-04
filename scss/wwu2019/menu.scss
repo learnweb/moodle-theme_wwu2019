@@ -71,7 +71,7 @@ ul.main-menubar {
     position: relative; // Fallback for IE.
     position: sticky; /* stylelint-disable-line */
     top: 0;
-    z-index: #{$zindex-sticky + 1};
+    z-index: #{$zindex-dropdown + 1};
     background: white;
     height: $main-menu-height;
     margin: 0 #{-$page-padding};
