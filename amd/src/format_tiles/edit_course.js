@@ -27,8 +27,9 @@
  * @copyright   2018 David Watson {@link http://evolutioncode.uk}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-// require.undef("format_tiles/course");
-define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_tiles/browser_storage",
+
+// require.undef("format_tiles/edit_course");
+define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "format_tiles/browser_storage",
         "core/notification", "core/str", "format_tiles/tile_fitter"],
     function ($, Templates, ajax, browserStorage, Notification, str, tileFitter) {
         "use strict";
@@ -62,6 +63,8 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
             TILE_LOADING_ICON_ID: "#loading-icon-",
             TILE_COLLAPSED: ".tile-collapsed",
             TILE_CLICKABLE: ".tile-clickable",
+            TILE_SELECTED: ".tile-clickable.selected",
+            TILE_NONSELECTED: "tile-clickable:not(.selected)",
             TILES: "ul.tiles",
             ACTIVITY: ".activity",
             SPACER: ".spacer",
@@ -76,9 +79,13 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
             MOODLE_VIDEO: ".mediaplugin.mediaplugin_videojs",
             LAUNCH_STANDARD: '[data-action="launch-tiles-standard"]',
             TOOLTIP: "[data-toggle=tooltip]",
-            HEADER_BAR: ["#main-menu"]
-            // We try several different selectors for header bar as it varies between theme.
-            // (Boost based, clean based, essential etc).
+            HEADER_BAR: ["#main-menu"],
+            MENU_BAR: ".menubar",
+            DROPDOWN_MENU: ".dropdown-menu",
+            HIDDEN_TOGGLE: "div.hiddentoggle",
+            DRAGDROP: ".dragdropwrap",
+            MULTI_SECTION_TILE_AREA: "#multi_section_tiles",
+            SUBTILEDRAGDROP: ".subtilecontrols > .editing_move",
         };
         var ClassNames = {
             SELECTED: "selected",
@@ -92,7 +99,11 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
         var Event = {
             CLICK: "click",
             KEYDOWN: "keydown",
-            SCROLL: "scroll"
+            SCROLL: "scroll",
+            MOUSEDOWN: "mousedown",
+            MOUSEUP: "mouseup",
+            MOUSEMOVE: "mousemove",
+            MOUSEOVER: "mouseover"
         };
 
         var CSS = {
@@ -300,11 +311,109 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
         };
 
         /**
+         * Initialize a sectiontilesdragdrop features
+         */
+        var initializeDragdropSubtiles = function() {
+            var page = $("#page-content");
+            page.on(Event.MOUSEDOWN, Selector.SUBTILEDRAGDROP, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var draggingdrag = e.currentTarget;
+                var dragsubtile = $(draggingdrag).closest(Selector.ACTIVITY);
+                var rect = dragsubtile.parent()[0].getBoundingClientRect();
+                var dragholo = dragsubtile.clone(true).css('opacity', '0.5')
+                    .css('position', 'absolute')
+                    .css('left', e.clientX - rect.left - 8 + "px")
+                    .css('top', e.clientY - rect.top - 8 + "px")
+                    .css('pointer-events', 'none')
+                    .attr('id', 'dragholo');
+                $(Selector.MULTI_SECTION_TILE_AREA).append(dragholo);
+                var holocallback = function (e) {
+                    var rect = dragholo.parent()[0].getBoundingClientRect();
+                    dragholo.css('left', e.clientX - rect.left - 8 + "px")
+                        .css('top', e.clientY - rect.top - 8 + "px");
+                };
+                var subtilehovercallback = function (e) {
+                    var targetsubtile = $(e.currentTarget);
+                    var targetindex = targetsubtile.index();
+                    var dragindex = dragsubtile.index();
+                    if (targetindex === dragindex) {
+                        return;
+                    } else if (targetindex < dragindex) {
+                        targetsubtile.before(dragsubtile);
+                    } else {
+                        targetsubtile.after(dragsubtile);
+                    }
+                };
+                var mouseupcallback = function (e) {
+                    $('html').off(Event.MOUSEUP, mouseupcallback);
+                    $('html').off(Event.MOUSEMOVE, holocallback);
+                    $('#dragholo').remove();
+                    page.off(Event.MOUSEOVER, Selector.ACTIVITY, subtilehovercallback);
+                    // Are we above another subtile?
+                    var overlay = windowOverlay.is(":visible");
+                    if (overlay) {
+                        windowOverlay.hide();
+                    }
+                    var dragtarget = $(document.elementFromPoint(e.clientX, e.clientY));
+                    if (overlay) {
+                        windowOverlay.show();
+                    }
+                    var query = '.tile.tile-clickable';
+                    if (overlay) {
+                        query += ', #section-0';
+                    }
+                    var tilelist = dragtarget.closest(query);
+                    var cmid = dragsubtile.attr('data-cmid');
+                    var xhttp = new XMLHttpRequest();
+                    var url = M.cfg.wwwroot + "/course/rest.php";
+                    var data = "?sesskey=" + M.cfg.sesskey + "&courseId=" + courseId
+                        + "&class=resource&field=move&id=" + cmid;
+                    var secid;
+                    if (tilelist.length > 0) { // We dropped to another tile.
+                        var targettile = $(tilelist[0]);
+                        secid = $(Selector.MULTI_SECTION_TILE_AREA).children('.tile').index(targettile) + 1;
+                        data += "&sectionId=" + secid;
+                        data += "&beforeId=0";
+                        window.console.log($('#section-' + secid));
+                        var activitylist = $('#section-' + secid).find('ul.section');
+                        window.console.log(activitylist);
+                        activitylist.append(dragsubtile);
+                        xhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                window.location.reload(false);
+                            }
+                        };
+                    } else {
+                        var sectionbody = dragsubtile.closest('.section.main');
+                        if (!sectionbody.length > 0) {
+                            return;
+                        }
+                        secid = sectionbody.attr("data-section");
+                        var beforeid = 0;
+                        var nexttile = dragsubtile.next();
+                        if (nexttile.length > 0) {
+                            beforeid = nexttile.attr('data-cmid');
+                        }
+                        data += "&sectionId=" + secid;
+                        data += "&beforeId=" + beforeid;
+                    }
+                    xhttp.open("GET", url + data);
+                    xhttp.send();
+                };
+                page.on(Event.MOUSEOVER, Selector.ACTIVITY, subtilehovercallback);
+                $('html').on(Event.MOUSEUP, mouseupcallback);
+                $('html').on(Event.MOUSEMOVE, holocallback);
+            });
+        };
+
+        /**
          * Expand a content containing section (e.g. on tile click)
          * @param {object} contentArea
          * @param {number} tileId to expand
+         * @param {boolean} whether to scroll to the tile
          */
-        var expandSection = function (contentArea, tileId) {
+        var expandSection = function (contentArea, tileId, scroll) {
             var expandAndScroll = function () {
                 // Scroll to the top of content bearing section
                 // we have to wait until possible reOrg and slide down totally before calling this, else co-ords are wrong.
@@ -320,13 +429,14 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                 body.on(events, function () {
                     body.stop();
                 });
-
-                bodyHtml.animate({scrollTop: scrollTo}, "slow", function () {
-                    // Animation complete, remove stop handler.
-                    bodyHtml.off(events, function () {
-                        bodyHtml.stop();
+                if (scroll) {
+                    bodyHtml.animate({scrollTop: scrollTo}, "slow", function () {
+                        // Animation complete, remove stop handler.
+                        bodyHtml.off(events, function () {
+                            bodyHtml.stop();
+                        });
                     });
-                });
+                }
                 sectionIsOpen = true;
                 openTile = tileId;
 
@@ -407,9 +517,8 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                     windowOverlay.fadeOut(300);
                 }
             };
-
             contentArea.addClass(ClassNames.STATE_VISIBLE);
-            contentArea.slideDown(350, function () {
+            contentArea.slideDown(350, "linear", function () {
                 // Wait until we have finished sliding down before we work out where the top is for scroll.
                 expandAndScroll();
                 holdSectionButtonPosition();
@@ -535,7 +644,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
             windowOverlay.fadeIn(300);
             backDropZIndex = parseInt(windowOverlay.css(CSS.Z_INDEX));
             var tile = $(Selector.TILEID + secNumOnTop);
-            tile.css(CSS.Z_INDEX, (backDropZIndex + 1));
+            tile.css(CSS.Z_INDEX, (backDropZIndex + 2));
             headerOverlayFadeInOut(true);
             $(Selector.SECTION_ID + secNumOnTop).css(CSS.Z_INDEX, (backDropZIndex + 1));
             if (tile.css(CSS.BG_COLOUR) && tile.css(CSS.BG_COLOUR).substr(0, 4) === "rgba") {
@@ -610,8 +719,9 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
          * @param {object} thisTile jquery the tile object clicked.
          * @param {number} dataSection the id number of the tile.
          * @param {number} storedContentExpirySecs
+         * @param {boolean} scroll whether to scroll to tile
          */
-        var populateAndExpandSection = function(courseId, thisTile, dataSection, storedContentExpirySecs) {
+        var populateAndExpandSection = function(courseId, thisTile, dataSection, storedContentExpirySecs, scroll = true) {
             setOverlay(dataSection);
             $(Selector.TILE).removeClass(ClassNames.SELECTED);
             thisTile.addClass(ClassNames.SELECTED);
@@ -636,7 +746,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
             var relatedContentArea = $(Selector.SECTION_ID + dataSection);
             if (relatedContentArea.find(Selector.ACTIVITY).length > 0) {
                 // There is already some content on the screen so display immediately.
-                expandSection(relatedContentArea, dataSection);
+                expandSection(relatedContentArea, dataSection, scroll);
                 // Then refresh the content in storage only but do not change on screen.
                 if (browserStorage.getStoredContentAge(courseId, dataSection) > storedContentExpirySecs
                     || !browserStorage.getStoredContentAge(courseId, dataSection)) {
@@ -657,7 +767,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                             relatedContentArea,
                             browserStorage.getCourseContent(courseId, dataSection)
                         );
-                        expandSection(relatedContentArea, dataSection);
+                        expandSection(relatedContentArea, dataSection, scroll);
                     }
                     if (!contentAge || contentAge > storedContentExpirySecs) {
                         // Content in local storage may not exist or have expired.
@@ -672,7 +782,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                         getSectionContentFromServer(courseId, dataSection).done(function (response) {
                             var contentToDisplay = $(response.html).html();
                             setCourseContentHTML(relatedContentArea, contentToDisplay);
-                            expandSection(relatedContentArea, dataSection);
+                            expandSection(relatedContentArea, dataSection, scroll);
                             if (browserStorage.storageEnabledSession()) {
                                 browserStorage.storeCourseContent(courseId, dataSection, contentToDisplay);
                             }
@@ -685,7 +795,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                     // Not using storage so get from server.
                     getSectionContentFromServer(courseId, dataSection).done(function (response) {
                         setCourseContentHTML(relatedContentArea, $(response.html).html());
-                        expandSection(relatedContentArea, dataSection);
+                        expandSection(relatedContentArea, dataSection, scroll);
                     }).fail(function (failResult) {
                         failedLoadSectionNotify(dataSection, failResult, relatedContentArea);
                         cancelTileSelections(dataSection);
@@ -700,22 +810,21 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                 courseIdInit,
                 useJavascriptNav, // Set by site admin see settings.php.
                 maxContentSectionsToStore, // Set by site admin see settings.php.
-                isMobileInit,
+                isMobile,
                 sectionNum,
                 storedContentExpirySecs, // Set by site admin see settings.php.
                 storedContentDeleteMins, // Set by site admin see settings.php.
                 useFilterButtons,
                 assumeDataStoreConsent, // Set by site admin see settings.php.
-                reopenLastSectionInit, // Set by site admin see settings.php.
+                reopenLastSection, // Set by site admin see settings.php.
                 userId,
                 fitTilesToWidth,
                 usingH5pFilter,
-                enableCompletionInit
+                enableCompletionInit,
             ) {
                 courseId = courseIdInit;
-                isMobile = isMobileInit;
                 // Some args are strings or ints but we prefer bool.  Change to bool now as they are passed on elsewhere.
-                reopenLastVisitedSection = reopenLastSectionInit === "1";
+                reopenLastVisitedSection = reopenLastSection === "1";
                 useFilterButtons = useFilterButtons === 1;
                 assumeDataStoreConsent = assumeDataStoreConsent === "1";
                 enableCompletion = enableCompletionInit === "1";
@@ -770,6 +879,176 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                         windowOverlay.click(function (e) {
                             cancelTileSelections(0);
                             clickItemBehind(e);
+                        });
+
+                        // On a click on the edit menu stop the tile from expanding.
+                        pageContent.on(Event.CLICK, Selector.MENU_BAR, function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            var targetelement = e.target;
+                            var expanded = targetelement.getAttribute("aria-expanded") === "true";
+                            var menuselector = targetelement.getAttribute("aria-controls");
+                            var menuelement = $('#' + menuselector);
+                            if (expanded) {
+                                // Is expanded, collapse.
+                                targetelement.setAttribute("aria-expanded", "false");
+                                menuelement.hide();
+                            } else {
+                                // Else expand.
+                                targetelement.setAttribute("aria-expanded", "true");
+                                menuelement.show();
+                            }
+                        });
+
+                        pageContent.on(Event.CLICK, Selector.HIDDEN_TOGGLE, function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            var xhttp = new XMLHttpRequest();
+                            var target = e.target;
+                            if (target.tagName !== "DIV") {
+                                target = target.closest(".hiddentoggle");
+                            }
+                            if (target.classList.contains("hidden")) {
+                                return;
+                            }
+                            xhttp.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    target.classList.add("hidden");
+                                    var parent = target.closest(".tile-hidden");
+                                    parent.classList.remove("tile-hidden");
+                                    parent.querySelector(".availabilityinfo").classList.add("hidden");
+                                }
+                            };
+                            xhttp.open("GET", target.getAttribute("href"));
+                            xhttp.send();
+                        });
+
+                        pageContent.on(Event.CLICK, Selector.DROPDOWN_MENU, function (e) {
+                            e.stopPropagation();
+                        });
+
+                        pageContent.on(Event.CLICK, Selector.DRAGDROP, function (e) {
+                            e.stopPropagation();
+                        });
+
+                        pageContent.on(Event.MOUSEDOWN, Selector.DRAGDROP, function (e) {
+                            if (e.button) {
+                                return;
+                            }
+                            var dragdrop = e.target;
+                            if (dragdrop.tagName !== "DIV") {
+                                // Click is on image.
+                                dragdrop = e.target.closest(Selector.DRAGDROP);
+                            }
+                            dragdrop.setAttribute("aria-grabbed", "true");
+
+                            var tile = $("#" + dragdrop.getAttribute("aria-controls"));
+
+                            tile.addClass("tile-moving");
+                            var rect = tile.parent()[0].getBoundingClientRect();
+                            var dragholo = tile.clone(true).css('opacity', '0.5')
+                                .css('position', 'absolute')
+                                .css('left', e.clientX - rect.left - 8 + "px")
+                                .css('top', e.clientY - rect.top - 8 + "px")
+                                .css('pointer-events', 'none')
+                                .attr('id', 'dragholo');
+                            tile.after(dragholo);
+                            rect = dragholo.parent()[0].getBoundingClientRect();
+                            var holocallback = function (e) {
+                                dragholo.css('left', e.clientX - rect.left - 8 + "px")
+                                    .css('top', e.clientY - rect.top - 8 + "px");
+                            };
+                            $("html").on(Event.MOUSEMOVE, holocallback);
+                            $("html").on(Event.MOUSEUP, function (e) {
+                                if (e.button) {
+                                    // It's not the primary button being clicked.
+                                    return;
+                                }
+                                $("html").off(Event.MOUSEMOVE, holocallback);
+                                dragholo.remove();
+                                dragdrop.setAttribute("aria-grabbed", "false");
+
+                                $("html").off(Event.MOUSEUP, this);
+                                pageContent.off(Event.MOUSEOVER, Selector.MULTI_SECTION_TILE_AREA);
+
+                                var tilesecpos = $(Selector.MULTI_SECTION_TILE_AREA)
+                                    .children()
+                                    .filter(".tile.tile-clickable")
+                                    .index(tile) + 1;
+                                var oldpos = tile.attr("data-section");
+
+                                if (parseInt(oldpos) === tilesecpos) {
+                                    return; // Nothing to do.
+                                }
+
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function () {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        window.location.reload(false);
+                                    }
+                                };
+                                var url = M.cfg.wwwroot + "/course/rest.php";
+                                var data = "?sesskey=" + M.cfg.sesskey + "&courseId=" + courseId
+                                    + "&class=section&field=move&id=" + tile.attr("data-section")
+                                    + "&value=" + tilesecpos;
+                                xhttp.open("GET", url + data);
+                                xhttp.send();
+
+                                var tilelist = $(Selector.MULTI_SECTION_TILE_AREA)
+                                    .children()
+                                    .filter(".tile.tile-clickable");
+                                var lineindexes = [];
+                                var last = -1;
+                                var lastelement = null;
+                                for (let i = 0; i < tilelist.length; i++) {
+                                    var element = tilelist[i];
+                                    var secindex = element.getAttribute("data-section");
+                                    if ($(element).position().top > last) {
+                                        last = $(element).position().top;
+                                        if (lastelement !== null) {
+                                            for (var j = 0; j < lineindexes.length; j++) {
+                                                var index = lineindexes[j];
+                                                $(lastelement).after($("#section-" + index));
+                                            }
+                                        }
+                                        lineindexes = [];
+                                    }
+                                    lastelement = element;
+                                    lineindexes.push(secindex);
+                                    element.setAttribute("data-section", i + 1);
+                                    element.setAttribute("id", "tile-" + (i + 1));
+
+                                }
+                                var sectionlist = $(Selector.MULTI_SECTION_TILE_AREA)
+                                    .children()
+                                    .filter(".section");
+
+                                for (let i = 1; i < tilelist.length; i++) {
+                                    sectionlist[i].setAttribute("id", "section-" + i);
+                                    sectionlist[i].setAttribute("data-section", i);
+                                }
+                                e.preventDefault();
+                                e.stopPropagation();
+                            });
+
+                            pageContent.on(Event.MOUSEOVER, Selector.MULTI_SECTION_TILE_AREA, function (e) {
+                                var targettile = e.target;
+                                if (!targettile.classList.contains("tile-clickable")) {
+                                    targettile = $(e.target).closest(".tile.tile-clickable");
+                                }
+                                if (targettile !== null && targettile.length) {
+                                    if ($(targettile).index() === tile.index()) {
+                                        return;
+                                    } else if ($(targettile).index() > tile.index()) {
+                                        targettile.after(tile);
+                                    } else {
+                                        targettile.before(tile);
+                                    }
+                                }
+                            });
+
+                            e.preventDefault();
+                            e.stopPropagation();
                         });
 
                         // On a tile click, decide what to do an do it.
@@ -869,22 +1148,25 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                             }, 600);
                         });
 
+                        initializeDragdropSubtiles();
+
                         // We want the main menu at the top to be on top of the tiles.
                         // Even the ones which we have brought to the front on top of the window overlay.
                         // But we also want it to still be greyed out.  So add an opaque overlay.
                         // We can show this when the main overlay is active.
                         // When a user clicks this overlay, they want to close the overlay and click menu item behind.
                         // So provide for that here.
-                        // Z-INDICES: active tile will be at overlayZindex + 1.
-                        // Header bar will be at overlayZindex + 2 so that it is higher than tiles.
-                        // Header bar overlay will be at overlayZindex + 3 so that it is highest of all.
+                        // Z-INDICES: Active tile content will be at overlayZindex + 1.
+                        // Active tile will be at overlayZindex + 2.
+                        // Header bar will be at overlayZindex + 3 so that it is higher than tiles.
+                        // Header bar overlay will be at overlayZindex + 4 so that it is highest of all.
 
                         var overlayZindex = parseInt(windowOverlay.css(CSS.Z_INDEX));
                         var headerBar = $(Selector.HEADER_BAR.find(function(selector) {
                             return $(selector).length > 0;
                         }));
                         if (headerBar !== undefined && headerBar.length !== 0) {
-                            headerBar.css(CSS.Z_INDEX, overlayZindex + 2);
+                            headerBar.css(CSS.Z_INDEX, overlayZindex + 3);
                             if (headerBar.attr("id") !== "navwrap") {
                                 // ID navwrap suggests theme is Adaptable based. We don't bother with header overlay if so.
                                 // Otherise the header bar has a separate mini overlay of its own - find and hide this.
@@ -896,7 +1178,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                         .addClass(ClassNames.HEADER_OVERLAY).attr("id", ClassNames.HEADER_OVERLAY)
                                         .css(CSS.DISPLAY, "none");
                                     headerOverlay.insertAfter(Selector.PAGE)
-                                        .css(CSS.Z_INDEX, (overlayZindex) + 3).css(CSS.HEIGHT, HEADER_BAR_HEIGHT)
+                                        .css(CSS.Z_INDEX, (overlayZindex) + 4).css(CSS.HEIGHT, HEADER_BAR_HEIGHT)
                                         .click(function (e) {
                                             cancelTileSelections(0);
                                             clickItemBehind(e);
