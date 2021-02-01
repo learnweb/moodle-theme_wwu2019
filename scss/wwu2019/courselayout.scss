@@ -218,6 +218,11 @@ body.format-tiles {
         transform: rotate(.3deg);
     }
 }
+
+.format-tiles .section .activity .activityinstance div.contentafterlink {
+    display: inline-block;
+}
+
 body.format-tiles.editing {
     .course-content ul.tiles .tile-clickable:hover {
         animation-name: onhover;
