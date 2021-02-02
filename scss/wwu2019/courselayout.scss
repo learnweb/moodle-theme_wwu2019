@@ -252,6 +252,10 @@ body.format-topcoll {
         padding-left: 30px;
     }
 
+    .course-content ul.ctopics li.section.main .header .sectionname {
+        flex-grow: 1;
+    }
+
 }
 
 /* Gradebook */

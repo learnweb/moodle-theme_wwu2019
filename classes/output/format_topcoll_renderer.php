@@ -207,4 +207,58 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
         return $o;
     }
 
+    /**
+     * Generate the content to displayed on the right part of a section
+     * before course modules are included.
+     *
+     * @param stdClass $section The course_section entry from DB.
+     * @param stdClass $course The course entry from DB.
+     * @param bool $onsectionpage true if being printed on a section page.
+     * @param bool $sectionishidden true if section is hidden.
+     *
+     * @return string HTML to output.
+     */
+    protected function section_right_content($section, $course, $onsectionpage, $sectionishidden = false) {
+        $o = '';
+
+        $controls = $this->section_edit_control_items($course, $section, $onsectionpage);
+        if (!empty($controls)) {
+            $o .= $this->section_edit_control_menu($controls, $course, $section);
+        } else if ((!$onsectionpage) && (!$sectionishidden)) {
+            if (empty($this->tcsettings)) {
+                $this->tcsettings = $this->courseformat->get_settings();
+            }
+            $url = new moodle_url('/course/view.php', array('id' => $course->id, 'section' => $section->section));
+            // Get the specific words from the language files.
+            $topictext = null;
+            if (($this->tcsettings['layoutstructure'] == 1) || ($this->tcsettings['layoutstructure'] == 4)) {
+                $topictext = get_string('setlayoutstructuretopic', 'format_topcoll');
+            } else if (($this->tcsettings['layoutstructure'] == 2) || ($this->tcsettings['layoutstructure'] == 3)) {
+                $topictext = get_string('setlayoutstructureweek', 'format_topcoll');
+            } else {
+                $topictext = get_string('setlayoutstructureday', 'format_topcoll');
+            }
+            if ($this->tcsettings['viewsinglesectionenabled'] == 2) {
+                $title = get_string('viewonly', 'format_topcoll', array('sectionname' => $topictext.' '.$section->section));
+                switch ($this->tcsettings['layoutelement']) { // Toggle section x.
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 8:
+                        $o .= html_writer::link($url,
+                                $topictext.html_writer::empty_tag('br').
+                                $section->section, array('title' => $title, 'class' => 'cps_centre'));
+                        break;
+                    default:
+                        $o .= html_writer::link($url,
+                                $this->output->pix_icon('one_section', $title, 'format_topcoll'),
+                                array('title' => $title, 'class' => 'cps_centre'));
+                        break;
+                }
+            }
+        }
+
+        return $o;
+    }
+
 }
