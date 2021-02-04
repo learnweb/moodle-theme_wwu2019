@@ -327,7 +327,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                     .css('top', e.clientY - rect.top - 8 + "px")
                     .css('pointer-events', 'none')
                     .attr('id', 'dragholo');
-                $(Selector.MULTI_SECTION_TILE_AREA).append(dragholo);
+                dragholo.insertAfter(dragsubtile);
                 var holocallback = function (e) {
                     var rect = dragholo.parent()[0].getBoundingClientRect();
                     dragholo.css('left', e.clientX - rect.left - 8 + "px")
@@ -945,27 +945,31 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                             var tile = $("#" + dragdrop.getAttribute("aria-controls"));
 
                             tile.addClass("tile-moving");
-                            var rect = tile.parent()[0].getBoundingClientRect();
-                            var dragholo = tile.clone(true).css('opacity', '0.5')
-                                .css('position', 'absolute')
-                                .css('left', e.clientX - rect.left - 8 + "px")
-                                .css('top', e.clientY - rect.top - 8 + "px")
-                                .css('pointer-events', 'none')
-                                .attr('id', 'dragholo');
-                            tile.after(dragholo);
-                            rect = dragholo.parent()[0].getBoundingClientRect();
-                            var holocallback = function (e) {
-                                dragholo.css('left', e.clientX - rect.left - 8 + "px")
-                                    .css('top', e.clientY - rect.top - 8 + "px");
+                            var originalX = e.pageX;
+                            var originalY = e.pageY;
+                            var X = 0;
+                            var Y = 0;
+                            var moving = true;
+                            var positionUpdate = function () {
+                                if (moving) {
+                                    tile.css('transform', `translate(${X}px, ${Y}px)`);
+                                    window.requestAnimationFrame(positionUpdate);
+                                }
                             };
+                            var holocallback = function (e) {
+                                X = e.pageX - originalX;
+                                Y = e.pageY - originalY;
+                            };
+                            window.requestAnimationFrame(positionUpdate);
                             $("html").on(Event.MOUSEMOVE, holocallback);
                             $("html").on(Event.MOUSEUP, function (e) {
+                                moving = false;
                                 if (e.button) {
                                     // It's not the primary button being clicked.
                                     return;
                                 }
                                 $("html").off(Event.MOUSEMOVE, holocallback);
-                                dragholo.remove();
+                                tile.css('transform', '');
                                 dragdrop.setAttribute("aria-grabbed", "false");
 
                                 $("html").off(Event.MOUSEUP, this);
@@ -982,9 +986,21 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 }
 
                                 var xhttp = new XMLHttpRequest();
+                                windowOverlay.fadeIn();
                                 xhttp.onreadystatechange = function () {
                                     if (this.readyState == 4 && this.status == 200) {
                                         window.location.reload(false);
+                                    } else if (this.readyState == 4) {
+                                        windowOverlay.fadeOut();
+                                        var errormsg = str.get_string('tilemovefailed', 'theme_wwu2019');
+                                        $.when(errormsg).done(function(msg) {
+                                            Notification.addNotification(
+                                                {
+                                                    message: msg,
+                                                    type: 'warning'
+                                                }
+                                            );
+                                        });
                                     }
                                 };
                                 var url = M.cfg.wwwroot + "/course/rest.php";
@@ -1039,10 +1055,16 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 if (targettile !== null && targettile.length) {
                                     if ($(targettile).index() === tile.index()) {
                                         return;
-                                    } else if ($(targettile).index() > tile.index()) {
-                                        targettile.after(tile);
                                     } else {
-                                        targettile.before(tile);
+                                        var targetdragdrop = targettile.find(Selector.DRAGDROP);
+                                        var offset = targetdragdrop.offset();
+                                        originalX = offset.left + 8;
+                                        originalY = offset.top + 4;
+                                        if ($(targettile).index() > tile.index()) {
+                                            targettile.after(tile);
+                                        } else {
+                                            targettile.before(tile);
+                                        }
                                     }
                                 }
                             });

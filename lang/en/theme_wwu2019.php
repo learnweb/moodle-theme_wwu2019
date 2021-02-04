@@ -90,3 +90,6 @@ $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Kee
 
 
 $string['viewfullsection'] = 'View full section';
+
+// Format Tile.
+$string['tilemovefailed'] = "Tile couldn't be moved";

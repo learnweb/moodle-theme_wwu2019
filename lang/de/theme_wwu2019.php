@@ -90,3 +90,7 @@ $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Kee
 
 
 $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
+
+// Format Tile
+
+$string['tilemovefailed'] = "Kachel konnte nicht verschoben werden";
