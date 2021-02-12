@@ -289,6 +289,17 @@ body.format-tiles.editing {
         cursor: grabbing;
     }
 
+    .dragdropwrap:after {
+        content: '';
+        position: absolute;
+        top: 7px;
+        left: 2%;
+        height: 16px;
+        width: 16px;
+        border: 13px solid transparent;
+        border-radius: 100%;
+    }
+
     .tile-link.editing {
         margin-left: 0;
         padding-left: 0;

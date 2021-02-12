@@ -16,8 +16,8 @@
 /* eslint space-before-function-paren: 0 */
 
 /**
- * Main Javascript module for format_tiles for when user is *NOT* editing.
- * See course_edit for if they are editing.
+ * Main Javascript module for format_tiles for when user is editing.
+ * See course_edit for if they are not editing.
  * Handles the UI changes when tiles are selected and anything else not
  * covered by the specific modules
  *
@@ -28,7 +28,10 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// require.undef("format_tiles/edit_course");
+var scriptname = document.currentScript.getAttribute("data-requiremodule");
+if (scriptname === "core/first") {
+    require.undef("format_tiles/edit_course");
+}
 define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "format_tiles/browser_storage",
         "core/notification", "core/str", "format_tiles/tile_fitter"],
     function ($, Templates, ajax, browserStorage, Notification, str, tileFitter) {
@@ -103,7 +106,11 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
             MOUSEDOWN: "mousedown",
             MOUSEUP: "mouseup",
             MOUSEMOVE: "mousemove",
-            MOUSEOVER: "mouseover"
+            MOUSEOVER: "mouseover",
+            TOUCHDOWN: "touchstart",
+            TOUCHUP: 'touchend',
+            TOUCHOVER: 'touchover',
+            TOUCHMOVE: 'touchmove'
         };
 
         var CSS = {
@@ -311,27 +318,60 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
         };
 
         /**
+         * Get X, Y from event
+         */
+        var getCoordinatesFromEvent = function(event) {
+            var xcoord;
+            var ycoord;
+            if (event.type.includes("touch")) {
+                var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+                xcoord = touch.clientX;
+                ycoord = touch.clientY;
+            } else if (event.type.includes("mouse")) {
+                xcoord = event.clientX;
+                ycoord = event.clientY;
+            }
+            return {
+                x: xcoord,
+                y: ycoord
+            };
+        };
+
+        /**
+         * Triggers a "touchover" event at the current position
+         */
+        var touchoverdetector = function (e) {
+            var position = getCoordinatesFromEvent(e);
+            var object = document.elementFromPoint(position.x, position.y);
+            $(object).trigger(Event.TOUCHOVER, e);
+        };
+
+        /**
          * Initialize a sectiontilesdragdrop features
          */
         var initializeDragdropSubtiles = function() {
+            // Touch doesn't have a Mouseover equivalent, so fake it.
+            $('html').on(Event.TOUCHMOVE, Selector.ACTIVITY, touchoverdetector);
             var page = $("#page-content");
-            page.on(Event.MOUSEDOWN, Selector.SUBTILEDRAGDROP, function (e) {
+            page.on(Event.MOUSEDOWN + " " + Event.TOUCHDOWN, Selector.SUBTILEDRAGDROP, function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 var draggingdrag = e.currentTarget;
                 var dragsubtile = $(draggingdrag).closest(Selector.ACTIVITY);
                 var rect = dragsubtile.parent()[0].getBoundingClientRect();
+                var coordinates = getCoordinatesFromEvent(e);
                 var dragholo = dragsubtile.clone(true).css('opacity', '0.5')
                     .css('position', 'absolute')
-                    .css('left', e.clientX - rect.left - 8 + "px")
-                    .css('top', e.clientY - rect.top - 8 + "px")
+                    .css('left', coordinates.x - rect.left - 8 + "px")
+                    .css('top', coordinates.y - rect.top - 8 + "px")
                     .css('pointer-events', 'none')
                     .attr('id', 'dragholo');
                 dragholo.insertAfter(dragsubtile);
                 var holocallback = function (e) {
+                    var cords = getCoordinatesFromEvent(e);
                     var rect = dragholo.parent()[0].getBoundingClientRect();
-                    dragholo.css('left', e.clientX - rect.left - 8 + "px")
-                        .css('top', e.clientY - rect.top - 8 + "px");
+                    dragholo.css('left', cords.x - rect.left - 8 + "px")
+                        .css('top', cords.y - rect.top - 8 + "px");
                 };
                 var subtilehovercallback = function (e) {
                     var targetsubtile = $(e.currentTarget);
@@ -346,16 +386,17 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                     }
                 };
                 var mouseupcallback = function (e) {
-                    $('html').off(Event.MOUSEUP, mouseupcallback);
-                    $('html').off(Event.MOUSEMOVE, holocallback);
+                    $('html').off(Event.MOUSEUP + " " + Event.TOUCHUP, mouseupcallback);
+                    $('html').off(Event.MOUSEMOVE + " " + Event.TOUCHMOVE, holocallback);
                     $('#dragholo').remove();
-                    page.off(Event.MOUSEOVER, Selector.ACTIVITY, subtilehovercallback);
+                    page.off(Event.MOUSEOVER + " " + Event.TOUCHOVER, Selector.ACTIVITY, subtilehovercallback);
                     // Are we above another subtile?
                     var overlay = windowOverlay.is(":visible");
                     if (overlay) {
                         windowOverlay.hide();
                     }
-                    var dragtarget = $(document.elementFromPoint(e.clientX, e.clientY));
+                    var cords = getCoordinatesFromEvent(e);
+                    var dragtarget = $(document.elementFromPoint(cords.x, cords.y));
                     if (overlay) {
                         windowOverlay.show();
                     }
@@ -375,9 +416,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                         secid = $(Selector.MULTI_SECTION_TILE_AREA).children('.tile').index(targettile) + 1;
                         data += "&sectionId=" + secid;
                         data += "&beforeId=0";
-                        window.console.log($('#section-' + secid));
                         var activitylist = $('#section-' + secid).find('ul.section');
-                        window.console.log(activitylist);
                         activitylist.append(dragsubtile);
                         xhttp.onreadystatechange = function () {
                             if (this.readyState == 4 && this.status == 200) {
@@ -401,9 +440,9 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                     xhttp.open("GET", url + data);
                     xhttp.send();
                 };
-                page.on(Event.MOUSEOVER, Selector.ACTIVITY, subtilehovercallback);
-                $('html').on(Event.MOUSEUP, mouseupcallback);
-                $('html').on(Event.MOUSEMOVE, holocallback);
+                page.on(Event.MOUSEOVER + " " + Event.TOUCHOVER, Selector.ACTIVITY, subtilehovercallback);
+                $('html').on(Event.MOUSEUP + " " + Event.TOUCHUP, mouseupcallback);
+                $('html').on(Event.MOUSEMOVE + " " + Event.TOUCHMOVE, holocallback);
             });
         };
 
@@ -868,7 +907,6 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                     var windowWidth = $(window).outerWidth();
 
                     if (useJavascriptNav) {
-                        // User is not editing but is usingJS nav to view.
 
                         // When a tile is clicked we add an overlay to grey out the rest of the tiles on the page, so prepare it.
                         windowOverlay = $("<div></div>").addClass("modal-backdrop fade in").hide()
@@ -931,10 +969,13 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                             e.stopPropagation();
                         });
 
-                        pageContent.on(Event.MOUSEDOWN, Selector.DRAGDROP, function (e) {
-                            if (e.button) {
+                        $('html').on(Event.TOUCHMOVE, Selector.MULTI_SECTION_TILE_AREA, touchoverdetector);
+
+                        pageContent.on(Event.MOUSEDOWN + " " + Event.TOUCHDOWN, Selector.DRAGDROP, function (e) {
+                            if (e.button && e.type !== Event.TOUCHDOWN) {
                                 return;
                             }
+                            window.console.log("oj2");
                             var dragdrop = e.target;
                             if (dragdrop.tagName !== "DIV") {
                                 // Click is on image.
@@ -945,8 +986,9 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                             var tile = $("#" + dragdrop.getAttribute("aria-controls"));
 
                             tile.addClass("tile-moving");
-                            var originalX = e.pageX;
-                            var originalY = e.pageY;
+                            var pos = getCoordinatesFromEvent(e);
+                            var originalX = pos.x;
+                            var originalY = pos.y;
                             var X = 0;
                             var Y = 0;
                             var moving = true;
@@ -957,23 +999,24 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 }
                             };
                             var holocallback = function (e) {
-                                X = e.pageX - originalX;
-                                Y = e.pageY - originalY;
+                                var pos = getCoordinatesFromEvent(e);
+                                X = pos.x - originalX;
+                                Y = pos.y - originalY;
                             };
                             window.requestAnimationFrame(positionUpdate);
-                            $("html").on(Event.MOUSEMOVE, holocallback);
-                            $("html").on(Event.MOUSEUP, function (e) {
+                            $("html").on(Event.MOUSEMOVE + " " + Event.TOUCHMOVE, holocallback);
+                            $("html").on(Event.MOUSEUP + " " + Event.TOUCHUP, function (e) {
                                 moving = false;
-                                if (e.button) {
+                                if (e.button && !e.type === Event.TOUCHUP) {
                                     // It's not the primary button being clicked.
                                     return;
                                 }
-                                $("html").off(Event.MOUSEMOVE, holocallback);
+                                $("html").off(Event.MOUSEMOVE + " " + Event.TOUCHMOVE, holocallback);
                                 tile.css('transform', '');
                                 dragdrop.setAttribute("aria-grabbed", "false");
 
-                                $("html").off(Event.MOUSEUP, this);
-                                pageContent.off(Event.MOUSEOVER, Selector.MULTI_SECTION_TILE_AREA);
+                                $("html").off(Event.MOUSEUP + " " + Event.TOUCHUP, this);
+                                pageContent.off(Event.MOUSEOVER + " " + Event.TOUCHOVER, Selector.MULTI_SECTION_TILE_AREA);
 
                                 var tilesecpos = $(Selector.MULTI_SECTION_TILE_AREA)
                                     .children()
@@ -1047,7 +1090,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 e.stopPropagation();
                             });
 
-                            pageContent.on(Event.MOUSEOVER, Selector.MULTI_SECTION_TILE_AREA, function (e) {
+                            pageContent.on(Event.MOUSEOVER + " " + Event.TOUCHOVER, Selector.MULTI_SECTION_TILE_AREA, function (e) {
                                 var targettile = e.target;
                                 if (!targettile.classList.contains("tile-clickable")) {
                                     targettile = $(e.target).closest(".tile.tile-clickable");
