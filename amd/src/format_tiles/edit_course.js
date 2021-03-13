@@ -457,13 +457,25 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
             });
         };
 
+        var FITTINGSELECTORS = [".action-menu"];
         /**
          * Trys to fit the action menus to eachother
          * @param {number} sectionid the section in which to fit the actionmenus
          */
         var fitActionMenusForSection = function (sectionid) {
-            var section = $(`#section-{{sectionid}}`);
-
+            var section = $('#section-' + sectionid);
+            FITTINGSELECTORS.forEach(function (selector) {
+                var menulist = section.find(selector);
+                var minX = menulist[0].getBoundingClientRect().x;
+                menulist.each(function (index, menu) {
+                    minX = Math.min(menu.getBoundingClientRect().x, minX);
+                });
+                menulist.each(function(index, menu) {
+                    $(menu).css('margin-right', 0);
+                    $(menu).css('margin-right', menu.getBoundingClientRect().x - minX);
+                });
+                return true;
+            });
         };
 
         /**
@@ -864,6 +876,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                 }
             }
             browserStorage.setLastVisitedSection(dataSection);
+            fitActionMenusForSection(dataSection);
         };
 
         return {
@@ -907,6 +920,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                         // Some themes e.g. RemUI do not have a #page-content div, so use #region-main.
                         pageContent = $("#region-main");
                     }
+                    fitActionMenusForSection(0);
 
                     // If we are being told to launch a section number from the URL, use that.
                     if (sectionNum !== 0) {
@@ -1265,7 +1279,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 // Do not include for Moodle 3.5 or higher as not needed.
                                 if (headerBar.outerHeight() !== undefined) {
                                     HEADER_BAR_HEIGHT = headerBar.outerHeight();
-                                    var logorect = window.getElementById("logo-header").getBoundingClientRect();
+                                    var logorect = document.getElementById("logo-header").getBoundingClientRect();
                                     var logoheight = logorect.y + logorect.height;
                                     var logoy = Math.max(0, logoheight - window.scrollY);
                                     headerOverlay = $("<div></div>")
