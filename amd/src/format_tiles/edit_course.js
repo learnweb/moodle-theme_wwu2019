@@ -356,15 +356,22 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
             page.on(Event.MOUSEDOWN + " " + Event.TOUCHDOWN, Selector.SUBTILEDRAGDROP, function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+                if (e.button && !e.type === Event.TOUCHUP) {
+                    // It's not the primary button being clicked.
+                    return;
+                }
                 var draggingdrag = e.currentTarget;
                 var dragsubtile = $(draggingdrag).closest(Selector.ACTIVITY);
                 var rect = dragsubtile.parent()[0].getBoundingClientRect();
+                var dimensions = dragsubtile[0].getBoundingClientRect();
                 var coordinates = getCoordinatesFromEvent(e);
                 var dragholo = dragsubtile.clone(true).css('opacity', '0.5')
                     .css('position', 'absolute')
                     .css('left', coordinates.x - rect.left - 8 + "px")
                     .css('top', coordinates.y - rect.top - 8 + "px")
                     .css('pointer-events', 'none')
+                    .css('width', dimensions.width)
+                    .css('height', dimensions.height)
                     .attr('id', 'dragholo');
                 dragholo.insertAfter(dragsubtile);
                 var holocallback = function (e) {
@@ -386,6 +393,10 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                     }
                 };
                 var mouseupcallback = function (e) {
+                    if (e.button && !e.type === Event.TOUCHUP) {
+                        // It's not the primary button being clicked.
+                        return;
+                    }
                     $('html').off(Event.MOUSEUP + " " + Event.TOUCHUP, mouseupcallback);
                     $('html').off(Event.MOUSEMOVE + " " + Event.TOUCHMOVE, holocallback);
                     $('#dragholo').remove();
@@ -524,6 +535,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 buttons.css("top", desiredNewPositionInSection);
                                 if (windowOverlay.css(CSS.DISPLAY) === "none") {
                                     windowOverlay.fadeIn(300);
+                                    headerOverlayFadeInOut(true);
                                 }
                             } else if (desiredNewPositionInSection < 0) {
                                 buttons.css("top", 0);
@@ -544,6 +556,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 buttons.css("top", 0);
                             } else if (windowOverlay.css(CSS.DISPLAY) === "none") {
                                 windowOverlay.fadeIn(300);
+                                headerOverlayFadeInOut(true);
                             }
                             buttons.fadeIn(300, function () {
                                 // Release lock on this function.
@@ -975,7 +988,6 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                             if (e.button && e.type !== Event.TOUCHDOWN) {
                                 return;
                             }
-                            window.console.log("oj2");
                             var dragdrop = e.target;
                             if (dragdrop.tagName !== "DIV") {
                                 // Click is on image.
@@ -986,6 +998,8 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                             var tile = $("#" + dragdrop.getAttribute("aria-controls"));
 
                             tile.addClass("tile-moving");
+                            tile.css('pointer-events', 'none');
+                            tile.css('transition', 'none');
                             var pos = getCoordinatesFromEvent(e);
                             var originalX = pos.x;
                             var originalY = pos.y;
@@ -1012,7 +1026,9 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                     return;
                                 }
                                 $("html").off(Event.MOUSEMOVE + " " + Event.TOUCHMOVE, holocallback);
+                                tile.css('pointer-events', '');
                                 tile.css('transform', '');
+                                tile.css('transition', '');
                                 dragdrop.setAttribute("aria-grabbed", "false");
 
                                 $("html").off(Event.MOUSEUP + " " + Event.TOUCHUP, this);
@@ -1035,15 +1051,16 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                         window.location.reload(false);
                                     } else if (this.readyState == 4) {
                                         windowOverlay.fadeOut();
-                                        var errormsg = str.get_string('tilemovefailed', 'theme_wwu2019');
-                                        $.when(errormsg).done(function(msg) {
-                                            Notification.addNotification(
-                                                {
-                                                    message: msg,
-                                                    type: 'warning'
-                                                }
-                                            );
-                                        });
+                                        str.get_strings({key: 'tilemovefailed', component: 'theme_wwu2019'},
+                                            {key: 'tilemovefailedtitle', component: 'theme_wwu2019'},
+                                            {key: 'Ok'})
+                                            .done(function(results) {
+                                                Notification.alert(
+                                                results[0],
+                                                results[1],
+                                                results[2]
+                                                );
+                                            });
                                     }
                                 };
                                 var url = M.cfg.wwwroot + "/course/rest.php";
@@ -1100,7 +1117,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                         return;
                                     } else {
                                         var targetdragdrop = targettile.find(Selector.DRAGDROP);
-                                        var offset = targetdragdrop.offset();
+                                        var offset = targetdragdrop[0].getBoundingClientRect();
                                         originalX = offset.left + 8;
                                         originalY = offset.top + 4;
                                         if ($(targettile).index() > tile.index()) {
@@ -1239,15 +1256,23 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                 // Do not include for Moodle 3.5 or higher as not needed.
                                 if (headerBar.outerHeight() !== undefined) {
                                     HEADER_BAR_HEIGHT = headerBar.outerHeight();
+                                    var logorect = window.getElementById("logo-header").getBoundingClientRect();
+                                    var logoheight = logorect.y + logorect.height;
+                                    var logoy = Math.max(0, logoheight - window.scrollY);
                                     headerOverlay = $("<div></div>")
                                         .addClass(ClassNames.HEADER_OVERLAY).attr("id", ClassNames.HEADER_OVERLAY)
                                         .css(CSS.DISPLAY, "none");
-                                    headerOverlay.insertAfter(Selector.PAGE)
-                                        .css(CSS.Z_INDEX, (overlayZindex) + 4).css(CSS.HEIGHT, HEADER_BAR_HEIGHT)
+                                    headerOverlay.insertAfter(Selector.HEADER_BAR)
+                                        .css(CSS.Z_INDEX, (overlayZindex) + 4).css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy)
                                         .click(function (e) {
                                             cancelTileSelections(0);
                                             clickItemBehind(e);
                                         });
+                                    window.addEventListener(Event.SCROLL, function () {
+                                        window.console.log("heyo");
+                                        logoy = Math.max(0, logoheight - window.scrollY);
+                                        headerOverlay.css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy);
+                                    }, true);
                                 } else {
                                     require(["core/log"], function(log) {
                                         log.debug(

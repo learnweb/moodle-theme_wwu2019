@@ -378,6 +378,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                 buttons.css("top", desiredNewPositionInSection);
                                 if (windowOverlay.css(CSS.DISPLAY) === "none") {
                                     windowOverlay.fadeIn(300);
+                                    headerOverlayFadeInOut(true);
                                 }
                             } else if (desiredNewPositionInSection < 0) {
                                 buttons.css("top", 0);
@@ -398,6 +399,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                 buttons.css("top", 0);
                             } else if (windowOverlay.css(CSS.DISPLAY) === "none") {
                                 windowOverlay.fadeIn(300);
+                                headerOverlayFadeInOut(true);
                             }
                             buttons.fadeIn(300, function () {
                                 // Release lock on this function.
@@ -888,6 +890,8 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                         }));
                         if (headerBar !== undefined && headerBar.length !== 0) {
                             headerBar.css(CSS.Z_INDEX, overlayZindex + 2);
+                            $('#logo-header').css('z-index', overlayZindex + 2)
+                                .css('background', '#fff');
                             if (headerBar.attr("id") !== "navwrap") {
                                 // ID navwrap suggests theme is Adaptable based. We don't bother with header overlay if so.
                                 // Otherise the header bar has a separate mini overlay of its own - find and hide this.
@@ -895,15 +899,23 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                 // Do not include for Moodle 3.5 or higher as not needed.
                                 if (headerBar.outerHeight() !== undefined) {
                                     HEADER_BAR_HEIGHT = headerBar.outerHeight();
+                                    var logorect = window.getElementById("logo-header").getBoundingClientRect();
+                                    var logoheight = logorect.y + logorect.height;
+                                    var logoy = Math.max(0, logoheight - window.scrollY);
                                     headerOverlay = $("<div></div>")
                                         .addClass(ClassNames.HEADER_OVERLAY).attr("id", ClassNames.HEADER_OVERLAY)
                                         .css(CSS.DISPLAY, "none");
-                                    headerOverlay.insertAfter(Selector.PAGE)
-                                        .css(CSS.Z_INDEX, (overlayZindex) + 3).css(CSS.HEIGHT, HEADER_BAR_HEIGHT)
+                                    headerOverlay.insertAfter(Selector.HEADER_BAR)
+                                        .css(CSS.Z_INDEX, (overlayZindex) + 4).css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy)
                                         .click(function (e) {
                                             cancelTileSelections(0);
                                             clickItemBehind(e);
                                         });
+                                    window.addEventListener(Event.SCROLL, function () {
+                                        window.console.log("heyo");
+                                        logoy = Math.max(0, logoheight - window.scrollY);
+                                        headerOverlay.css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy);
+                                    }, true);
                                 } else {
                                     require(["core/log"], function(log) {
                                         log.debug(

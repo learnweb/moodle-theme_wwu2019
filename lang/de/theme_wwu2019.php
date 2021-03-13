@@ -94,3 +94,4 @@ $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
 // Format Tile
 
 $string['tilemovefailed'] = "Kachel konnte nicht verschoben werden";
+$string['tilemovefailedtitle'] = "Verschiebungfehler";
