@@ -912,7 +912,6 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                             clickItemBehind(e);
                                         });
                                     window.addEventListener(Event.SCROLL, function () {
-                                        window.console.log("heyo");
                                         logoy = Math.max(0, logoheight - window.scrollY);
                                         headerOverlay.css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy);
                                     }, true);

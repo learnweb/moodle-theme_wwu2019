@@ -458,6 +458,15 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
         };
 
         /**
+         * Trys to fit the action menus to eachother
+         * @param {number} sectionid the section in which to fit the actionmenus
+         */
+        var fitActionMenusForSection = function (sectionid) {
+            var section = $(`#section-{{sectionid}}`);
+
+        };
+
+        /**
          * Expand a content containing section (e.g. on tile click)
          * @param {object} contentArea
          * @param {number} tileId to expand
@@ -1269,7 +1278,6 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                             clickItemBehind(e);
                                         });
                                     window.addEventListener(Event.SCROLL, function () {
-                                        window.console.log("heyo");
                                         logoy = Math.max(0, logoheight - window.scrollY);
                                         headerOverlay.css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy);
                                     }, true);
