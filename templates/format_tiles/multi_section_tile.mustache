@@ -67,10 +67,7 @@
                     {{#restricted}}
                         <div id="restrictedtoggle-{{tileid}}" href="">{{#pix}}lock, format_tiles, {{#str}}restricted{{/str}}{{/pix}}</div>
                     {{/restricted}}
-                    {{#progress}}
-                        {{> format_tiles/progress}}
-                    {{/progress}}
-                    {{#isactive}}{{#pix}}i/star, core{{/pix}}{{/isactive}}
+                {{#isactive}}<div class="icon fa fa-star"></div>{{/isactive}}
                 </div>
             </div>
             <div class="tile-text" id="tileText-{{tileid}}"

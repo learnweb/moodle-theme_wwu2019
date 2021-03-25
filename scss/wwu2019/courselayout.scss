@@ -181,6 +181,11 @@ body.format-tiles {
         max-width: none !important; // override style attribute
     }
 
+    .course-content .icon.fa.fa-star {
+        color: $wwugreen;
+        font-size: 2em;
+    }
+
     #page .course-content ul li.section.main.moveablesection {
         max-width: none !important; // override style attribute
         /* stylelint-enable declaration-no-important */
@@ -203,18 +208,196 @@ body.format-tiles {
         border-top-color: $secondary;
     }
 
-    ul.tiles#multi_section_tiles li.section, .format-tiles ul.tiles#multi_section_tiles li#section-0.section {
+    ul.tiles#multi_section_tiles li.section{
         margin-left: 7px; // offset negative margin of parent.
         /* stylelint-disable declaration-no-important */
         border: 2px solid $primary !important; // Important is used by the css in the plugin itself...
-        border-top: 20px solid $primary !important;
+        border-top: 21px solid $primary !important;
         width: calc(100% - 12px) !important;
         /* stylelint-enable declaration-no-important */
+    }
+
+    ul.tiles#multi_section_tiles li#section-0.section {
+        margin-left: 7px; // offset negative margin of parent.
+        /* stylelint-disable declaration-no-important */
+        border: 2px solid $primary !important; // Important is used by the css in the plugin itself...
+        border-top: 0!important;
+        width: calc(100% - 12px) !important;
+        /* stylelint-enable declaration-no-important */
+
+        .header {
+            h3 {
+                padding-left: .3rem;
+                font-weight: bold;
+            }
+            .icon {
+                margin-top: 6px;
+            }
+            .buttonhidesec0 {
+                position: relative;
+                top: 0;
+                width: 20px;
+                height: 20px;
+                margin-top: 4px;
+                background-color: $primary;
+                margin-right: 5px;
+            }
+        }
+
     }
 
     .course-content ul.tiles .tile.current {
         border-top-color: $primary;
     }
+
+    // Progress stuff.
+    .progresswarning {
+        color: red;
+        font-size: 0.7em;
+    }
+
+    .progresspendingwarning {
+        color: lightskyblue;
+        font-size: 0.7em;
+    }
+
+
+    // -- vars
+    $default-size: 6em;
+    $progress-bar-color: #1abc5b;
+    $label-font-size: $default-size / 6;
+    $label-font-size-redo: $default-size;
+
+    .progresssection {
+        width: 100%;
+        height: $default-size;
+        text-align: justify;
+    }
+
+    .labelsection {
+        width: 100%;
+        height: 2em;
+        text-align: justify;
+    }
+
+    .sectionnamelabel {
+        width: 6em;
+        display: inline-block;
+        text-align: center;
+        overflow: visible;
+        white-space: nowrap;
+    }
+
+    .sectioncontainer {
+        height: 6em;
+        width: 6em;
+        margin-left: 5px;
+        margin-right: 5px;
+        position: relative;
+        display: inline-block;
+        overflow: visible;
+        text-overflow: ellipsis;
+    }
+
+    .dummy-2 {
+        display: inline-block;
+        width: 0;
+    }
+
+    .dummy {
+        display: inline-block;
+        width: 100%;
+    }
+
+    // -- mixins
+    @mixin size($width, $height) {
+        height: $height;
+        width: $width;
+    }
+
+    @mixin draw-progress($progress) {
+        .pie {
+            .half-circle {
+                border-color: $progress-bar-color;
+            }
+
+            .left-side {
+                transform: rotate($progress * 3.6deg);
+            }
+
+            @if $progress <= 50 {
+                .right-side {
+                    display: none;
+                }
+            } @else {
+                clip: rect(auto, auto, auto, auto);
+
+                .right-side {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    .pie-wrapper {
+        @include size($default-size, $default-size);
+        margin-left: 5px;
+        margin-right: 5px;
+        position: relative;
+        display: inline-block;
+
+        &:nth-child(3n + 1) {
+            clear: both;
+        }
+
+        .pie {
+            @include size(100%, 100%);
+            clip: rect(0, $default-size, $default-size, $default-size / 2);
+            left: 0;
+            position: absolute;
+            top: 0;
+
+            .half-circle {
+                @include size(100%, 100%);
+                border: ($default-size / 10) solid #3498db;
+                border-radius: 50%;
+                clip: rect(0, $default-size / 2, $default-size, 0);
+                left: 0;
+                position: absolute;
+                top: 0;
+            }
+        }
+
+        .label {
+            border-radius: 50%;
+            color: #7f8c8d;
+            cursor: default;
+            display: block;
+            font-size: $label-font-size;
+            top: $label-font-size;
+            left: $label-font-size;
+            right: $label-font-size;
+            bottom: $label-font-size;
+            line-height: $label-font-size-redo * .70;
+            position: absolute;
+            text-align: center;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .shadow {
+            @include size(100%, 100%);
+            border: $default-size / 10 solid #bdc3c7;
+            border-radius: 50%;
+        }
+
+        @for $i from 1 through 100 {
+            &.progress-#{$i} {
+                @include draw-progress(#{$i});
+            }
+        }
+    }
+
 }
 /* Fix for format tile menu opacity */
 @keyframes onhover {
@@ -332,7 +515,6 @@ body.format-tiles.editing {
     i.icon.fa.fa-arrows.fa-fw {
         margin-right: 0;
     }
-
 }
 
 body.format-topcoll {

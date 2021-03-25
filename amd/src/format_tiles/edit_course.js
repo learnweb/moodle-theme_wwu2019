@@ -79,6 +79,7 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
             CLOSE_SEC_BTN: ".closesectionbtn",
             HIDE_SEC0_BTN: "#buttonhidesec0",
             SECTION_ZERO: "#section-0",
+            SECTION_ZERO_CONTENT: "#section-0 > .content",
             MOODLE_VIDEO: ".mediaplugin.mediaplugin_videojs",
             LAUNCH_STANDARD: '[data-action="launch-tiles-standard"]',
             TOOLTIP: "[data-toggle=tooltip]",
@@ -465,15 +466,18 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
         var fitActionMenusForSection = function (sectionid) {
             var section = $('#section-' + sectionid);
             FITTINGSELECTORS.forEach(function (selector) {
-                var menulist = section.find(selector);
-                var minX = menulist[0].getBoundingClientRect().x;
-                menulist.each(function (index, menu) {
-                    minX = Math.min(menu.getBoundingClientRect().x, minX);
-                });
-                menulist.each(function(index, menu) {
-                    $(menu).css('margin-right', 0);
-                    $(menu).css('margin-right', menu.getBoundingClientRect().x - minX);
-                });
+                try {
+                    var menulist = section.find(selector);
+                    var minX = menulist[0].getBoundingClientRect().x;
+                    menulist.each(function (index, menu) {
+                        minX = Math.min(menu.getBoundingClientRect().x, minX);
+                    });
+                    menulist.each(function (index, menu) {
+                        $(menu).css('margin-right', 0);
+                        $(menu).css('margin-right', menu.getBoundingClientRect().x - minX);
+                    });
+                } catch (e) {
+                }
                 return true;
             });
         };
@@ -1272,6 +1276,8 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                         }));
                         if (headerBar !== undefined && headerBar.length !== 0) {
                             headerBar.css(CSS.Z_INDEX, overlayZindex + 3);
+                            $('#logo-header').css('z-index', overlayZindex + 3)
+                                .css('background', '#fff');
                             if (headerBar.attr("id") !== "navwrap") {
                                 // ID navwrap suggests theme is Adaptable based. We don't bother with header overlay if so.
                                 // Otherise the header bar has a separate mini overlay of its own - find and hide this.
@@ -1327,15 +1333,15 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
 
                     // When the user presses the button to collapse or expand Section zero (section at the top of the course).
                     pageContent.on(Event.CLICK, Selector.HIDE_SEC0_BTN, function (e) {
-                        var sectionZero = $(Selector.SECTION_ZERO);
-                        if (sectionZero.css(CSS.DISPLAY) === "none") {
+                        var sectionZeroContent = $(Selector.SECTION_ZERO_CONTENT);
+                        if (sectionZeroContent.css(CSS.DISPLAY) === "none") {
                             // Sec zero is collapsed so expand it on user click.
-                            sectionZero.slideDown(250);
+                            sectionZeroContent.slideDown(250);
                             $(e.currentTarget).addClass(ClassNames.OPEN).removeClass(ClassNames.CLOSED);
                             browserStorage.setSecZeroCollapseStatus("collapsed");
                         } else {
                             // Sec zero is expanded so collapse it on user click.
-                            sectionZero.slideUp(250);
+                            sectionZeroContent.slideUp(250);
                             $(e.currentTarget).addClass(ClassNames.CLOSED).removeClass(ClassNames.OPEN);
                             browserStorage.setSecZeroCollapseStatus("expanded");
                         }

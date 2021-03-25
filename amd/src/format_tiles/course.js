@@ -76,6 +76,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
             CLOSE_SEC_BTN: ".closesectionbtn",
             HIDE_SEC0_BTN: "#buttonhidesec0",
             SECTION_ZERO: "#section-0",
+            SECTION_ZERO_CONTENT: "#section-0 > .content",
             MOODLE_VIDEO: ".mediaplugin.mediaplugin_videojs",
             LAUNCH_STANDARD: '[data-action="launch-tiles-standard"]',
             TOOLTIP: "[data-toggle=tooltip]",
@@ -592,20 +593,20 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
          */
         var setSectionZeroFromUserPref = function () {
             var buttonHideSecZero = $(Selector.HIDE_SEC0_BTN);
-            var sectionZero = $(Selector.SECTION_ZERO);
+            var sectionZeroContent = $(Selector.SECTION_ZERO_CONTENT);
             if (browserStorage.storageEnabledLocal()) {
                 // Collapse section zero if user had it collapsed before - relies on local storage so only if enabled.
                 if (browserStorage.getSecZeroCollapseStatus() === true) {
-                    sectionZero.slideUp(0);
+                    sectionZeroContent.slideUp(0);
                     buttonHideSecZero.addClass(ClassNames.CLOSED).removeClass(ClassNames.OPEN); // Button image.
                 } else {
-                    sectionZero.slideDown(300);
+                    sectionZeroContent.slideDown(300);
                     buttonHideSecZero.addClass(ClassNames.OPEN).removeClass(ClassNames.CLOSED); // Button image.
                 }
             } else {
                 // Storage not available so we dont know if sec zero was previously collapsed - expand it.
                 buttonHideSecZero.addClass(ClassNames.OPEN).removeClass(ClassNames.CLOSED);
-                sectionZero.slideDown(300);
+                sectionZeroContent.slideDown(300);
             }
         };
 
@@ -899,7 +900,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                 // Do not include for Moodle 3.5 or higher as not needed.
                                 if (headerBar.outerHeight() !== undefined) {
                                     HEADER_BAR_HEIGHT = headerBar.outerHeight();
-                                    var logorect = window.getElementById("logo-header").getBoundingClientRect();
+                                    var logorect = document.getElementById("logo-header").getBoundingClientRect();
                                     var logoheight = logorect.y + logorect.height;
                                     var logoy = Math.max(0, logoheight - window.scrollY);
                                     headerOverlay = $("<div></div>")
@@ -911,6 +912,8 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                             cancelTileSelections(0);
                                             clickItemBehind(e);
                                         });
+                                    $('#page').css("padding-top", 0);
+                                    $('#logo-header').css("border-top", "16px solid #fff");
                                     window.addEventListener(Event.SCROLL, function () {
                                         logoy = Math.max(0, logoheight - window.scrollY);
                                         headerOverlay.css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy);
@@ -947,15 +950,15 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
 
                     // When the user presses the button to collapse or expand Section zero (section at the top of the course).
                     pageContent.on(Event.CLICK, Selector.HIDE_SEC0_BTN, function (e) {
-                        var sectionZero = $(Selector.SECTION_ZERO);
-                        if (sectionZero.css(CSS.DISPLAY) === "none") {
+                        var sectionZeroContent = $(Selector.SECTION_ZERO_CONTENT);
+                        if (sectionZeroContent.css(CSS.DISPLAY) === "none") {
                             // Sec zero is collapsed so expand it on user click.
-                            sectionZero.slideDown(250);
+                            sectionZeroContent.slideDown(250);
                             $(e.currentTarget).addClass(ClassNames.OPEN).removeClass(ClassNames.CLOSED);
                             browserStorage.setSecZeroCollapseStatus("collapsed");
                         } else {
                             // Sec zero is expanded so collapse it on user click.
-                            sectionZero.slideUp(250);
+                            sectionZeroContent.slideUp(250);
                             $(e.currentTarget).addClass(ClassNames.CLOSED).removeClass(ClassNames.OPEN);
                             browserStorage.setSecZeroCollapseStatus("expanded");
                         }

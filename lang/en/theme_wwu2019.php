@@ -94,3 +94,4 @@ $string['viewfullsection'] = 'View full section';
 // Format Tile.
 $string['tilemovefailed'] = "Tile couldn't be moved";
 $string['tilemovefailedtitle'] = "Tile move failed";
+$string['format_tiles_generalsec0name'] = "General";
