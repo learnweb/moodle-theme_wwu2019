@@ -29,7 +29,7 @@
  */
 var scriptname = document.currentScript.getAttribute("data-requiremodule");
 if (scriptname === "core/first") {
-    require.undef("format_tiles/edit_course");
+    require.undef("format_tiles/course");
 }
 define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_tiles/browser_storage",
         "core/notification", "core/str", "format_tiles/tile_fitter"],
