@@ -124,37 +124,37 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                     return $(selector).length > 0;
                 }));
                 if (fadeIn === true) {
-                    headerBar.css(CSS.Z_INDEX, backDropZIndex + 2);
-                    $('#logo-header').css('z-index', backDropZIndex + 2)
+                    headerBar.css(CSS.Z_INDEX, backDropZIndex + 3);
+                    $('#logo-header').css('z-index', backDropZIndex + 3)
                         .css('background', '#fff');
                     headerOverlay.fadeIn({
                         duration: 300,
                         step: function () {
-                            headerBar.css('border-left', `1rem solid rgba(170, 170, 170,
-                            ${parseFloat(windowOverlay.css('opacity') * 3)})`);
-                            headerBar.css('border-right', `1rem solid rgba(170, 170, 170,
-                            ${parseFloat(windowOverlay.css('opacity') * 3)})`);
+                            headerBar.css('border-left', `1rem solid rgba(193, 193, 193,
+                            ${parseFloat(windowOverlay.css('opacity') * 5)})`);
+                            headerBar.css('border-right', `1rem solid rgba(193, 193, 193,
+                            ${parseFloat(windowOverlay.css('opacity') * 5)})`);
                         },
                         complete: function () {
-                            headerBar.css('border-left', `1rem solid rgba(170, 170, 170, 0.6)`);
-                            headerBar.css('border-right', `1rem solid rgba(170, 170, 170, 0.6)`);
+                            headerBar.css('border-left', `1rem solid rgba(193, 193, 193, 1)`);
+                            headerBar.css('border-right', `1rem solid rgba(193, 193, 193, 1)`);
                         }
                     });
                 } else {
-                    headerBar.css(CSS.Z_INDEX, backDropZIndex);
-                    $('#logo-header').css('z-index', backDropZIndex)
-                        .css('background', '#fff');
                     headerOverlay.fadeOut({
                         duration: 300,
                         step: function () {
-                            headerBar.css('border-left', `1rem solid rgba(170, 170, 170,
-                            ${parseFloat(windowOverlay.css('opacity') * 3)})`);
-                            headerBar.css('border-right', `1rem solid rgba(170, 170, 170,
-                            ${parseFloat(windowOverlay.css('opacity') * 3)})`);
+                            headerBar.css('border-left', `1rem solid rgba(193, 193, 193,
+                            ${parseFloat(windowOverlay.css('opacity') * 5)})`);
+                            headerBar.css('border-right', `1rem solid rgba(193, 193, 193,
+                            ${parseFloat(windowOverlay.css('opacity') * 5)})`);
                         },
                         complete: function () {
-                            headerBar.css('border-left', `1rem solid rgba(170, 170, 170, 0)`);
-                            headerBar.css('border-right', `1rem solid rgba(170, 170, 170, 0)`);
+                            headerBar.css('border-left', `1rem solid rgba(193, 193, 193, 0)`);
+                            headerBar.css('border-right', `1rem solid rgba(193, 193, 193, 0)`);
+                            headerBar.css(CSS.Z_INDEX, backDropZIndex);
+                            $('#logo-header').css('z-index', backDropZIndex)
+                                .css('background', '#fff');
                         }
                     });
                 }
@@ -910,7 +910,7 @@ define('format_tiles/course', ["jquery", "core/templates", "core/ajax", "format_
                                         .addClass(ClassNames.HEADER_OVERLAY).attr("id", ClassNames.HEADER_OVERLAY)
                                         .css(CSS.DISPLAY, "none");
                                     headerOverlay.insertAfter(Selector.HEADER_BAR)
-                                        .css(CSS.Z_INDEX, (overlayZindex) + 4).css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy)
+                                        .css(CSS.Z_INDEX, (overlayZindex) + 2).css(CSS.HEIGHT, HEADER_BAR_HEIGHT + logoy)
                                         .click(function (e) {
                                             cancelTileSelections(0);
                                             clickItemBehind(e);
