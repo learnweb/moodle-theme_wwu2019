@@ -139,6 +139,9 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                     return $(selector).length > 0;
                 }));
                 if (fadeIn === true) {
+                    headerBar.css(CSS.Z_INDEX, backDropZIndex + 3);
+                    $('#logo-header').css('z-index', backDropZIndex + 3)
+                        .css('background', '#fff');
                     headerOverlay.fadeIn({
                         duration: 300,
                         step: function () {
@@ -153,6 +156,9 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                         }
                     });
                 } else {
+                    headerBar.css(CSS.Z_INDEX, backDropZIndex);
+                    $('#logo-header').css('z-index', backDropZIndex)
+                        .css('background', '#fff');
                     headerOverlay.fadeOut({
                         duration: 300,
                         step: function () {
@@ -1275,9 +1281,6 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                             return $(selector).length > 0;
                         }));
                         if (headerBar !== undefined && headerBar.length !== 0) {
-                            headerBar.css(CSS.Z_INDEX, overlayZindex + 3);
-                            $('#logo-header').css('z-index', overlayZindex + 3)
-                                .css('background', '#fff');
                             if (headerBar.attr("id") !== "navwrap") {
                                 // ID navwrap suggests theme is Adaptable based. We don't bother with header overlay if so.
                                 // Otherise the header bar has a separate mini overlay of its own - find and hide this.
