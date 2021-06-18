@@ -61,7 +61,7 @@
                     {{>format_tiles/tileicon}}
                 </div>
                 <div class="tiletopright pull-right" id="tiletopright-{{tileid}}" aria-hidden="true">
-                {{#isactive}}<div class="icon fa fa-star"></div>{{/isactive}}
+                    {{#isactive}}<div class="icon fa fa-star"></div>{{/isactive}}
                 </div>
             </div>
             <div class="tile-text" id="tileText-{{tileid}}"
@@ -109,5 +109,5 @@
         {{! This is added as empty for now - JS will populate and de-populate as necessary and add image to it using template.}}
         <span class="tile-loading-icon" id="loading-icon-{{tileid}}" style="display: none;"></span>
     {{/usingjsnav}}
-    {{{section_edit_control}}}
+    {{#isediting}}{{{section_edit_control}}}{{/isediting}}
 </li>

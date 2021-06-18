@@ -199,7 +199,6 @@ body.format-tiles {
     .course-content ul.tiles .tile {
         border-top-color: $primary;
         background-color: rgba(22, 112, 204, 0.05);
-        overflow: hidden;
     }
 
     .course-content ul.tiles .tile:hover {
@@ -273,6 +272,10 @@ body.format-tiles {
     .progresspendingwarning {
         color: lightskyblue;
         font-size: 0.7em;
+    }
+
+    .section_action_menu {
+        height: fit-content;
     }
 
 
