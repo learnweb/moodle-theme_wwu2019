@@ -42,7 +42,6 @@
 }}
 
 <div class="availabilityinfo isrestricted isfullinfo">
-    <span class="badge badge-info"{{#visible}}
-        {{#availabilitymessage}}title="{{availabilitymessage}}" data-html="true" data-toggle="tooltip"{{/availabilitymessage}}
-    {{/visible}}>{{^visible}}{{#str}}hiddenfromstudents{{/str}}{{/visible}}{{#visible}}{{#str}}restricted{{/str}}{{/visible}}</span>
+    {{#hidden}}<div class="badge badge-info">{{#str}}hiddenfromstudents{{/str}}</div>{{/hidden}}
+    {{#restricted}}<div class="badge badge-info{{#hidden}} second-badge{{/hidden}}">{{#str}}restricted{{/str}}</div>{{/restricted}}
 </div>

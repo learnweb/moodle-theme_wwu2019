@@ -170,6 +170,7 @@ body.pagelayout-incourse {
 }
 
 body.format-tiles {
+
     ul.tiles#multi_section_tiles {
         display: flex;
         justify-content: space-between;
@@ -198,6 +199,7 @@ body.format-tiles {
     .course-content ul.tiles .tile {
         border-top-color: $primary;
         background-color: rgba(22, 112, 204, 0.05);
+        overflow: hidden;
     }
 
     .course-content ul.tiles .tile:hover {
@@ -244,6 +246,18 @@ body.format-tiles {
             }
         }
 
+    }
+
+    ul.tiles#multi_section_tiles .availabilityinfo.isrestricted.isfullinfo .badge.badge-info {
+        position: absolute;
+    }
+
+    ul.tiles#multi_section_tiles .availabilityinfo.isrestricted.isfullinfo .badge.badge-info.second-badge {
+        margin-top: 20px;
+    }
+
+    ul.tiles .tile .tile-text {
+        padding-top: 0;
     }
 
     .course-content ul.tiles .tile.current {
@@ -297,16 +311,6 @@ body.format-tiles {
         display: inline-block;
         overflow: visible;
         text-overflow: ellipsis;
-    }
-
-    .dummy-2 {
-        display: inline-block;
-        width: 0;
-    }
-
-    .dummy {
-        display: inline-block;
-        width: 100%;
     }
 
     // -- mixins

@@ -61,12 +61,6 @@
                     {{>format_tiles/tileicon}}
                 </div>
                 <div class="tiletopright pull-right" id="tiletopright-{{tileid}}" aria-hidden="true">
-                    {{#hidden}}
-                        <div class="hiddentoggle" id="hiddentoggle-{{tileid}}" href="{{{config.wwwroot}}}/course/view.php?id={{courseid}}&sesskey={{sesskey}}&show={{tileid}}">{{#pix}}eye-slash, format_tiles, {{#str}}hidden, format_tiles{{/str}}{{/pix}}</div>
-                    {{/hidden}}
-                    {{#restricted}}
-                        <div id="restrictedtoggle-{{tileid}}" href="">{{#pix}}lock, format_tiles, {{#str}}restricted{{/str}}{{/pix}}</div>
-                    {{/restricted}}
                 {{#isactive}}<div class="icon fa fa-star"></div>{{/isactive}}
                 </div>
             </div>
@@ -82,7 +76,6 @@
                 {{/availabilitymessage}}
             </div>
         </div>
-
         {{/hastilephoto}}
 
         {{#hastilephoto}}
