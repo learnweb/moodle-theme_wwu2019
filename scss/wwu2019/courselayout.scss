@@ -255,6 +255,10 @@ body.format-tiles {
         margin-top: 20px;
     }
 
+    ul.tiles .tile.tile-restricted {
+        opacity: 1;
+    }
+
     ul.tiles .tile .tile-text {
         padding-top: 0;
     }

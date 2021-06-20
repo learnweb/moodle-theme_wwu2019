@@ -84,16 +84,6 @@
 {{/showinitialpageloadingicon}}
 
 {{#isediting}}
-    <div class="expand-collapse-all-btns">
-        <a class="btn btn-secondary" data-action="expand-all" title="{{#str}}expandall, format_tiles{{/str}}"
-           href="{{{config.wwwroot}}}/course/view.php?id={{courseid}}&expanded=1" id="expand-all-btn">
-        {{#pix}}expand, format_tiles{{/pix}}&nbsp;{{#str}}expandall, format_tiles{{/str}}
-        </a>
-        <a class="btn btn-secondary" data-action="collaspse-all" title="{{#str}}collapsesections, format_tiles{{/str}}"
-            href="{{{config.wwwroot}}}/course/view.php?id={{courseid}}&expanded=-1" id="collapse-all-btn">
-        {{#pix}}collapse, format_tiles{{/pix}}&nbsp;{{#str}}collapsesections, format_tiles{{/str}}
-        </a>
-    </div>
     {{#hasoutofsequencetiles}}
         <div class="alert alert-danger" id="warning-outofsequence">
             {{#str}}tilesoutofsequencewarning, format_tiles{{/str}}
