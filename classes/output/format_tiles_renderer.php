@@ -73,11 +73,21 @@ class format_tiles_renderer extends \format_tiles_renderer {
                 array_push($progress, $progresstileinfo);
             }
         }
+        $defaultsectionpre = get_string('sectionname', 'format_tiles');
+        $unnamedtiles = false;
+        foreach ($data['tiles'] as $tile) {
+            $defaulttiletitle = htmlspecialchars_decode($defaultsectionpre . $tile['tileid']);
+            if ($defaulttiletitle != $tile['title']) {
+                $unnamedtiles = true;
+                break;
+            }
+        }
         $modinfo = get_fast_modinfo($course);
         $sec0data = $modinfo->get_section_info(0);
         $data["section_zero"]["name"] = is_null($sec0data->name) ?
             get_string("format_tiles_generalsec0name", "theme_wwu2019") : $sec0data->name;
         $data["progress-sections"] = $progress;
+        $data['unnamedtiles'] = $unnamedtiles;
         echo $this->render_from_template('format_tiles/multi_section_page', $data);
     }
 }

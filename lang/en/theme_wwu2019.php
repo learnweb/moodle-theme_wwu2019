@@ -95,3 +95,4 @@ $string['viewfullsection'] = 'View full section';
 $string['tilemovefailed'] = "Tile couldn't be moved";
 $string['tilemovefailedtitle'] = "Tile move failed";
 $string['format_tiles_generalsec0name'] = "General";
+$string['format_tiles_unnamedsectionswarn'] = "There are unnamed sections in this course. Moving these can result in a name change, making it seem like they weren't moved at all";

@@ -50,6 +50,7 @@
         "all_tiles_expanded": 0,
         "activity_clipboard": "",
         "course_activity_clipboard": ""
+        "unnamedtiles": 1
     }
 }}
 
@@ -98,7 +99,11 @@
         </div>
     {{/hasoutofsequencetiles}}
 {{/isediting}}
-
+{{#isediting}}
+    {{#unnamedtiles}}
+        <span class="unnamedsectionswarning">{{#str}}format_tiles_unnamedsectionswarn, theme_wwu2019{{/str}}</span>
+    {{/unnamedtiles}}
+{{/isediting}}
 <ul class="tiles" id="multi_section_tiles">
     {{#section_zero}}
         {{> format_tiles/section_zero}}

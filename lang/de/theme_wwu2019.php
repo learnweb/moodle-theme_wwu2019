@@ -96,3 +96,4 @@ $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
 $string['tilemovefailed'] = "Kachel konnte nicht verschoben werden";
 $string['tilemovefailedtitle'] = "Verschiebungfehler";
 $string['format_tiles_generalsec0name'] = "Allgemein";
+$string['format_tiles_unnamedsectionswarn'] = "Dieser Kurs beinhaltet unbenannte Kacheln. Das verschieben dieser verändert deren angezeigten Namen.";
