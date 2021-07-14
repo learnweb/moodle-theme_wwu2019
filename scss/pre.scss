@@ -29,6 +29,6 @@ $onecolumn-break-point: $mobile-break-point;
 
 // $learnwebblue / themecolor defined in core_renderer.php
 $wwugreen: #578014;
-$dividergrey: #423c39;
-$outlinegrey: #bec6c8;
+$dividergrey: var(--wwu-dividergrey);
+$outlinegrey: var(--wwu-outlinegrey);
 $wwu-footer: #3e3e3c;

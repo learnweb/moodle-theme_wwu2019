@@ -59,13 +59,14 @@ $breadcrumb-divider: "/" !default;
 $breadcrumb-divider-rtl: "/" !default;
 
 // Menu
-
 $main-menu-height: 55px;
 
 // Alerts
 $alert-border-width:                0 !default;
 
 $card-group-margin: .25rem;
+
+$custom-select-indicator-color: #777;
 
 // stylelint-disable
 $theme-colors: () !default;
@@ -105,12 +106,12 @@ $theme-colors: map-merge((
     border-radius: 50%;
 }
 
-.block {
-    background-color: $gray-100;
+.card {
+    background: var(--wwu-bg);
 }
 
 #page-my-index {
-    background-color: $white;
+    background-color: var(--wwu-bg);
 }
 // Reset the default styling back to the bootstrap defaults for
 // the secondary outline button because gray-200 is much too light

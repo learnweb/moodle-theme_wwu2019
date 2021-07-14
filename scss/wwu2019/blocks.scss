@@ -21,10 +21,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+.card {
+    border-color: var(--wwu-muted-fg);
+}
+
 .block.card {
     border: none;
     border-radius: 0;
-    background: white;
+    background: var(--wwu-bg);
     word-break: break-word;
 
     & > .card-body {

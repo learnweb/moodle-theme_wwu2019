@@ -27,7 +27,7 @@
     border: 2px solid #bec6c8;
 
     .carousel-indicators {
-        background-color: rgba($learnwebblue, .7);
+        background-color: rgba(var(--wwu-learnwebblue), .7);
         height: 26px;
         padding-right: 65px;
         margin: 0;

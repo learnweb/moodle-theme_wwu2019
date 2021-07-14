@@ -70,8 +70,18 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: var(--wwu-bg);
+    color: var(--wwu-fg);
     font-family: 'MetaWebPro', sans-serif;
+}
+
+a,
+.btn-link {
+    color: var(--wwu-learnwebblue);
+
+    &:hover {
+        color: var(--wwu-learnwebblue-highlight);
+    }
 }
 
 h1 {
@@ -218,14 +228,14 @@ footer#wwu-footer {
                 line-height: 1;
 
                 a {
-                    color: $wwu-footer;
+                    color: var(--wwu-fg);
                     text-transform: uppercase;
                 }
 
-                &:hover {
+                /*&:hover {
                     text-shadow: 1px 0 0 black;
                     text-decoration: none;
-                }
+                }*/
             }
 
             li ~ li {
