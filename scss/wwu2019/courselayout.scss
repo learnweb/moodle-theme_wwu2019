@@ -24,6 +24,7 @@
 #region-main {
     border: 2px solid $outlinegrey;
     border-radius: 0;
+    background: var(--wwu-bg);
 }
 
 body.pagelayout-course,
@@ -37,7 +38,7 @@ body.pagelayout-report {
 
     .page-title {
         font-weight: bold;
-        color: white;
+        color: white; // Should be white both in light and dark theme.
         background: $learnwebblue;
         padding: 16px 16px 14px 16px;
         border: 2px solid $outlinegrey;
@@ -152,6 +153,14 @@ body.pagelayout-course {
         display: inherit;
     }
 
+}
+
+.forumpost.unread .row.header,
+.path-course-view .unread,
+span.unread {
+    background-color: #ddedff;
+    padding: 3px;
+    border-radius: 4px;
 }
 
 body.pagelayout-incourse {
@@ -270,4 +279,8 @@ body.format-topcoll {
 .section .activity .contentwithoutlink > a,
 .section .activity .activityinstance > a {
     display: inline-block;
+}
+
+.section li.activity.hasinfo {
+    border-bottom: 1px solid var(--wwu-muted-bg);
 }

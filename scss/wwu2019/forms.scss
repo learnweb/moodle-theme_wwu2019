@@ -34,12 +34,24 @@
 }
 
 /* Form control */
-.form-control {
+.form-control,
+.form-control:focus {
     border-radius: 0;
+    background-color: var(--wwu-bg);
+    border: 1px solid var(--wwu-muted-fg);
+    color: var(--wwu-fg);
 }
 
 .custom-select {
     border-radius: 0;
+    color: var(--wwu-fg);
+    background-color: var(--wwu-bg);
+    border: 1px solid var(--wwu-muted-fg);
+}
+
+.form-autocomplete-suggestions {
+    background-color: var(--wwu-bg);
+    border: 1px solid var(--wwu-muted-fg);
 }
 
 /* Pagination */

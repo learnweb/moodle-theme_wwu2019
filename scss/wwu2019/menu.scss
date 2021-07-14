@@ -61,7 +61,7 @@ ul.main-menubar {
 
     span,
     .icon {
-        color: black;
+        color: var(--wwu-contrast-fg);
         font-size: 1.34375em;
         text-transform: uppercase;
     }
@@ -72,11 +72,12 @@ ul.main-menubar {
     position: sticky; /* stylelint-disable-line */
     top: 0;
     z-index: #{$zindex-dropdown + 1};
-    background: white;
+    background: var(--wwu-bg);
+    color: var(--wwu-contrast-fg);
     height: $main-menu-height;
     margin: 0 #{-$page-padding};
-    border-left: $page-padding solid white;
-    border-right: $page-padding solid white;
+    border-left: $page-padding solid var(--wwu-bg);
+    border-right: $page-padding solid var(--wwu-bg);
 
     #main-menu-border {
         padding: 10px 0;
@@ -126,7 +127,7 @@ ul.main-menubar {
 
         &:not(:last-child) {
             padding-right: 15px;
-            border-right: 1px solid black;
+            border-right: 1px solid var(--wwu-contrast-fg);
             margin-right: 15px;
         }
 
@@ -166,7 +167,7 @@ ul.main-menubar {
                     // Hide divider below bottommost items.
                     margin-bottom: -1px;
                     width: calc(100% + 16px);
-                    background: white;
+                    background: var(--wwu-bg);
 
                     .breaker {
                         display: none;
@@ -200,7 +201,7 @@ ul.main-menubar {
             display: flex;
             width: 100%;
             padding: 12px 12px 12px 0;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-contrast-fg);
             align-items: center;
 
             & > * {
@@ -214,7 +215,7 @@ ul.main-menubar {
             & > span,
             & > .icon {
                 font-size: 16px;
-                color: $learnwebblue;
+                color: var(--wwu-learnwebblue);
             }
 
             & > .arrow {
@@ -235,11 +236,11 @@ ul.main-menubar {
             font-size: 10.5px;
             list-style: none;
             padding: 4px 12px 4px 20px;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-contrast-fg);
 
             // Second level sub-sub-menu.
             .sub-sub-menu {
-                border-top: 1px solid black;
+                border-top: 1px solid var(--wwu-contrast-fg);
             }
         }
 
@@ -327,11 +328,11 @@ ul.main-menubar {
         }
 
         .sub-menu-item.divider > a {
-            border-bottom: 1px dashed black;
+            border-bottom: 1px dashed var(--wwu-contrast-fg);
         }
 
         .sub-menu-item.open > a {
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-contrast-fg);
         }
 
         &.open > a > span.underline {
@@ -386,7 +387,7 @@ ul.main-menubar {
                 display: none;
                 position: absolute;
                 top: 100%;
-                background: white;
+                background: var(--wwu-bg);
                 width: 100%;
                 border-bottom: 4px solid $dividergrey;
                 padding: 8px 0;
@@ -435,7 +436,7 @@ ul.main-menubar {
                 .sub-menu-scroll-wrapper {
                     position: relative;
                     padding: 0 12px 0 20px;
-                    border-top: 1px solid black;
+                    border-top: 1px solid var(--wwu-contrast-fg);
                     border-bottom: none;
                     top: unset;
                     left: unset;
@@ -450,7 +451,7 @@ ul.main-menubar {
 
         .main-menu-item:not(:last-child) {
             border-right: none;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-contrast-fg);
         }
     }
 
@@ -469,7 +470,7 @@ ul.main-menubar {
     top: 0;
     height: $main-menu-height;
     width: 100%;
-    background-color: $white;
+    background-color: var(--wwu-bg);
 }
 
 #menu-bottom {
