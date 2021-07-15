@@ -22,12 +22,72 @@
  */
 
 import $ from 'jquery';
+import Ajax from 'core/ajax';
 
 /**
  * Init function
  */
 export function init() {
     openMenu();
+    initThemeChooser();
+}
+
+
+function initThemeChooser() {
+    const body = $('body');
+    const uselighttheme = $('#user-menu .wwu-uselighttheme');
+    const useostheme = $('#user-menu .wwu-useostheme');
+    const usedarktheme = $('#user-menu .wwu-usedarktheme');
+
+    let selected;
+    if (body.hasClass('dark')) {
+        selected = usedarktheme;
+    } else if (body.hasClass('light')) {
+        selected = uselighttheme;
+    } else {
+        selected = useostheme;
+    }
+    selected.addClass('selectedtheme');
+
+    uselighttheme.click(function() {
+        selected.removeClass('selectedtheme');
+        body.removeClass('dark');
+        body.addClass('light');
+        updateThemePreferenceAjax(1);
+        selected = uselighttheme;
+        selected.addClass('selectedtheme');
+    });
+    useostheme.click(function() {
+        selected.removeClass('selectedtheme');
+        body.removeClass('dark');
+        body.removeClass('light');
+        updateThemePreferenceAjax(0);
+        selected = useostheme;
+        selected.addClass('selectedtheme');
+    });
+    usedarktheme.click(function() {
+        selected.removeClass('selectedtheme');
+        body.addClass('dark');
+        body.removeClass('light');
+        updateThemePreferenceAjax(2);
+        selected = usedarktheme;
+        selected.addClass('selectedtheme');
+    });
+}
+
+function updateThemePreferenceAjax(theme) {
+    var request = {
+        methodname: 'core_user_update_user_preferences',
+        args: {
+            preferences: [{
+                type: 'theme_wwu2019_theme',
+                value: theme
+            }]
+        }
+    };
+
+    Ajax.call([request])[0]
+        .fail(Notification.exception);
 }
 
 const onecolumnbreakpoint = 767;

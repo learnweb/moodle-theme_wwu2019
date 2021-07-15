@@ -54,7 +54,19 @@ class layout {
      */
     public static function get_default_template_context() {
         global $OUTPUT, $PAGE, $SITE, $CFG;
-        $bodyattributes = $OUTPUT->body_attributes();
+
+        $themepreference = get_user_preferences('theme_wwu2019_theme');
+        $extraclasses = [];
+        if ($themepreference == 1) {
+            $extraclasses[] = 'light';
+        } else if ($themepreference == 2) {
+            $extraclasses[] = 'dark';
+        }
+
+        $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+
+        user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
+
         $blockspost = $OUTPUT->blocks('side-post');
 
         $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
