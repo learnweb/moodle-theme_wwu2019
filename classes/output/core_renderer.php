@@ -152,6 +152,7 @@ class core_renderer extends \core_renderer {
         if (!$this->is_login_page()) {
             $output .= $this->add_endofpage_button();
         }
+
         $output .= parent::navbar_plugin_output();
 
         return $output;
@@ -689,6 +690,37 @@ class core_renderer extends \core_renderer {
                     'icon' => (new pix_icon('i/user', ''))->export_for_pix()
             ];
         }
+
+        // Create Theme chooser.
+        $menucontent[] = [
+                'name' => 'Choose Theme',
+                'hasmenu' => true,
+                'isexpanded' => false,
+                'menu' => [
+                        [
+                                'name' => 'Light',
+                                'icon' => (new pix_icon('i/sun', ''))->export_for_pix(),
+                                'href' => null,
+                                'hasmenu' => false,
+                                'class' => 'wwu-uselighttheme'
+                        ],
+                        [
+                                'name' => 'Use OS Theme',
+                                'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
+                                'href' => null,
+                                'hasmenu' => false,
+                                'class' => 'wwu-useostheme',
+                        ],
+                        [
+                                'name' => 'Dark',
+                                'icon' => (new pix_icon('i/moon', ''))->export_for_pix(),
+                                'href' => null,
+                                'hasmenu' => false,
+                                'class' => 'wwu-usedarktheme',
+                        ],
+                ],
+                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
+        ];
 
         if ($rolemenuitem) {
             $menucontent[] = $rolemenuitem;

@@ -361,6 +361,11 @@ ul.main-menubar {
             vertical-align: bottom;
             white-space: nowrap;
         }
+
+        .selectedtheme {
+            font-weight: bold;
+            font-style: italic;
+        }
     }
 
     #main-menu-hamburger > a#hamburger-toggle > i.icon {
