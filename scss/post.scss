@@ -53,16 +53,22 @@
     }
 }
 
-body {
+:root {
     @include light-colors;
-}
+    color-scheme: light dark;
 
-body.dark {
-    @include dark-colors;
+    &.dark {
+        @include dark-colors;
+        color-scheme: dark;
+    }
+
+    &.light {
+        color-scheme: light;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
-    body:not(.light) {
+    :root:not(.light) {
         @include dark-colors;
     }
 }

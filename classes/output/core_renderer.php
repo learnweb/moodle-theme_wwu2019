@@ -1257,4 +1257,15 @@ _paq.push(['trackPageView']);
         return $output;
     }
 
+    public function htmlattributes() {
+        user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
+        $themepreference = get_user_preferences('theme_wwu2019_theme');
+        if ($themepreference == 1) {
+            return parent::htmlattributes() . 'class="light"';
+        } else if ($themepreference == 2) {
+            return parent::htmlattributes() . 'class="dark"';
+        }
+        return parent::htmlattributes();
+    }
+
 }

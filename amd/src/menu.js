@@ -34,15 +34,15 @@ export function init() {
 
 
 function initThemeChooser() {
-    const body = $('body');
+    const html = $('html');
     const uselighttheme = $('#user-menu .wwu-uselighttheme');
     const useostheme = $('#user-menu .wwu-useostheme');
     const usedarktheme = $('#user-menu .wwu-usedarktheme');
 
     let selected;
-    if (body.hasClass('dark')) {
+    if (html.hasClass('dark')) {
         selected = usedarktheme;
-    } else if (body.hasClass('light')) {
+    } else if (html.hasClass('light')) {
         selected = uselighttheme;
     } else {
         selected = useostheme;
@@ -51,24 +51,24 @@ function initThemeChooser() {
 
     uselighttheme.click(function() {
         selected.removeClass('selectedtheme');
-        body.removeClass('dark');
-        body.addClass('light');
+        html.removeClass('dark');
+        html.addClass('light');
         updateThemePreferenceAjax(1);
         selected = uselighttheme;
         selected.addClass('selectedtheme');
     });
     useostheme.click(function() {
         selected.removeClass('selectedtheme');
-        body.removeClass('dark');
-        body.removeClass('light');
+        html.removeClass('dark');
+        html.removeClass('light');
         updateThemePreferenceAjax(0);
         selected = useostheme;
         selected.addClass('selectedtheme');
     });
     usedarktheme.click(function() {
         selected.removeClass('selectedtheme');
-        body.addClass('dark');
-        body.removeClass('light');
+        html.addClass('dark');
+        html.removeClass('light');
         updateThemePreferenceAjax(2);
         selected = usedarktheme;
         selected.addClass('selectedtheme');
