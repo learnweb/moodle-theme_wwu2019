@@ -131,7 +131,7 @@ ul.main-menubar {
             margin-right: 15px;
         }
 
-        &.open > a > span.underline {
+        &.open > a span.underline {
             text-decoration: underline;
         }
 
@@ -148,6 +148,7 @@ ul.main-menubar {
         left: 0;
         top: 100%; /* #main-menu is offset parent */
         width: 100%;
+        background-color: var(--wwu-bg);
 
         .sub-menu-scroll-container {
             overflow-y: auto;
@@ -167,7 +168,6 @@ ul.main-menubar {
                     // Hide divider below bottommost items.
                     margin-bottom: -1px;
                     width: calc(100% + 16px);
-                    background: var(--wwu-bg);
 
                     .breaker {
                         display: none;
@@ -212,7 +212,7 @@ ul.main-menubar {
                 flex: auto 1 1;
             }
 
-            & > span,
+            & span,
             & > .icon {
                 font-size: 16px;
                 color: var(--wwu-learnwebblue);
@@ -263,7 +263,7 @@ ul.main-menubar {
                 flex: auto 0 0;
             }
 
-            & > span {
+            span {
                 line-height: 20px;
                 text-transform: none;
                 flex: auto 1 1;
@@ -365,6 +365,10 @@ ul.main-menubar {
         .selectedtheme {
             font-weight: bold;
             font-style: italic;
+        }
+
+        .wwu-useostheme {
+            text-decoration: dotted;
         }
     }
 

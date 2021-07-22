@@ -693,30 +693,31 @@ class core_renderer extends \core_renderer {
 
         // Create Theme chooser.
         $menucontent[] = [
-                'name' => 'Choose Theme',
+                'name' => get_string('choosetheme', 'theme_wwu2019'),
                 'hasmenu' => true,
                 'isexpanded' => false,
                 'menu' => [
                         [
-                                'name' => 'Light',
+                                'name' => get_string('light', 'theme_wwu2019'),
                                 'icon' => (new pix_icon('i/sun', ''))->export_for_pix(),
                                 'href' => null,
                                 'hasmenu' => false,
                                 'class' => 'wwu-uselighttheme'
                         ],
                         [
-                                'name' => 'Use OS Theme',
+                                'name' => get_string('ostheme', 'theme_wwu2019'),
                                 'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
                                 'href' => null,
                                 'hasmenu' => false,
                                 'class' => 'wwu-useostheme',
+                                'addatags' => ' title="' . get_string('ostheme_help', 'theme_wwu2019') . '"'
                         ],
                         [
-                                'name' => 'Dark',
+                                'name' => get_string('dark', 'theme_wwu2019'),
                                 'icon' => (new pix_icon('i/moon', ''))->export_for_pix(),
                                 'href' => null,
                                 'hasmenu' => false,
-                                'class' => 'wwu-usedarktheme',
+                                'class' => 'wwu-usedarktheme'
                         ],
                 ],
                 'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()

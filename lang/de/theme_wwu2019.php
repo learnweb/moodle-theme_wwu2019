@@ -88,5 +88,11 @@ $string['marketingtitledesc'] = 'Title to show in this marketing spot';
 $string['marketingcontent'] = 'Beschreibung';
 $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Keep it short and sweet.';
 
-
 $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
+
+// Theme switcher
+$string['choosetheme'] = 'Theme auswählen';
+$string['light'] = 'Hell';
+$string['dark'] = 'Dunkel';
+$string['ostheme'] = 'Systemfarben';
+$string['ostheme_help'] = 'Wechselt zwischen hellem und dunklem Theme basierend auf den Systemeinstellungen.';

@@ -21,63 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-@mixin light-colors {
-    --wwu-bg: #fff;
-    --wwu-fg: #373a3c;
-    --wwu-muted-bg: #ccc;
-    --wwu-muted-fg: #ced4da;
-    --wwu-contrast-fg: #000;
-    --wwu-outlinegrey: #bec6c8;
-    --wwu-dividergrey: #423c39;
-    --wwu-learnwebblue: #006784;
-    --wwu-learnwebblue-highlight: #002b38;
-}
-
-@mixin dark-colors {
-    --wwu-bg: #222;
-    --wwu-fg: #eee;
-    --wwu-muted-bg: #444;
-    --wwu-muted-fg: #666;
-    --wwu-contrast-fg: #eee;
-    --wwu-outlinegrey: #444;
-    --wwu-dividergrey: #777;
-    --wwu-learnwebblue: #00b6ef;
-    --wwu-learnwebblue-highlight: #40c7f8;
-
-    #logo-header a.wwu-logo {
-        filter: brightness(200);
-    }
-
-    #main-menu .arrow {
-        filter: brightness(2);
-    }
-}
-
-:root {
-    @include light-colors;
-    color-scheme: light dark;
-
-    &.dark {
-        @include dark-colors;
-        color-scheme: dark;
-    }
-
-    &.light {
-        color-scheme: light;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not(.light) {
-        @include dark-colors;
-    }
-}
-
-.bg-white {
-    //noinspection Stylelint
-    background-color: var(--wwu-bg) !important;
-}
-
+@import "wwu2019/theming";
 @import "wwu2019/general";
 @import "wwu2019/menu";
 @import "wwu2019/blocks";

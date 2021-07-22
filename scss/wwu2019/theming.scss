@@ -1,0 +1,282 @@
+@mixin light-colors {
+    --wwu-bg: #fff;
+    --wwu-fg: #373a3c;
+    --wwu-muted-bg: #ccc;
+    --wwu-muted-fg: #ced4da;
+    --wwu-contrast-fg: #000;
+    --wwu-outlinegrey: #bec6c8;
+    --wwu-dividergrey: #423c39;
+    --wwu-learnwebblue: #006784;
+    --wwu-learnwebblue-highlight: #002b38;
+    --wwu-learnwebblue-og: #006784;
+
+    --wwu-success-bg: #dff0d8;
+    --wwu-success-border: #d6e9c6;
+    --wwu-success-fg: #468847;
+
+    --wwu-info-bg: #d9edf7;
+    --wwu-info-border: #bce8f1;
+    --wwu-info-fg: #3a87ad;
+
+    --wwu-warn-bg: #fcf8e3;
+    --wwu-warn-border: #fbeed5;
+    --wwu-warn-fg: #8a6d3b;
+
+    --wwu-error-bg: #f2dede;
+    --wwu-error-border: #eed3d7;
+    --wwu-error-fg: #b94a48;
+}
+
+@mixin dark-colors {
+    --wwu-bg: #222;
+    --wwu-bg-1: #{lighten(#222, 5%)};
+    --wwu-bg-2: #{lighten(#222, 10%)};
+    --wwu-bg-3: #{lighten(#222, 15%)};
+    --wwu-bg-4: #{lighten(#222, 20%)};
+    --wwu-bg-5: #{lighten(#222, 25%)};
+    --wwu-fg: #eee;
+    --wwu-fg-1: #ccc;
+    --wwu-muted-bg: #444;
+    --wwu-muted-fg: #666;
+    --wwu-contrast-fg: #eee;
+    --wwu-outlinegrey: #444;
+    --wwu-dividergrey: #777;
+    --wwu-learnwebblue: #00b6ef;
+    --wwu-learnwebblue-highlight: #40c7f8;
+
+    --wwu-success-bg: #2c5b2d;
+    --wwu-success-border: #336c35;
+    --wwu-success-fg: #f9fff6;
+
+    --wwu-info-bg: #105273;
+    --wwu-info-border: #0e6693;
+    --wwu-info-fg: #c1e5f7;
+
+    --wwu-warn-bg: #6a5c0f;
+    --wwu-warn-border: #7b6a0e;
+    --wwu-warn-fg: #fff8d0;
+
+    --wwu-error-bg: #600000;
+    --wwu-error-border: #730011;
+    --wwu-error-fg: #ffc1c0;
+
+    .border-bottom {
+        //noinspection Stylelint
+        border-bottom: 1px solid var(--wwu-outlinegrey) !important;
+    }
+
+    .bg-white {
+        //noinspection Stylelint
+        background-color: var(--wwu-bg) !important;
+    }
+
+    .bg-light {
+        background-color: var(--wwu-bg-1) !important;
+    }
+
+    .border {
+        border-color: var(--wwu-bg-3) !important;
+    }
+
+    #logo-header a.wwu-logo {
+        filter: brightness(200);
+    }
+
+    #main-menu .arrow {
+        filter: brightness(2);
+    }
+
+    .bg-pulse-grey {
+        animation: bg-pulse-grey-dark 2s infinite linear;
+    }
+
+    @keyframes bg-pulse-grey-dark {
+        0% {
+            background-color: $gray-800;
+        }
+        50% {
+            background-color: darken($gray-800, 5%);
+        }
+        100% {
+            background-color: $gray-800;
+        }
+    }
+
+    .list-group-item,
+    [data-fieldtype="modgrade"],
+    .moodle-dialogue-base .moodle-dialogue-wrap {
+        background-color: var(--wwu-bg);
+        border: 1px solid rgba(white, 0.125);
+    }
+
+    .mform fieldset,
+    .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .custom-select:disabled {
+        color: var(--wwu-fg-1);
+        background-color: var(--wwu-muted-bg);
+    }
+
+    .fp-navbar {
+        background: var(--wwu-bg-2);
+
+        .fp-toolbar .btn.btn-secondary,
+        .fp-viewbar .btn.btn-secondary {
+            border: 1px solid var(--wwu-muted-fg);
+            border-bottom: 1px solid var(--wwu-muted-fg);
+            background: var(--wwu-bg);
+            color: var(--wwu-fg);
+        }
+    }
+
+    .page-item .page-link {
+        color: var(--wwu-learnwebblue);
+        background-color: var(--wwu-bg);
+        border: 1px solid var(--wwu-outlinegrey);
+    }
+
+    .page-item.active .page-link {
+        color: white;
+        background-color: var(--wwu-learnwebblue-og);
+        border: 1px solid var(--wwu-learnwebblue-og)
+    }
+
+    .generaltable,
+    table.mod-data-default-template {
+        color: var(--wwu-fg-1);
+
+        thead th,
+        th,
+        td {
+            border-color: var(--wwu-bg-3);
+        }
+
+        tr:hover {
+            color: var(--wwu-fg-1);
+            background-color: rgba(white, 0.075);
+        }
+    }
+
+    .table {
+        color: var(--wwu-fg-1);
+
+        thead th,
+        th,
+        td{
+            border-color: var(--wwu-bg-3);
+        }
+    }
+
+    .custom-control-label {
+        &::before {
+            background-color: var(--wwu-bg);
+            border-color: var(--wwu-bg-5);
+        }
+
+        &::after {
+            background-color: var(--wwu-bg-5);
+        }
+    }
+
+    .custom-control-input:checked ~ .custom-control-label {
+        &::before {
+            border-color: var(--wwu-learnwebblue);
+            background-color: var(--wwu-learnwebblue);
+        }
+
+        &::after {
+            background-color: var(--wwu-bg);
+        }
+    }
+
+    .simplesearchform .btn-submit {
+        background-color: var(--wwu-bg-2);
+        border-color: var(--wwu-bg-5);
+        color: var(--wwu-fg-1);
+    }
+
+    .dropdown-menu {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border: 1px solid rgba(white, 0.15);
+    }
+
+    .dropdown-item {
+        color: var(--wwu-fg-1);
+    }
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        color: var(--wwu-fg);
+    }
+
+    .dropdown-item:active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:focus-within {
+        background-color: var(--wwu-bg-2);
+    }
+
+    .path-mod-assign .gradingtable tr.unselectedrow td {
+        background-color: unset;
+    }
+
+    .path-mod-assign [data-region="grade-panel"] {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .form-autocomplete-suggestions li {
+        color: var(--wwu-fg-1);
+    }
+
+    .popover {
+        background-color: var(--wwu-bg);
+        border: 1px solid rgba(white, 0.2);
+        color: var(--wwu-fg);
+    }
+
+    .popover-body {
+        color: var(--wwu-fg);
+    }
+
+    .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd.yui3-widget-hd {
+        background-color: var(--wwu-bg);
+        color: var(--wwu-fg);
+    }
+
+    .yui3-button {
+        color: rgba(white, 0.8);
+    }
+
+    .fp-iconview .fp-thumbnail img {
+        border: 1px solid var(--wwu-bg-4);
+    }
+
+    .fp-iconview .fp-thumbnail {
+        border: 1px solid var(--wwu-bg);
+    }
+
+    .file-picker .fp-content,
+    .fp-iconview .fp-filename-field .fp-filename {
+        background-color: var(--wwu-bg)
+    }
+
+}
+
+:root {
+    @include light-colors;
+    color-scheme: light dark;
+
+    &.dark {
+        @include dark-colors;
+        color-scheme: dark;
+    }
+
+    &.light {
+        color-scheme: light;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+        @include dark-colors;
+    }
+}
