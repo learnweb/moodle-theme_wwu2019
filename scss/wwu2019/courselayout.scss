@@ -51,11 +51,12 @@ body.pagelayout-report {
 body.pagelayout-incourse,
 body.pagelayout-report {
 
-    & #region-main-body {
+    #region-main-body {
         border: 2px solid $outlinegrey;
         border-radius: 0;
         padding: 1.25rem;
         margin-top: 1rem;
+        overflow-x: auto;
     }
 }
 
