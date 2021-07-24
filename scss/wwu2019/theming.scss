@@ -82,6 +82,10 @@
         filter: brightness(200);
     }
 
+    #logo-header a.learnweb-logo {
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_dark.svg);
+    }
+
     #main-menu .arrow {
         filter: brightness(2);
     }

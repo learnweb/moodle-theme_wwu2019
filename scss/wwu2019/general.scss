@@ -144,8 +144,12 @@ $page-padding: 1rem;
         }
     }
 
-    a.learnweb-logo img {
-        max-height: 81px;
+    a.learnweb-logo {
+        height: 81px;
+        width: 145px;
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_light.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 

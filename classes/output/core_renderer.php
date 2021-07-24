@@ -66,8 +66,7 @@ class core_renderer extends \core_renderer {
         global $CFG;
 
         $templatecontext = [
-                'wwwroot' => $CFG->wwwroot,
-                'logo' => $CFG->wwwroot . '/theme/wwu2019/pix/learnweb_logo.svg'
+                'wwwroot' => $CFG->wwwroot
         ];
         return $this->render_from_template('theme_wwu2019/logo_header', $templatecontext);
     }
