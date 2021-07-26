@@ -297,7 +297,13 @@ footer#wwu-footer + div > div.container {
     overflow-y: hidden;
 }
 
-/* Turn editing off button */
+/* Enforce margin on dashboard and login page */
+.pagelayout-mydashboard #region-main-box,
+.pagelayout-login #region-main-box {
+    padding: 0 1rem;
+}
+
+/* Turn editing off button red */
 .red-edit-button > form > button {
     @extend .btn-danger;
 }
