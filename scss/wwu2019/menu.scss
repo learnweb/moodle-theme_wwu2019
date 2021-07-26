@@ -141,7 +141,6 @@ ul.main-menubar {
 
     .sub-menu-scroll-wrapper {
         display: none;
-
         border-bottom: 4px solid $dividergrey;
         z-index: #{$zindex-sticky + 5};
         position: absolute;
@@ -192,16 +191,25 @@ ul.main-menubar {
     }
 
     .sub-menu-item {
-        width: 100%;
         display: block;
+        width: 100%;
         padding-right: 16px;
         line-height: 20px;
 
         & > a {
-            display: block;
+            display: flex;
             width: 100%;
             padding: 12px 12px 12px 0;
             border-bottom: 1px solid black;
+            align-items: center;
+
+            & > * {
+                flex: auto 0 0;
+            }
+
+            & > span {
+                flex: auto 1 1;
+            }
 
             & > span,
             & > .icon {
@@ -244,14 +252,20 @@ ul.main-menubar {
         cursor: pointer;
 
         & > a {
-            display: block;
+            display: flex;
             width: 100%;
             height: 100%;
             padding: 2px 2px;
+            align-items: center;
+
+            & > * {
+                flex: auto 0 0;
+            }
 
             & > span {
                 line-height: 20px;
                 text-transform: none;
+                flex: auto 1 1;
             }
 
             & > .icon {
