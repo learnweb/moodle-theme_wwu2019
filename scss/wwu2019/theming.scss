@@ -138,7 +138,9 @@
         border-color: var(--wwu-bg-3);
     }
 
-    .custom-select:disabled {
+    .custom-select:disabled,
+    .form-control:disabled,
+    .form-control[readonly] {
         color: var(--wwu-fg-1);
         background-color: var(--wwu-muted-bg);
     }
@@ -356,6 +358,7 @@
             background-color: var(--wwu-bg-2);
         }
         .nav-tabs .nav-link, .nav-pills .nav-link {
+            color: var(--wwu-fg-1);
             background: var(--wwu-bg);
         }
         .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
@@ -383,6 +386,30 @@
 
     .toast .close {
         color: black;
+    }
+
+    /* Grade table */
+    .path-grade-report-grader .gradeparent tr .cell,
+    .path-grade-report-grader .gradeparent .floater .cell {
+        background-color: var(--wwu-bg);
+    }
+
+    .path-grade-report-grader .gradeparent table,
+    .path-grade-report-grader .gradeparent .cell {
+        border-color: var(--wwu-bg-4);
+    }
+
+    .path-grade-report-grader .gradeparent .userrow.odd .cell,
+    .path-grade-report-grader .gradeparent .floater .cell.odd,
+    .path-grade-report-grader .gradeparent .heading .cell,
+    .path-grade-report-grader .gradeparent .cell.category,
+    .path-grade-report-grader .gradeparent .avg .cell {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .preferences-container .preference-table,
+    .preferences-container .preference-table tr td:nth-child(2n) {
+        border-color: var(--wwu-bg-3);
     }
 }
 
