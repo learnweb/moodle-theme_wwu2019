@@ -273,6 +273,11 @@
         color: var(--wwu-fg);
     }
 
+    .popover-header {
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-4);
+    }
+
     .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd.yui3-widget-hd {
         background-color: var(--wwu-bg);
         color: var(--wwu-fg);
@@ -411,6 +416,20 @@
     .preferences-container .preference-table tr td:nth-child(2n) {
         border-color: var(--wwu-bg-3);
     }
+
+    /* Calendar block */
+    .block .minicalendar td a {
+        color: var(--wwu-learnwebblue);
+    }
+
+    .calendar_event_user {
+        background-color: var(--wwu-bg-3);
+    }
+
+    .block .minicalendar td.calendar_event_user a {
+        color: var(--wwu-fg);
+    }
+
 }
 
 
