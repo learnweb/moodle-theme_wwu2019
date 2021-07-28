@@ -1,5 +1,10 @@
 @mixin light-colors {
     --wwu-bg: #fff;
+    --wwu-bg-1: #{darken(#fff, 3%)};
+    --wwu-bg-2: #{darken(#fff, 6%)};
+    --wwu-bg-3: #{darken(#fff, 9%)};
+    --wwu-bg-4: #{darken(#fff, 12%)};
+    --wwu-bg-5: #{darken(#fff, 15%)};
     --wwu-fg: #373a3c;
     --wwu-muted-bg: #ccc;
     --wwu-muted-fg: #ced4da;
@@ -52,9 +57,9 @@
     --wwu-info-border: #0e6693;
     --wwu-info-fg: #c1e5f7;
 
-    --wwu-warn-bg: #6a5c0f;
-    --wwu-warn-border: #7b6a0e;
-    --wwu-warn-fg: #fff8d0;
+    --wwu-warn-bg: #6c4700;
+    --wwu-warn-border: #845700;
+    --wwu-warn-fg: #ffecc8;
 
     --wwu-error-bg: #600000;
     --wwu-error-border: #730011;
@@ -62,7 +67,22 @@
 
     .border-bottom {
         //noinspection Stylelint
-        border-bottom: 1px solid var(--wwu-outlinegrey) !important;
+        border-bottom-color: var(--wwu-bg-3) !important;
+    }
+
+    .border-top {
+        //noinspection Stylelint
+        border-top-color: var(--wwu-bg-3) !important;
+    }
+
+    .border-left {
+        //noinspection Stylelint
+        border-left-color: var(--wwu-bg-3) !important;
+    }
+
+    .border-right {
+        //noinspection Stylelint
+        border-right-color: var(--wwu-bg-3) !important;
     }
 
     .bg-white {
@@ -110,7 +130,7 @@
     [data-fieldtype="modgrade"],
     .moodle-dialogue-base .moodle-dialogue-wrap {
         background-color: var(--wwu-bg);
-        border: 1px solid rgba(white, 0.125);
+        border-color: rgba(white, 0.125);
     }
 
     .mform fieldset,
@@ -157,9 +177,19 @@
             border-color: var(--wwu-bg-3);
         }
 
-        tr:hover {
+        tbody tr:nth-of-type(#{$table-striped-order}) {
+            background-color: rgba(white, 0.05);
+        }
+
+        tbody tr:hover {
             color: var(--wwu-fg-1);
-            background-color: rgba(white, 0.075);
+            background-color: rgba(white, 0.1);
+        }
+    }
+
+    .table-striped {
+        tbody tr:nth-of-type(#{$table-striped-order}) {
+            background-color: rgba(white, 0.05);
         }
     }
 
@@ -231,7 +261,7 @@
         color: var(--wwu-fg-1);
     }
 
-    .popover {
+    .popover, {
         background-color: var(--wwu-bg);
         border: 1px solid rgba(white, 0.2);
         color: var(--wwu-fg);
@@ -263,6 +293,106 @@
         background-color: var(--wwu-bg)
     }
 
+    .popover-region-container {
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-5);
+    }
+
+    .popover-region-header-container {
+        border-bottom-color: var(--wwu-bg-5);
+    }
+
+    .popover-region-footer-container {
+        border-top-color: var(--wwu-bg-5);
+        background-color: var(--wwu-bg);
+    }
+
+    .popover-region-toggle::before {
+        border-bottom-color: var(--wwu-bg-5);
+    }
+
+    .popover-region-toggle::after {
+        border-bottom-color: var(--wwu-bg);
+    }
+
+    #adminsettings h3 {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .table-hover tbody tr:hover {
+        color: unset;
+        background-color: rgba(white, 0.075);
+    }
+
+    .modal-header {
+        border-bottom-color: var(--wwu-bg-3);
+    }
+
+    .modal-content {
+        background-color: var(--wwu-bg);
+    }
+
+    .modal-footer {
+        border-top-color: var(--wwu-bg-3);
+    }
+
+    .close {
+        color: var(--wwu-fg);
+    }
+
+    hr {
+        border-color: rgba(white, 0.1)
+    }
+
+    .modchoosercontainer .optionscontainer .option .optioninfo a, .modchoosercontainer .searchresultitemscontainer .option .optioninfo a {
+        color: var(--wwu-fg);
+    }
+
+
+    /* styles_debug.php | http://localhost/moodle311/theme/styles_debug.php?theme=wwu2019&type=scss */
+
+    @media (max-width: 767.98px) {
+        .nav-tabs, .nav-pills {
+            background-color: var(--wwu-bg-2);
+        }
+        .nav-tabs .nav-link, .nav-pills .nav-link {
+            background: var(--wwu-bg);
+        }
+        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
+            background-color: var(--wwu-bg-5);
+            border-color: var(--wwu-bg-5);
+        }
+        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
+        }
+    }
+
+    .nav-tabs {
+        border-color: var(--wwu-bg-2);
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg-5);
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+        border-color: var(--wwu-bg-2) var(--wwu-bg-2) var(--wwu-bg-3);
+    }
+
+    .toast .close {
+        color: black;
+    }
+}
+
+
+.toast {
+    color: $gray-800;
+}
+
+.popover-region-container {
+    overflow-y: hidden;
 }
 
 :root {
