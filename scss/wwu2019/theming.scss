@@ -263,7 +263,7 @@
         color: var(--wwu-fg-1);
     }
 
-    .popover, {
+    .popover {
         background-color: var(--wwu-bg);
         border: 1px solid rgba(white, 0.2);
         color: var(--wwu-fg);
@@ -428,6 +428,12 @@
 
     .block .minicalendar td.calendar_event_user a {
         color: var(--wwu-fg);
+    }
+
+    /** 3rd party plugin theme fixes **/
+    .qn-question,
+    .qn-info {
+        background-color: var(--wwu-bg-3);
     }
 
 }
