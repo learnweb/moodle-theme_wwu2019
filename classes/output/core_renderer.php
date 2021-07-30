@@ -719,7 +719,7 @@ class core_renderer extends \core_renderer {
                                 'class' => 'wwu-usedarktheme'
                         ],
                 ],
-                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
+                'icon' => (new pix_icon('i/theme', ''))->export_for_pix()
         ];
 
         if ($rolemenuitem) {

@@ -64,7 +64,8 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
                 'core:i/hamburger' => 'fa-bars',
                 'core:i/sun' => 'fa-sun-o',
                 'core:i/moon' => 'fa-moon-o',
-                'core:i/magic' => 'fa-magic'
+                'core:i/magic' => 'fa-magic',
+                'core:i/theme' => 'fa-paint-brush'
         );
 
         return array_merge($iconmap, $override);
