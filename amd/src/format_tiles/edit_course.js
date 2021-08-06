@@ -1084,8 +1084,8 @@ define('format_tiles/edit_course', ["jquery", "core/templates", "core/ajax", "fo
                                         window.location.reload(false);
                                     } else if (this.readyState == 4) {
                                         windowOverlay.fadeOut();
-                                        str.get_strings({key: 'tilemovefailed', component: 'theme_wwu2019'},
-                                            {key: 'tilemovefailedtitle', component: 'theme_wwu2019'},
+                                        str.get_strings({key: 'format_tiles_tilemovefailed', component: 'theme_wwu2019'},
+                                            {key: 'format_tiles_tilemovefailedtitle', component: 'theme_wwu2019'},
                                             {key: 'Ok'})
                                             .done(function(results) {
                                                 Notification.alert(
