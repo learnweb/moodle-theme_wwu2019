@@ -37,6 +37,7 @@ jobs:
       env: DB=mysqli MOODLE_BRANCH=MOODLE_39_STABLE
       install:
         - moodle-plugin-ci install --no-init
+        - wget -o ${TRAVIS_HOME}/build/moodle/GruntfileComponents.js https://raw.githubusercontent.com/moodle/moodle/master/GruntfileComponents.js
       script:
         - moodle-plugin-ci phpdoc
         - moodle-plugin-ci phplint
@@ -46,7 +47,8 @@ jobs:
         - moodle-plugin-ci validate
         - moodle-plugin-ci savepoints
         - moodle-plugin-ci mustache || true
-        - moodle-plugin-ci grunt
+        - cd ${TRAVIS_HOME}/build/moodle/theme/wwu2019
+        - ls -l ${TRAVIS_HOME}/build/moodle/lib | grep components.json
     # Smaller build matrix for development builds
     - stage: develop
       php: 7.3
