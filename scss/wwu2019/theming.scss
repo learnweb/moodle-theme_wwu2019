@@ -297,7 +297,7 @@
 
     .file-picker .fp-content,
     .fp-iconview .fp-filename-field .fp-filename {
-        background-color: var(--wwu-bg)
+        background-color: var(--wwu-bg);
     }
 
     .popover-region-container {
@@ -305,7 +305,8 @@
         border-color: var(--wwu-bg-5);
     }
 
-    .popover-region-header-container {
+    .popover-region-header-container,
+    .path-mod div.activity-information {
         border-bottom-color: var(--wwu-bg-5);
     }
 
@@ -335,7 +336,9 @@
         border-bottom-color: var(--wwu-bg-3);
     }
 
-    .modal-content {
+    .modal-content,
+    .modchooser .modal-body .optionsummary,
+    .modchooser .modal-footer {
         background-color: var(--wwu-bg);
     }
 
@@ -348,15 +351,12 @@
     }
 
     hr {
-        border-color: rgba(white, 0.1)
+        border-color: rgba(white, 0.1);
     }
 
     .modchoosercontainer .optionscontainer .option .optioninfo a, .modchoosercontainer .searchresultitemscontainer .option .optioninfo a {
         color: var(--wwu-fg);
     }
-
-
-    /* styles_debug.php | http://localhost/moodle311/theme/styles_debug.php?theme=wwu2019&type=scss */
 
     @media (max-width: 767.98px) {
         .nav-tabs, .nav-pills {
@@ -430,10 +430,113 @@
         color: var(--wwu-fg);
     }
 
+    .resourcelinkdetails,
+    .resourcedetails {
+        color: var(--wwu-fg-1);
+    }
+
+    .list-group-item-action:hover,
+    .list-group-item-action:focus {
+        color: var(--wwu-fg-1);
+    }
+
+    body.format-topcoll #toggle-all #toggles-all-closed,
+    body.format-topcoll #toggle-all #toggless-all-opened {
+        filter: brightness(2);
+    }
+
+    span.unread {
+        background-color: #1a2f46;
+    }
+
+    pre {
+        color: var(--wwu-fg);
+    }
+
+    /* mod_quiz */
+    .jschooser .choosercontainer #chooseform .instruction,
+    .jschooser .choosercontainer #chooseform .typesummary,
+    #page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmarkcontainer,
+    .choosercontainer #chooseform .selected {
+        background-color: var(--wwu-bg);
+    }
+
+    #page-mod-quiz-edit ul.slots li.section .content,
+    .chooserdialogue .moodle-dialogue-wrap .moodle-dialogue-bd,
+    table.quizreviewsummary td.cell {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .choosercontainer #chooseform .option .icon,
+    #questionscontainer .qtype img.icon,
+    #page-mod-quiz-edit ul.slots .activityinstance img.activityicon {
+        filter: invert(1);
+    }
+
+    .choosercontainer #chooseform .option label,
+    #page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmarkcontainer {
+        border-bottom-color: var(--wwu-bg);
+    }
+
+    .choosercontainer #chooseform .options {
+        border-bottom-color: var(--wwu-bg-5);
+    }
+
+    #page-mod-quiz-edit ul.slots li.section li.activity,
+    #page-mod-quiz-edit .section .activity .actions,
+    table.quizreviewsummary th.cell {
+        background: var(--wwu-bg-2);
+    }
+
+    #page-mod-quiz-edit .slotnumber {
+        background-color: var(--wwu-bg-3);
+    }
+
+    #page-mod-quiz-edit #categoryquestions .questionname, #page-mod-quiz-edit ul.slots li.activity div.activityinstance .questionname {
+        color: var(--wwu-fg);
+    }
+
+
+    #page-mod-quiz-edit #categoryquestions .questionname,
+    #page-mod-quiz-edit ul.slots li.activity div.activityinstance .questionname,
+    #page-mod-quiz-edit ul.slots li.activity div.activityinstance .questiontext {
+        color: var(--wwu-fg-1);
+    }
+
+    #page-mod-quiz-edit ul.slots li.section li.activity.page {
+        background: transparent;
+    }
+
+    .que .info {
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-5);
+    }
+
+    body#page-question-type-multichoice div[id^="fitem_id_"][id*="feedback_"],
+    body#page-question-type-multichoice div[id^="fitem_id_"][id*="fraction_"],
+    body#page-question-type-multichoice div[id^="fitem_id_"][id*="answer_"] {
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-5);
+    }
+
+    .editor_atto_notification .atto_info {
+        background-color: var(--wwu-bg-1);
+    }
+
     /** 3rd party plugin theme fixes **/
     .qn-question,
     .qn-info {
         background-color: var(--wwu-bg-3);
+    }
+
+    /* mod_moodleoverflow */
+    .moodleoverflowpost.unread .row.header {
+        background-color: #1a2f46;
+        border-bottom-color: var(--wwu-bg-3);
+    }
+
+    .moodleoverflowpost .topic .author {
+        color: var(--wwu-fg-1);
     }
 
 }

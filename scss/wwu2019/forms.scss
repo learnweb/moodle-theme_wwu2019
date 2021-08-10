@@ -25,6 +25,17 @@
 
 .btn {
     border-radius: 0;
+    color: var(--wwu-fg);
+}
+
+.btn:hover {
+    color: var(--wwu-fg);
+}
+
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+        @include button-variant($value, $value);
+    }
 }
 
 @each $color, $value in $theme-colors {
@@ -38,7 +49,8 @@
 .form-control:focus,
 .custom-select,
 input[type="submit"]:not(.btn),
-.custom-file-label {
+.custom-file-label,
+.yui3-button {
     border-radius: 0;
     background-color: var(--wwu-bg);
     border: 1px solid var(--wwu-muted-fg);
