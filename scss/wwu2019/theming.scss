@@ -102,7 +102,6 @@
         background-color: #131d00;
     }
 
-
     #logo-header a.wwu-logo {
         filter: brightness(200);
     }
@@ -449,7 +448,7 @@
     }
 
     body.format-topcoll #toggle-all #toggles-all-closed,
-    body.format-topcoll #toggle-all #toggless-all-opened {
+    body.format-topcoll #toggle-all #toggles-all-opened {
         filter: brightness(2);
     }
 
@@ -527,6 +526,10 @@
         border-color: var(--wwu-bg-5);
     }
 
+    #quiz-timer-wrapper #quiz-timer {
+        background-color: unset;
+    }
+
     .editor_atto_notification .atto_info {
         background-color: var(--wwu-bg-1);
     }
@@ -564,6 +567,10 @@
         color: var(--wwu-fg-1);
     }
 
+    /* block_xp */
+    .block_xp nav .nav-button {
+        color: var(--wwu-fg-1);
+    }
 }
 
 
