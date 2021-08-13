@@ -145,6 +145,12 @@
         border-color: var(--wwu-bg-3);
     }
 
+    select {
+        background-color: var(--wwu-bg);
+        border-color: 1px solid var(--wwu-muted-fg);
+        color: var(--wwu-fg);
+    }
+
     select:disabled,
     .custom-select:disabled,
     .form-control:disabled,
