@@ -303,7 +303,9 @@
     }
 
     .file-picker .fp-content,
-    .fp-iconview .fp-filename-field .fp-filename {
+    .fp-iconview .fp-filename-field .fp-filename,
+    .filepicker-filelist .dndupload-target,
+    .filemanager-container .dndupload-target {
         background-color: var(--wwu-bg);
     }
 
@@ -536,9 +538,11 @@
 
     /* backup */
     .path-backup .mform .root_setting,
-    .path-backup .mform .grouped_settings {
+    .path-backup .mform .grouped_settings,
+    .h5p-admin-table tr,
+    .h5p-data-view tr {
         &:nth-of-type(2n+1) {
-            background-color: rgba(255, 255, 255,.05);
+            background-color: rgba(255, 255, 255, .05);
         }
 
         &:nth-of-type(2n) {
