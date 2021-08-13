@@ -145,6 +145,7 @@
         border-color: var(--wwu-bg-3);
     }
 
+    select:disabled,
     .custom-select:disabled,
     .form-control:disabled,
     .form-control[readonly] {
@@ -574,6 +575,14 @@
     /* block_xp */
     .block_xp nav .nav-button {
         color: var(--wwu-fg-1);
+    }
+
+    /* mod_scheduler */
+    .path-mod-scheduler .maildisplay,
+    .path-mod-scheduler div.commandbar,
+    .path-mod-scheduler div.slotnotes,
+    .path-mod-scheduler .appointmentnote {
+        background-color: var(--wwu-bg-1);
     }
 }
 
