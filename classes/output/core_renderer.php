@@ -704,12 +704,12 @@ class core_renderer extends \core_renderer {
                                 'class' => 'wwu-uselighttheme'
                         ],
                         [
-                                'name' => get_string('ostheme', 'theme_wwu2019'),
+                                'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'), ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
                                 'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
                                 'href' => null,
                                 'hasmenu' => false,
                                 'class' => 'wwu-useostheme',
-                                'addatags' => ' title="' . get_string('ostheme_help', 'theme_wwu2019') . '"'
+                                'dontescape' => true
                         ],
                         [
                                 'name' => get_string('dark', 'theme_wwu2019'),
