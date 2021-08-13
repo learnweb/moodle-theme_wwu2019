@@ -128,13 +128,16 @@
 
     .list-group-item,
     [data-fieldtype="modgrade"],
-    .moodle-dialogue-base .moodle-dialogue-wrap {
+    .moodle-dialogue-base .moodle-dialogue-wrap,
+    .path-mod-assign [data-region="grade-panel"] .fitem.has-popout {
         background-color: var(--wwu-bg);
         border-color: rgba(white, 0.125);
     }
 
     .mform fieldset,
-    .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd {
+    .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd,
+    .path-mod-assign [data-region="grading-navigation-panel"],
+    .path-mod-assign [data-region="grade-actions-panel"] {
         border-color: var(--wwu-bg-3);
     }
 
@@ -521,6 +524,23 @@
 
     .editor_atto_notification .atto_info {
         background-color: var(--wwu-bg-1);
+    }
+
+    /* backup */
+    .path-backup .mform .root_setting,
+    .path-backup .mform .grouped_settings {
+        &:nth-of-type(2n+1) {
+            background-color: rgba(255, 255, 255,.05);
+        }
+
+        &:nth-of-type(2n) {
+            background-color: unset;
+        }
+    }
+
+    .path-backup .backup-section {
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-3);
     }
 
     /** 3rd party plugin theme fixes **/
