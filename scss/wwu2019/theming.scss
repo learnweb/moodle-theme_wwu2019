@@ -98,6 +98,11 @@
         border-color: var(--wwu-bg-3) !important;
     }
 
+    body.pagelayout-course .course-content ul li.section.main.current .content {
+        background-color: #131d00;
+    }
+
+
     #logo-header a.wwu-logo {
         filter: brightness(200);
     }
