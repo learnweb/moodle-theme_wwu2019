@@ -44,7 +44,16 @@
     }
 }
 
+select:disabled,
+.custom-select:disabled,
+.form-control:disabled,
+.form-control[readonly] {
+    color: var(--wwu-fg-1);
+    background-color: var(--wwu-muted-bg);
+}
+
 /* Form control */
+select,
 .form-control,
 .form-control:focus,
 .custom-select,
@@ -53,7 +62,7 @@ input[type="submit"]:not(.btn),
 .yui3-button {
     border-radius: 0;
     background-color: var(--wwu-bg);
-    border: 1px solid var(--wwu-muted-fg);
+    border-color: var(--wwu-muted-fg);
     color: var(--wwu-fg);
 }
 

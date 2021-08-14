@@ -6,7 +6,8 @@
     --wwu-bg-4: #{darken(#fff, 12%)};
     --wwu-bg-5: #{darken(#fff, 15%)};
     --wwu-fg: #373a3c;
-    --wwu-muted-bg: #ccc;
+    --wwu-fg-1: #5a5f65;
+    --wwu-muted-bg: #ddd;
     --wwu-muted-fg: #ced4da;
     --wwu-contrast-fg: #000;
     --wwu-outlinegrey: #bec6c8;
@@ -40,7 +41,7 @@
     --wwu-bg-4: #{lighten(#222, 20%)};
     --wwu-bg-5: #{lighten(#222, 25%)};
     --wwu-fg: #eee;
-    --wwu-fg-1: #ccc;
+    --wwu-fg-1: #aaa;
     --wwu-muted-bg: #444;
     --wwu-muted-fg: #666;
     --wwu-contrast-fg: #eee;
@@ -143,20 +144,6 @@
     .path-mod-assign [data-region="grading-navigation-panel"],
     .path-mod-assign [data-region="grade-actions-panel"] {
         border-color: var(--wwu-bg-3);
-    }
-
-    select {
-        background-color: var(--wwu-bg);
-        border-color: 1px solid var(--wwu-muted-fg);
-        color: var(--wwu-fg);
-    }
-
-    select:disabled,
-    .custom-select:disabled,
-    .form-control:disabled,
-    .form-control[readonly] {
-        color: var(--wwu-fg-1);
-        background-color: var(--wwu-muted-bg);
     }
 
     .fp-navbar {
