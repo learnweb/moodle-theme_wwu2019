@@ -469,6 +469,10 @@
         color: var(--wwu-fg);
     }
 
+    .CodeMirror pre {
+        color: black;
+    }
+
     /* mod_quiz */
     .jschooser .choosercontainer #chooseform .instruction,
     .jschooser .choosercontainer #chooseform .typesummary,
