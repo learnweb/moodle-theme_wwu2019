@@ -24,7 +24,7 @@
 
 /* Slideshow */
 #wwuCarousel.carousel {
-    border: 2px solid #bec6c8;
+    border: 2px solid var(--wwu-outlinegrey);
 
     .carousel-indicators {
         background-color: rgba($learnwebblue, .7);
