@@ -127,7 +127,7 @@ ul.main-menubar {
 
         &:not(:last-child) {
             padding-right: 15px;
-            border-right: 1px solid var(--wwu-contrast-fg);
+            border-right: 1px solid var(--wwu-dividergrey);
             margin-right: 15px;
         }
 
@@ -201,7 +201,7 @@ ul.main-menubar {
             display: flex;
             width: 100%;
             padding: 12px 12px 12px 0;
-            border-bottom: 1px solid var(--wwu-contrast-fg);
+            border-bottom: 1px solid var(--wwu-dividergrey);
             align-items: center;
 
             & > * {
@@ -236,11 +236,11 @@ ul.main-menubar {
             font-size: 10.5px;
             list-style: none;
             padding: 4px 12px 4px 20px;
-            border-bottom: 1px solid var(--wwu-contrast-fg);
+            border-bottom: 1px solid var(--wwu-dividergrey);
 
             // Second level sub-sub-menu.
             .sub-sub-menu {
-                border-top: 1px solid var(--wwu-contrast-fg);
+                border-top: 1px solid var(--wwu-dividergrey);
             }
         }
 
@@ -310,7 +310,7 @@ ul.main-menubar {
         margin-left: 4px;
 
         .sub-menu-scroll-wrapper {
-            border: 2px solid #423c39;
+            border: 2px solid var(--wwu-dividergrey);
             border-top: 0;
             right: 0;
             left: auto;
@@ -328,11 +328,11 @@ ul.main-menubar {
         }
 
         .sub-menu-item.divider > a {
-            border-bottom: 1px dashed var(--wwu-contrast-fg);
+            border-bottom: 1px dashed var(--wwu-dividergrey);
         }
 
         .sub-menu-item.open > a {
-            border-bottom: 1px solid var(--wwu-contrast-fg);
+            border-bottom: 1px solid var(--wwu-dividergrey);
         }
 
         &.open > a > span.underline {
@@ -445,7 +445,7 @@ ul.main-menubar {
                 .sub-menu-scroll-wrapper {
                     position: relative;
                     padding: 0 12px 0 20px;
-                    border-top: 1px solid var(--wwu-contrast-fg);
+                    border-top: 1px solid var(--wwu-dividergrey);
                     border-bottom: none;
                     top: unset;
                     left: unset;
@@ -460,7 +460,7 @@ ul.main-menubar {
 
         .main-menu-item:not(:last-child) {
             border-right: none;
-            border-bottom: 1px solid var(--wwu-contrast-fg);
+            border-bottom: 1px solid var(--wwu-dividergrey);
         }
     }
 
