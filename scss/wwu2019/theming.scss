@@ -244,12 +244,13 @@
         border: 1px solid rgba(white, 0.15);
     }
 
-    .dropdown-item {
-        color: var(--wwu-fg-1);
-    }
-
-    .dropdown-item:hover, .dropdown-item:focus {
-        color: var(--wwu-fg);
+    .dropdown-item,
+    .dropdown-item a {
+        &,
+        &:hover,
+        &:focus {
+            color: var(--wwu-fg);
+        }
     }
 
     .dropdown-item:active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:focus-within {
