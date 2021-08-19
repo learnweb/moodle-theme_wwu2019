@@ -172,7 +172,7 @@
 
     .generaltable,
     table.mod-data-default-template {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg);
 
         thead th,
         th,
@@ -185,8 +185,12 @@
         }
 
         tbody tr:hover {
-            color: var(--wwu-fg-1);
+            color: var(--wwu-fg);
             background-color: rgba(white, 0.1);
+
+            &.dimmed_text a:not(.menu-action) {
+                color: var(--wwu-fg);
+            }
         }
     }
 
@@ -197,7 +201,7 @@
     }
 
     .table {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg);
 
         thead th,
         th,
