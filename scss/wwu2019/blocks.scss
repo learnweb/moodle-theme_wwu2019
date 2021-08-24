@@ -31,26 +31,20 @@
     background: var(--wwu-bg);
     word-break: break-word;
 
-    & > .card-body {
-        & > .block-header {
+    > .card-body {
+        border: 2px solid var(--wwu-outlinegrey);
+
+        > .block-header {
             background-color: $learnwebblue;
             color: white;
             padding: 0 12px;
             font-size: 18px;
-            border-color: $outlinegrey;
-            border-style: solid;
-            border-width: 2px 2px 0 2px;
             display: flex;
             justify-content: space-between;
 
-            & > .card-title {
+            > .card-title {
                 margin: 4px 0;
             }
-        }
-
-        & > .card-text {
-            border: 2px solid $outlinegrey;
-            border-top: none;
         }
     }
 
