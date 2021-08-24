@@ -558,6 +558,32 @@
         border-color: var(--wwu-bg-3);
     }
 
+    /* block_accessreview */
+    .block_accessreview_success,
+    .block_accessreview.block_accessreview_success.hasinfo {
+        color: var(--wwu-success-fg);
+        background:var(--wwu-success-bg);
+        border-color: var(--wwu-success-border);
+    }
+
+    .block_accessreview_danger,
+    .block_accessreview.block_accessreview_danger.hasinfo {
+        color: var(--wwu-error-fg);
+        background:var(--wwu-error-bg);
+        border-color: var(--wwu-error-border);
+    }
+
+    .block_accessreview_warning,
+    .block_accessreview.block_accessreview_warning.hasinfo {
+        color: var(--wwu-warn-fg);
+        background:var(--wwu-warn-bg);
+        border-color: var(--wwu-warn-border);
+    }
+
+    .block_accessreview_table {
+        border-color: var(--wwu-bg-3);
+    }
+
     /** 3rd party plugin theme fixes **/
     .qn-question,
     .qn-info {
