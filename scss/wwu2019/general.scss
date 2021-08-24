@@ -362,3 +362,12 @@ a:not([class]):focus,
         @include button-old-focus($value);
     }
 }
+
+.section li.activity {
+    &.block_accessreview_success,
+    &.block_accessreview_danger,
+    &.block_accessreview_warning {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
