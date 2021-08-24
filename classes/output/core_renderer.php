@@ -962,6 +962,7 @@ class core_renderer extends \core_renderer {
         $header->navbar = $this->navbar();
         $header->contextheader = $this->page->pagelayout === 'mypublic' ? $this->context_header() : '';
         $header->pageheadingbutton = $this->page_heading_button();
+        $header->headeractions = $this->page->get_header_actions();
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 

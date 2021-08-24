@@ -27,22 +27,26 @@
 }}
 <header id="page-header" class="row">
     <div class="col-12 pb-3">
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap justify-content-between">
             {{#hasnavbar}}
                 <div id="page-navbar">
                     {{{navbar}}}
                 </div>
             {{/hasnavbar}}
-            <div class="ml-auto d-flex">
-                {{{pageheadingbutton}}}
-            </div>
-        </div>
-        <div>
-            {{#contextheader}}
+            {{#pageheadingbutton}}
+                <div class="ml-auto d-flex">
+                    {{{pageheadingbutton}}}
+                </div>
+            {{/pageheadingbutton}}
+            <div class="d-flex align-items-center">
                 <div class="mr-auto">
                     {{{contextheader}}}
                 </div>
-            {{/contextheader}}
-        </div>
+                <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
+                    {{#headeractions}}
+                        <div class="header-action ml-2">{{{.}}}</div>
+                    {{/headeractions}}
+                </div>
+            </div>
     </div>
 </header>
