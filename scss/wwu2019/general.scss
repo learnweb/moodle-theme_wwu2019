@@ -117,6 +117,10 @@ $page-padding: 1rem;
     margin-right: auto;
 }
 
+.pagelayout-embedded #page {
+    padding: 0;
+}
+
 /* Header and Logos */
 #logo-header {
     padding-bottom: 1.25rem;
