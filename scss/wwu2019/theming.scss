@@ -66,6 +66,14 @@
     --wwu-error-border: #730011;
     --wwu-error-fg: #ffc1c0;
 
+    .only-dark {
+        display: unset;
+    }
+
+    .only-light {
+        display: none;
+    }
+
     .border-bottom {
         //noinspection Stylelint
         border-bottom-color: var(--wwu-bg-3) !important;
@@ -621,6 +629,10 @@
 
 .popover-region-container {
     overflow-y: hidden;
+}
+
+.only-dark {
+    display: none;
 }
 
 :root {
