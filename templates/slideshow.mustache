@@ -38,20 +38,12 @@
             {{^link}}
             <div class="carousel-item item {{#active}}active{{/active}}">
             {{/link}}
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-5 side-caption my-auto">
-                            <div class="the-side-caption ">
-                                {{#title}}<h1>{{title}}</h1>{{/title}}
-                                {{#caption}}<div>{{{caption}}}</div>{{/caption}}
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="carousel-image-container text-center">
-                                <img class="h-100" src="{{slideimage}}" alt="First slide"/>
-                            </div>
-                        </div>
+                <div class="carousel-item-container">
+                    <div class="side-caption">
+                        {{#title}}<h1>{{title}}</h1>{{/title}}
+                        {{#caption}}<div>{{{caption}}}</div>{{/caption}}
                     </div>
+                    <img class="carousel-image-container" src="{{slideimage}}" alt="First slide"/>
                 </div>
             {{^link}}
             </div>
