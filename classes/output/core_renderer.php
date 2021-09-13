@@ -66,8 +66,7 @@ class core_renderer extends \core_renderer {
         global $CFG;
 
         $templatecontext = [
-                'wwwroot' => $CFG->wwwroot,
-                'logo' => $CFG->wwwroot . '/theme/wwu2019/pix/learnweb_logo.svg'
+                'wwwroot' => $CFG->wwwroot
         ];
         return $this->render_from_template('theme_wwu2019/logo_header', $templatecontext);
     }
@@ -152,6 +151,7 @@ class core_renderer extends \core_renderer {
         if (!$this->is_login_page()) {
             $output .= $this->add_endofpage_button();
         }
+
         $output .= parent::navbar_plugin_output();
 
         return $output;
@@ -690,6 +690,38 @@ class core_renderer extends \core_renderer {
             ];
         }
 
+        // Create Theme chooser.
+        $menucontent[] = [
+                'name' => get_string('choosetheme', 'theme_wwu2019'),
+                'hasmenu' => true,
+                'isexpanded' => false,
+                'menu' => [
+                        [
+                                'name' => get_string('light', 'theme_wwu2019'),
+                                'icon' => (new pix_icon('i/sun', ''))->export_for_pix(),
+                                'href' => null,
+                                'hasmenu' => false,
+                                'class' => 'wwu-uselighttheme'
+                        ],
+                        [
+                                'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'), ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
+                                'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
+                                'href' => null,
+                                'hasmenu' => false,
+                                'class' => 'wwu-useostheme',
+                                'dontescape' => true
+                        ],
+                        [
+                                'name' => get_string('dark', 'theme_wwu2019'),
+                                'icon' => (new pix_icon('i/moon', ''))->export_for_pix(),
+                                'href' => null,
+                                'hasmenu' => false,
+                                'class' => 'wwu-usedarktheme'
+                        ],
+                ],
+                'icon' => (new pix_icon('i/theme', ''))->export_for_pix()
+        ];
+
         if ($rolemenuitem) {
             $menucontent[] = $rolemenuitem;
         }
@@ -930,6 +962,7 @@ class core_renderer extends \core_renderer {
         $header->navbar = $this->navbar();
         $header->contextheader = $this->page->pagelayout === 'mypublic' ? $this->context_header() : '';
         $header->pageheadingbutton = $this->page_heading_button();
+        $header->headeractions = $this->page->get_header_actions();
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
@@ -1223,6 +1256,17 @@ _paq.push(['trackPageView']);
         $output = parent::standard_head_html();
         $output .= \html_writer::empty_tag('meta', ['name' => 'theme-color', 'content' => self::THEMECOLOR]);
         return $output;
+    }
+
+    public function htmlattributes() {
+        user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
+        $themepreference = get_user_preferences('theme_wwu2019_theme');
+        if ($themepreference == 1) {
+            return parent::htmlattributes() . 'class="light"';
+        } else if ($themepreference == 2) {
+            return parent::htmlattributes() . 'class="dark"';
+        }
+        return parent::htmlattributes();
     }
 
 }

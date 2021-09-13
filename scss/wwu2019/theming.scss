@@ -1,0 +1,656 @@
+@mixin light-colors {
+    --wwu-bg: #fff;
+    --wwu-bg-1: #{darken(#fff, 3%)};
+    --wwu-bg-2: #{darken(#fff, 6%)};
+    --wwu-bg-3: #{darken(#fff, 9%)};
+    --wwu-bg-4: #{darken(#fff, 12%)};
+    --wwu-bg-5: #{darken(#fff, 15%)};
+    --wwu-fg: #373a3c;
+    --wwu-fg-1: #5a5f65;
+    --wwu-muted-bg: #ddd;
+    --wwu-muted-fg: #ced4da;
+    --wwu-contrast-fg: #000;
+    --wwu-outlinegrey: #bec6c8;
+    --wwu-dividergrey: #423c39;
+    --wwu-learnwebblue: #006784;
+    --wwu-learnwebblue-highlight: #002b38;
+    --wwu-learnwebblue-og: #006784;
+
+    --wwu-success-bg: #dff0d8;
+    --wwu-success-border: #d6e9c6;
+    --wwu-success-fg: #468847;
+
+    --wwu-info-bg: #d9edf7;
+    --wwu-info-border: #bce8f1;
+    --wwu-info-fg: #3a87ad;
+
+    --wwu-warn-bg: #fcf8e3;
+    --wwu-warn-border: #fbeed5;
+    --wwu-warn-fg: #8a6d3b;
+
+    --wwu-error-bg: #f2dede;
+    --wwu-error-border: #eed3d7;
+    --wwu-error-fg: #b94a48;
+}
+
+@mixin dark-colors {
+    --wwu-bg: #222;
+    --wwu-bg-1: #{lighten(#222, 5%)};
+    --wwu-bg-2: #{lighten(#222, 10%)};
+    --wwu-bg-3: #{lighten(#222, 15%)};
+    --wwu-bg-4: #{lighten(#222, 20%)};
+    --wwu-bg-5: #{lighten(#222, 25%)};
+    --wwu-fg: #eee;
+    --wwu-fg-1: #aaa;
+    --wwu-muted-bg: #444;
+    --wwu-muted-fg: #666;
+    --wwu-contrast-fg: #eee;
+    --wwu-outlinegrey: #444;
+    --wwu-dividergrey: #777;
+    --wwu-learnwebblue: #00b0e8;
+    --wwu-learnwebblue-highlight: #40c7f8;
+
+    --wwu-success-bg: #2c5b2d;
+    --wwu-success-border: #336c35;
+    --wwu-success-fg: #dfffd0;
+
+    --wwu-info-bg: #105273;
+    --wwu-info-border: #0e6693;
+    --wwu-info-fg: #c1e5f7;
+
+    --wwu-warn-bg: #6c4700;
+    --wwu-warn-border: #845700;
+    --wwu-warn-fg: #ffecc8;
+
+    --wwu-error-bg: #600000;
+    --wwu-error-border: #730011;
+    --wwu-error-fg: #ffc1c0;
+
+    .only-dark {
+        display: unset;
+    }
+
+    .only-light {
+        display: none;
+    }
+
+    .border-bottom {
+        //noinspection Stylelint
+        border-bottom-color: var(--wwu-bg-3) !important;
+    }
+
+    .border-top {
+        //noinspection Stylelint
+        border-top-color: var(--wwu-bg-3) !important;
+    }
+
+    .border-left {
+        //noinspection Stylelint
+        border-left-color: var(--wwu-bg-3) !important;
+    }
+
+    .border-right {
+        //noinspection Stylelint
+        border-right-color: var(--wwu-bg-3) !important;
+    }
+
+    .bg-white {
+        //noinspection Stylelint
+        background-color: var(--wwu-bg) !important;
+    }
+
+    .bg-light {
+        background-color: var(--wwu-bg-1) !important;
+    }
+
+    .border {
+        border-color: var(--wwu-bg-3) !important;
+    }
+
+    body.pagelayout-course .course-content ul li.section.main.current .content {
+        background-color: #131d00;
+    }
+
+    #logo-header a.wwu-logo {
+        filter: brightness(200);
+    }
+
+    #logo-header a.learnweb-logo {
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_dark.svg);
+    }
+
+    #main-menu .arrow {
+        filter: brightness(2);
+    }
+
+    .bg-pulse-grey {
+        animation: bg-pulse-grey-dark 2s infinite linear;
+    }
+
+    @keyframes bg-pulse-grey-dark {
+        0% {
+            background-color: $gray-800;
+        }
+        50% {
+            background-color: darken($gray-800, 5%);
+        }
+        100% {
+            background-color: $gray-800;
+        }
+    }
+
+    .list-group-item,
+    [data-fieldtype="modgrade"],
+    .moodle-dialogue-base .moodle-dialogue-wrap,
+    .path-mod-assign [data-region="grade-panel"] .fitem.has-popout {
+        background-color: var(--wwu-bg);
+        border-color: rgba(white, 0.125);
+    }
+
+    .mform fieldset,
+    .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd,
+    .path-mod-assign [data-region="grading-navigation-panel"],
+    .path-mod-assign [data-region="grade-actions-panel"] {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .fp-navbar {
+        background: var(--wwu-bg-2);
+
+        .fp-toolbar .btn.btn-secondary,
+        .fp-viewbar .btn.btn-secondary {
+            border: 1px solid var(--wwu-muted-fg);
+            border-bottom: 1px solid var(--wwu-muted-fg);
+            background: var(--wwu-bg);
+            color: var(--wwu-fg);
+        }
+    }
+
+    .page-item .page-link {
+        color: var(--wwu-learnwebblue);
+        background-color: var(--wwu-bg);
+        border: 1px solid var(--wwu-outlinegrey);
+    }
+
+    .page-item.active .page-link {
+        color: white;
+        background-color: var(--wwu-learnwebblue-og);
+        border: 1px solid var(--wwu-learnwebblue-og)
+    }
+
+    .generaltable,
+    table.mod-data-default-template {
+        color: var(--wwu-fg);
+
+        thead th,
+        th,
+        td {
+            border-color: var(--wwu-bg-3);
+        }
+
+        tbody tr:nth-of-type(#{$table-striped-order}) {
+            background-color: rgba(white, 0.05);
+        }
+
+        tbody tr:hover {
+            color: var(--wwu-fg);
+            background-color: rgba(white, 0.1);
+
+            &.dimmed_text a:not(.menu-action) {
+                color: var(--wwu-fg);
+            }
+        }
+    }
+
+    .table-striped {
+        tbody tr:nth-of-type(#{$table-striped-order}) {
+            background-color: rgba(white, 0.05);
+        }
+    }
+
+    .table {
+        color: var(--wwu-fg);
+
+        thead th,
+        th,
+        td{
+            border-color: var(--wwu-bg-3);
+        }
+    }
+
+    .custom-control-label {
+        &::before {
+            background-color: var(--wwu-bg);
+            border-color: var(--wwu-bg-5);
+        }
+
+        &::after {
+            background-color: var(--wwu-bg-5);
+        }
+    }
+
+    .custom-control-input:checked ~ .custom-control-label {
+        &::before {
+            border-color: var(--wwu-learnwebblue);
+            background-color: var(--wwu-learnwebblue);
+        }
+
+        &::after {
+            background-color: var(--wwu-bg);
+        }
+    }
+
+    .simplesearchform .btn-submit {
+        background-color: var(--wwu-bg-2);
+        border-color: var(--wwu-bg-5);
+        color: var(--wwu-fg-1);
+    }
+
+    .dropdown-menu {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border: 1px solid rgba(white, 0.15);
+    }
+
+    .dropdown-item,
+    .dropdown-item a {
+        &,
+        &:hover,
+        &:focus {
+            color: var(--wwu-fg);
+        }
+    }
+
+    .dropdown-item:active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:focus-within {
+        background-color: var(--wwu-bg-2);
+    }
+
+    .path-mod-assign .gradingtable tr.unselectedrow td {
+        background-color: unset;
+    }
+
+    .path-mod-assign [data-region="grade-panel"] {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .form-autocomplete-suggestions li {
+        color: var(--wwu-fg-1);
+    }
+
+    .popover {
+        background-color: var(--wwu-bg);
+        border: 1px solid rgba(white, 0.2);
+        color: var(--wwu-fg);
+    }
+
+    .popover-body {
+        color: var(--wwu-fg);
+    }
+
+    .popover-header {
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-4);
+    }
+
+    .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd.yui3-widget-hd {
+        background-color: var(--wwu-bg);
+        color: var(--wwu-fg);
+    }
+
+    .yui3-button {
+        color: rgba(white, 0.8);
+    }
+
+    .fp-iconview .fp-thumbnail img {
+        border: 1px solid var(--wwu-bg-4);
+    }
+
+    .fp-iconview .fp-thumbnail {
+        border: 1px solid var(--wwu-bg);
+    }
+
+    .file-picker .fp-content,
+    .fp-iconview .fp-filename-field .fp-filename,
+    .filepicker-filelist .dndupload-target,
+    .filemanager-container .dndupload-target {
+        background-color: var(--wwu-bg);
+    }
+
+    .popover-region-container {
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-5);
+    }
+
+    .popover-region-header-container,
+    .path-mod div.activity-information {
+        border-bottom-color: var(--wwu-bg-5);
+    }
+
+    .popover-region-footer-container {
+        border-top-color: var(--wwu-bg-5);
+        background-color: var(--wwu-bg);
+    }
+
+    .popover-region-toggle::before {
+        border-bottom-color: var(--wwu-bg-5);
+    }
+
+    .popover-region-toggle::after {
+        border-bottom-color: var(--wwu-bg);
+    }
+
+    #adminsettings h3 {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .table-hover tbody tr:hover {
+        color: unset;
+        background-color: rgba(white, 0.075);
+    }
+
+    .modal-header {
+        border-bottom-color: var(--wwu-bg-3);
+    }
+
+    .modal-content,
+    .modchooser .modal-body .optionsummary,
+    .modchooser .modal-footer {
+        background-color: var(--wwu-bg);
+    }
+
+    .modal-footer {
+        border-top-color: var(--wwu-bg-3);
+    }
+
+    .close {
+        color: var(--wwu-fg);
+    }
+
+    hr {
+        border-color: rgba(white, 0.1);
+    }
+
+    .modchoosercontainer .optionscontainer .option .optioninfo a, .modchoosercontainer .searchresultitemscontainer .option .optioninfo a {
+        color: var(--wwu-fg);
+    }
+
+    @media (max-width: 767.98px) {
+        .nav-tabs, .nav-pills {
+            background-color: var(--wwu-bg-2);
+        }
+        .nav-tabs .nav-link, .nav-pills .nav-link {
+            color: var(--wwu-fg-1);
+            background: var(--wwu-bg);
+        }
+        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
+            background-color: var(--wwu-bg-5);
+            border-color: var(--wwu-bg-5);
+        }
+        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
+        }
+    }
+
+    .nav-tabs {
+        border-color: var(--wwu-bg-2);
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg-5);
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+        border-color: var(--wwu-bg-2) var(--wwu-bg-2) var(--wwu-bg-3);
+    }
+
+    .toast .close {
+        color: black;
+    }
+
+    /* Grade table */
+    .path-grade-report-grader .gradeparent tr .cell,
+    .path-grade-report-grader .gradeparent .floater .cell {
+        background-color: var(--wwu-bg);
+    }
+
+    .path-grade-report-grader .gradeparent table,
+    .path-grade-report-grader .gradeparent .cell {
+        border-color: var(--wwu-bg-4);
+    }
+
+    .path-grade-report-grader .gradeparent .userrow.odd .cell,
+    .path-grade-report-grader .gradeparent .floater .cell.odd,
+    .path-grade-report-grader .gradeparent .heading .cell,
+    .path-grade-report-grader .gradeparent .cell.category,
+    .path-grade-report-grader .gradeparent .avg .cell {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .preferences-container .preference-table,
+    .preferences-container .preference-table tr td:nth-child(2n) {
+        border-color: var(--wwu-bg-3);
+    }
+
+    /* Calendar block */
+    .block .minicalendar td a {
+        color: var(--wwu-learnwebblue);
+    }
+
+    .calendar_event_user {
+        background-color: var(--wwu-bg-3);
+    }
+
+    .block .minicalendar td.calendar_event_user a {
+        color: var(--wwu-fg);
+    }
+
+    .resourcelinkdetails,
+    .resourcedetails {
+        color: var(--wwu-fg-1);
+    }
+
+    .list-group-item-action:hover,
+    .list-group-item-action:focus {
+        color: var(--wwu-fg-1);
+    }
+
+    body.format-topcoll #toggle-all #toggles-all-closed,
+    body.format-topcoll #toggle-all #toggles-all-opened {
+        filter: brightness(2);
+    }
+
+    span.unread {
+        background-color: #1a2f46;
+    }
+
+    pre {
+        color: var(--wwu-fg);
+    }
+
+    .CodeMirror pre {
+        color: black;
+    }
+
+    /* mod_quiz */
+    .jschooser .choosercontainer #chooseform .instruction,
+    .jschooser .choosercontainer #chooseform .typesummary,
+    #page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmarkcontainer,
+    .choosercontainer #chooseform .selected {
+        background-color: var(--wwu-bg);
+    }
+
+    #page-mod-quiz-edit ul.slots li.section .content,
+    .chooserdialogue .moodle-dialogue-wrap .moodle-dialogue-bd,
+    table.quizreviewsummary td.cell {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .choosercontainer #chooseform .option .icon,
+    #questionscontainer .qtype img.icon,
+    #page-mod-quiz-edit ul.slots .activityinstance img.activityicon {
+        filter: invert(1);
+    }
+
+    .choosercontainer #chooseform .option label,
+    #page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmarkcontainer {
+        border-bottom-color: var(--wwu-bg);
+    }
+
+    .choosercontainer #chooseform .options {
+        border-bottom-color: var(--wwu-bg-5);
+    }
+
+    #page-mod-quiz-edit ul.slots li.section li.activity,
+    #page-mod-quiz-edit .section .activity .actions,
+    table.quizreviewsummary th.cell {
+        background: var(--wwu-bg-2);
+    }
+
+    #page-mod-quiz-edit .slotnumber {
+        background-color: var(--wwu-bg-3);
+    }
+
+    #page-mod-quiz-edit #categoryquestions .questionname, #page-mod-quiz-edit ul.slots li.activity div.activityinstance .questionname {
+        color: var(--wwu-fg);
+    }
+
+
+    #page-mod-quiz-edit #categoryquestions .questionname,
+    #page-mod-quiz-edit ul.slots li.activity div.activityinstance .questionname,
+    #page-mod-quiz-edit ul.slots li.activity div.activityinstance .questiontext {
+        color: var(--wwu-fg-1);
+    }
+
+    #page-mod-quiz-edit ul.slots li.section li.activity.page {
+        background: transparent;
+    }
+
+    .que .info {
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-5);
+    }
+
+    body#page-question-type-multichoice div[id^="fitem_id_"][id*="feedback_"],
+    body#page-question-type-multichoice div[id^="fitem_id_"][id*="fraction_"],
+    body#page-question-type-multichoice div[id^="fitem_id_"][id*="answer_"] {
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-5);
+    }
+
+    #quiz-timer-wrapper #quiz-timer {
+        background-color: unset;
+    }
+
+    .editor_atto_notification .atto_info {
+        background-color: var(--wwu-bg-1);
+    }
+
+    /* backup */
+    .path-backup .mform .root_setting,
+    .path-backup .mform .grouped_settings,
+    .h5p-admin-table tr,
+    .h5p-data-view tr {
+        &:nth-of-type(2n+1) {
+            background-color: rgba(255, 255, 255, .05);
+        }
+
+        &:nth-of-type(2n) {
+            background-color: unset;
+        }
+    }
+
+    .path-backup .backup-section {
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-3);
+    }
+
+    /* block_accessreview */
+    .block_accessreview_success,
+    .block_accessreview.block_accessreview_success.hasinfo {
+        color: var(--wwu-success-fg);
+        background:var(--wwu-success-bg);
+        border-color: var(--wwu-success-border);
+    }
+
+    .block_accessreview_danger,
+    .block_accessreview.block_accessreview_danger.hasinfo {
+        color: var(--wwu-error-fg);
+        background:var(--wwu-error-bg);
+        border-color: var(--wwu-error-border);
+    }
+
+    .block_accessreview_warning,
+    .block_accessreview.block_accessreview_warning.hasinfo {
+        color: var(--wwu-warn-fg);
+        background:var(--wwu-warn-bg);
+        border-color: var(--wwu-warn-border);
+    }
+
+    .block_accessreview_table {
+        border-color: var(--wwu-bg-3);
+    }
+
+    /** 3rd party plugin theme fixes **/
+    .qn-question,
+    .qn-info {
+        background-color: var(--wwu-bg-3);
+    }
+
+    /* mod_moodleoverflow */
+    .moodleoverflowpost.unread .row.header {
+        background-color: #1a2f46;
+        border-bottom-color: var(--wwu-bg-3);
+    }
+
+    .moodleoverflowpost .topic .author {
+        color: var(--wwu-fg-1);
+    }
+
+    /* block_xp */
+    .block_xp nav .nav-button {
+        color: var(--wwu-fg-1);
+    }
+
+    /* mod_scheduler */
+    .path-mod-scheduler .maildisplay,
+    .path-mod-scheduler div.commandbar,
+    .path-mod-scheduler div.slotnotes,
+    .path-mod-scheduler .appointmentnote {
+        background-color: var(--wwu-bg-1);
+    }
+}
+
+
+.toast {
+    color: $gray-800;
+}
+
+.popover-region-container {
+    overflow-y: hidden;
+}
+
+.only-dark {
+    display: none;
+}
+
+:root {
+    @include light-colors;
+    color-scheme: light dark;
+
+    &.dark {
+        @include dark-colors;
+        color-scheme: dark;
+    }
+
+    &.light {
+        color-scheme: light;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+        @include dark-colors;
+    }
+}

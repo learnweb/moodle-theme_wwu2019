@@ -61,7 +61,7 @@ ul.main-menubar {
 
     span,
     .icon {
-        color: black;
+        color: var(--wwu-contrast-fg);
         font-size: 1.34375em;
         text-transform: uppercase;
     }
@@ -72,11 +72,12 @@ ul.main-menubar {
     position: sticky; /* stylelint-disable-line */
     top: 0;
     z-index: #{$zindex-dropdown + 1};
-    background: white;
+    background: var(--wwu-bg);
+    color: var(--wwu-contrast-fg);
     height: $main-menu-height;
     margin: 0 #{-$page-padding};
-    border-left: $page-padding solid white;
-    border-right: $page-padding solid white;
+    border-left: $page-padding solid var(--wwu-bg);
+    border-right: $page-padding solid var(--wwu-bg);
 
     #main-menu-border {
         padding: 10px 0;
@@ -126,11 +127,11 @@ ul.main-menubar {
 
         &:not(:last-child) {
             padding-right: 15px;
-            border-right: 1px solid black;
+            border-right: 1px solid var(--wwu-dividergrey);
             margin-right: 15px;
         }
 
-        &.open > a > span.underline {
+        &.open > a span.underline {
             text-decoration: underline;
         }
 
@@ -147,6 +148,7 @@ ul.main-menubar {
         left: 0;
         top: 100%; /* #main-menu is offset parent */
         width: 100%;
+        background-color: var(--wwu-bg);
 
         .sub-menu-scroll-container {
             overflow-y: auto;
@@ -166,7 +168,6 @@ ul.main-menubar {
                     // Hide divider below bottommost items.
                     margin-bottom: -1px;
                     width: calc(100% + 16px);
-                    background: white;
 
                     .breaker {
                         display: none;
@@ -200,7 +201,7 @@ ul.main-menubar {
             display: flex;
             width: 100%;
             padding: 12px 12px 12px 0;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-dividergrey);
             align-items: center;
 
             & > * {
@@ -211,10 +212,10 @@ ul.main-menubar {
                 flex: auto 1 1;
             }
 
-            & > span,
+            & span,
             & > .icon {
                 font-size: 16px;
-                color: $learnwebblue;
+                color: var(--wwu-learnwebblue);
             }
 
             & > .arrow {
@@ -235,11 +236,11 @@ ul.main-menubar {
             font-size: 10.5px;
             list-style: none;
             padding: 4px 12px 4px 20px;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-dividergrey);
 
             // Second level sub-sub-menu.
             .sub-sub-menu {
-                border-top: 1px solid black;
+                border-top: 1px solid var(--wwu-dividergrey);
             }
         }
 
@@ -262,7 +263,7 @@ ul.main-menubar {
                 flex: auto 0 0;
             }
 
-            & > span {
+            span {
                 line-height: 20px;
                 text-transform: none;
                 flex: auto 1 1;
@@ -309,7 +310,7 @@ ul.main-menubar {
         margin-left: 4px;
 
         .sub-menu-scroll-wrapper {
-            border: 2px solid #423c39;
+            border: 2px solid var(--wwu-dividergrey);
             border-top: 0;
             right: 0;
             left: auto;
@@ -327,11 +328,11 @@ ul.main-menubar {
         }
 
         .sub-menu-item.divider > a {
-            border-bottom: 1px dashed black;
+            border-bottom: 1px dashed var(--wwu-dividergrey);
         }
 
         .sub-menu-item.open > a {
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-dividergrey);
         }
 
         &.open > a > span.underline {
@@ -360,6 +361,15 @@ ul.main-menubar {
             vertical-align: bottom;
             white-space: nowrap;
         }
+
+        .selectedtheme {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .wwu-useostheme {
+            text-decoration: dotted;
+        }
     }
 
     #main-menu-hamburger > a#hamburger-toggle > i.icon {
@@ -386,7 +396,7 @@ ul.main-menubar {
                 display: none;
                 position: absolute;
                 top: 100%;
-                background: white;
+                background: var(--wwu-bg);
                 width: 100%;
                 border-bottom: 4px solid $dividergrey;
                 padding: 8px 0;
@@ -435,7 +445,7 @@ ul.main-menubar {
                 .sub-menu-scroll-wrapper {
                     position: relative;
                     padding: 0 12px 0 20px;
-                    border-top: 1px solid black;
+                    border-top: 1px solid var(--wwu-dividergrey);
                     border-bottom: none;
                     top: unset;
                     left: unset;
@@ -450,7 +460,7 @@ ul.main-menubar {
 
         .main-menu-item:not(:last-child) {
             border-right: none;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--wwu-dividergrey);
         }
     }
 
@@ -469,7 +479,7 @@ ul.main-menubar {
     top: 0;
     height: $main-menu-height;
     width: 100%;
-    background-color: $white;
+    background-color: var(--wwu-bg);
 }
 
 #menu-bottom {

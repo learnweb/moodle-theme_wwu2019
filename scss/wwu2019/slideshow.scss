@@ -24,7 +24,11 @@
 
 /* Slideshow */
 #wwuCarousel.carousel {
-    border: 2px solid #bec6c8;
+    border: 2px solid var(--wwu-outlinegrey);
+
+    .carousel-inner {
+        margin-bottom: 26px;
+    }
 
     .carousel-indicators {
         background-color: rgba($learnwebblue, .7);
@@ -45,17 +49,30 @@
         }
     }
 
-    .carousel-image-container {
-        height: 260px;
+    .carousel-item-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
 
-        img {
-            padding: 8px;
+        @media (max-width: 768px) {
+            flex-wrap: wrap;
         }
     }
 
-    .carousel-inner .side-caption div.the-side-caption {
-        padding-left: 16%;
+    .carousel-image-container {
+        height: 260px;
+        padding: 8px;
+        max-width: 100%;
+        flex-shrink: 0;
+        object-fit: contain;
     }
+
+    .side-caption {
+        padding: 2em 2em 1em 2em;
+        flex: 650px 0 1;
+        max-width: max-content;
+    }
+
 
     .carousel-control {
         width: 6%;

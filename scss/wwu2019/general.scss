@@ -70,10 +70,18 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: var(--wwu-bg);
+    color: var(--wwu-fg);
     font-family: 'MetaWebPro', sans-serif;
-    overflow-wrap: break-word;
-    overflow-wrap: anywhere;
+}
+
+a,
+.btn-link {
+    color: var(--wwu-learnwebblue);
+
+    &:hover {
+        color: var(--wwu-learnwebblue-highlight);
+    }
 }
 
 h1 {
@@ -109,6 +117,10 @@ $page-padding: 1rem;
     margin-right: auto;
 }
 
+.pagelayout-embedded #page {
+    padding: 0;
+}
+
 /* Header and Logos */
 #logo-header {
     padding-bottom: 1.25rem;
@@ -134,8 +146,12 @@ $page-padding: 1rem;
         }
     }
 
-    a.learnweb-logo img {
-        max-height: 81px;
+    a.learnweb-logo {
+        height: 81px;
+        width: 145px;
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_light.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 
@@ -220,14 +236,14 @@ footer#wwu-footer {
                 line-height: 1;
 
                 a {
-                    color: $wwu-footer;
+                    color: var(--wwu-fg);
                     text-transform: uppercase;
                 }
 
-                &:hover {
+                /*&:hover {
                     text-shadow: 1px 0 0 black;
                     text-decoration: none;
-                }
+                }*/
             }
 
             li ~ li {
@@ -292,11 +308,6 @@ footer#wwu-footer + div > div.container {
     width: 100%;
 }
 
-#region-main-body {
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
 /* Enforce margin on dashboard and login page */
 .pagelayout-mydashboard #region-main-box,
 .pagelayout-login #region-main-box {
@@ -353,5 +364,14 @@ a:not([class]):focus,
     .btn-#{$color},
     .btn-outline-#{$color} {
         @include button-old-focus($value);
+    }
+}
+
+.section li.activity {
+    &.block_accessreview_success,
+    &.block_accessreview_danger,
+    &.block_accessreview_warning {
+        margin-top: 1em;
+        margin-bottom: 1em;
     }
 }

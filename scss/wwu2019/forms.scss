@@ -25,6 +25,17 @@
 
 .btn {
     border-radius: 0;
+    color: var(--wwu-fg);
+}
+
+.btn:hover {
+    color: var(--wwu-fg);
+}
+
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+        @include button-variant($value, $value);
+    }
 }
 
 @each $color, $value in $theme-colors {
@@ -33,13 +44,31 @@
     }
 }
 
-/* Form control */
-.form-control {
-    border-radius: 0;
+select:disabled,
+.custom-select:disabled,
+.form-control:disabled,
+.form-control[readonly] {
+    color: var(--wwu-fg-1);
+    background-color: var(--wwu-muted-bg);
 }
 
-.custom-select {
+/* Form control */
+select,
+.form-control,
+.form-control:focus,
+.custom-select,
+input[type="submit"]:not(.btn),
+.custom-file-label,
+.yui3-button {
     border-radius: 0;
+    background-color: var(--wwu-bg);
+    border-color: var(--wwu-muted-fg);
+    color: var(--wwu-fg);
+}
+
+.form-autocomplete-suggestions {
+    background-color: var(--wwu-bg);
+    border: 1px solid var(--wwu-muted-fg);
 }
 
 /* Pagination */

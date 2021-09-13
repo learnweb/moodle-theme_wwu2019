@@ -54,3 +54,41 @@ function theme_wwu2019_get_main_scss_content($theme) {
 
     return $pre . "\n" . $scss . "\n" . $post;
 }
+
+function theme_wwu2019_user_preferences() {
+    $preferences['theme_wwu2019_theme'] = [
+            'null' => NULL_NOT_ALLOWED,
+            'default' => 0,
+            'type' => PARAM_INT,
+            'choices' => [0, 1, 2,]
+    ];
+    return $preferences;
+}
+
+/**
+ * Adds a link to the content bank to the course menu.
+ *
+ * @param navigation_node $navigation The navigation node to extend
+ * @param stdClass $course The course to object for the tool
+ * @param context $context The context of the course
+ * @return void|null return null if we don't want to display the node.
+ */
+function theme_wwu2019_extend_navigation_course($navigation, $course, $context) {
+    global $PAGE;
+
+    // Only add this settings item on non-site course pages.
+    if (!$PAGE->course || $PAGE->course->id == SITEID || !has_capability('moodle/contentbank:access', $context)) {
+        return null;
+    }
+
+    $node = navigation_node::create(
+            get_string('contentbank'),
+            new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
+            navigation_node::NODETYPE_LEAF,
+            null,
+            'contentbank',
+            new pix_icon('i/contentbank', '')
+    );
+
+    $navigation->add_node($node);
+}

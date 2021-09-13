@@ -27,7 +27,7 @@
 <ul class="sub-sub-menu" role="menu">
     {{# menu }}
     <li class="sub-sub-menu-item {{# class }}{{class}}{{/class}}">
-        <a role="menuitem" {{# href }} href="{{ href }}"{{/href}} tabindex="-1"
+        <a role="menuitem" {{# href }} href="{{ href }}"{{/href}} tabindex="-1" {{{ addatags }}}
             {{# hasmenu }} aria-haspopup="true" aria-expanded="{{# isexpanded }}{{isexpanded}}{{/isexpanded}}{{^isexpanded}}false{{/isexpanded}}"
             {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
             {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}

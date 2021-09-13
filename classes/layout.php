@@ -54,7 +54,9 @@ class layout {
      */
     public static function get_default_template_context() {
         global $OUTPUT, $PAGE, $SITE, $CFG;
+
         $bodyattributes = $OUTPUT->body_attributes();
+
         $blockspost = $OUTPUT->blocks('side-post');
 
         $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
