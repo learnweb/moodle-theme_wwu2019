@@ -1225,6 +1225,7 @@ _paq.push(['trackPageView']);
             }
 
             if ($slides) {
+                $this->page->requires->js_call_amd('theme_wwu2019/slideshow', 'init');
                 $output .= $this->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
             }
         }
