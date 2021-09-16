@@ -60,11 +60,15 @@
     }
 
     .carousel-image-container {
-        height: 260px;
+        max-height: 260px;
         padding: 8px;
-        max-width: 100%;
+        max-width: 66%;
         flex-shrink: 0;
         object-fit: contain;
+
+        @media (max-width: 768px) {
+            max-width: 100%;
+        }
     }
 
     .side-caption {
