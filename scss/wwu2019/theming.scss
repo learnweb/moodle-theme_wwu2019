@@ -635,6 +635,31 @@
     .path-mod-scheduler .appointmentnote {
         background-color: var(--wwu-bg-1);
     }
+
+    /* mod_opencast */
+    body.path-mod-opencast {
+        .episode > a {
+            color: var(--wwu-fg);
+            border: 1px solid var(--wwu-bg-5);
+        }
+
+        .episode > a:hover {
+            background-color: var(--wwu-bg-1);
+        }
+
+        .episode img {
+            border: 1px solid var(--wwu-bg-5);
+        }
+
+        .episode .date {
+            color: var(--wwu-fg-1);
+        }
+
+        .player-wrapper {
+            border: 1px solid var(--wwu-bg-5);
+        }
+    }
+
 }
 
 
