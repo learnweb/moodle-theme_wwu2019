@@ -370,6 +370,20 @@
         border-color: rgba(white, 0.1);
     }
 
+    .message-app .day {
+        color: var(--wwu-fg);
+    }
+
+    .message-app .btn.btn-link.btn-icon:hover,
+    .message-app .btn.btn-link.btn-icon:focus {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .message-app .btn-link:hover,
+    .message-app .btn-link:focus {
+        background-color: rgba(255, 255, 255, .035);
+    }
+
     .modchoosercontainer .optionscontainer .option .optioninfo a, .modchoosercontainer .searchresultitemscontainer .option .optioninfo a {
         color: var(--wwu-fg);
     }
