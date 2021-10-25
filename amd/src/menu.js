@@ -61,7 +61,7 @@ function initThemeChooser() {
         selected.removeClass('selectedtheme');
         html.removeClass('dark');
         html.removeClass('light');
-        updateThemePreferenceAjax(0);
+        updateThemePreferenceAjax(null);
         selected = useostheme;
         selected.addClass('selectedtheme');
     });
