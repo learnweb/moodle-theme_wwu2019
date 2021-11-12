@@ -16,7 +16,7 @@
 /**
  * Manages the very important snow.
  *
- * @package    theme_wwu2019
+ * @module     theme_wwu2019/snow
  * @copyright  2020 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,6 +51,7 @@ export function init() {
     canvas = document.createElement('canvas');
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
+    canvas.classList.add('snow');
     canvas.style.position = 'fixed';
     canvas.style.top = '0';
     canvas.style.left = '0';
@@ -107,6 +108,9 @@ export function init() {
 // Animate the flakes
 let angle = 0;
 
+/**
+ * Move the flakes.
+ */
 function moveFlakes() {
     angle += 0.01;
     let basemovement = noise.simplex2(angle * 0.1, 0) * 2.5;
@@ -137,16 +141,21 @@ function moveFlakes() {
     }
 }
 
+/**
+ * Generate X Coordinate
+ * @returns {number} the x coordinate
+ */
 function generateXCoord() {
     return Math.random() * (canvas.width + 400) - 200;
 }
 
+/**
+ * Redraw everything
+ * @param {CanvasRenderingContext2D} ctx
+ */
 function redraw(ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#cbebfa";
-    // ctx.fillStyle = "#fff";
     ctx.beginPath();
     for (let f of flakes) {
         ctx.moveTo(f.x, f.y);
@@ -171,8 +180,9 @@ function redraw(ctx) {
  * attribution is appreciated.
  *
  */
+// eslint-disable-next-line
 function exportNoise() {
-    /* eslint-disable no-bitwise */
+    /* eslint-disable */
     var module = {};
 
     function Grad(x, y, z) {
