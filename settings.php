@@ -165,4 +165,21 @@ if ($ADMIN->fulltree) {
     }
 
     $settings->add($page);
+
+    $gimmickpage = new admin_settingpage('theme_wwu2019_gimmickspage', 'Gimmicks');
+
+    $gimmickpage->add(new admin_setting_heading('theme_wwu2019_snow', 'Snow', null));
+    $gimmickpage->add(new admin_setting_configselect('theme_wwu2019/snow_enable', 'Enable snow', '',
+        0, [
+            0 => 'Disable snow',
+            1 => 'Enable snow',
+            2 => 'Enable snow within timelimits'
+    ]));
+    $gimmickpage->add(new admin_setting_configtext('theme_wwu2019/snow_start', 'Start snow',
+        'Of course a unixtimestamp. Because it is very convenient.', 0));
+    $gimmickpage->add(new admin_setting_configtext('theme_wwu2019/snow_end', 'End snow',
+        'Of course a unixtimestamp. Because it is very convenient.', 0));
+
+    $settings->add($gimmickpage);
+
 }
