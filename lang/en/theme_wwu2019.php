@@ -49,6 +49,8 @@ $string['usermenu'] = 'User menu';
 /* Settings */
 $string['helpurl'] = 'Help URL';
 $string['helpurl_desc'] = 'URL to helppage that will be linked to in the usermenu';
+$string['cookie_policy_url'] = 'Cookie policy URL';
+$string['cookie_policy_url_desc'] = 'URL to a cookie policy that will be linked to in the footer';
 $string['matomo_siteurl'] = 'Analytics URL';
 $string['matomo_siteurl_desc'] = 'Enter your "Matomo Analytics" URL without http(s) or a trailing slash. For example "mysite.com/analytics".';
 $string['matomo_siteid'] = 'Analytics Site ID';
@@ -96,6 +98,8 @@ $string['light'] = 'Light';
 $string['dark'] = 'Dark';
 $string['ostheme'] = 'System colors';
 $string['ostheme_help'] = 'Switches between light and dark theme depending on the OS settings.';
+
+$string['cookiepolicy'] = "Cookie policy";
 
 // Cookie consent.
 $string['cookie_consent_title'] = "Zustimmung zur Verwendung von Cookies";
