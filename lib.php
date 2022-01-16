@@ -124,12 +124,18 @@ function theme_wwu2019_before_standard_top_of_body_html() {
 
         $consentgiven = optional_param('theme_wwu2019_cookie_consent_given', false, PARAM_BOOL);
         if ($consentgiven) {
-            $data = new stdClass();
-            $data->userid = $USER->id;
-            $data->consentdate = time();
-            $consentpersistent = new \theme_wwu2019\cookie_consent_allocation(0, $data);
-            $consentpersistent->create();
-            add_consent_cooke($consentpersistent);
+            if ($consentpersistent) {
+                $consentpersistent->set('consentdate', time());
+                $consentpersistent->save();
+                add_consent_cooke($consentpersistent);
+            } else {
+                $data = new stdClass();
+                $data->userid = $USER->id;
+                $data->consentdate = time();
+                $consentpersistent = new \theme_wwu2019\cookie_consent_allocation(0, $data);
+                $consentpersistent->create();
+                add_consent_cooke($consentpersistent);
+            }
             return null;
         }
 
