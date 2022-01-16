@@ -90,9 +90,44 @@ $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Kee
 
 $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
 
-// Theme switcher
+// Theme switcher.
 $string['choosetheme'] = 'Theme auswählen';
 $string['light'] = 'Hell';
 $string['dark'] = 'Dunkel';
 $string['ostheme'] = 'Systemfarben';
 $string['ostheme_help'] = 'Wechselt zwischen hellem und dunklem Theme basierend auf den Systemeinstellungen.';
+
+// Cookie consent.
+$string['cookie_consent_title'] = "Zustimmung zur Verwendung von Cookies";
+$string['cookie_consent_title_one'] = "Diese Website verwendet Cookies";
+$string['cookie_consent_body_one'] = "Das Learnweb braucht Cookies um zu funktionieren." .
+    " Da wir kein Interesse am Verkauf deiner Daten haben setzen wir nur solche Cookies ein, die zum Betrieb der Website notwendig sind.";
+$string['cookie_explanation_title'] = "Was sind Cookies?";
+$string['cookie_explanation_body'] = "Cookies sind kleine Textdateien die das Learnweb auf Ihrem PC speichert."
+    . " In dieser Textdatei wird dann ein Wert und ein Ablaufdatum gespeichert."
+    . " Der Name dieser Textdatei, sowie ihr Inhalt werden dann immer an das Learnweb gesendet wenn Sie es besuchen."
+    . " Wenn das gespeicherte Ablaufdatum erreicht ist wird der Cookie automatisch von ihrem PC gelöscht.";
+$string['cookie_classes_title'] = "Was für Arten von Cookies gibt es?";
+$string['cookie_classes_body'] = "Grundsätzlich unterscheidet man vier Arten von Cookies:" .
+    " <br> <ul>" .
+        "<li><p class='text-bold'>Essentielle Cookies</p> sind Cookies die zum Betrieb einer Website unbedingt nötig sind." .
+        " Außerdem ist bei diesen Cookies sicherzustellen, dass sie nur an den Betreiber einer Website gesendet werden.</li>" .
+        "<li><p class='text-bold'>Funktionale Cookies</p> sind Cookies die dazu dienen eine Website um Funktionen zu bereichern." .
+        " Beispielsweise kann so die Sprache eines Nutzers gespeichert werden und die Website auf dieser Sprache angezeigt werden." .
+        " Die informationen die in Funktionalen Cookies gespeichert sind müssen anonymisiert werden.</li>" .
+        "<li><p class='text-bold'>Performance Cookies</p> sind Cookies die dazu genutzt werden die Performance einer Webseite zu analysieren." .
+        " Sie speichern Beispielsweise welche Unterseiten ein Nutzer besonders oft besucht oder welchen Text er besonders lang und aufmerksam durchgelesen hat.</li>" .
+        "<li><p class='text-bold'>Marketing Cookies</p> sind alle Cookies deren Informationen primär dazu genutzt werden um " .
+        " (personalisierte) Werbung für den Nutzer anzuzeigen.</li>" .
+    "</ul>";
+
+$string['cookie_reason_title'] = "Wofür benutzt das Learnweb Cookies?";
+$string['cookie_reason_body'] = "Das Learnweb setzt Cookies für verschiedene Zwecke ein. Wenn Sie sich Beispielsweise einloggen "
+    . "speichert das Learnweb einen Cookie der einen Zugangscode für Sie enthält. Wenn sie dann eine andere Seite des Learnwebs aufrufen "
+    . "kann das Learnweb sie anhand dieses Codes identifizieren und Sie müssen sich nicht erneut einloggen. <br> "
+    . "Ein anderer Anwendungsbereich sind einige Texteditoren des Learnwebs. Wenn sie einen Text schreiben so speichert ihr PC diesen Text "
+    . "während des Schreibens immer wieder in einem Cookie. Somit ist sichergestellt, dass sie auch bei Verbindungsabbruch oder zwischenzeitlichem "
+    . "Verlassen des Learnwebs keinen Verlust ihres Textes befürchten müssen.";
+$string['agree'] = "Zustimmung erteilen";
+
+$string['invalidconsentdate'] = "Ungültiges Datum für Zustimmungserteilung";

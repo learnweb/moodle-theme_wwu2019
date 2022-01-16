@@ -375,3 +375,92 @@ a:not([class]):focus,
         margin-bottom: 1em;
     }
 }
+
+#theme_wwu2019_cookie_consent_overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2000; // to be above nav
+}
+
+#theme_wwu2019_cookie_consent_dialog_header {
+    background-color: $primary;
+}
+
+.theme_wwu2019_cookie_consent_body {
+    text-align: left;
+    color: black;
+}
+
+.vertical-center {
+    margin: 0 auto;
+}
+
+.theme_wwu2019_bold_text {
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+.dialog_center {
+    width: 40%;
+    display: inline-table;
+    height: auto;
+    margin: 10% auto auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.theme_wwu2019_cookie_consent_form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dialog_overlay {
+    z-index: 2001;
+    background-color: white;
+}
+.theme_wwu2019_switch_wrapper {
+    text-align: left;
+    padding-top: 5px;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    background: white;
+}
+
+.theme_wwu2019_switch_label {
+    background-image: url([[pix:theme_wwu2019|arrow_up]]);
+    height: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 0 0 5px;
+    padding-left: calc(1em + 5px);
+    color: $primary;
+    font-weight: bold;
+}
+
+:checked ~ .theme_wwu2019_switch_label {
+    background-image: url([[pix:theme_wwu2019|arrow_down]]);
+}
+
+.theme_wwu2019_switched_text {
+    display: none;
+}
+
+:checked ~ .theme_wwu2019_switched_text {
+    display: block;
+}
+
+.theme_wwu2019_switch_input {
+    display: none;
+}
+
+.text-bold {
+    font-weight: bold;
+}
