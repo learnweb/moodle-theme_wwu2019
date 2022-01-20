@@ -92,3 +92,72 @@ function theme_wwu2019_extend_navigation_course($navigation, $course, $context) 
 
     $navigation->add_node($node);
 }
+
+const CONSENT_COOKIE = "cookie_policy_consent";
+function theme_wwu2019_before_standard_top_of_body_html() {
+    global $USER, $OUTPUT;
+    if (isloggedin()) {
+        if (isset($_COOKIE[CONSENT_COOKIE])) {
+            $consentdataraw = $_COOKIE[CONSENT_COOKIE];
+            $consentdata = json_decode($consentdataraw, true);
+            $userid = $USER->id;
+            $useridhash = md5($userid);
+            foreach ($consentdata as $consenteduser => $consentdate) {
+                if ($consenteduser == $useridhash) {
+                    $consentexpirydate = strtotime("+1 year", $consentdate);
+                    if ($consentexpirydate > time()) {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        $consentpersistent = \theme_wwu2019\cookie_consent_allocation::get_record(["userid" => $USER->id]);
+        if ($consentpersistent) {
+            $consentdate = $consentpersistent->get('consentdate');
+            $consentexpirydate = strtotime("+1 year", $consentdate);
+            if ($consentexpirydate > time()) {
+                add_consent_cooke($consentpersistent);
+            }
+            return null;
+        }
+
+        $consentgiven = optional_param('theme_wwu2019_cookie_consent_given', false, PARAM_BOOL);
+        if ($consentgiven) {
+            if ($consentpersistent) {
+                $consentpersistent->set('consentdate', time());
+                $consentpersistent->save();
+                add_consent_cooke($consentpersistent);
+            } else {
+                $data = new stdClass();
+                $data->userid = $USER->id;
+                $data->consentdate = time();
+                $consentpersistent = new \theme_wwu2019\cookie_consent_allocation(0, $data);
+                $consentpersistent->create();
+                add_consent_cooke($consentpersistent);
+            }
+            return null;
+        }
+
+        $consentdialog = $OUTPUT->render_from_template("theme_wwu2019/cookie_consent", []);
+
+        return $consentdialog;
+    }
+    return null;
+}
+
+function add_consent_cooke($consentpersistent) {
+    global $CFG;
+    if (isset($_COOKIE[CONSENT_COOKIE])) {
+        $consentdata = json_decode($_COOKIE[CONSENT_COOKIE], true);
+    } else {
+        $consentdata = [];
+    }
+
+    $consentdate = $consentpersistent->get('consentdate');
+    $hashedid = md5($consentpersistent->get('userid'));
+    $consentdata[$hashedid] = $consentdate;
+    $encodeddata = json_encode($consentdata);
+    $consentexpirydate = strtotime("+1 year", $consentdate);
+    setcookie(CONSENT_COOKIE, $encodeddata, $consentexpirydate, $CFG->sessioncookiepath);
+}

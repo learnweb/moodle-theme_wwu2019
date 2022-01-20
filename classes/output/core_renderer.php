@@ -1014,6 +1014,9 @@ class core_renderer extends \core_renderer {
         if (!empty($CFG->sitepolicyhandler) && $CFG->sitepolicyhandler == 'tool_policy') {
             $elements['policyurl'] = (new moodle_url('/admin/tool/policy/view.php', ['policyid' => 1]))->out();
         }
+        if ($cookiepolicy = get_config('theme_wwu2019', 'cookie_policy_url')) {
+            $elements['cookiepolicyurl'] = $cookiepolicy;
+        }
         return $elements;
 
     }

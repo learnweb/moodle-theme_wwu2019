@@ -1,0 +1,50 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_wwu2019/cookie_consent
+}}
+
+<div id="theme_wwu2019_cookie_consent_overlay"></div>
+<div id="theme_wwu2019_cookie_consent_dialog" class="centerpara dialog_center dialog_overlay">
+    <div id="theme_wwu2019_cookie_consent_dialog_header" class="modal-header">
+        <h5 class="modal-title vertical-center"><p class="theme_wwu2019_bold_text">{{#str}}cookie_consent_title, theme_wwu2019{{/str}}</p></h5>
+    </div>
+    <div class="theme_wwu2019_cookie_consent_body">
+        <h5><p class="text-bold">{{#str}}cookie_consent_title_one, theme_wwu2019{{/str}}</p></h5>
+        {{#str}}cookie_consent_body_one, theme_wwu2019{{/str}}
+        {{<theme_wwu2019/collapsible_topic}}
+            {{$title}}{{#str}}cookie_explanation_title, theme_wwu2019{{/str}}{{/title}}
+            {{$text}}{{#str}}cookie_explanation_body, theme_wwu2019{{/str}}{{/text}}
+            {{$id_prefix}}exp{{/id_prefix}}
+        {{/theme_wwu2019/collapsible_topic}}
+        {{<theme_wwu2019/collapsible_topic}}
+            {{$title}}{{#str}}cookie_classes_title, theme_wwu2019{{/str}}{{/title}}
+            {{$text}}{{#str}}cookie_classes_body, theme_wwu2019{{/str}}{{/text}}
+            {{$id_prefix}}class{{/id_prefix}}
+        {{/theme_wwu2019/collapsible_topic}}
+        {{<theme_wwu2019/collapsible_topic}}
+            {{$title}}{{#str}}cookie_reason_title, theme_wwu2019{{/str}}{{/title}}
+            {{$text}}{{#str}}cookie_reason_body, theme_wwu2019{{/str}}{{/text}}
+            {{$id_prefix}}reason{{/id_prefix}}
+        {{/theme_wwu2019/collapsible_topic}}
+    </div>
+
+    <form class="theme_wwu2019_cookie_consent_form" method="post">
+        <input type="hidden" name="theme_wwu2019_cookie_consent_given" value="true">
+        <input type="submit" class="btn btn-secondary" name="submit" value="{{#str}}agree, theme_wwu2019{{/str}}">
+    </form>
+</div>

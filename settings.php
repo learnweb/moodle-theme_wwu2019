@@ -34,6 +34,12 @@ if ($ADMIN->fulltree) {
         get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
     $page->add($setting);
 
+    // Cookie consent.
+    $setting = new admin_setting_configtext('theme_wwu2019/cookie_policy_url',
+        get_string('cookie_policy_url', 'theme_wwu2019'),
+        get_string('cookie_policy_url_desc', 'theme_wwu2019'), '');
+    $page->add($setting);
+
     // Matomo.
     $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteurl',
         get_string('matomo_siteurl', 'theme_wwu2019'),
