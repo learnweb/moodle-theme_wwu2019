@@ -31,7 +31,6 @@ use moodle_url;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot . '/course/format/topcoll/renderer.php');
 
 /**
  * Overriden functions for format_topcoll_renderer and format_section_renderer_base.
@@ -39,75 +38,72 @@ require_once($CFG->dirroot . '/course/format/topcoll/renderer.php');
  * @copyright 2020 Justus Dieckmann WWU
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class format_topcoll_renderer extends \format_topcoll_renderer {
+class format_topcoll_renderer extends \format_topcoll\output\renderer {
     use wwu_format_trait;
 
     /**
-     * Generate the display of the header part of a section before
-     * course modules are included.
+     * Generate the section.
      *
      * @param stdClass $section The course_section entry from DB.
      * @param stdClass $course The course entry from DB.
      * @param bool $onsectionpage true if being printed on a section page.
      * @param int $sectionreturn The section to return to after an action.
+     * @param array $displayoptions The display options.
+     *
      * @return string HTML to output.
      */
-    protected function section_header($section, $course, $onsectionpage, $sectionreturn = null) {
-        $o = '';
-
-        $sectionstyle = '';
-        $rightcurrent = '';
+    protected function topcoll_section($section, $course, $onsectionpage, $sectionreturn = null, $displayoptions = array()) {
         $context = context_course::instance($course->id);
+
+        $sectioncontext = array(
+            'rtl' => $this->rtl,
+            'sectionid' => $section->id,
+            'sectionno' => $section->section,
+            'sectionreturn' => $sectionreturn
+        );
 
         if ($section->section != 0) {
             // Only in the non-general sections.
             if (!$section->visible) {
-                $sectionstyle = ' hidden';
+                $sectioncontext['sectionstyle'] = 'hidden';
             }
             if ($section->section == $this->currentsection) {
-                $sectionstyle = ' current';
-                $rightcurrent = ' left';
+                $sectioncontext['sectionstyle'] = 'current';
             }
         }
 
-        if ((!$this->formatresponsive) && ($section->section != 0) &&
-                ($this->tcsettings['layoutcolumnorientation'] == 2)) { // Horizontal column layout.
-            $sectionstyle .= ' ' . $this->get_column_class($this->tcsettings['layoutcolumns']);
+        if (empty($this->tcsettings)) {
+            $this->tcsettings = $this->courseformat->get_settings();
         }
-        $liattributes = array(
-                'id' => 'section-' . $section->section,
-                'class' => 'section main clearfix' . $sectionstyle,
-                'role' => 'region',
-                'aria-label' => $this->courseformat->get_topcoll_section_name($course, $section, false)
-        );
-        if (($this->formatresponsive) && ($this->tcsettings['layoutcolumnorientation'] == 2)) { // Horizontal column layout.
-            $liattributes['style'] = 'width: ' . $this->tccolumnwidth . '%;';
+
+        if ($this->tcsettings['layoutcolumnorientation'] == 2) { // Horizontal column layout.
+            if ($this->formatresponsive) {
+                $sectioncontext['horizontalwidth'] = $this->tccolumnwidth;
+            } else if ((!$onsectionpage) && ($section->section != 0)) {
+                $sectioncontext['horizontalclass'] = $this->get_column_class($this->tcsettings['layoutcolumns']);
+            }
         }
-        $o .= html_writer::start_tag('li', $liattributes);
+
+        if ((($this->mobiletheme === false) && ($this->tablettheme === false)) || ($this->userisediting)) {
+            $sectioncontext['nomtore'] = true;
+            $sectioncontext['leftcontent'] = $this->section_left_content($section, $course, $onsectionpage);
+            $sectioncontext['rightcontent'] = '';
+            $sectioncontext['rightcontent'] .= $this->section_right_content($section, $course, $onsectionpage);
+        }
+        if ($section->section != 0) {
+            $sectioncontext['contentaria'] = true;
+        }
+        $sectioncontext['sectionavailability'] = $this->section_availability($section);
 
         if (($onsectionpage == false) && ($section->section != 0)) {
-
-            $o .= html_writer::start_tag('div',
-                    array('class' => 'header sectionhead toggle toggle-'.$this->tcsettings['toggleiconset'],
-                            'id' => 'toggle-'.$section->section, 'tabindex' => '0')
-            );
-
-            $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
-            $o .= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
+            $sectioncontext['sectionpage'] = false;
+            $sectioncontext['toggleiconset'] = $this->tcsettings['toggleiconset'];
+            $sectioncontext['toggleiconsize'] = $this->tctoggleiconsize;
 
             if ((!($section->toggle === null)) && ($section->toggle == true)) {
-                $toggleclass = 'toggle_open';
-                $ariaexpanded = 'true';
-                $sectionclass = ' sectionopen';
+                $sectioncontext['toggleopen'] = true;
             } else {
-                $toggleclass = 'toggle_closed';
-                $ariaexpanded = 'false';
-                $sectionclass = '';
-            }
-            $toggleclass .= ' the_toggle ' . $this->tctoggleiconsize;
-
-            if (empty($this->tcsettings)) {
-                $this->tcsettings = $this->courseformat->get_settings();
+                $sectioncontext['toggleopen'] = false;
             }
 
             if ($this->userisediting) {
@@ -115,72 +111,33 @@ class format_topcoll_renderer extends \format_topcoll_renderer {
             } else {
                 $title = $this->courseformat->get_topcoll_section_name($course, $section, true);
             }
+            $sectioncontext['heading'] = $title;
 
-            $o .= html_writer::tag('span', $title, array('class' => 'sectionname ' . $toggleclass, 'role' => 'button',
-                    'aria-expanded' => $ariaexpanded));
-
-            $o .= $this->section_availability($section);
-
-            $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
-            $o .= html_writer::tag('div', $rightcontent, array('class' => 'right side'));
-
-            $o .= html_writer::end_div();
-
-            if ($this->tcsettings['showsectionsummary'] == 2) {
-                $o .= $this->section_summary_container($section);
-            }
-
-            $o .= html_writer::start_tag('div',
-                    array('class' => 'content sectionbody toggledsection' . $sectionclass,
-                            'id' => 'toggledsection-' . $section->section)
-            );
+            $sectioncontext['sectionsummary'] = $this->section_summary_container($section);
+            $sectioncontext['sectionsummarywhencollapsed'] = ($this->tcsettings['showsectionsummary'] == 2);
 
             if ($this->userisediting) {
                 // CONTRIB-7434.
-                $o .= html_writer::tag('span',
-                        $this->courseformat->get_topcoll_section_name($course, $section, false),
-                        array('class' => 'hidden', 'aria-hidden' => 'true'));
-            }
-
-            if ($this->tcsettings['showsectionsummary'] == 1) {
-                $o .= $this->section_summary_container($section);
+                $sectioncontext['usereditingtitle'] = $this->courseformat->get_topcoll_section_name($course, $section, false);
             }
         } else {
+            $sectioncontext['sectionpage'] = true;
             // When on a section page, we only display the general section title, if title is not the default one.
-
-            // Swap content.
-            $o .= html_writer::start_div('header');
-            $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
-            $o .= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
-            $o .= $this->output->heading($this->section_title($section, $course), 3, 'section-title sectionname');
-            $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
-            $o .= html_writer::tag('div', $rightcontent, array('class' => 'right side'));
-            $o .= html_writer::end_div();
-
-            $o .= html_writer::start_div('content');
-            $o .= $this->section_availability($section);
-            $o .= html_writer::start_tag('div', array('class' => 'summary'));
-
-            $o .= $this->format_summary_text($section);
-
-            $o .= html_writer::end_div();
+            $title = $this->section_title($section, $course);
+            $sectioncontext['heading'] = $title;
+            $sectioncontext['summary'] = $this->format_summary_text($section);
         }
-        return $o;
-    }
+        if ($this->userisediting && has_capability('moodle/course:update', $context)) {
+            $sectioncontext['usereditingicon'] = $this->output->pix_icon('t/edit', get_string('edit'));
+            $sectioncontext['usereditingurl'] = new moodle_url('/course/editsection.php', array('id' => $section->id, 'sr' => $sectionreturn));
+        }
 
-    /**
-     * Generate the display of the footer part of a section after
-     * course modules are included.
-     *
-     * @param stdClass $section The course_section entry from DB.
-     * @param stdClass $course The course entry from DB.
-     * @param bool $onsectionpage true if being printed on a section page.
-     * @param int $sectionreturn The section to return to after an action.
-     * @return string HTML to output.
-     */
-    protected function topcoll_section_footer($section, $course, $onsectionpage, $sectionreturn = null) {
-        $o = html_writer::end_tag('li');
-        return $o;
+        if ($section->uservisible) {
+            $sectioncontext['cscml'] = $this->courserenderer->course_section_cm_list($course, $section, $sectionreturn, $displayoptions);
+            $sectioncontext['cscml'] .= $this->courserenderer->course_section_add_cm_control($course, $section->section, $sectionreturn);
+        }
+
+        return $this->render_from_template('format_topcoll/section', $sectioncontext);
     }
 
     /**
