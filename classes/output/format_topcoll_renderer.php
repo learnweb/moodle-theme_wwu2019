@@ -125,7 +125,7 @@ class format_topcoll_renderer extends \format_topcoll\output\renderer {
             // When on a section page, we only display the general section title, if title is not the default one.
             $title = $this->section_title($section, $course);
             $sectioncontext['heading'] = $title;
-            $sectioncontext['summary'] = $this->format_summary_text($section);
+            $sectioncontext['sectionsummary'] = $this->format_summary_text($section);
         }
         if ($this->userisediting && has_capability('moodle/course:update', $context)) {
             $sectioncontext['usereditingicon'] = $this->output->pix_icon('t/edit', get_string('edit'));
