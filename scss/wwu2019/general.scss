@@ -247,7 +247,7 @@ footer#wwu-footer {
             }
 
             li ~ li {
-                border-left: 1px solid $wwu-footer;
+                border-left: 1px solid var(--wwu-fg);
             }
         }
 
