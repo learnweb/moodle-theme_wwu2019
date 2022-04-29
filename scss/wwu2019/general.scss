@@ -229,6 +229,12 @@ footer#wwu-footer {
             list-style: none;
             padding-left: 0;
             flex-wrap: wrap;
+            margin-bottom: 0;
+
+            li.suppresscaps a {
+                text-transform: none;
+                text-decoration: underline;
+            }
 
             li {
                 padding: 0 5px;
