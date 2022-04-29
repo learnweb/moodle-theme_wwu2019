@@ -314,6 +314,11 @@ footer#wwu-footer + div > div.container {
     padding: 0 1rem;
 }
 
+.pagelayout-admin #region-main,
+.pagelayout-standard #region-main {
+    padding: 1em;
+}
+
 /* Turn editing off button red */
 .red-edit-button > form > button {
     @extend .btn-danger;
