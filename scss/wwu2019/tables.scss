@@ -28,3 +28,9 @@ table.mod-data-default-template {
         text-align: left;
     }
 }
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+    background-color: var(--wwu-info-bg) !important;
+}

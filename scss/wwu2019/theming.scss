@@ -660,6 +660,12 @@
         }
     }
 
+    #page-mod-quiz-view table.quizattemptsummary tr.bestrow td,
+    body.path-mod-quiz .gradedattempt, body.path-mod-quiz table tbody tr.gradedattempt > td {
+        background-color: var(--wwu-info-bg);
+        border-color: var(--wwu-info-border);
+    }
+
 }
 
 
