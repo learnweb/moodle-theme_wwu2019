@@ -39,3 +39,17 @@ body.fullscreenWrapper {
     top: 0;
     z-index: unset;
 }
+
+.mod_cas-content #savediv,
+.mod_cas-content #editdiv {
+    background: var(--wwu-bg);
+}
+
+.mod_cas-content #tooldiv {
+    color: black;
+}
+
+body.path-mod-cas table.generaltable[border],
+body.path-mod-cas table.generaltable table[border]{
+    border-color: var(--wwu-bg-3);
+}
