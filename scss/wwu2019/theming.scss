@@ -666,6 +666,17 @@
         border-color: var(--wwu-info-border);
     }
 
+    .que .formulation {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg-1);
+        border-color: var(--wwu-bg-3);
+    }
+
+    #plugins-check-page .pluginupdateinfo,
+    #plugins-control-panel .pluginupdateinfo {
+        background-color:var(--wwu-info-bg);
+    }
+
 }
 
 
