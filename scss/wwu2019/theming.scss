@@ -12,9 +12,9 @@
     --wwu-contrast-fg: #000;
     --wwu-outlinegrey: #bec6c8;
     --wwu-dividergrey: #423c39;
-    --wwu-learnwebblue: #006784;
-    --wwu-learnwebblue-highlight: #002b38;
-    --wwu-learnwebblue-og: #006784;
+    --wwu-learnwebblue: #{$learnwebblue};
+    --wwu-learnwebblue-highlight: #{darken($learnwebblue, 15%)};
+    --wwu-learnwebblue-og: #{$learnwebblue};
 
     --wwu-success-bg: #dff0d8;
     --wwu-success-border: #d6e9c6;
@@ -47,8 +47,8 @@
     --wwu-contrast-fg: #eee;
     --wwu-outlinegrey: #444;
     --wwu-dividergrey: #777;
-    --wwu-learnwebblue: #00b0e8;
-    --wwu-learnwebblue-highlight: #40c7f8;
+    --wwu-learnwebblue: lighten($learnwebblue, 18%);
+    --wwu-learnwebblue-highlight: lighten($learnwebblue, 25%);
 
     --wwu-success-bg: #2c5b2d;
     --wwu-success-border: #336c35;
@@ -116,7 +116,7 @@
     }
 
     #logo-header a.learnweb-logo {
-        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_dark.svg);
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/#{$logoprefix}_dark.svg);
     }
 
     #main-menu .arrow {

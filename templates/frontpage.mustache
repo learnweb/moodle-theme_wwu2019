@@ -74,9 +74,11 @@
 
         {{{alerts}}}
 
-        <div id="region-slideshow" class="region-slideshow-content mb-3">
-            {{{ output.slideshow }}}
-        </div>
+        {{^ isexamweb }}
+            <div id="region-slideshow" class="region-slideshow-content mb-3">
+                {{{ output.slideshow }}}
+            </div>
+        {{/isexamweb}}
 
         <div id="region-marketing" class="region-marketing-content">
             <div class="row">

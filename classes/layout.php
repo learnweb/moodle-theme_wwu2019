@@ -23,6 +23,8 @@
 
 namespace theme_wwu2019;
 
+use theme_wwu2019\output\core_renderer;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -64,6 +66,7 @@ class layout {
         $templatecontext = [
             'sitename' => format_string($SITE->shortname, true,
                 ['context' => \context_course::instance(SITEID), "escape" => false]),
+            'isexamweb' => core_renderer::is_examweb(),
             'output' => $OUTPUT,
             'sidepostblocks' => $blockspost,
             'haspostblocks' => $hassidepost,

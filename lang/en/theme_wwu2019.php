@@ -90,10 +90,22 @@ $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Kee
 
 $string['viewfullsection'] = 'View full section';
 
-// Theme switcher
+// Theme switcher.
 $string['choosetheme'] = 'Choose theme';
 $string['light'] = 'Light';
 $string['dark'] = 'Dark';
 $string['ostheme'] = 'System colors';
 $string['ostheme_help'] = 'Switches between light and dark theme depending on the OS settings.';
 
+$string['settings:isexamweb'] = 'Is this the Examweb?';
+$string['settings:isexamweb_desc'] = 'This decides the page logo, as well as various things in templates (for example no slideshow, ...)';
+$string['settings:primarycolor'] = 'Primary theme color';
+$string['settings:secondarycolor'] = 'Secondary theme color';
+$string['settings:prescss'] = 'Additional Pre-SCSS Code';
+$string['settings:darkthemeenabled'] = 'Should the dark theme be choosable?';
+
+// Examweb.
+$string['exam:begin'] = 'Start of exam:';
+$string['exam:end'] = 'End of exam:';
+
+$string['examweb_description'] = 'Online examination system of the University of M&uuml;nster';

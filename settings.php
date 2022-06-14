@@ -29,6 +29,27 @@ if ($ADMIN->fulltree) {
             get_string('pluginname', 'theme_wwu2019'));
     $page = new admin_settingpage('theme_classic_wwu2019', get_string('generalsettings', 'theme_boost'));
 
+    $page->add(new admin_setting_configcheckbox('theme_wwu2019/isexamweb',
+        get_string('settings:isexamweb', 'theme_wwu2019'),
+        get_string('settings:isexamweb_desc', 'theme_wwu2019'),
+        '0'
+    ));
+
+    $page->add(new admin_setting_configcolourpicker('theme_wwu2019/primarycolor',
+        get_string('settings:primarycolor', 'theme_wwu2019'), '',
+        '#006784'));
+
+    $page->add(new admin_setting_configcolourpicker('theme_wwu2019/secondarycolor',
+        get_string('settings:secondarycolor', 'theme_wwu2019'), '',
+        '#578014'));
+
+    $page->add(new admin_setting_configtextarea('theme_wwu2019/prescss',
+        get_string('settings:prescss', 'theme_wwu2019'), '', ''));
+
+    $page->add(new admin_setting_configcheckbox('theme_wwu2019/darktheme_enabled',
+        get_string('settings:darkthemeenabled', 'theme_wwu2019'), '',
+        '1'));
+
     $setting = new admin_setting_configtext('theme_wwu2019/helpurl',
         get_string('helpurl', 'theme_wwu2019'),
         get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
