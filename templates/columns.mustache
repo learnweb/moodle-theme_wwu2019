@@ -55,9 +55,9 @@
         {{{ output.logo_header }}}
         {{{ output.main_menu }}}
         {{{ output.full_header }}}
-
         <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
             <div id="region-main-box" class="region-main mb-3">
+
                 {{{alerts}}}
 
                 {{#hasregionmainsettingsmenu}}
@@ -65,6 +65,12 @@
                     <div> {{{ output.region_main_settings_menu }}} </div>
                 </div>
                 {{/hasregionmainsettingsmenu}}
+
+                {{#secondarymoremenu}}
+                    <div class="secondary-navigation">
+                        {{> core/moremenu}}
+                    </div>
+                {{/secondarymoremenu}}
                 <section id="region-main" class="region-main-content" aria-label="{{#str}}content{{/str}}">
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>

@@ -63,12 +63,25 @@ class layout {
 
         $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
 
+        $secondarynavigation = false;
+        $overflow = '';
+        if ($PAGE->has_secondary_navigation()) {
+            $tablistnav = $PAGE->has_tablist_secondary_navigation();
+            $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+            $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+            $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+            if (!is_null($overflowdata)) {
+                $overflow = $overflowdata->export_for_template($OUTPUT);
+            }
+        }
+
         $templatecontext = [
             'sitename' => format_string($SITE->shortname, true,
                 ['context' => \context_course::instance(SITEID), "escape" => false]),
             'isexamweb' => core_renderer::is_examweb(),
             'output' => $OUTPUT,
             'sidepostblocks' => $blockspost,
+            'secondarymoremenu' => $secondarynavigation,
             'haspostblocks' => $hassidepost,
             'bodyattributes' => $bodyattributes,
             'footer' => $OUTPUT->get_footer_context(),

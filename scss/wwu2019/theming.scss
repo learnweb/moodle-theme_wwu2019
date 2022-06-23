@@ -16,6 +16,9 @@
     --wwu-learnwebblue-highlight: #{darken($learnwebblue, 15%)};
     --wwu-learnwebblue-og: #{$learnwebblue};
 
+    --wwu-tab-bg-inactive: #adb5bd;
+    --wwu-tab-fg-inactive: #495057;
+
     --wwu-success-bg: #dff0d8;
     --wwu-success-border: #d6e9c6;
     --wwu-success-fg: #468847;
@@ -49,6 +52,9 @@
     --wwu-dividergrey: #777;
     --wwu-learnwebblue: lighten($learnwebblue, 18%);
     --wwu-learnwebblue-highlight: lighten($learnwebblue, 25%);
+
+    --wwu-tab-bg-inactive: var(--wwu-bg-2);
+    --wwu-tab-fg-inactive: #adb5bd;
 
     --wwu-success-bg: #2c5b2d;
     --wwu-success-border: #336c35;
@@ -388,26 +394,8 @@
         color: var(--wwu-fg);
     }
 
-    @media (max-width: 767.98px) {
-        .nav-tabs, .nav-pills {
-            background-color: var(--wwu-bg-2);
-        }
-        .nav-tabs .nav-link, .nav-pills .nav-link {
-            color: var(--wwu-fg-1);
-            background: var(--wwu-bg);
-        }
-        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
-            background-color: var(--wwu-bg-5);
-            border-color: var(--wwu-bg-5);
-        }
-        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
-            box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
-        }
-    }
 
-    .nav-tabs {
-        border-color: var(--wwu-bg-2);
-    }
+    /*
 
     .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
         color: var(--wwu-fg);
@@ -417,7 +405,7 @@
     .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
         border-color: var(--wwu-bg-2) var(--wwu-bg-2) var(--wwu-bg-3);
-    }
+    }*/
 
     .toast .close {
         color: black;

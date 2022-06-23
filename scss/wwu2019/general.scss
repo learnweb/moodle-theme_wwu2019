@@ -386,3 +386,64 @@ a:not([class]):focus,
         margin-bottom: 1em;
     }
 }
+
+.secondary-navigation {
+    padding: 0;
+    margin-bottom: -2px;
+
+    &> .navigation {
+        border: none;
+        height: $moremenu-height;
+    }
+}
+
+.nav-tabs > .nav-item > .nav-link {
+    border: 2px solid var(--wwu-outlinegrey);
+    background-color: var(--wwu-tab-bg-inactive);
+    color: var(--wwu-tab-fg-inactive);
+
+    &:focus {
+        outline: none;
+    }
+
+    &.active,
+    &.active:hover,
+    &.active:focus {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border-bottom-color: var(--wwu-bg);
+        box-shadow: none;
+    }
+}
+
+.nav-tabs {
+    border-color: var(--wwu-bg-2);
+}
+
+.moremenu .nav-tabs {
+    background-color: var(--wwu-bg);
+
+    .nav-item {
+        margin-bottom: unset;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .nav-tabs:not(.more-nav), .nav-pills {
+        background-color: var(--wwu-bg-1);
+
+        .nav-link {
+            background-color: var(--wwu-tab-bg-inactive);
+            color: var(--wwu-tab-fg-inactive);
+            border: none;
+        }
+    }
+    .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs:not(.more-nav) .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
+        color: var(--wwu-fg);
+        background: var(--wwu-bg);
+        border: 2px solid var(--wwu-bg-5);
+    }
+    .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs:not(.more-nav) .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
+    }
+}
