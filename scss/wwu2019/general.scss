@@ -418,6 +418,13 @@ a:not([class]):focus,
 
 .nav-tabs {
     border-color: var(--wwu-bg-2);
+
+    .nav-link.active,
+    .nav-item.show .nav-link {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-outlinegrey) var(--wwu-outlinegrey) var(--wwu-bg);
+    }
 }
 
 .moremenu .nav-tabs {

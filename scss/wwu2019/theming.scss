@@ -16,7 +16,7 @@
     --wwu-learnwebblue-highlight: #{darken($learnwebblue, 15%)};
     --wwu-learnwebblue-og: #{$learnwebblue};
 
-    --wwu-tab-bg-inactive: #adb5bd;
+    --wwu-tab-bg-inactive: #e1e6ec;
     --wwu-tab-fg-inactive: #495057;
 
     --wwu-success-bg: #dff0d8;
@@ -393,19 +393,6 @@
     .modchoosercontainer .optionscontainer .option .optioninfo a, .modchoosercontainer .searchresultitemscontainer .option .optioninfo a {
         color: var(--wwu-fg);
     }
-
-
-    /*
-
-    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-        color: var(--wwu-fg);
-        background-color: var(--wwu-bg-5);
-    }
-
-    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-        border-color: var(--wwu-bg-2) var(--wwu-bg-2) var(--wwu-bg-3);
-    }*/
 
     .toast .close {
         color: black;
