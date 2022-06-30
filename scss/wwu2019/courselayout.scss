@@ -64,10 +64,11 @@ body.pagelayout-course {
 
     .course-content ul li.section.main {
         border-radius: 0;
-        padding-bottom: 0;
+        padding: 0;
         border: 2px solid $outlinegrey;
+        margin-bottom: 0.5rem;
 
-        .header {
+        .header, .course-section-header {
             background-color: $learnwebblue;
             color: white;
             display: flex;
@@ -81,8 +82,21 @@ body.pagelayout-course {
                 line-height: 1.2;
             }
 
-            a {
-                color: inherit;
+            a,
+            .btn-link {
+                color: white;
+            }
+
+            .dropdown-menu {
+                a,
+                .btn-link {
+                    color: inherit;
+
+                    &:hover,
+                    &:focus {
+                        color: white;
+                    }
+                }
             }
 
             .side.left,
@@ -99,7 +113,7 @@ body.pagelayout-course {
 
         .content {
             margin: 0;
-            padding: 12px 4px;
+            padding: 0 0.5rem;
             // overflow-x: auto;
 
             .section {
@@ -155,6 +169,41 @@ body.pagelayout-course {
         display: inherit;
     }
 
+}
+
+.btn.btn-icon {
+    &:hover,
+    &:focus {
+        background-color: rgba(200, 200, 200, 0.3)
+    }
+}
+
+.activity-item:not(.activityinline) {
+    border: none;
+}
+
+.editing .activity-item:hover {
+    background-color: var(--wwu-bg-1);
+    color: unset;
+
+    .description .course-description-item,
+    .activityiconcontainer,
+    .badge {
+        mix-blend-mode: unset;
+    }
+}
+
+.activity-add, .block-add {
+    background-color: var(--wwu-bg-1);
+    border-color: var(--wwu-bg-5);
+
+    &:hover {
+        background-color: var(--wwu-bg-3);
+    }
+
+    .pluscontainer {
+        border-color: var(--wwu-bg-5);
+    }
 }
 
 .forumpost.unread .row.header,

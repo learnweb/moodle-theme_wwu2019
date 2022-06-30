@@ -1025,10 +1025,11 @@ class core_renderer extends \core_renderer {
             return $output;
         }
 
-        $output .= '<div class="page-title">';
-        $output .= '<h1>' . $this->page->course->fullname . '</h1>';
-
-        if (self::is_examweb()) {
+        if (!self::is_examweb()) {
+            $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
+        } else {
+            $output .= '<div class="page-title">';
+            $output .= '<h1>' . $this->page->course->fullname . '</h1>';
             if ($this->page->pagelayout == 'course') {
                 $handler = \core_customfield\handler::get_handler('core_course', 'course');
                 $datas = $handler->get_instance_data($this->page->course->id, true);
@@ -1052,9 +1053,8 @@ class core_renderer extends \core_renderer {
                     userdate($metadata['end']) . '</h3>';
                 $output .= '</div>';
             }
+            $output .= '</div>';
         }
-
-        $output .= '</div>';
         return $output;
     }
 

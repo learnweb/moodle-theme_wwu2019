@@ -416,6 +416,13 @@ a:not([class]):focus,
     }
 }
 
+.nav-tabs .nav-link {
+    &:focus,
+    &:hover {
+        border-color: transparent;
+    }
+}
+
 .nav-tabs {
     border-color: var(--wwu-bg-2);
 
