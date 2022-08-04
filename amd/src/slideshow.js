@@ -16,7 +16,7 @@
 /**
  * Set the slides to all be the height.
  *
- * @package    theme_wwu2019
+ * @module     theme_wwu2019/slideshow
  * @copyright  2021 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,14 +28,15 @@ import $ from 'jquery';
  */
 export function init() {
     const items = $('#wwuCarousel .carousel-item');
-    window.console.log(items);
 
+    /**
+     * A function that handles window resizing to set the correct height for the carousel slides.
+     */
     function onResize() {
         let maxheight = 0;
-        items.each(function(i) {
+        items.each(function() {
             $(this).css('height', '');
             maxheight = Math.max(maxheight, $(this).height());
-            window.console.log(i, $(this).height());
         });
         items.each(function() {
             $(this).css('height', maxheight + 'px');
