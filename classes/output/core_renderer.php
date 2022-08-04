@@ -26,6 +26,7 @@ namespace theme_wwu2019\output;
 
 use action_link;
 use context_course;
+use image_icon;
 use moodle_page;
 use moodle_url;
 use navigation_node;
@@ -597,7 +598,7 @@ class core_renderer extends \core_renderer {
                     if ($modname === 'resources') {
                         $activities[] = [
                                 'name' => $modfullname,
-                                'icon' => (new pix_icon('icon', '', 'mod_page'))->export_for_pix(),
+                                'icon' => (new pix_icon('monologo', '', 'mod_page'))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))->out(false)
@@ -605,7 +606,7 @@ class core_renderer extends \core_renderer {
                     } else {
                         $activities[] = [
                                 'name' => $modfullname,
-                                'icon' => (new pix_icon('icon', '', $modname))->export_for_pix(),
+                                'icon' => (new pix_icon('monologo', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))->out(false)
@@ -1347,4 +1348,52 @@ _paq.push(['trackPageView']);
         }
     }
 
+    /**
+     * Renders a pix_icon widget and returns the HTML to display it.
+     *
+     * @param pix_icon $icon
+     * @return string HTML fragment
+     */
+    protected function render_pix_icon(pix_icon $icon) {
+        $this->check_monologo($icon);
+        $system = \core\output\icon_system::instance();
+        return $system->render_pix_icon($this, $icon);
+    }
+
+    /**
+     * Renders a pix_icon widget and returns the HTML to display it.
+     *
+     * @param image_icon $icon
+     * @return string HTML fragment
+     */
+    protected function render_image_icon(image_icon $icon) {
+        $this->check_monologo($icon);
+        $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
+        return $system->render_pix_icon($this, $icon);
+    }
+
+    /**
+     * @param pix_icon $icon
+     */
+    private function check_monologo(pix_icon $icon) {
+        global $PAGE;
+
+        if ($icon->pix === 'monologo' || $icon->pix === 'icon') {
+            if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
+                    substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
+                    strpos($icon->component, '_') === false
+                )
+            ) {
+                if ($location = $PAGE->theme->resolve_image_location($icon->pix, $icon->component, null)) {
+                    if (substr_compare($location, 'monologo.svg', -12) === 0) {
+                        if (isset($icon->attributes['class'])) {
+                            $icon->attributes['class'] .= ' wwu-monologo ';
+                        } else {
+                            $icon->attributes['class'] = ' wwu-monologo ';
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

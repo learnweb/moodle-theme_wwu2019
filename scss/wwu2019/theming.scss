@@ -145,6 +145,10 @@
         }
     }
 
+    .icon.wwu-monologo {
+        filter: invert(1);
+    }
+
     .list-group-item,
     [data-fieldtype="modgrade"],
     .moodle-dialogue-base .moodle-dialogue-wrap,
