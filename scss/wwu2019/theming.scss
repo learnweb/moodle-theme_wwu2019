@@ -609,6 +609,14 @@
         color: var(--wwu-fg-1);
     }
 
+    #moodleoverflow-root .vote[data-moodleoverflow-state] {
+        filter: invert(1);
+    }
+
+    #moodleoverflow-root .vote[data-moodleoverflow-state="clicked"] {
+        filter: none;
+    }
+
     /* block_xp */
     .block_xp nav .nav-button {
         color: var(--wwu-fg-1);
