@@ -590,8 +590,15 @@
 
     /* mod_moodleoverflow */
     .moodleoverflowpost.unread .row.header {
-        background-color: #1a2f46;
         border-bottom-color: var(--wwu-bg-3);
+    }
+
+    .mod_moodleoverflow-label-unread {
+        background-color: #645800;
+    }
+
+    .mod_moodleoverflow-label-review {
+        background-color: #774444;
     }
 
     .moodleoverflowpost .topic .author {

@@ -74,14 +74,6 @@ body.pagelayout-course {
             display: flex;
             width: 100%;
 
-            .sectionname {
-                padding: 0;
-                font-size: 18px;
-                margin: 4px 0;
-                flex-grow: 1;
-                line-height: 1.2;
-            }
-
             a,
             .btn-link {
                 color: white;
@@ -180,6 +172,11 @@ body.pagelayout-course {
 
 .activity-item:not(.activityinline) {
     border: none;
+    padding: 0.5rem 1rem;
+
+    @media (min-width: 768px) {
+        padding: 0.5rem 1rem;
+    }
 }
 
 .editing .activity-item:hover {
@@ -332,6 +329,6 @@ body.format-topcoll {
     display: inline-block;
 }
 
-.section li.activity.hasinfo {
+.section li.activity {
     border-bottom: 1px solid var(--wwu-muted-bg);
 }
