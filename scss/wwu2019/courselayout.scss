@@ -203,6 +203,10 @@ body.pagelayout-course {
     }
 }
 
+.description .course-description-item {
+    background: var(--wwu-bg-1);
+}
+
 .forumpost.unread .row.header,
 .path-course-view .unread,
 span.unread {
