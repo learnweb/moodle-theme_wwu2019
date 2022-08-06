@@ -160,19 +160,14 @@ $page-padding: 1rem;
     content: ">";
 }
 // Unset Breadcrumb margin and border.
-#page-navbar {
-    width: unset;
-}
 
 .breadcrumb:not(:empty) {
-    width: unset;
-    border: none;
-    padding: 0.25rem 0;
-    margin-bottom: unset;
+    flex-wrap: wrap;
 
     .breadcrumb-item {
         padding-top: unset;
         padding-bottom: unset;
+        flex-grow: 0;
     }
 }
 
