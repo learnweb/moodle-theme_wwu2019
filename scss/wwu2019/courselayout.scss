@@ -338,6 +338,6 @@ body.format-topcoll {
     display: inline-block;
 }
 
-.section li.activity {
+.section li.activity:not(:last-child) {
     border-bottom: 1px solid var(--wwu-muted-bg);
 }
