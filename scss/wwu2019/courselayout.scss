@@ -113,10 +113,6 @@ body.pagelayout-course {
                 margin: 0;
             }
 
-            .summarytext {
-                margin: 2px 12px;
-            }
-
             .summary-view-full {
                 font-size: .8203125rem;
                 display: block;
@@ -180,6 +176,10 @@ body.pagelayout-course {
     }
 }
 
+.activity-item.activityinline {
+    padding: 1rem;
+}
+
 .editing .activity-item:hover {
     background-color: var(--wwu-bg-1);
     color: unset;
@@ -193,7 +193,7 @@ body.pagelayout-course {
 
 .activity-add, .block-add {
     background-color: var(--wwu-bg-1);
-    border-color: var(--wwu-bg-5);
+    border-color: var(--wwu-bg-3);
 
     &:hover {
         background-color: var(--wwu-bg-3);
@@ -206,6 +206,10 @@ body.pagelayout-course {
 
 .description .course-description-item {
     background: var(--wwu-bg-1);
+
+    .description-inner {
+        border-color: var(--wwu-bg-4);
+    }
 }
 
 .forumpost.unread .row.header,
