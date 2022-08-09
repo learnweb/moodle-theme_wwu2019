@@ -123,17 +123,14 @@ body.pagelayout-course {
 
         // Highlighted section
         &.current {
-            .header {
+            .course-section-header {
                 background-color: $wwugreen;
 
                 .sectionname {
                     font-weight: bold;
                 }
             }
-
-            .content {
-                background-color: change_color($wwugreen, $lightness: 97.5%);
-            }
+            border-color: $wwugreen;
         }
     }
 
