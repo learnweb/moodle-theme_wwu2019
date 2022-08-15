@@ -59,7 +59,9 @@ select,
 .custom-select,
 input[type="submit"]:not(.btn),
 .custom-file-label,
-.yui3-button {
+.yui3-button,
+.custom-select.is-invalid,
+.custom-select:invalid {
     border-radius: 0;
     background-color: var(--wwu-bg);
     border-color: var(--wwu-muted-fg);
