@@ -613,11 +613,6 @@
         filter: none;
     }
 
-    /* block_xp */
-    .block_xp nav .nav-button {
-        color: var(--wwu-fg-1);
-    }
-
     /* mod_scheduler */
     .path-mod-scheduler .maildisplay,
     .path-mod-scheduler div.commandbar,
@@ -654,6 +649,22 @@
     body.path-mod-quiz .gradedattempt, body.path-mod-quiz table tbody tr.gradedattempt > td {
         background-color: var(--wwu-info-bg);
         border-color: var(--wwu-info-border);
+    }
+
+    /** block_xp */
+
+    .block_xp .react-numeric-input > b {
+        filter: invert(1);
+    }
+
+    .block_xp .xp-bg-gray-100,
+    .block_xp-level-grid .block_xp-level-no,
+    .block_xp-level-grid .block_xp-level-box {
+        color: black;
+    }
+
+    .block_xp .xp-text-gray-600 {
+        color: var(--wwu-fg-1);
     }
 
 }
