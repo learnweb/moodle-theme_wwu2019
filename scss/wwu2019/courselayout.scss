@@ -193,7 +193,7 @@ body.pagelayout-course {
     border-color: var(--wwu-bg-3);
 
     &:hover {
-        background-color: var(--wwu-bg-3);
+        background-color: var(--wwu-bg-2);
     }
 
     .pluscontainer {
@@ -337,4 +337,16 @@ body.format-topcoll {
 
 .section li.activity:not(:last-child) {
     border-bottom: 1px solid var(--wwu-muted-bg);
+}
+
+.activity-item.hiddenactivity {
+    background-color: var(--wwu-bg-1);
+}
+
+.activity-item.hiddenactivity:hover {
+    background-color: var(--wwu-bg-2);
+}
+
+.activity-item.hiddenactivity .description .course-description-item, .activity-item.hiddenactivity .activityiconcontainer, .activity-item.hiddenactivity .badge {
+    mix-blend-mode: normal;
 }
