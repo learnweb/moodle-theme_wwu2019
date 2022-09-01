@@ -456,3 +456,7 @@ a:not([class]):focus,
         box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
     }
 }
+
+.pagelayout-login #page {
+    background: unset;
+}
