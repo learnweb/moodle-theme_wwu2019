@@ -57,6 +57,8 @@ class layout {
     public static function get_default_template_context() {
         global $OUTPUT, $PAGE, $SITE, $CFG;
 
+        $renderer = $PAGE->get_renderer('core');
+
         $bodyattributes = $OUTPUT->body_attributes();
 
         $blockspost = $OUTPUT->blocks('side-post');
@@ -64,6 +66,10 @@ class layout {
         $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
 
         $secondarynavigation = false;
+
+        $header = $PAGE->activityheader;
+        $headercontent = $header->export_for_template($renderer);
+
         $overflow = '';
         // DO NOT render secondary menu inside courses?
         if ($PAGE->has_secondary_navigation() && $PAGE->course->id == SITEID) {
@@ -84,6 +90,7 @@ class layout {
             'sidepostblocks' => $blockspost,
             'secondarymoremenu' => $secondarynavigation,
             'haspostblocks' => $hassidepost,
+            'headercontent' => $headercontent,
             'bodyattributes' => $bodyattributes,
             'footer' => $OUTPUT->get_footer_context(),
             'alerts' => alerts::get_alerts(),

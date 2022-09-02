@@ -37,6 +37,9 @@
         <div id="page-content" class="row">
             <div id="region-main-box" class="region-main mb-3">
                 <section id="region-main" class="region-main-content" aria-label="{{#str}}content{{/str}}">
+                    {{#headercontent}}
+                        {{> core/activity_header }}
+                    {{/headercontent}}
                     {{{ output.course_content_header }}}
                     <div id="region-main-body">
                         {{{ output.main_content }}}

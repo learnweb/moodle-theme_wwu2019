@@ -103,6 +103,9 @@
         <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
             <div id="region-main-box" class="region-main">
                 <section id="region-main" class="region-main-content" aria-label="{{#str}}content{{/str}}">
+                    {{#headercontent}}
+                        {{> core/activity_header }}
+                    {{/headercontent}}
                     {{{ output.main_content }}}
                 </section>
             </div>

@@ -671,6 +671,15 @@
         color: var(--wwu-fg-1);
     }
 
+    .path-mod .activity-header:not(:empty) {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .path-mod .activity-information .completion-info,
+    .path-mod .activity-information .activity-dates {
+        border-color: var(--wwu-bg-4);
+    }
+
 }
 
 
