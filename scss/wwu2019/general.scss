@@ -460,3 +460,10 @@ a:not([class]):focus,
 .pagelayout-login #page {
     background: unset;
 }
+
+.courses .coursebox .content .summary .no-overflow {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
+}
