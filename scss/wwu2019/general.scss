@@ -467,3 +467,8 @@ a:not([class]):focus,
     -webkit-line-clamp: 10;
     overflow: hidden;
 }
+
+.count-container {
+    top: -5px;
+    right: 15px;
+}
