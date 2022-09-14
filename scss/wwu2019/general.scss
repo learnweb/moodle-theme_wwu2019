@@ -472,3 +472,7 @@ a:not([class]):focus,
     top: -5px;
     right: 15px;
 }
+
+.path-mod .automatic-completion-conditions .badge {
+    mix-blend-mode: unset;
+}
