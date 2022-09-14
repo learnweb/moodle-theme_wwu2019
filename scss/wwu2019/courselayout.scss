@@ -166,15 +166,15 @@ body.pagelayout-course {
 
 .activity-item:not(.activityinline) {
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
 
     @media (min-width: 768px) {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem;
     }
 }
 
 .activity-item.activityinline {
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .editing .activity-item:hover {
@@ -202,6 +202,11 @@ body.pagelayout-course {
 }
 
 .description .course-description-item {
+
+    &:first-child {
+        margin-top: 0.5rem;
+    }
+
     background: var(--wwu-bg-1);
 
     .description-inner {
