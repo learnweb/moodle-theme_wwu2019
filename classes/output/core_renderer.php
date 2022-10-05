@@ -26,6 +26,7 @@ namespace theme_wwu2019\output;
 
 use action_link;
 use context_course;
+use image_icon;
 use moodle_page;
 use moodle_url;
 use navigation_node;
@@ -43,8 +44,46 @@ defined('MOODLE_INTERNAL') || die;
  */
 class core_renderer extends \core_renderer {
 
-    /** @var string The theme color. */
-    public const THEMECOLOR = '#006784';
+    /**
+     * Returns the primary theme color.
+     * @return string
+     */
+    public static function get_primary_color(): string {
+        $value = get_config('theme_wwu2019', 'primarycolor');
+        if ($value) {
+            return $value;
+        } else {
+            // Fallback in case config is not defined.
+            return '#006784';
+        }
+    }
+
+    /**
+     * Returns the secondary theme color.
+     * @return string
+     */
+    public static function get_secondary_color(): string {
+        $value = get_config('theme_wwu2019', 'secondarycolor');
+        if ($value) {
+            return $value;
+        } else {
+            // Fallback in case config is not defined.
+            return '#578014';
+        }
+    }
+
+    private static $isexamweb = null;
+
+    /**
+     * Returns whether this is the examweb.
+     * @return bool
+     */
+    public static function is_examweb(): bool {
+        if (!self::$isexamweb) {
+            self::$isexamweb = get_config('theme_wwu2019', 'isexamweb') == '1';
+        }
+        return self::$isexamweb;
+    }
 
     /**
      * core_renderer constructor.
@@ -161,9 +200,10 @@ class core_renderer extends \core_renderer {
      * Returns HTML to display a "Turn editing on/off" button in a form.
      *
      * @param moodle_url $url The URL + params to send through when clicking the button
+     * @param string $method
      * @return string HTML the button
      */
-    public function edit_button(moodle_url $url) {
+    public function edit_button(moodle_url $url, string $method = 'post'): string {
         $url->param('sesskey', sesskey());
         $class = '';
         if ($this->page->user_is_editing()) {
@@ -175,7 +215,7 @@ class core_renderer extends \core_renderer {
             $editstring = get_string('turneditingon');
         }
 
-        return $this->single_button($url, $editstring, 'post', array('class' => 'singlebutton ' . $class));
+        return $this->single_button($url, $editstring, $method, array('class' => 'singlebutton ' . $class));
     }
 
     /**
@@ -558,7 +598,7 @@ class core_renderer extends \core_renderer {
                     if ($modname === 'resources') {
                         $activities[] = [
                                 'name' => $modfullname,
-                                'icon' => (new pix_icon('icon', '', 'mod_page'))->export_for_pix(),
+                                'icon' => (new pix_icon('monologo', '', 'mod_page'))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))->out(false)
@@ -566,7 +606,7 @@ class core_renderer extends \core_renderer {
                     } else {
                         $activities[] = [
                                 'name' => $modfullname,
-                                'icon' => (new pix_icon('icon', '', $modname))->export_for_pix(),
+                                'icon' => (new pix_icon('monologo', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
                                 'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))->out(false)
@@ -690,37 +730,39 @@ class core_renderer extends \core_renderer {
             ];
         }
 
-        // Create Theme chooser.
-        $menucontent[] = [
-                'name' => get_string('choosetheme', 'theme_wwu2019'),
-                'hasmenu' => true,
-                'isexpanded' => false,
-                'menu' => [
-                        [
-                                'name' => get_string('light', 'theme_wwu2019'),
-                                'icon' => (new pix_icon('i/sun', ''))->export_for_pix(),
-                                'href' => null,
-                                'hasmenu' => false,
-                                'class' => 'wwu-uselighttheme'
-                        ],
-                        [
-                                'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'), ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
-                                'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
-                                'href' => null,
-                                'hasmenu' => false,
-                                'class' => 'wwu-useostheme',
-                                'dontescape' => true
-                        ],
-                        [
-                                'name' => get_string('dark', 'theme_wwu2019'),
-                                'icon' => (new pix_icon('i/moon', ''))->export_for_pix(),
-                                'href' => null,
-                                'hasmenu' => false,
-                                'class' => 'wwu-usedarktheme'
-                        ],
-                ],
-                'icon' => (new pix_icon('i/theme', ''))->export_for_pix()
-        ];
+        if (get_config('theme_wwu2019', 'darktheme_enabled') == '1') {
+            // Create Theme chooser.
+            $menucontent[] = [
+                    'name' => get_string('choosetheme', 'theme_wwu2019'),
+                    'hasmenu' => true,
+                    'isexpanded' => false,
+                    'menu' => [
+                            [
+                                    'name' => get_string('light', 'theme_wwu2019'),
+                                    'icon' => (new pix_icon('i/sun', ''))->export_for_pix(),
+                                    'href' => null,
+                                    'hasmenu' => false,
+                                    'class' => 'wwu-uselighttheme'
+                            ],
+                            [
+                                    'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'), ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
+                                    'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
+                                    'href' => null,
+                                    'hasmenu' => false,
+                                    'class' => 'wwu-useostheme',
+                                    'dontescape' => true
+                            ],
+                            [
+                                    'name' => get_string('dark', 'theme_wwu2019'),
+                                    'icon' => (new pix_icon('i/moon', ''))->export_for_pix(),
+                                    'href' => null,
+                                    'hasmenu' => false,
+                                    'class' => 'wwu-usedarktheme'
+                            ],
+                    ],
+                    'icon' => (new pix_icon('i/theme', ''))->export_for_pix()
+            ];
+        }
 
         if ($rolemenuitem) {
             $menucontent[] = $rolemenuitem;
@@ -737,15 +779,17 @@ class core_renderer extends \core_renderer {
 
         $menucontent[count($menucontent) - 1]['class'] = 'divider';
 
-        // Calendar.
-        if (has_capability('moodle/calendar:manageownentries', $context)) {
-            $menucontent[] = [
-                    'name' => get_string('pluginname', 'block_calendar_month'),
-                    'hasmenu' => false,
-                    'menu' => null,
-                    'icon' => (new pix_icon('i/calendar', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/calendar/view.php'))->out(false)
-            ];
+        if (!self::is_examweb()) {
+            // Calendar.
+            if (has_capability('moodle/calendar:manageownentries', $context)) {
+                $menucontent[] = [
+                        'name' => get_string('pluginname', 'block_calendar_month'),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'icon' => (new pix_icon('i/calendar', ''))->export_for_pix(),
+                        'href' => (new moodle_url('/calendar/view.php'))->out(false)
+                ];
+            }
         }
 
         // Messaging.
@@ -759,58 +803,60 @@ class core_renderer extends \core_renderer {
             ];
         }
 
-        // Files.
-        if (has_capability('moodle/user:manageownfiles', $context)) {
+        if (!self::is_examweb()) {
+            // Files.
+            if (has_capability('moodle/user:manageownfiles', $context)) {
+                $menucontent[] = [
+                        'name' => get_string('privatefiles', 'block_private_files'),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'icon' => (new pix_icon('i/files', ''))->export_for_pix(),
+                        'href' => (new moodle_url('/user/files.php'))->out(false)
+                ];
+            }
+
+            // Forum.
             $menucontent[] = [
-                    'name' => get_string('privatefiles', 'block_private_files'),
+                    'name' => get_string('forumposts', 'mod_forum'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new pix_icon('i/files', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/user/files.php'))->out(false)
+                    'icon' => (new pix_icon('i/log', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/mod/forum/user.php', array('id' => $USER->id)))->out(false),
             ];
-        }
 
-        // Forum.
-        $menucontent[] = [
-                'name' => get_string('forumposts', 'mod_forum'),
-                'hasmenu' => false,
-                'menu' => null,
-                'icon' => (new pix_icon('i/log', ''))->export_for_pix(),
-                'href' => (new moodle_url('/mod/forum/user.php', array('id' => $USER->id)))->out(false),
-        ];
+            if (has_capability('mod/forum:viewdiscussion', $context)) {
+                $menucontent[] = [
+                        'name' => get_string('discussions', 'mod_forum'),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'icon' => (new pix_icon('i/list', ''))->export_for_pix(),
+                        'href' => (new moodle_url('/mod/forum/user.php',
+                                array('id' => $USER->id, 'mode' => 'discussions')))->out(false)
+                ];
+            }
 
-        if (has_capability('mod/forum:viewdiscussion', $context)) {
+            $menucontent[count($menucontent) - 1]['class'] = 'divider';
+
+            // Grades.
             $menucontent[] = [
-                    'name' => get_string('discussions', 'mod_forum'),
+                    'name' => get_string('mygrades', 'theme_wwu2019'),
                     'hasmenu' => false,
                     'menu' => null,
-                    'icon' => (new pix_icon('i/list', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/mod/forum/user.php',
-                            array('id' => $USER->id, 'mode' => 'discussions')))->out(false)
+                    'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/grade/report/overview/index.php',
+                            array('userid' => $USER->id)))->out(false)
             ];
-        }
 
-        $menucontent[count($menucontent) - 1]['class'] = 'divider';
-
-        // Grades.
-        $menucontent[] = [
-                'name' => get_string('mygrades', 'theme_wwu2019'),
-                'hasmenu' => false,
-                'menu' => null,
-                'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
-                'href' => (new moodle_url('/grade/report/overview/index.php',
-                        array('userid' => $USER->id)))->out(false)
-        ];
-
-        // Badges.
-        if (!empty($CFG->enablebadges) && has_capability('moodle/badges:manageownbadges', $context)) {
-            $menucontent[] = [
-                    'name' => get_string('badges'),
-                    'hasmenu' => false,
-                    'menu' => null,
-                    'icon' => (new pix_icon('i/badge', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/badges/mybadges.php'))->out(false)
-            ];
+            // Badges.
+            if (!empty($CFG->enablebadges) && has_capability('moodle/badges:manageownbadges', $context)) {
+                $menucontent[] = [
+                        'name' => get_string('badges'),
+                        'hasmenu' => false,
+                        'menu' => null,
+                        'icon' => (new pix_icon('i/badge', ''))->export_for_pix(),
+                        'href' => (new moodle_url('/badges/mybadges.php'))->out(false)
+                ];
+            }
         }
 
         $menucontent[count($menucontent) - 1]['class'] = 'divider';
@@ -980,8 +1026,36 @@ class core_renderer extends \core_renderer {
             return $output;
         }
 
-        // TODO Do this nicely.
-        $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
+        if (!self::is_examweb()) {
+            $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
+        } else {
+            $output .= '<div class="page-title">';
+            $output .= '<h1>' . $this->page->course->fullname . '</h1>';
+            if ($this->page->pagelayout == 'course') {
+                $handler = \core_customfield\handler::get_handler('core_course', 'course');
+                $datas = $handler->get_instance_data($this->page->course->id, true);
+                $metadata = [];
+                foreach ($datas as $data) {
+                    if (empty($data->get_value())) {
+                        continue;
+                    }
+                    $metadata[$data->get_field()->get('shortname')] = $data->get_value();
+                }
+            }
+
+            // If an exam date is set, append it to the course title.
+            if ($this->page->pagelayout == 'course' &&
+                array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
+                $metadata['begin'] > 0 &&  $metadata['end'] > 0) {
+                $output .= '<div class="examdates">';
+                $output .= '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['begin']) . '</h3>';
+                $output .= '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['end']) . '</h3>';
+                $output .= '</div>';
+            }
+            $output .= '</div>';
+        }
         return $output;
     }
 
@@ -1029,6 +1103,8 @@ class core_renderer extends \core_renderer {
         global $CFG;
 
         $context = $form->export_for_template($this);
+
+        $context->isexamweb = self::is_examweb();
 
         // Override because rendering is not supported in template yet.
         if ($CFG->rememberusername == 0) {
@@ -1232,18 +1308,14 @@ _paq.push(['trackPageView']);
         return $output;
     }
 
-    /**
-     * For a specific set of users, add current hostname to standard footer.
-     * @return string|void
-     */
-    public function standard_footer_html() {
-        $standardfooter = parent::standard_footer_html();
-        if (!is_siteadmin()) {
-            return $standardfooter;
+    public function debug_footer_html() {
+        if (is_siteadmin()) {
+            return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()),
+                array('class' => 'hostname pt-2')) .
+                parent::debug_footer_html();
+        } else {
+            return '';
         }
-
-        return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()), array('class' => 'hostname')) .
-            $standardfooter;
     }
 
     /**
@@ -1255,19 +1327,73 @@ _paq.push(['trackPageView']);
      */
     public function standard_head_html() {
         $output = parent::standard_head_html();
-        $output .= \html_writer::empty_tag('meta', ['name' => 'theme-color', 'content' => self::THEMECOLOR]);
+        $output .= \html_writer::empty_tag('meta', ['name' => 'theme-color', 'content' => self::get_primary_color()]);
         return $output;
     }
 
     public function htmlattributes() {
-        user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
-        $themepreference = get_user_preferences('theme_wwu2019_theme');
-        if ($themepreference == 1) {
+        if (get_config('theme_wwu2019', 'darktheme_enabled') == '1') {
+            user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
+            $themepreference = get_user_preferences('theme_wwu2019_theme');
+            if ($themepreference == 1) {
+                return parent::htmlattributes() . 'class="light"';
+            } else if ($themepreference == 2) {
+                return parent::htmlattributes() . 'class="dark"';
+            } else {
+                // Use system setting.
+                return parent::htmlattributes();
+            }
+        } else {
             return parent::htmlattributes() . 'class="light"';
-        } else if ($themepreference == 2) {
-            return parent::htmlattributes() . 'class="dark"';
         }
-        return parent::htmlattributes();
     }
 
+    /**
+     * Renders a pix_icon widget and returns the HTML to display it.
+     *
+     * @param pix_icon $icon
+     * @return string HTML fragment
+     */
+    protected function render_pix_icon(pix_icon $icon) {
+        $this->check_monologo($icon);
+        $system = \core\output\icon_system::instance();
+        return $system->render_pix_icon($this, $icon);
+    }
+
+    /**
+     * Renders a pix_icon widget and returns the HTML to display it.
+     *
+     * @param image_icon $icon
+     * @return string HTML fragment
+     */
+    protected function render_image_icon(image_icon $icon) {
+        $this->check_monologo($icon);
+        $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
+        return $system->render_pix_icon($this, $icon);
+    }
+
+    /**
+     * @param pix_icon $icon
+     */
+    private function check_monologo(pix_icon $icon) {
+        global $PAGE;
+
+        if ($icon->pix === 'monologo' || $icon->pix === 'icon') {
+            if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
+                    substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
+                    strpos($icon->component, '_') === false
+                )
+            ) {
+                if ($location = $PAGE->theme->resolve_image_location($icon->pix, $icon->component, null)) {
+                    if (substr_compare($location, 'monologo.svg', -12) === 0) {
+                        if (isset($icon->attributes['class'])) {
+                            $icon->attributes['class'] .= ' wwu-monologo ';
+                        } else {
+                            $icon->attributes['class'] = ' wwu-monologo ';
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

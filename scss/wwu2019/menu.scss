@@ -100,6 +100,8 @@ ul.main-menubar {
 
     .main-menu-additions-item {
         display: flex;
+        align-items: center;
+        margin-right: -10px;
 
         @for $i from 1 through 4 {
             & > :nth-child(#{$i}) {
@@ -112,6 +114,10 @@ ul.main-menubar {
 
         .nav-link {
             padding: 0 15px 0 0;
+        }
+
+        .popover-region-toggle.nav-link {
+            margin-right: 10px;
         }
 
         .popover-region-container {

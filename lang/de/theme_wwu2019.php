@@ -90,9 +90,22 @@ $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Kee
 
 $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
 
-// Theme switcher
+// Theme switcher.
 $string['choosetheme'] = 'Theme auswählen';
 $string['light'] = 'Hell';
 $string['dark'] = 'Dunkel';
 $string['ostheme'] = 'Systemfarben';
 $string['ostheme_help'] = 'Wechselt zwischen hellem und dunklem Theme basierend auf den Systemeinstellungen.';
+
+$string['settings:isexamweb'] = 'Ist dies das Examweb?';
+$string['settings:isexamweb_desc'] = 'Bestimmt über das Seitenlogo, als auch verschiedene Dinge in Templates (z.B. keine Slideshow, ...)';
+$string['settings:primarycolor'] = 'Primäre Themefarbe';
+$string['settings:secondarycolor'] = 'Sekundäre Themefarbe';
+$string['settings:prescss'] = 'Zusätzlicher Pre-SCSS Code';
+$string['settings:darkthemeenabled'] = 'Sollte der Darktheme auswählbar sein?';
+
+// Examweb.
+$string['exam:begin'] = 'Klausurbeginn:';
+$string['exam:end'] = 'Klausurende:';
+
+$string['examweb_description'] = 'Online-Prüfungssystem der WWU Münster';

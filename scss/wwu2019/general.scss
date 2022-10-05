@@ -149,7 +149,7 @@ $page-padding: 1rem;
     a.learnweb-logo {
         height: 81px;
         width: 145px;
-        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_light.svg);
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/#{$logoprefix}_light.svg);
         background-repeat: no-repeat;
         background-size: contain;
     }
@@ -160,19 +160,14 @@ $page-padding: 1rem;
     content: ">";
 }
 // Unset Breadcrumb margin and border.
-#page-navbar {
-    width: unset;
-}
 
 .breadcrumb:not(:empty) {
-    width: unset;
-    border: none;
-    padding: 0.25rem 0;
-    margin-bottom: unset;
+    flex-wrap: wrap;
 
     .breadcrumb-item {
         padding-top: unset;
         padding-bottom: unset;
+        flex-grow: 0;
     }
 }
 
@@ -229,6 +224,12 @@ footer#wwu-footer {
             list-style: none;
             padding-left: 0;
             flex-wrap: wrap;
+            margin-bottom: 0;
+
+            li.suppresscaps a {
+                text-transform: none;
+                text-decoration: underline;
+            }
 
             li {
                 padding: 0 5px;
@@ -247,7 +248,7 @@ footer#wwu-footer {
             }
 
             li ~ li {
-                border-left: 1px solid $wwu-footer;
+                border-left: 1px solid var(--wwu-fg);
             }
         }
 
@@ -314,6 +315,11 @@ footer#wwu-footer + div > div.container {
     padding: 0 1rem;
 }
 
+.pagelayout-admin #region-main,
+.pagelayout-standard #region-main {
+    padding: 1em;
+}
+
 /* Turn editing off button red */
 .red-edit-button > form > button {
     @extend .btn-danger;
@@ -374,4 +380,103 @@ a:not([class]):focus,
         margin-top: 1em;
         margin-bottom: 1em;
     }
+}
+
+.secondary-navigation {
+    padding: 0;
+    margin-bottom: -2px;
+
+    &> .navigation {
+        border: none;
+        height: $moremenu-height;
+    }
+}
+
+.nav-tabs > .nav-item > .nav-link {
+    border: 2px solid var(--wwu-outlinegrey);
+    background-color: var(--wwu-tab-bg-inactive);
+    color: var(--wwu-tab-fg-inactive);
+
+    &:focus {
+        outline: none;
+    }
+
+    &.active,
+    &.active:hover,
+    &.active:focus {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border-bottom-color: var(--wwu-bg);
+        box-shadow: none;
+    }
+}
+
+.nav-tabs .nav-link {
+    &:focus,
+    &:hover {
+        border-color: transparent;
+    }
+}
+
+.nav-tabs {
+    border-color: var(--wwu-bg-2);
+
+    .nav-link.active,
+    .nav-item.show .nav-link {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-outlinegrey) var(--wwu-outlinegrey) var(--wwu-bg);
+    }
+}
+
+.moremenu .nav-tabs {
+    background-color: var(--wwu-bg);
+
+    .nav-item {
+        margin-bottom: unset;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .nav-tabs:not(.more-nav), .nav-pills {
+        background-color: var(--wwu-bg-1);
+
+        .nav-link {
+            background-color: var(--wwu-tab-bg-inactive);
+            color: var(--wwu-tab-fg-inactive);
+            border: none;
+        }
+    }
+    .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs:not(.more-nav) .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
+        color: var(--wwu-fg);
+        background: var(--wwu-bg);
+        border: 2px solid var(--wwu-bg-5);
+    }
+    .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs:not(.more-nav) .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
+    }
+}
+
+.pagelayout-login #page {
+    background: unset;
+}
+
+.courses .coursebox .content .summary .no-overflow {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
+}
+
+.count-container {
+    top: -5px;
+    right: 15px;
+}
+
+.path-mod .automatic-completion-conditions .badge {
+    mix-blend-mode: unset;
+}
+
+.yui3-skin-sam .yui3-datatable-header {
+    text-shadow: unset;
 }

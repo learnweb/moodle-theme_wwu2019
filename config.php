@@ -120,6 +120,14 @@ $THEME->layouts = [
                 'defaultregion' => 'side-post',
                 'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
         ),
+        // My courses page.
+        'mycourses' => array(
+                'theme' => 'wwu2019',
+                'file' => 'columns.php',
+                'regions' => array('side-post'),
+                'defaultregion' => 'side-post',
+                'options' => array('nonavbar' => true, 'nocontextheader' => true),
+        ),
         // My public page.
         'mypublic' => array(
                 'theme' => 'wwu2019',
@@ -199,3 +207,5 @@ $THEME->scss = function($theme) {
 $THEME->iconsystem = '\\theme_wwu2019\\output\\icon_system_fontawesome';
 
 $THEME->requiredblocks = '';
+
+$THEME->haseditswitch = false;

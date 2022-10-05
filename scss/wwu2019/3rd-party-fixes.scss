@@ -53,3 +53,18 @@ body.path-mod-cas table.generaltable[border],
 body.path-mod-cas table.generaltable table[border]{
     border-color: var(--wwu-bg-3);
 }
+
+/* block_xp */
+.block_xp nav .nav-button,
+.block_xp .xp-test-gray900 {
+    color: var(--wwu-fg-1);
+}
+
+.block_xp nav .nav-button:hover {
+    background: var(--wwu-bg-1);
+}
+
+.block_xp-table tr.highlight-row > td {
+    background-color: var(--wwu-info-bg);
+}
+

@@ -7,14 +7,18 @@
     --wwu-bg-5: #{darken(#fff, 15%)};
     --wwu-fg: #373a3c;
     --wwu-fg-1: #5a5f65;
+    --wwu-fg-2: #7b8188;
     --wwu-muted-bg: #ddd;
     --wwu-muted-fg: #ced4da;
     --wwu-contrast-fg: #000;
     --wwu-outlinegrey: #bec6c8;
     --wwu-dividergrey: #423c39;
-    --wwu-learnwebblue: #006784;
-    --wwu-learnwebblue-highlight: #002b38;
-    --wwu-learnwebblue-og: #006784;
+    --wwu-learnwebblue: #{$learnwebblue};
+    --wwu-learnwebblue-highlight: #{darken($learnwebblue, 15%)};
+    --wwu-learnwebblue-og: #{$learnwebblue};
+
+    --wwu-tab-bg-inactive: #e1e6ec;
+    --wwu-tab-fg-inactive: #495057;
 
     --wwu-success-bg: #dff0d8;
     --wwu-success-border: #d6e9c6;
@@ -42,13 +46,17 @@
     --wwu-bg-5: #{lighten(#222, 25%)};
     --wwu-fg: #eee;
     --wwu-fg-1: #aaa;
+    --wwu-fg-2: #888;
     --wwu-muted-bg: #444;
     --wwu-muted-fg: #666;
     --wwu-contrast-fg: #eee;
     --wwu-outlinegrey: #444;
     --wwu-dividergrey: #777;
-    --wwu-learnwebblue: #00b0e8;
-    --wwu-learnwebblue-highlight: #40c7f8;
+    --wwu-learnwebblue: lighten($learnwebblue, 18%);
+    --wwu-learnwebblue-highlight: lighten($learnwebblue, 25%);
+
+    --wwu-tab-bg-inactive: var(--wwu-bg-2);
+    --wwu-tab-fg-inactive: #adb5bd;
 
     --wwu-success-bg: #2c5b2d;
     --wwu-success-border: #336c35;
@@ -107,16 +115,12 @@
         border-color: var(--wwu-bg-3) !important;
     }
 
-    body.pagelayout-course .course-content ul li.section.main.current .content {
-        background-color: #131d00;
-    }
-
     #logo-header a.wwu-logo {
         filter: brightness(200);
     }
 
     #logo-header a.learnweb-logo {
-        background-image: url(#{$wwwroot}/theme/wwu2019/pix/learnweb_dark.svg);
+        background-image: url(#{$wwwroot}/theme/wwu2019/pix/#{$logoprefix}_dark.svg);
     }
 
     #main-menu .arrow {
@@ -137,6 +141,14 @@
         100% {
             background-color: $gray-800;
         }
+    }
+
+    .text-dark {
+        color: var(--wwu-fg-1);
+    }
+
+    .icon.wwu-monologo {
+        filter: invert(1);
     }
 
     .list-group-item,
@@ -388,37 +400,6 @@
         color: var(--wwu-fg);
     }
 
-    @media (max-width: 767.98px) {
-        .nav-tabs, .nav-pills {
-            background-color: var(--wwu-bg-2);
-        }
-        .nav-tabs .nav-link, .nav-pills .nav-link {
-            color: var(--wwu-fg-1);
-            background: var(--wwu-bg);
-        }
-        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
-            background-color: var(--wwu-bg-5);
-            border-color: var(--wwu-bg-5);
-        }
-        .nav-tabs .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
-            box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);
-        }
-    }
-
-    .nav-tabs {
-        border-color: var(--wwu-bg-2);
-    }
-
-    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-        color: var(--wwu-fg);
-        background-color: var(--wwu-bg-5);
-    }
-
-    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-        border-color: var(--wwu-bg-2) var(--wwu-bg-2) var(--wwu-bg-3);
-    }
-
     .toast .close {
         color: black;
     }
@@ -615,17 +596,27 @@
 
     /* mod_moodleoverflow */
     .moodleoverflowpost.unread .row.header {
-        background-color: #1a2f46;
         border-bottom-color: var(--wwu-bg-3);
+    }
+
+    .mod_moodleoverflow-label-unread {
+        background-color: #645800;
+    }
+
+    .mod_moodleoverflow-label-review {
+        background-color: #774444;
     }
 
     .moodleoverflowpost .topic .author {
         color: var(--wwu-fg-1);
     }
 
-    /* block_xp */
-    .block_xp nav .nav-button {
-        color: var(--wwu-fg-1);
+    #moodleoverflow-root .vote[data-moodleoverflow-state] {
+        filter: invert(1);
+    }
+
+    #moodleoverflow-root .vote[data-moodleoverflow-state="clicked"] {
+        filter: none;
     }
 
     /* mod_scheduler */
@@ -666,6 +657,78 @@
         border-color: var(--wwu-info-border);
     }
 
+    /** block_xp */
+
+    .block_xp .react-numeric-input > b {
+        filter: invert(1);
+    }
+
+    .block_xp .xp-bg-gray-100,
+    .block_xp-level-grid .block_xp-level-no,
+    .block_xp-level-grid .block_xp-level-box {
+        color: black;
+    }
+
+    .block_xp .xp-text-gray-600 {
+        color: var(--wwu-fg-1);
+    }
+
+    .path-mod .activity-header:not(:empty) {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .path-mod .activity-information .completion-info,
+    .path-mod .activity-information .activity-dates {
+        border-color: var(--wwu-bg-4);
+    }
+
+    // File manager.
+    .filemanager .yui3-datatable-header {
+        background: var(--wwu-bg) !important;
+        border-bottom: 1px solid var(--wwu-bg-5) !important;
+        color: var(--wwu-fg-1) !important;
+    }
+
+    .filemanager .yui3-datatable-even .yui3-datatable-cell {
+        background-color: var(--wwu-bg) !important;
+    }
+
+    .filemanager .yui3-datatable-odd .yui3-datatable-cell {
+        background-color: var(--wwu-bg-1) !important;
+    }
+
+    // Yui3 table.
+    .yui3-skin-sam .yui3-datatable-header {
+        color: var(--wwu-fg);
+    }
+
+    .yui3-skin-sam .yui3-datatable-columns .yui3-datatable-sorted,
+    .yui3-skin-sam .yui3-datatable-sortable-column:hover {
+        background: var(--wwu-bg-1);
+    }
+
+    .yui3-skin-sam .yui3-datatable-even .yui3-datatable-cell {
+        background: var(--wwu-bg);
+        &.yui3-datatable-sorted {
+            background: var(--wwu-bg-1);
+        }
+    }
+
+    .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
+        background: var(--wwu-bg-1);
+        &.yui3-datatable-sorted {
+            background: var(--wwu-bg-2);
+        }
+    }
+
+    .yui3-skin-sam .yui3-datatable-cell,
+    .yui3-skin-sam .yui3-datatable-header {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .yui3-skin-sam .yui3-datatable-sort-indicator {
+        filter: invert(1);
+    }
 }
 
 

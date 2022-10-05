@@ -25,6 +25,7 @@
     border: 2px solid $outlinegrey;
     border-radius: 0;
     background: var(--wwu-bg);
+    padding: 1em;
 }
 
 body.pagelayout-course,
@@ -64,25 +65,31 @@ body.pagelayout-course {
 
     .course-content ul li.section.main {
         border-radius: 0;
-        padding-bottom: 0;
+        padding: 0;
         border: 2px solid $outlinegrey;
+        margin-bottom: 0.5rem;
 
-        .header {
+        .header, .course-section-header {
             background-color: $learnwebblue;
             color: white;
             display: flex;
             width: 100%;
 
-            .sectionname {
-                padding: 0;
-                font-size: 18px;
-                margin: 4px 0;
-                flex-grow: 1;
-                line-height: 1.2;
+            a,
+            .btn-link {
+                color: white;
             }
 
-            a {
-                color: inherit;
+            .dropdown-menu {
+                a,
+                .btn-link {
+                    color: inherit;
+
+                    &:hover,
+                    &:focus {
+                        color: white;
+                    }
+                }
             }
 
             .side.left,
@@ -99,15 +106,11 @@ body.pagelayout-course {
 
         .content {
             margin: 0;
-            padding: 12px 4px;
+            padding: 0 0.5rem;
             // overflow-x: auto;
 
             .section {
                 margin: 0;
-            }
-
-            .summarytext {
-                margin: 2px 12px;
             }
 
             .summary-view-full {
@@ -120,17 +123,14 @@ body.pagelayout-course {
 
         // Highlighted section
         &.current {
-            .header {
+            .course-section-header {
                 background-color: $wwugreen;
 
                 .sectionname {
                     font-weight: bold;
                 }
             }
-
-            .content {
-                background-color: change_color($wwugreen, $lightness: 97.5%);
-            }
+            border-color: $wwugreen;
         }
     }
 
@@ -155,6 +155,67 @@ body.pagelayout-course {
         display: inherit;
     }
 
+}
+
+.btn.btn-icon {
+    &:hover,
+    &:focus {
+        background-color: rgba(200, 200, 200, 0.3)
+    }
+}
+
+.activity-item:not(.activityinline) {
+    border: none;
+    padding: 0.5rem;
+
+    @media (min-width: 768px) {
+        padding: 0.5rem;
+    }
+}
+
+.activity-item.activityinline {
+    padding: 0.5rem;
+}
+
+.editing .activity-item:hover {
+    background-color: var(--wwu-bg-1);
+    color: unset;
+
+    .description .course-description-item,
+    .activityiconcontainer,
+    .badge {
+        mix-blend-mode: unset;
+    }
+}
+
+.activity-add, .block-add {
+    background-color: var(--wwu-bg-1);
+    border-color: var(--wwu-bg-3);
+
+    &:hover {
+        background-color: var(--wwu-bg-2);
+    }
+
+    .pluscontainer {
+        border-color: var(--wwu-bg-5);
+    }
+}
+
+.activity-item .activitytitle .media-body .text-uppercase {
+    color: var(--wwu-fg-2);
+}
+
+.description .course-description-item {
+
+    &:first-child {
+        margin-top: 0.5rem;
+    }
+
+    background: var(--wwu-bg-1);
+
+    .description-inner {
+        border-color: var(--wwu-bg-4);
+    }
 }
 
 .forumpost.unread .row.header,
@@ -283,6 +344,18 @@ body.format-topcoll {
     display: inline-block;
 }
 
-.section li.activity.hasinfo {
+.section li.activity:not(:last-child) {
     border-bottom: 1px solid var(--wwu-muted-bg);
+}
+
+.activity-item.hiddenactivity {
+    background-color: var(--wwu-bg-1);
+}
+
+.activity-item.hiddenactivity:hover {
+    background-color: var(--wwu-bg-2);
+}
+
+.activity-item.hiddenactivity .description .course-description-item, .activity-item.hiddenactivity .activityiconcontainer, .activity-item.hiddenactivity .badge {
+    mix-blend-mode: normal;
 }
