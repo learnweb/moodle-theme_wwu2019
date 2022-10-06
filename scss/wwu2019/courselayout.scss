@@ -106,7 +106,7 @@ body.pagelayout-course {
 
         .content {
             margin: 0;
-            padding: 0 0.5rem;
+            padding: 0 0.5rem 0.5rem;
             // overflow-x: auto;
 
             .section {
@@ -146,6 +146,19 @@ body.pagelayout-course {
 
     .single-section h3.sectionname {
         text-align: left;
+    }
+
+    h3.sectionname {
+        padding: 6px 0;
+        margin-bottom: 0;
+    }
+
+    h3.sectionname:first-child {
+        padding-left: 8px;
+    }
+
+    .course-content .single-section {
+        overflow-y: hidden;
     }
 
     &:not(.editing) .course-content ul.topics li.section .left,
