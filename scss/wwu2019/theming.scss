@@ -791,6 +791,11 @@
     .yui3-skin-sam .yui3-datatable-sort-indicator {
         filter: invert(1);
     }
+
+    // Evasys logo.
+    a.wwu2019-evasys-button {
+        filter: brightness(150%);
+    }
 }
 
 
