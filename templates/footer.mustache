@@ -17,7 +17,9 @@
 {{!
     Page footer.
 }}
-<footer id="wwu-footer" class="py-3">
+<footer id="wwu-footer" class="pt-3">
+    <div id="course-footer">{{{ output.course_footer }}}</div>
+
     {{!<div class="row ml-0 mr-0">
         <a class="nav-slideup" href="#">nach oben</a>
     </div>
@@ -43,42 +45,63 @@
         <aside class="col-md-4 d-none d-md-block text-right">
             <div class="claim">wissen.leben</div>
         </aside><!-- Ende WWU-Claim -->
+
+        <div class="col-md-12" style="margin-bottom: -1em">
+            <div style="border-top: 1px solid white" class="pt-2">
+            {{{ output.standard_footer_html }}}
+            {{# output.page_doc_link }}
+                <p class="helplink">{{{ output.page_doc_link }}}</p>
+            {{/ output.page_doc_link }}
+            <div class="tool_usertours-resettourcontainer"></div>
+            <nav class="nav navbar-nav d-md-none" aria-label="{{#str}}custommenu, admin{{/str}}">
+                {{# output.custom_menu_flat }}
+                    <ul class="list-unstyled pt-3">
+                        {{> theme_boost/custom_menu_footer }}
+                    </ul>
+                {{/ output.custom_menu_flat }}
+            </nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer-content-debugging footer-dark bg-dark text-light">
+        <div class="container-fluid footer-dark-inner">
+            {{{ output.debug_footer_html }}}
+            {{# output.moodle_release }}
+                <div>
+                    {{#str}}version, core{{/str}} {{{ output.moodle_release }}}
+                </div>
+            {{/ output.moodle_release }}
+        </div>
     </div>
     <div class="row ml-0 mr-0 wwu-fin">
         <nav>
+            {{^ isexamweb }}
+                <ul class="d-flex flex-row">
+                    <li><a href="{{footer.wwwroot}}">Index</a></li>
+                    <li><a href="{{footer.wwwroot}}/mod/page/view.php?id=1082629">Karriere</a></li>
+                    {{#footer.policyurl}}
+                        <li><a href="{{footer.policyurl}}">{{#str}}userpolicysettings, tool_policy{{/str}}</a></li>
+                    {{/footer.policyurl}}
+                    <li><a href="{{footer.wwwroot}}/mod/page/view.php?id=743522">Impressum</a></li>
+                </ul>
+            {{/ isexamweb }}
+        </nav>
+        <nav>
             <ul class="d-flex flex-row">
-                <li><a href="{{footer.wwwroot}}">Index</a></li>
-                <li><a href="{{footer.wwwroot}}/mod/page/view.php?id=1082629">Karriere</a></li>
-                {{#footer.policyurl}}
-                    <li><a href="{{footer.policyurl}}">{{#str}}userpolicysettings, tool_policy{{/str}}</a></li>
-                {{/footer.policyurl}}
-                <li><a href="{{footer.wwwroot}}/mod/page/view.php?id=743522">Impressum</a></li>
+                <li class="suppresscaps">
+                    <div>{{#str}}poweredbymoodle, core{{/str}}</div>
+                </li>
+                <li>
+                    <div class="copyright">
+                        <span>© {{footer.year}} Universität Münster</span>
+                    </div>
+                </li>
             </ul>
         </nav>
-        <div class="copyright">
-            <p>© {{footer.year}} Universität Münster</p>
-        </div>
     </div>
 </footer>
 <div>
     <div class="container">
-        <div id="course-footer">{{{ output.course_footer }}}</div>
-
-        {{# output.page_doc_link }}
-            <p class="helplink">{{{ output.page_doc_link }}}</p>
-        {{/ output.page_doc_link }}
-
-        {{{ output.login_info }}}
-        <div class="tool_usertours-resettourcontainer"></div>
-        {{{ output.home_link }}}
-        <nav class="nav navbar-nav d-md-none" aria-label="{{#str}}custommenu, admin{{/str}}">
-            {{# output.custom_menu_flat }}
-                <ul class="list-unstyled pt-3">
-                    {{> theme_boost/custom_menu_footer }}
-                </ul>
-            {{/ output.custom_menu_flat }}
-        </nav>
-        {{{ output.standard_footer_html }}}
         {{{ output.standard_end_of_body_html }}}
     </div>
 </div>

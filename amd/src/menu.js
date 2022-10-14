@@ -16,7 +16,7 @@
 /**
  * Manage the user menu.
  *
- * @package    theme_wwu2019
+ * @module     theme_wwu2019/menu
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -33,6 +33,9 @@ export function init() {
 }
 
 
+/**
+ * Initializes the theme chooser.
+ */
 function initThemeChooser() {
     const html = $('html');
     const uselighttheme = $('#user-menu .wwu-uselighttheme');
@@ -75,6 +78,10 @@ function initThemeChooser() {
     });
 }
 
+/**
+ * Updates the theme preference.
+ * @param {int} theme
+ */
 function updateThemePreferenceAjax(theme) {
     var request = {
         methodname: 'core_user_update_user_preferences',
@@ -106,8 +113,7 @@ function openMenu() {
     let openCandidate = null;
     let openTimeoutId = null;
     let closeTimeoutId = null;
-    /** Date when menu was opened by hovering, to prevent immediately closing it by clicking again.
-     * @type {null|Date} */
+    /** @type {null|Date} Date when menu was opened by hovering, to prevent immediately closing it by clicking again. */
     let openTime = null;
 
     /**

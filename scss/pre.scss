@@ -27,8 +27,9 @@ $hamburger-menu-break-point: 1080px;
 $onecolumn-break-point: $mobile-break-point;
 
 
-// $learnwebblue / themecolor defined in core_renderer.php
-$wwugreen: #578014;
+// $learnwebblue / wwugreen defined via core_renderer.php
+$learnwebblue: $learnwebblue;
+$wwugreen: $wwugreen;
 $dividergrey: var(--wwu-dividergrey);
 $outlinegrey: var(--wwu-outlinegrey);
 $wwu-footer: #3e3e3c;

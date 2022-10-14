@@ -106,6 +106,22 @@
 
     <div class="row">
     <div class="col-12 col-md-6 pl-0 pr-0 pr-md-3">
+        {{# isexamweb }}
+        <section id="examwebdescription" class="block card mb-3">
+            {{! Beginn Block Container }}
+            <div class="card-body p-0">
+                {{! Block header }}
+                <div class="block-header">
+                    <h5 class="card-title d-inline">
+                        <p style="font-weight: bold; text-transform: uppercase; margin-top: 16px;">
+                            {{#str}} examweb_description, theme_wwu2019 {{/str}}
+                        </p>
+                    </h5>
+
+                </div>
+            </div>
+        </section>
+        {{/ isexamweb }}
         <section id="ssologinblock" class="block card mb-3">
             {{! Beginn Block Container }}
             <div class="card-body p-0">
@@ -145,7 +161,7 @@
             </div>
             {{! End Block Container }}
         </section>
-
+        {{^isexamweb}}
         <section id="loginblock" class="block card mb-3">
             {{! Beginn Block Container }}
             <div class="card-body p-0">
@@ -225,6 +241,7 @@
             </div>
             {{! End Block Container }}
         </section>
+        {{/isexamweb}}
     </div>
 
     <div class="col-12 col-md-6 pl-0 pr-0">
