@@ -755,6 +755,19 @@
     display: none;
 }
 
+
+.maincalendar .calendarmonth {
+    .clickable:hover {
+        background-color: var(--wwu-bg-1);
+    }
+
+    td,
+    th {
+        border-color: var(--wwu-bg-5);
+    }
+
+}
+
 :root {
     @include light-colors;
     color-scheme: light dark;
