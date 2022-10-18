@@ -42,7 +42,7 @@ defined('MOODLE_INTERNAL') || die;
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_renderer extends \core_renderer {
+class core_renderer extends \theme_boost\output\core_renderer {
 
     /**
      * Returns the primary theme color.
@@ -1006,7 +1006,6 @@ class core_renderer extends \core_renderer {
         $header = new \stdClass();
         $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
         $header->navbar = $this->navbar();
-        $header->contextheader = $this->page->pagelayout === 'mypublic' ? $this->context_header() : '';
         $header->pageheadingbutton = $this->page_heading_button();
         $header->headeractions = $this->page->get_header_actions();
         return $this->render_from_template('theme_wwu2019/full_header', $header);
