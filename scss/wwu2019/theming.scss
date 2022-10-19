@@ -528,11 +528,58 @@
         border-color: var(--wwu-bg-5);
     }
 
-    body#page-question-type-multichoice div[id^="fitem_id_"][id*="feedback_"],
-    body#page-question-type-multichoice div[id^="fitem_id_"][id*="fraction_"],
-    body#page-question-type-multichoice div[id^="fitem_id_"][id*="answer_"] {
-        background-color: var(--wwu-bg-1);
-        border-color: var(--wwu-bg-5);
+    #page-question-type-multichoice,
+    #page-question-type-calculated,
+    #page-question-type-calculatedmulti,
+    #page-question-type-calculatedsimple,
+    #page-question-type-numerical,
+    #page-question-type-shortanswer {
+        div[id^="fitem_id_"],
+        div[id^="fgroup_id_"] {
+            &[id*="answeroptions_"],
+            &[id*="answer_"],
+            &[id*="fraction_"],
+            &[id*="answertolerance_"],
+            &[id*="answerdisplay_"],
+            &[id*="feedback_"] {
+                background-color: var(--wwu-bg-1);
+                border-color: var(--wwu-bg-5);
+            }
+        }
+    }
+
+    #page-question-type-match div[id^="fitem_id_"] {
+        &[id*="subquestions_"],
+        &[id*="subanswers_"]{
+            background-color: var(--wwu-bg-1);
+            border-color: var(--wwu-bg-5);
+        }
+    }
+
+    #page-question-type-ddimageortext {
+        div[id^="fgroup_id_"][id*="drags_"],
+        div[id^="fitem_id_"][id*="dragitem_"],
+        div[id^="fitem_id_"][id*="draglabel_"] {
+            background-color: var(--wwu-bg-1);
+            border-color: var(--wwu-bg-5);
+        }
+    }
+
+    #page-question-type-ddmarker div[id^="fitem_id_"] {
+        &[id*="hint_"],
+        &[id*="hintoptions_"],
+        &[id*="hintclearwrong_"] {
+            background-color: var(--wwu-bg-1);
+            border-color: var(--wwu-bg-5);
+        }
+    }
+
+    #page-question-type-match div[id^="fitem_id_"] {
+        &[id*="subanswers_"],
+        &[id*="subquestions_"]{
+            background-color: var(--wwu-bg-1);
+            border-color: var(--wwu-bg-5);
+        }
     }
 
     #quiz-timer-wrapper #quiz-timer {
