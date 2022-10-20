@@ -273,6 +273,10 @@
         }
     }
 
+    .activity-item .activityname a {
+        color: white;
+    }
+
     .dropdown-item:active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:focus-within {
         background-color: var(--wwu-bg-2);
     }
