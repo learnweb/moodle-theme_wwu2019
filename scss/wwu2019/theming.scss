@@ -52,8 +52,8 @@
     --wwu-contrast-fg: #eee;
     --wwu-outlinegrey: #444;
     --wwu-dividergrey: #777;
-    --wwu-learnwebblue: lighten($learnwebblue, 18%);
-    --wwu-learnwebblue-highlight: lighten($learnwebblue, 25%);
+    --wwu-learnwebblue: #{lighten($learnwebblue, 18%)};
+    --wwu-learnwebblue-highlight: #{lighten($learnwebblue, 25%)};
 
     --wwu-tab-bg-inactive: var(--wwu-bg-2);
     --wwu-tab-fg-inactive: #adb5bd;
@@ -271,6 +271,10 @@
         &:focus {
             color: var(--wwu-fg);
         }
+    }
+
+    .activity-item .activityname a {
+        color: white;
     }
 
     .dropdown-item:active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:focus-within {
