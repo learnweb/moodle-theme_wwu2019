@@ -55,7 +55,11 @@
         {{{ output.logo_header }}}
         {{{ output.main_menu }}}
         {{{ output.full_header }}}
+
+        {{{alerts}}}
+
         {{{ output.course_content_header }}}
+
         {{#secondarymoremenu}}
             <div class="secondary-navigation">
                 {{> core/moremenu}}
@@ -63,8 +67,6 @@
         {{/secondarymoremenu}}
         <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
             <div id="region-main-box" class="region-main mb-3">
-
-                {{{alerts}}}
 
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
