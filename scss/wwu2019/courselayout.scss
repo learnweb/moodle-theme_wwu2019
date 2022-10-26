@@ -28,23 +28,21 @@
     padding: 1em;
 }
 
-body.pagelayout-course,
-body.pagelayout-incourse,
-body.pagelayout-report {
+.page-title {
+    font-weight: bold;
+    color: white; // Should be white both in light and dark theme.
+    background: $learnwebblue;
+    padding: 16px 16px 14px 16px;
+    border: 2px solid $outlinegrey;
+    font-size: 26px;
+    text-transform: uppercase;
+}
+
+body.pagelayout-course {
 
     #region-main {
         border: 0;
         padding: 0;
-    }
-
-    .page-title {
-        font-weight: bold;
-        color: white; // Should be white both in light and dark theme.
-        background: $learnwebblue;
-        padding: 16px 16px 14px 16px;
-        border: 2px solid $outlinegrey;
-        font-size: 26px;
-        text-transform: uppercase;
     }
 
 }
@@ -53,10 +51,6 @@ body.pagelayout-incourse,
 body.pagelayout-report {
 
     #region-main-body {
-        border: 2px solid $outlinegrey;
-        border-radius: 0;
-        padding: 1.25rem;
-        margin-top: 1rem;
         overflow-x: auto;
     }
 }

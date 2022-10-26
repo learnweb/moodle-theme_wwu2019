@@ -55,10 +55,18 @@
         {{{ output.logo_header }}}
         {{{ output.main_menu }}}
         {{{ output.full_header }}}
+
+        {{{alerts}}}
+
+        {{{ output.course_content_header }}}
+
+        {{#secondarymoremenu}}
+            <div class="secondary-navigation">
+                {{> core/moremenu}}
+            </div>
+        {{/secondarymoremenu}}
         <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
             <div id="region-main-box" class="region-main mb-3">
-
-                {{{alerts}}}
 
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
@@ -66,16 +74,11 @@
                 </div>
                 {{/hasregionmainsettingsmenu}}
 
-                {{#secondarymoremenu}}
-                    <div class="secondary-navigation">
-                        {{> core/moremenu}}
-                    </div>
-                {{/secondarymoremenu}}
                 <section id="region-main" class="region-main-content" aria-label="{{#str}}content{{/str}}">
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
                     {{/hasregionmainsettingsmenu}}
-                    {{{ output.course_content_header }}}
+
                     <div id="region-main-body">
                         {{#headercontent}}
                             {{> core/activity_header }}

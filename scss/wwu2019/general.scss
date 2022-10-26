@@ -385,10 +385,13 @@ a:not([class]):focus,
 .secondary-navigation {
     padding: 0;
     margin-bottom: -2px;
+    margin-left: 0;
+    z-index: 3;
 
     &> .navigation {
         border: none;
         height: $moremenu-height;
+        background-color: unset;
     }
 }
 
@@ -414,7 +417,7 @@ a:not([class]):focus,
 .nav-tabs .nav-link {
     &:focus,
     &:hover {
-        border-color: transparent;
+        background-color: var(--wwu-bg-1);
     }
 }
 
@@ -430,7 +433,7 @@ a:not([class]):focus,
 }
 
 .moremenu .nav-tabs {
-    background-color: var(--wwu-bg);
+    background-color: unset;
 
     .nav-item {
         margin-bottom: unset;
