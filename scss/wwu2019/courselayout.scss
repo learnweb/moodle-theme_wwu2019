@@ -98,7 +98,7 @@ body.pagelayout-course {
             }
         }
 
-        .content {
+        &> .content {
             margin: 0;
             padding: 0 0.5rem 0.5rem;
             // overflow-x: auto;
