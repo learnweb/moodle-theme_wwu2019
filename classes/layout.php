@@ -59,6 +59,8 @@ class layout {
 
         $renderer = $PAGE->get_renderer('core');
 
+        $PAGE->navbar->get_items();
+
         $bodyattributes = $OUTPUT->body_attributes();
 
         $blockspost = $OUTPUT->blocks('side-post');
