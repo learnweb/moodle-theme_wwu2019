@@ -408,6 +408,18 @@
         color: black;
     }
 
+    .forumpost.unread .row.header,
+    .path-course-view .unread, span.unread,
+    .content-item-container.unread {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .content-item-container,
+    .notification-area,
+    .notification-area .control-area {
+        border-color: var(--wwu-bg-3);
+    }
+
     /* Grade table */
     .path-grade-report-grader .gradeparent tr .cell,
     .path-grade-report-grader .gradeparent .floater .cell {
