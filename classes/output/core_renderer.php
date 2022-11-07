@@ -481,9 +481,14 @@ class core_renderer extends \core_renderer {
                         $terms[$termid]['isexpanded'] = true;
                     }
                 }
+                $fullname = $course->fullname;
+                if (strlen($fullname) > 67) {
+                    $fullname = substr($fullname, 0, 67) . '...';
+                }
                 $terms[$termid]['menu'][] = [
                     'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
                     'dontescape' => !$course->visible,
+                    'description' => $fullname,
                     'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
                     'icon' => $course->visible ? $courseicon : $hiddencourseicon,
                     'class' => $course->visible ? '' : 'dimmed_text',
@@ -494,9 +499,14 @@ class core_renderer extends \core_renderer {
         } else {
             $courses = enrol_get_my_courses();
             foreach ($courses as $course) {
+                $fullname = $course->fullname;
+                if (strlen($fullname) > 67) {
+                    $fullname = substr($fullname, 0, 67) . '...';
+                }
                 $terms['Kurse']['menu'][] = [
                     'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
                     'dontescape' => !$course->visible,
+                    'description' => $fullname,
                     'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
                     'icon' => $course->visible ? $courseicon : $hiddencourseicon,
                     'class' => $course->visible ? '' : 'dimmed_text',
@@ -545,7 +555,7 @@ class core_renderer extends \core_renderer {
         list ($instring, $params) = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED);
 
         // Get for each course where the user is enrolled the customfield value (here encoded as number).
-        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname
+        $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname,cs.fullname
                                 FROM {course} cs
                                 INNER JOIN {customfield_data} cd ON cs.id=cd.instanceid
                                 WHERE cs.id ' . $instring . '
