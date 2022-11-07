@@ -30,5 +30,6 @@ layout::sso_auto_login();
 
 $templatecontext = layout::get_default_template_context();
 
+echo $OUTPUT->doctype_if_necessary();
 echo $OUTPUT->render_from_template('theme_wwu2019/secure', $templatecontext);
 
