@@ -122,38 +122,33 @@
             </div>
         </section>
         {{/ isexamweb }}
+        {{# showssologin }}
         <section id="ssologinblock" class="block card mb-3">
             {{! Beginn Block Container }}
             <div class="card-body p-0">
                 {{! Block header }}
                 <div class="block-header">
-                        <h5 class="card-title d-inline">
-                            {{#str}} heading_login_via_sso, auth_sso {{/str}}
-                        </h5>
-
+                    <h5 class="card-title d-inline">
+                        {{#str}} login {{/str}}
+                    </h5>
                 </div>
                 {{! Block contents }}
                 <div class="card-text content p-3 text-center">
                     <div class="subcontent loginsub">
-                        <p>{{#str}} login_via_sso_desc, auth_sso {{/str}}</p>
+                        <p>{{#str}} login_via_sso_desc, theme_wwu2019 {{/str}}</p>
 
                         <div class="ssologins">
-                            <div class="mb-1">
-                                <form style="display: inline;" action="{{ssoactionurl}}" method="get" id="ssologin">
-                                    {{#ssoparams}}
-                                        <input type='hidden' name='{{key}}' value='{{value}}'>
-                                    {{/ssoparams}}
-                                    <input class="btn btn-secondary" type="submit" value="{{#str}} loginSSO_long, auth_sso {{/str}}" />
-                                </form>
+                            <div class="my-4">
+                                <a href="{{ssourl}}" class="btn btn-secondary">{{#str}} loginSSO_long, theme_wwu2019{{/str}}</a>
                             </div>
-                            <div>
-                                <form style="display: inline;" action="{{xssoactionurl}}" method="get" id="xssologin">
-                                    {{#ssoparams}}
-                                        <input type='hidden' name='{{key}}' value='{{value}}'>
-                                    {{/ssoparams}}
-                                    <input class="btn btn-secondary" type="submit" value="{{#str}} loginXSSO_long, auth_sso {{/str}}" />
-                                </form>
+                            <div class="">
+                                <a href="{{xssourl}}">{{#str}} loginXSSO_long, theme_wwu2019{{/str}}</a>
                             </div>
+                            {{^ isexamweb }}
+                            <div class="mt-2">
+                                <a href="{{moodleloginurl}}">{{#str}} login_usual_way, theme_wwu2019{{/str}}</a>
+                            </div>
+                            {{/ isexamweb }}
                         </div>
                     </div>
                 </div>
@@ -161,7 +156,8 @@
             </div>
             {{! End Block Container }}
         </section>
-        {{^isexamweb}}
+        {{/showssologin}}
+        {{#showmoodlelogin}}
         <section id="loginblock" class="block card mb-3">
             {{! Beginn Block Container }}
             <div class="card-body p-0">
@@ -175,7 +171,6 @@
                             {{#str}} login {{/str}}
                         {{/ssofield}}
                     </h5>
-
                 </div>
                 {{! Block contents }}
                 <div class="card-text content text-center p-3">
@@ -241,7 +236,7 @@
             </div>
             {{! End Block Container }}
         </section>
-        {{/isexamweb}}
+        {{/showmoodlelogin}}
     </div>
 
     <div class="col-12 col-md-6 pl-0 pr-0">

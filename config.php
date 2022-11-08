@@ -139,7 +139,7 @@ $THEME->layouts = [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
                 'regions' => array(),
-                'options' => array('langmenu' => true),
+                'options' => array('langmenu' => true, 'nomainmenu' => true, 'nonavbar' => true),
         ),
 
         // Pages that appear in pop-up windows - no navigation, no blocks, no header.
