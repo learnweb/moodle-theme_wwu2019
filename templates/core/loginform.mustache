@@ -103,11 +103,13 @@
             </div>
         </div>
     {{/error}}
-
+<!-- <div class="login-wrapper">
+                    <div class="login-container"> -->
     <div class="row">
-    <div class="col-12 col-md-6 pl-0 pr-0 pr-md-3">
+    <div class="container-fluid pt-5 mt-0">
         {{# isexamweb }}
         <section id="examwebdescription" class="block card mb-3">
+
             {{! Beginn Block Container }}
             <div class="card-body p-0">
                 {{! Block header }}
@@ -120,35 +122,71 @@
 
                 </div>
             </div>
+
         </section>
         {{/ isexamweb }}
+
         {{# showssologin }}
-        <section id="ssologinblock" class="block card mb-3">
+
+        <section id="ssologinblock" class="block card mb-3" style="max-width: 600px;margin-left: auto;margin-right: auto;">
+<!--            <div class="login-wrapper">-->
+<!--            <div class="login-container">-->
+
             {{! Beginn Block Container }}
             <div class="card-body p-0">
                 {{! Block header }}
                 <div class="block-header">
                     <h5 class="card-title d-inline">
-                        {{#str}} login {{/str}}
+                        {{#str}} login, theme_wwu2019 {{/str}}
                     </h5>
                 </div>
                 {{! Block contents }}
                 <div class="card-text content p-3 text-center">
                     <div class="subcontent loginsub">
-                        <p>{{#str}} login_via_sso_desc, theme_wwu2019 {{/str}}</p>
-
                         <div class="ssologins">
-                            <div class="my-4">
-                                <a href="{{ssourl}}" class="btn btn-secondary">{{#str}} loginSSO_long, theme_wwu2019{{/str}}</a>
+                            <h3>{{#str}} persistent_login_methods, theme_wwu2019{{/str}}</h3>
+                            <div class="my-1">
+                                <a href="{{ssourl}}" class="btn btn-secondary">{{#str}} loginSSO_link, theme_wwu2019{{/str}}</a>
                             </div>
                             <div class="">
-                                <a href="{{xssourl}}">{{#str}} loginXSSO_long, theme_wwu2019{{/str}}</a>
+                                <a href="{{xssourl}}" class="btn btn-secondary">{{#str}} loginXSSO_long, theme_wwu2019{{/str}}</a>
                             </div>
+
+                            <hr>
                             {{^ isexamweb }}
-                            <div class="mt-2">
-                                <a href="{{moodleloginurl}}">{{#str}} login_usual_way, theme_wwu2019{{/str}}</a>
+                            <h3>{{#str}} guest_and_intern, theme_wwu2019{{/str}}</h3>
+                            <div class="my-1">
+                                <a href="{{moodleloginurl}} " class="btn btn-secondary">{{#str}} login_usual_way, theme_wwu2019{{/str}}</a>
                             </div>
                             {{/ isexamweb }}
+                            {{#canloginasguest}}
+                                <div class="subcontent guestsub">
+                                    <form action="{{loginurl}}" method="post" id="guestlogin">
+                                        <div class="guestform">
+                                            <input type="hidden" name="logintoken" value="{{logintoken}}">
+                                            <input type="hidden" name="username" value="guest" />
+                                            <input type="hidden" name="password" value="guest" />
+                                            <input class="btn btn-secondary"  type="submit" value={{#quote}}{{#str}} loginguest {{/str}}{{/quote}} />
+                                        </div>
+                                    </form>
+                                </div>
+                            {{/canloginasguest}}
+                            <hr>
+
+                            <p><a href="/IV-Sicherheit/flyer/"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
+                                {{#str}} security_info, theme_wwu2019{{/str}}</a></p>
+
+                            <p><a href="/ZIV/MeinZIV/PasswortVergessen.html"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
+                                {{#str}} forgot_pwd, theme_wwu2019{{/str}}</a></p>
+
+                            <p><a href="https://www.uni-muenster.de/WWUCA/"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
+                                {{#str}} get_cert, theme_wwu2019{{/str}}</a></p>
+
+<!--                            <p>{{#str}} login_via_sso_desc, theme_wwu2019 {{/str}}</p>-->
+                            <div class="desc">
+                                {{#str}} cookiesenabled {{/str}}
+                                {{{cookieshelpiconformatted}}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -156,9 +194,11 @@
             </div>
             {{! End Block Container }}
         </section>
+        </div>
+        </div>
         {{/showssologin}}
         {{#showmoodlelogin}}
-        <section id="loginblock" class="block card mb-3">
+        <section id="loginblock" class="block card mb-3" style="max-width: 600px;margin-left: auto;margin-right: auto;">
             {{! Beginn Block Container }}
             <div class="card-body p-0">
                 {{! Block header }}
@@ -211,26 +251,8 @@
                             </div>
                         </form>
 
-                        <div class="desc">
-                            {{#str}} cookiesenabled {{/str}}
-                            {{{cookieshelpiconformatted}}}
-                        </div>
-
                     </div>
 
-                    {{#canloginasguest}}
-                        <div class="subcontent guestsub">
-                            <div class="desc">{{#str}} someallowguest {{/str}}</div>
-                            <form action="{{loginurl}}" method="post" id="guestlogin">
-                                <div class="guestform">
-                                    <input type="hidden" name="logintoken" value="{{logintoken}}">
-                                    <input type="hidden" name="username" value="guest" />
-                                    <input type="hidden" name="password" value="guest" />
-                                    <input class="btn btn-secondary"  type="submit" value={{#quote}}{{#str}} loginguest {{/str}}{{/quote}} />
-                                </div>
-                            </form>
-                        </div>
-                    {{/canloginasguest}}
                 </div>
 
             </div>
@@ -269,40 +291,6 @@
                 {{! End Block Container }}
             </section>
         {{/hasinstructions}}
-
-        <section id="hintsblock" class="block card mb-3">
-            {{! Beginn Block Container }}
-            <div class="card-body p-0">
-                {{! Block header }}
-                <div class="block-header">
-                    <h5 class="card-title d-inline">
-                        Wichtige Hinweise zum Umgang mit Passwörtern
-                    </h5>
-
-                </div>
-                {{! Block contents }}
-                <div class="card-text content p-3">
-                    <p>
-                        <img style="float: right; margin: 5px 0px 5px 5px; max-width: 50%" title="Informationen zum Serverzertifikat in Google Chrome" alt="Informationen zum Serverzertifikat in Google Chrome" src="/imperia/md/content/iv-sicherheit/chrome.png" />
-                        Keine Person oder Einrichtung der Universität wird Sie in E-Mails nach Ihrem persönlichen Passwort fragen. Bitte geben Sie dieses nie an jemanden weiter. Geben Sie Kennung und Passwort nur auf Webseiten der Uni Münster ein, die sich per Serverzertifikat als vertrauenswürdig ausweisen! Klicken Sie zur Überprüfung auf das Schlosssymbol in der Adressleiste Ihres Browsers.
-                    </p>
-
-                    <h4>Weitere Informationen</h4>
-                    <p><a href="/IV-Sicherheit/flyer/"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
-                        IV-Sicherheitsflyer</a></p>
-
-                    <h4>Passwort vergessen?</h4>
-                    <p><a href="/ZIV/MeinZIV/PasswortVergessen.html"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
-                        Hinweise zum Wiedererlangen vergessener Passwörter und Nutzerkennungen</a></p>
-
-                    <h4>Nutzerzertifikat beantragen?</h4>
-                    <p><a href="https://www.uni-muenster.de/WWUCA/"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
-                        Weiterführende Informationen bei der Zertifizierungsstelle der WWU</a></p>
-                </div>
-
-            </div>
-            {{! End Block Container }}
-        </section>
 
         {{#hasidentityproviders}}
             <div class="subcontent potentialidps">

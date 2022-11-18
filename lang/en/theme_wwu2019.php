@@ -111,10 +111,15 @@ $string['exam:end'] = 'End of exam:';
 $string['examweb_description'] = 'Online examination system of the University of M&uuml;nster';
 
 // SSO Strings.
+$string['login'] = 'Login';
 $string['loginSSO_long'] = 'Log in via SSO';
-$string['loginXSSO_long'] = 'Log in with certificate';
+$string['persistent_login_methods'] = 'University-wide Login';
+$string['loginXSSO_long'] = 'Certificate';
+$string['get_cert'] = 'Get Certifikat';
+$string['forgot_pwd'] = 'Forgotten Password?';
+$string['security_info'] = 'IV-Security Information';
+$string['guest_and_intern'] = 'Guests and LearnWeb internal login';
 $string['loginSSO_link'] = 'Log in (SSO)';
 $string['login_via_sso_desc'] = 'Using Single-Sign-On (SSO) means that a single login provides you with access to all central services offered by the university. Without having to login again! If you possess a user certificate issued by the WWUCA you can even skip login completely.';
 $string['heading_login_via_sso'] = 'Login via SSO (recommended)';
-$string['heading_login_usual_way'] = 'Moodle login';
-$string['login_usual_way'] = 'Use the internal moodle login';
+$string['login_usual_way'] = 'LearnWeb internal login';
