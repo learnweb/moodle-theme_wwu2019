@@ -110,7 +110,7 @@ $string['exam:end'] = 'Klausurende:';
 
 $string['examweb_description'] = 'Online-Prüfungssystem der WWU Münster';
 
-// SSO Strings.
+// Login Strings.
 $string['login'] = 'Anmelden';
 $string['loginSSO_long'] = 'Anmelden per SSO';
 $string['persistent_login_methods'] = 'Universitätsweite Anmeldung';
