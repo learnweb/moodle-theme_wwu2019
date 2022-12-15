@@ -69,6 +69,12 @@ function theme_wwu2019_user_preferences() {
             'type' => PARAM_INT,
             'choices' => [0, 1, 2,]
     ];
+    $preferences['theme_wwu2019_snow'] = [
+            'null' => NULL_NOT_ALLOWED,
+            'default' => 1,
+            'type' => PARAM_INT,
+            'choices' => [0, 1]
+    ];
     return $preferences;
 }
 

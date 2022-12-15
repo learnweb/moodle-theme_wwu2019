@@ -22,6 +22,7 @@
  */
 
 import $ from 'jquery';
+import Ajax from 'core/ajax';
 
 let canvas;
 
@@ -39,10 +40,35 @@ const pixurl = M.cfg.wwwroot + '/theme/wwu2019/pix/';
 let noise = exportNoise();
 
 /**
- * Init function
+ * Updates the snow preference.
+ * @param {boolean} snow
  */
-export function init() {
-    let enableSnow = localStorage.getItem('theme_wwu2019/enable-snow') !== 'false';
+function updateSnowPreferenceAjax(snow) {
+    var request = {
+        methodname: 'core_user_update_user_preferences',
+        args: {
+            preferences: [{
+                type: 'theme_wwu2019_snow',
+                value: snow ? 1 : 0
+            }]
+        }
+    };
+
+    Ajax.call([request])[0]
+        .fail(Notification.exception);
+}
+
+/**
+ * Init function
+ * @param {int} snowValue
+ */
+export function init(snowValue) {
+    let enableSnow = !!snowValue;
+    if (localStorage.getItem('theme_wwu2019/enable-snow') !== null) {
+        enableSnow = localStorage.getItem('theme_wwu2019/enable-snow') !== 'false';
+        updateSnowPreferenceAjax(enableSnow);
+        localStorage.removeItem('theme_wwu2019/enable-snow');
+    }
 
     $('<div class="mr-3" id="snow-toggle">' +
         '<img style="margin-top: -6px; cursor: pointer" width="35">' +
@@ -97,7 +123,7 @@ export function init() {
             snowicon.attr('src', pixurl + 'snow-disable.svg');
         }
         canvas.hidden = intervalId === null;
-        localStorage.setItem('theme_wwu2019/enable-snow', intervalId !== null ? 'true' : 'false');
+        updateSnowPreferenceAjax(intervalId !== null);
     });
 
     $('body').append(canvas);

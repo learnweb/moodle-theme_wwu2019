@@ -32,13 +32,7 @@ $templatecontext = layout::get_default_template_context();
 
 $PAGE->requires->js_call_amd('theme_wwu2019/alert', 'init');
 
-// Important snow stuff
-$snowenable = get_config('theme_wwu2019', 'snow_enable');
-if ($snowenable == 1 || $snowenable == 2 && (
-        get_config('theme_wwu2019', 'snow_start') < time()
-        && get_config('theme_wwu2019', 'snow_end') > time())) {
-    $PAGE->requires->js_call_amd('theme_wwu2019/snow', 'init');
-}
+layout::handle_snow();
 
 echo $OUTPUT->doctype_if_necessary();
 echo $OUTPUT->render_from_template('theme_wwu2019/columns', $templatecontext);
