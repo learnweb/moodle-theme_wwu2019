@@ -598,6 +598,29 @@
         }
     }
 
+    .que.calculatedmulti .answer .specificfeedback,
+    .que.multichoice .answer .specificfeedback,
+    .que.multianswer .answer .specificfeedback {
+        &, * {
+            background: var(--wwu-warn-border);
+        }
+    }
+
+    .que.ddwtos,
+    .que.ddimageortext {
+        .group1,
+        .group2,
+        .group3,
+        .group4,
+        .group5,
+        .group6,
+        .group7,
+        .group8 {
+            color: black;
+        }
+    }
+
+
     #quiz-timer-wrapper #quiz-timer {
         background-color: unset;
     }
