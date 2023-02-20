@@ -392,6 +392,11 @@ a:not([class]):focus,
         border: none;
         height: $moremenu-height;
         background-color: unset;
+
+        .nav-tabs {
+            max-width: unset;
+            margin: unset;
+        }
     }
 }
 
