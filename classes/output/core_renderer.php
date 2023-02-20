@@ -117,6 +117,10 @@ class core_renderer extends \core_renderer {
     public function main_menu() {
         global $CFG, $USER;
 
+        if (isset($this->page->layout_options['nomainmenu']) && $this->page->layout_options['nomainmenu']) {
+            return '';
+        }
+
         $mainmenu = [];
 
         // Add MyCourses menu.
@@ -1079,7 +1083,11 @@ class core_renderer extends \core_renderer {
         }
 
         $loginurl = get_login_url();
-        $wwwhost = htmlentities(selfmsp(true));
+        if (function_exists('selfmsp')) {
+            $wwwhost = htmlentities(selfmsp(true));
+        } else {
+            $wwwhost = '';
+        }
         $ssologinurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $CFG->wwwroot);
 
         return ['url' => $loginurl, 'ssourl' => $ssologinurl];
@@ -1125,22 +1133,19 @@ class core_renderer extends \core_renderer {
 
         // Set the context variables for the mustache template.
         global $CFG, $SESSION;
-        $wwwhost = htmlentities(selfmsp(true));
+        if (function_exists('selfmsp')) {
+            $wwwhost = htmlentities(selfmsp(true));
+        } else {
+            $wwwhost = '';
+        }
         $context->ssofield = (stripos($wwwhost, "www") !== false && stripos($CFG->wwwroot, $wwwhost) !== false);
         $wantsurl = empty($SESSION->wantsurl) ? $CFG->wwwroot : $SESSION->wantsurl;
-        $context->ssoactionurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
-        $context->xssoactionurl = str_ireplace($wwwhost, 'https://xsso.uni-muenster.de', $wantsurl);
-        // Read parameters from url, thus they can be used in form as hidden fields
-        // $wantsurl can contain parameters e.g. user/view.php?id=5&course=10
-        // form method needs to be 'get', because an xsso forward would drop post values.
-        // within the get action of a form query string values are dropped as well.
-        $params = array();
-        parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
-        $paramsmustache = array();
-        foreach ($params as $key => $val) {
-            $paramsmustache[] = ["key" => $key, "value" => $val];
-        }
-        $context->ssoparams = $paramsmustache;
+        $context->ssourl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
+        $context->xssourl = str_ireplace($wwwhost, 'https://xsso.uni-muenster.de', $wantsurl);
+        $context->moodleloginurl = new moodle_url($this->page->url, ['moodlelogin' => '1']);
+        $moodlelogin = (bool) optional_param('moodlelogin', 0, PARAM_BOOL);
+        $context->showmoodlelogin = !self::is_examweb() && $moodlelogin;
+        $context->showssologin = !$moodlelogin;
 
         return $this->render_from_template('core/loginform', $context);
     }

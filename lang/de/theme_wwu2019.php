@@ -109,3 +109,17 @@ $string['exam:begin'] = 'Klausurbeginn:';
 $string['exam:end'] = 'Klausurende:';
 
 $string['examweb_description'] = 'Online-Prüfungssystem der WWU Münster';
+
+// Login Strings.
+$string['login'] = 'Anmelden';
+$string['loginSSO_long'] = 'Anmelden per SSO';
+$string['persistent_login_methods'] = 'Universitätsweite Anmeldung';
+$string['loginXSSO_long'] = 'Nutzerzertifikat';
+$string['get_cert'] = 'Zertifikat beantragen?';
+$string['forgot_pwd'] = 'Passwort vergessen?';
+$string['security_info'] = 'IV-Sicherheitsflyer';
+$string['guest_and_intern'] = 'Zugang für Gäste und LearnWeb interner Login';
+$string['loginSSO_link'] = 'Login (SSO)';
+$string['login_via_sso_desc'] = 'Bei Nutzung von Single-Sign-On (SSO) reicht die einmalige Anmeldung zu Beginn der Sitzung zur Nutzung (fast) aller Dienste, die zentral für die WWU Münster bereitgestellt werden. Sie müssen sich also in anderen Systemen nicht erneut anmelden! Besitzen Sie ein kostenloses Nutzerzertifikat der WWUCA? Dann können Sie auch dieses zur Anmeldung verwenden und ersparen sich somit vollständig die Eingabe von Nutzername und Passwort.';
+$string['heading_login_via_sso'] = 'Login per SSO (empfohlen)';
+$string['login_usual_way'] = 'LearnWeb interner Login';
