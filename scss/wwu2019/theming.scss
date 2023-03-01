@@ -766,8 +766,30 @@
         color: black;
     }
 
+    .block_xp .xp-bg-gray-200 {
+        color: var(--wwu-bg-5);
+    }
+
     .block_xp .xp-text-gray-600 {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg);
+    }
+
+    /** mod_margic */
+
+    .margic_view .entriesheader,
+    .margic_view .margic_entry,
+    .margic_view .entrybackground,
+    .margic_view .annotationsheader,
+    .margic_view .annotationarea,
+    .margic_view .annotatedtextpreview {
+        background-color: var(--wwu-bg-1);
+        color: var(--wwu-fg);
+    }
+
+    .margic_view .annotation-box,
+    .margic_view .originaltext {
+        background-color: var(--wwu-bg-4);
+        color: var(--wwu-fg);
     }
 
     .path-mod .activity-header:not(:empty) {
