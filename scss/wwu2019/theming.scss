@@ -778,10 +778,14 @@
 
     .margic_view .entriesheader,
     .margic_view .margic_entry,
+    .margic_entry .entry,
+    .margic_entry .annotationarea,
     .margic_view .entrybackground,
     .margic_view .annotationsheader,
     .margic_view .annotationarea,
-    .margic_view .annotatedtextpreview {
+    .margic_view .annotatedtextpreview,
+    .margic_view .entryfooter,
+    .margic_view .gradingform {
         background-color: var(--wwu-bg-1);
         color: var(--wwu-fg);
     }
