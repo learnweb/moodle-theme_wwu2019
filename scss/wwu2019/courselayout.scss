@@ -345,6 +345,10 @@ body.format-topcoll {
     min-width: 100%;
 }
 
+body.path-grade #region-main-body {
+    min-height: 580px;
+}
+
 /* Ensure filesize is displayed on the right of the resource, not below */
 .section .activity .contentwithoutlink > a,
 .section .activity .activityinstance > a {

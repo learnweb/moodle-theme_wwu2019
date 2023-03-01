@@ -355,6 +355,15 @@
         border-bottom-color: var(--wwu-bg);
     }
 
+    /* Tertiary navigation */
+    .tertiary-navigation.full-width-bottom-border {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .tertiary-navigation .navitem-divider {
+        background-color: var(--wwu-bg-3);
+    }
+
     #adminsettings h3 {
         border-color: var(--wwu-bg-3);
     }
