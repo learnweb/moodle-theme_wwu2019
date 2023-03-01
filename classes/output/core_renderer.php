@@ -1079,7 +1079,11 @@ class core_renderer extends \core_renderer {
         }
 
         $loginurl = get_login_url();
-        $wwwhost = htmlentities(selfmsp(true));
+        if (function_exists('selfmsp')) {
+            $wwwhost = htmlentities(selfmsp(true));
+        } else {
+            $wwwhost = '';
+        }
         $ssologinurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $CFG->wwwroot);
 
         return ['url' => $loginurl, 'ssourl' => $ssologinurl];
@@ -1125,7 +1129,11 @@ class core_renderer extends \core_renderer {
 
         // Set the context variables for the mustache template.
         global $CFG, $SESSION;
-        $wwwhost = htmlentities(selfmsp(true));
+        if (function_exists('selfmsp')) {
+            $wwwhost = htmlentities(selfmsp(true));
+        } else {
+            $wwwhost = '';
+        }
         $context->ssofield = (stripos($wwwhost, "www") !== false && stripos($CFG->wwwroot, $wwwhost) !== false);
         $wantsurl = empty($SESSION->wantsurl) ? $CFG->wwwroot : $SESSION->wantsurl;
         $context->ssoactionurl = str_ireplace($wwwhost, 'https://sso.uni-muenster.de', $wantsurl);
@@ -1297,7 +1305,7 @@ _paq.push(['trackPageView']);
                     $titleslug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $slide->title)));
                     if(strpos($slide->link, "#")!==false){
                         $pos = strpos($slide->link, "#");
-                        $slide->link = substr($slide->link, 0, $pos) . $concatenate . 'pk_medium=local_marketing&pk_campaign=' 
+                        $slide->link = substr($slide->link, 0, $pos) . $concatenate . 'pk_medium=local_marketing&pk_campaign='
                             . $slide->id . '--' . $titleslug . substr($slide->link, $pos);
                     } else {
                         $slide->link .= $concatenate . 'pk_medium=local_marketing&pk_campaign=' . $slide->id . '--' . $titleslug;

@@ -39,6 +39,9 @@ class layout {
      * Autologin if access takes place via SSO.
      */
     public static function sso_auto_login() {
+        if (!function_exists('wwusso_username')) {
+            return;
+        }
         if (!isloggedin() && wwusso_username()) {
             global $CFG;
             $url = qualified_me();
