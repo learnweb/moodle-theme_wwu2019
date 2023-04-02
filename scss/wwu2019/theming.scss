@@ -429,6 +429,14 @@
         border-color: var(--wwu-bg-3);
     }
 
+    #frontpage-available-course-list,
+    #frontpage-course-list,
+    .course-search-result {
+        .coursebox {
+            border-color: var(--wwu-bg-3);
+        }
+    }
+
     /* Grade table */
     .path-grade-report-grader .gradeparent tr .cell,
     .path-grade-report-grader .gradeparent .floater .cell {
