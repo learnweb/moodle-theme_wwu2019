@@ -355,6 +355,15 @@
         border-bottom-color: var(--wwu-bg);
     }
 
+    /* Tertiary navigation */
+    .tertiary-navigation.full-width-bottom-border {
+        border-color: var(--wwu-bg-3);
+    }
+
+    .tertiary-navigation .navitem-divider {
+        background-color: var(--wwu-bg-3);
+    }
+
     #adminsettings h3 {
         border-color: var(--wwu-bg-3);
     }
@@ -420,6 +429,14 @@
         border-color: var(--wwu-bg-3);
     }
 
+    #frontpage-available-course-list,
+    #frontpage-course-list,
+    .course-search-result {
+        .coursebox {
+            border-color: var(--wwu-bg-3);
+        }
+    }
+
     /* Grade table */
     .path-grade-report-grader .gradeparent tr .cell,
     .path-grade-report-grader .gradeparent .floater .cell {
@@ -438,6 +455,35 @@
     .path-grade-report-grader .gradeparent .avg .cell {
         background-color: var(--wwu-bg-1);
     }
+
+
+
+    .path-grade-report-singleview div.reporttable,
+    .path-grade-report-user .user-report-container,
+    .grade-report-user .user-report-container,
+    .path-grade-report-user .user-grade thead th,
+    .grade-report-user .user-grade thead th,
+    .path-grade-report-user .user-grade td,
+    .grade-report-user .user-grade td {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .path-grade-report-singleview .reporttable tbody tr,
+    .path-grade-report-singleview .reporttable tbody tr:nth-of-type(2n+1), {
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-1);
+    }
+
+    .path-grade-report-user .user-grade td.category,
+    .grade-report-user .user-grade td.category,
+    .path-grade-report-user .user-grade tbody tr,
+    .grade-report-user .user-grade tbody tr,
+    .path-grade-report-user .user-grade td.item,
+    .grade-report-user .user-grade td.item {
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-2);
+    }
+
 
     .preferences-container .preference-table,
     .preferences-container .preference-table tr td:nth-child(2n) {
@@ -606,6 +652,10 @@
         }
     }
 
+    .que.multianswer .feedbackspan {
+        background-color: var(--wwu-warn-bg);
+    }
+
     .que.ddwtos,
     .que.ddimageortext {
         .group1,
@@ -766,8 +816,34 @@
         color: black;
     }
 
+    .block_xp .xp-bg-gray-200 {
+        color: var(--wwu-bg-5);
+    }
+
     .block_xp .xp-text-gray-600 {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg);
+    }
+
+    /** mod_margic */
+
+    .margic_view .entriesheader,
+    .margic_view .margic_entry,
+    .margic_entry .entry,
+    .margic_entry .annotationarea,
+    .margic_view .entrybackground,
+    .margic_view .annotationsheader,
+    .margic_view .annotationarea,
+    .margic_view .annotatedtextpreview,
+    .margic_view .entryfooter,
+    .margic_view .gradingform {
+        background-color: var(--wwu-bg-1);
+        color: var(--wwu-fg);
+    }
+
+    .margic_view .annotation-box,
+    .margic_view .originaltext {
+        background-color: var(--wwu-bg-4);
+        color: var(--wwu-fg);
     }
 
     .path-mod .activity-header:not(:empty) {

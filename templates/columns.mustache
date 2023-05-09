@@ -60,13 +60,14 @@
 
         {{{ output.course_content_header }}}
 
-        {{#secondarymoremenu}}
-            <div class="secondary-navigation">
-                {{> core/moremenu}}
-            </div>
-        {{/secondarymoremenu}}
         <div id="page-content" class="row {{#haspostblocks}} blocks-post {{/haspostblocks}}">
             <div id="region-main-box" class="region-main mb-3">
+
+                {{#secondarymoremenu}}
+                    <div class="secondary-navigation">
+                        {{> core/moremenu}}
+                    </div>
+                {{/secondarymoremenu}}
 
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">

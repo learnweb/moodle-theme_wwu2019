@@ -34,3 +34,17 @@ table.mod-data-default-template {
 .table-primary > td {
     background-color: var(--wwu-info-bg) !important;
 }
+
+.table-warning,
+.table-warning > th,
+.table-warning > td {
+    background-color: var(--wwu-warn-bg) !important;
+}
+
+
+.table-success,
+.table-success > th,
+.table-success > td {
+    background-color: var(--wwu-success-bg) !important;
+}
+
