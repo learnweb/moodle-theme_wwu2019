@@ -488,6 +488,16 @@ ul.main-menubar {
     background-color: var(--wwu-bg);
 }
 
+a.wwu2019-evasys-button {
+    display: block;
+    width: 28px;
+    height: 24px;
+    background-size: contain;
+    background-image: url(#{$wwwroot}/theme/wwu2019/pix/evasys.png);
+    background-repeat: no-repeat;
+    margin: 0 4px;
+}
+
 #menu-bottom {
     display: flex;
     width: 100%;

@@ -183,7 +183,13 @@ class core_renderer extends \core_renderer {
      * @return string HTML for the navbar
      */
     public function navbar_plugin_output() {
+        global $CFG;
         $output = '';
+        if (file_exists($CFG->dirroot . '/blocks/evasys_sync/classes/evalcat_manager.php')) {
+            if (\block_evasys_sync\evalcat_manager::get_instance()->is_user_manager()) {
+                $output .= $this->add_evasys_button();
+            }
+        }
         if ($this->page->user_allowed_editing()) {
             $output .= $this->add_edit_button();
         }
@@ -216,6 +222,16 @@ class core_renderer extends \core_renderer {
         }
 
         return $this->single_button($url, $editstring, $method, array('class' => 'singlebutton ' . $class));
+    }
+
+    /**
+     * Renders an evasys manager button.
+     * @return string HTML for evasys manager button
+     */
+    private function add_evasys_button() {
+        $link = \html_writer::link(new moodle_url('/blocks/evasys_sync/manageroverview.php'), '',
+            ['class' => 'wwu2019-evasys-button']);
+        return \html_writer::div($link, 'nav-link');
     }
 
     /**
