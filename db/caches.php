@@ -34,5 +34,9 @@ $definitions = array(
         'staticacceleration' => true,
         'staticaccelerationsize' => 1
     ),
+    'slides' => array(
+        'mode' => cache_store::MODE_SESSION,
+        'simplekeys' => true
+    ),
 
 );

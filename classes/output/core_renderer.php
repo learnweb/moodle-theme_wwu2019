@@ -1286,16 +1286,16 @@ _paq.push(['trackPageView']);
      * @return string
      */
     public function slideshow() {
-        global $CFG, $USER;
+        global $CFG;
 
         $output = '';
 
         if (file_exists($CFG->dirroot . '/local/marketing/locallib.php')) {
+            $cache = \cache::make('theme_wwu2019', 'slides');
+            $slides = $cache->get('slides');
             // Retrieve slides if none are cached.
             // Also, force re-cache if user has changed ID recently (i.e., a login has occurred).
-            if (!isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
-                $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id || empty($_SESSION["theme_wwu2019_slides"])
-            ) {
+            if ($slides === false) {
                 require_once($CFG->dirroot . '/local/marketing/locallib.php');
                 $allslides = \local_marketing\slide_manager::get_slides_for();
                 $slides = array();
@@ -1333,10 +1333,7 @@ _paq.push(['trackPageView']);
                     $slides[0]->active = true;
                 }
 
-                $_SESSION["theme_wwu2019_slides"] = $slides;
-                $_SESSION["theme_wwu2019_slides_cachedfor"] = $USER->id;
-            } else {
-                $slides = $_SESSION["theme_wwu2019_slides"];
+                $cache->set('slides', $slides);
             }
 
             if ($slides) {
