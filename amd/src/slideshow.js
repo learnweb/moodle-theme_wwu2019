@@ -29,6 +29,9 @@ import $ from 'jquery';
 export function init() {
     const items = $('#wwuCarousel .carousel-item');
 
+    // Start carousel manually for firefox.
+    setTimeout(() => $('#wwuCarousel').carousel('cycle'), 1000);
+
     /**
      * A function that handles window resizing to set the correct height for the carousel slides.
      */
