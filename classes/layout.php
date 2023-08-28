@@ -58,17 +58,17 @@ class layout {
      * @return array
      */
     public static function get_default_template_context() {
-        global $OUTPUT, $PAGE, $SITE, $CFG;
+        global $PAGE, $SITE, $CFG;
 
         $renderer = $PAGE->get_renderer('core');
 
         $PAGE->navbar->get_items();
 
-        $bodyattributes = $OUTPUT->body_attributes();
+        $bodyattributes = $renderer->body_attributes();
 
-        $blockspost = $OUTPUT->blocks('side-post');
+        $blockspost = $renderer->blocks('side-post');
 
-        $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
+        $hassidepost = $PAGE->blocks->region_has_content('side-post', $renderer);
 
         $secondarynavigation = false;
 
@@ -79,10 +79,10 @@ class layout {
         if ($PAGE->has_secondary_navigation() && $PAGE->pagelayout != 'course') {
             $tablistnav = $PAGE->has_tablist_secondary_navigation();
             $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
-            $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+            $secondarynavigation = $moremenu->export_for_template($renderer);
             $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
             if (!is_null($overflowdata)) {
-                $overflow = $overflowdata->export_for_template($OUTPUT);
+                $overflow = $overflowdata->export_for_template($renderer);
             }
         }
 
@@ -90,13 +90,13 @@ class layout {
             'sitename' => format_string($SITE->shortname, true,
                 ['context' => \context_course::instance(SITEID), "escape" => false]),
             'isexamweb' => core_renderer::is_examweb(),
-            'output' => $OUTPUT,
+            'output' => $renderer,
             'sidepostblocks' => $blockspost,
             'secondarymoremenu' => $secondarynavigation,
             'haspostblocks' => $hassidepost,
             'headercontent' => $headercontent,
             'bodyattributes' => $bodyattributes,
-            'footer' => $OUTPUT->get_footer_context(),
+            'footer' => $renderer->get_footer_context(),
             'alerts' => alerts::get_alerts(),
             'supportemail' => $CFG->supportemail,
         ];
