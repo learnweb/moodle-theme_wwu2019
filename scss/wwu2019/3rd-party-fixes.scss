@@ -68,3 +68,14 @@ body.path-mod-cas table.generaltable table[border]{
     background-color: var(--wwu-info-bg);
 }
 
+.path-mod-assign [data-region="configure-filters"] {
+    background-color: var(--wwu-bg);
+
+    &::after {
+        border-bottom-color: var(--wwu-bg);
+    }
+
+    &::before {
+        border-bottom-color: var(--wwu-muted-bg);
+    }
+}
