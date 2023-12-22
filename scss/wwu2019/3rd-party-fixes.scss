@@ -68,6 +68,20 @@ body.path-mod-cas table.generaltable table[border]{
     background-color: var(--wwu-info-bg);
 }
 
+/* mod_ratingallocate */
+.ratingallocate_ratings_table thead th,
+.ratingallocate_ratings_table tbody td:first-child,
+.ratingallocate_ratings_table.includegroups tbody td:nth-child(2),
+.ratingallocate_ratings_table tr.ratingallocate_summary td {
+    background-color: var(--wwu-bg);
+}
+
+.ratingallocate_ratings_table:not(.includegroups) tbody td:first-child,
+.ratingallocate_ratings_table:not(.includegroups) thead th:first-child,
+.ratingallocate_ratings_table.includegroups tbody td:nth-child(2),
+.ratingallocate_ratings_table.includegroups thead th:nth-child(2) {
+    border-color: var(--wwu-bg-3);
+
 .path-mod-assign [data-region="configure-filters"] {
     background-color: var(--wwu-bg);
 
