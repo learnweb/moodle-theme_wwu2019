@@ -22,8 +22,8 @@
  */
 
 import $ from 'jquery';
-import Ajax from 'core/ajax';
 import Notification from 'core/notification';
+import {setUserPreference} from "core_user/repository";
 
 /**
  * Init function
@@ -84,18 +84,8 @@ function initThemeChooser() {
  * @param {int} theme
  */
 function updateThemePreferenceAjax(theme) {
-    var request = {
-        methodname: 'core_user_update_user_preferences',
-        args: {
-            preferences: [{
-                type: 'theme_wwu2019_theme',
-                value: theme
-            }]
-        }
-    };
-
-    Ajax.call([request])[0]
-        .fail(Notification.exception);
+    setUserPreference('theme_wwu2019_theme', theme)
+        .catch(Notification.exception);
 }
 
 const onecolumnbreakpoint = 767;
