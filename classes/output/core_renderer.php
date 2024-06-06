@@ -1372,7 +1372,6 @@ _paq.push(['trackPageView']);
 
     public function htmlattributes() {
         if (get_config('theme_wwu2019', 'darktheme_enabled') == '1') {
-            user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
             $themepreference = get_user_preferences('theme_wwu2019_theme');
             if ($themepreference == 1) {
                 return parent::htmlattributes() . 'class="light"';
