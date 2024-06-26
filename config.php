@@ -53,7 +53,7 @@ $THEME->enable_dock = false;
 
 // This is an old setting used to load specific CSS for some YUI JS. We don't need it in Classic based themes because Classic
 // provides default styling for the YUI modules that we use. It is not recommended to use this setting anymore.
-$THEME->yuicssmodules = array();
+$THEME->yuicssmodules = [];
 
 // Most themes will use this rendererfactory as this is the one that allows the theme to override any other renderer.
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
@@ -64,139 +64,139 @@ $THEME->prescsscallback = 'theme_wwu2019_get_pre_scss';
 // multiple column layouts.
 $THEME->layouts = [
         // Most backwards compatible layout without the blocks - this is the layout used by default.
-        'base' => array(
+        'base' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array(),
-        ),
+                'regions' => [],
+        ],
         // Standard layout with blocks, this is recommended for most pages with general information.
-        'standard' => array(
+        'standard' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-        ),
+        ],
         // Main course page.
-        'course' => array(
+        'course' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-                'options' => array('langmenu' => true),
-        ),
-        'coursecategory' => array(
+                'options' => ['langmenu' => true],
+        ],
+        'coursecategory' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-        ),
+        ],
         // Part of course, typical for modules - default page layout if $cm specified in require_login().
-        'incourse' => array(
+        'incourse' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-        ),
+        ],
         // The site home page.
-        'frontpage' => array(
+        'frontpage' => [
                 'theme' => 'wwu2019',
                 'file' => 'frontpage.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-                'options' => array('nonavbar' => true),
-        ),
+                'options' => ['nonavbar' => true],
+        ],
         // Server administration scripts.
-        'admin' => array(
+        'admin' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-        ),
+        ],
         // My dashboard page.
-        'mydashboard' => array(
+        'mydashboard' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-                'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
-        ),
+                'options' => ['nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true],
+        ],
         // My courses page.
-        'mycourses' => array(
+        'mycourses' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-                'options' => array('nonavbar' => true, 'nocontextheader' => true),
-        ),
+                'options' => ['nonavbar' => true, 'nocontextheader' => true],
+        ],
         // My public page.
-        'mypublic' => array(
+        'mypublic' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-        ),
-        'login' => array(
+        ],
+        'login' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array(),
-                'options' => array('langmenu' => true),
-        ),
+                'regions' => [],
+                'options' => ['langmenu' => true],
+        ],
 
         // Pages that appear in pop-up windows - no navigation, no blocks, no header.
-        'popup' => array(
+        'popup' => [
                 'theme' => 'wwu2019',
                 'file' => 'contentonly.php',
-                'regions' => array(),
-                'options' => array('nofooter' => true, 'nonavbar' => true),
-        ),
+                'regions' => [],
+                'options' => ['nofooter' => true, 'nonavbar' => true],
+        ],
         // No blocks and minimal footer - used for legacy frame layouts only!
-        'frametop' => array(
+        'frametop' => [
                 'theme' => 'wwu2019',
                 'file' => 'contentonly.php',
-                'regions' => array(),
-                'options' => array('nofooter' => true, 'nocoursefooter' => true),
-        ),
+                'regions' => [],
+                'options' => ['nofooter' => true, 'nocoursefooter' => true],
+        ],
         // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
-        'embedded' => array(
+        'embedded' => [
                 'theme' => 'boost',
                 'file' => 'embedded.php',
-                'regions' => array()
-        ),
+                'regions' => [],
+        ],
         // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
         // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
         // Please be extremely careful if you are modifying this layout.
-        'maintenance' => array(
+        'maintenance' => [
                 'theme' => 'boost',
                 'file' => 'maintenance.php',
-                'regions' => array(),
-        ),
+                'regions' => [],
+        ],
         // Should display the content and basic headers only.
-        'print' => array(
+        'print' => [
                 'theme' => 'wwu2019',
                 'file' => 'contentonly.php',
-                'regions' => array(),
-                'options' => array('nofooter' => true, 'nonavbar' => false),
-        ),
+                'regions' => [],
+                'options' => ['nofooter' => true, 'nonavbar' => false],
+        ],
         // The pagelayout used when a redirection is occuring.
-        'redirect' => array(
+        'redirect' => [
                 'theme' => 'boost',
                 'file' => 'embedded.php',
-                'regions' => array(),
-        ),
+                'regions' => [],
+        ],
         // The pagelayout used for reports.
-        'report' => array(
+        'report' => [
                 'theme' => 'wwu2019',
                 'file' => 'columns.php',
-                'regions' => array('side-post'),
+                'regions' => ['side-post'],
                 'defaultregion' => 'side-post',
-        ),
+        ],
         // The pagelayout used for safebrowser and securewindow.
-        'secure' => array(
+        'secure' => [
                 'theme' => 'wwu2019',
                 'file' => 'secure.php',
-                'regions' => array('side-post'),
-                'defaultregion' => 'side-post'
-        )
+                'regions' => ['side-post'],
+                'defaultregion' => 'side-post',
+        ],
 ];
 
 // This is the function that returns the SCSS source for the main file in our theme.

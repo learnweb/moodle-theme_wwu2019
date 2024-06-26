@@ -30,7 +30,7 @@ layout::sso_auto_login();
 
 $templatecontext = [
         'bodyattributes' => $OUTPUT->body_attributes(),
-        'output' => $OUTPUT
+        'output' => $OUTPUT,
 ];
 
 echo $OUTPUT->doctype_if_necessary();

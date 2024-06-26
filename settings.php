@@ -76,7 +76,7 @@ if ($ADMIN->fulltree) {
     $alertwarning = get_string('alert_warning', 'theme_wwu2019');
     $alertgeneral = get_string('alert_general', 'theme_wwu2019');
     $alerttypedefault = 'info';
-    $alerttypechoices = array('info' => $alertinfo, 'error' => $alertwarning, 'success' => $alertgeneral);
+    $alerttypechoices = ['info' => $alertinfo, 'error' => $alertwarning, 'success' => $alertgeneral];
     $setting = new admin_setting_configselect('theme_wwu2019/alert1type',
         get_string('alert1type', 'theme_wwu2019'),
         get_string('alerttype_desc', 'theme_wwu2019'),
@@ -173,7 +173,7 @@ if ($ADMIN->fulltree) {
         0, [
             0 => 'Disable snow',
             1 => 'Enable snow',
-            2 => 'Enable snow within timelimits'
+            2 => 'Enable snow within timelimits',
     ]));
     $gimmickpage->add(new admin_setting_configtext('theme_wwu2019/snow_start', 'Start snow',
         'Of course a unixtimestamp. Because it is very convenient.', 0));
