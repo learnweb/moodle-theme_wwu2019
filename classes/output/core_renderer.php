@@ -26,6 +26,7 @@ namespace theme_wwu2019\output;
 
 use action_link;
 use context_course;
+use core\output\icon_system;
 use image_icon;
 use moodle_page;
 use moodle_url;
@@ -1414,7 +1415,7 @@ _paq.push(['trackPageView']);
      */
     protected function render_pix_icon(pix_icon $icon) {
         $this->check_monologo($icon);
-        $system = \core\output\icon_system::instance();
+        $system = icon_system::instance();
         return $system->render_pix_icon($this, $icon);
     }
 
@@ -1426,7 +1427,10 @@ _paq.push(['trackPageView']);
      */
     protected function render_image_icon(image_icon $icon) {
         $this->check_monologo($icon);
-        $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
+        $system = icon_system::instance(icon_system::STANDARD);
+        if (str_contains($icon->attributes['class'], 'activityicon')) {
+            var_dump($icon->attributes['class']);
+        }
         return $system->render_pix_icon($this, $icon);
     }
 

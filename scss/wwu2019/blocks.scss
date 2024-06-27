@@ -26,15 +26,14 @@
 }
 
 .block.card {
-    border: none;
-    border-radius: 0;
     background: var(--wwu-bg);
     word-break: break-word;
 
     > .card-body {
-        border: 2px solid var(--wwu-outlinegrey);
+        //border: 2px solid var(--wwu-outlinegrey);
 
         > .block-header {
+            border-radius: 0.5rem 0.5rem 0 0;
             background-color: $learnwebblue;
             color: white;
             padding: 0 12px;

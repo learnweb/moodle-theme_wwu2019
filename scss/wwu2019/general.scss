@@ -274,7 +274,7 @@ footer#wwu-footer + div > div.container {
 .nav-tabs {
 
     .nav-link {
-        border-radius: 0;
+        border-radius: 0.5rem;
         border: 2px solid transparent;
     }
     & > li {
@@ -386,7 +386,7 @@ a:not([class]):focus,
 }
 
 .nav-tabs > .nav-item > .nav-link {
-    border: 2px solid var(--wwu-outlinegrey);
+    border: 1px solid var(--wwu-outlinegrey);
     background-color: var(--wwu-tab-bg-inactive);
     color: var(--wwu-tab-fg-inactive);
 
@@ -401,13 +401,20 @@ a:not([class]):focus,
         background-color: var(--wwu-bg);
         border-bottom-color: var(--wwu-bg);
         box-shadow: none;
+        border-radius: 0.5rem 0.5rem 0 0;
     }
+}
+.secondary-navigation .navigation .nav-tabs .nav-item .nav-link {
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .nav-tabs .nav-link {
     &:focus,
     &:hover {
         background-color: var(--wwu-bg-1);
+    }
+    &:active {
+        border-radius: 0.5rem 0.5rem 0 0;
     }
 }
 

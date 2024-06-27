@@ -23,7 +23,7 @@
 
 #region-main {
     border: 2px solid $outlinegrey;
-    border-radius: 0;
+    border-radius: 0.5rem;
     background: var(--wwu-bg);
     padding: 1em;
 }
@@ -60,10 +60,17 @@ body.pagelayout-course {
     .course-content ul li.section.main {
         border-radius: 0;
         padding: 0;
-        border: 2px solid $outlinegrey;
-        margin-bottom: 0.5rem;
+        margin-top: 0;
+
+        .topics {
+            margin-top: 0;
+        }
 
         .header, .course-section-header {
+            padding-left: 0;
+            padding-right: 0;
+            border-radius: 0.5rem 0.5rem 0 0;
+            box-sizing: border-box;
             background-color: $learnwebblue;
             color: white;
             display: flex;
@@ -100,11 +107,11 @@ body.pagelayout-course {
 
         &> .content {
             margin: 0;
-            padding: 0 0.5rem 0.5rem;
             // overflow-x: auto;
 
             .section {
                 margin: 0;
+                padding: 0 0.5rem 0.5rem;
             }
 
             .summary-view-full {
@@ -125,6 +132,14 @@ body.pagelayout-course {
                 }
             }
             border-color: $wwugreen;
+        }
+    }
+
+    .course-section .section-item {
+        padding: 0 0 1rem 0;
+        .course-content-item-content.content{
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
         }
     }
 
@@ -171,9 +186,13 @@ body.pagelayout-course {
     }
 }
 
+.btn.btn-icon.icons-collapse-expand {
+    background-color: inherit;
+}
+
 .activity-item:not(.activityinline) {
-    border: none;
     padding: 0.5rem;
+    border: 2px solid var(--wwu-bg-1);
 
     @media (min-width: 768px) {
         padding: 0.5rem;
