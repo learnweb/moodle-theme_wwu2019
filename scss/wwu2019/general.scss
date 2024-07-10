@@ -76,7 +76,8 @@ body {
 }
 
 a,
-.btn-link {
+.btn-link,
+.dataicon {
     color: var(--wwu-learnwebblue);
 
     &:hover {
@@ -116,10 +117,10 @@ $page-padding: 1rem;
         background-size: contain;
         background-position: left center;
         background-repeat: no-repeat;
-        background-image: url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg");
+        background-image: url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/unims.svg");
 
         @media (max-width: $mobile-break-point) {
-            background-position: -82px center;
+            background-position: -76px center;
             background-size: cover;
             width: 81px;
         }
