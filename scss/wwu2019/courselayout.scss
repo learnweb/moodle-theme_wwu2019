@@ -33,7 +33,7 @@
     color: white; // Should be white both in light and dark theme.
     background: $learnwebblue;
     padding: 16px 16px 14px 16px;
-    border: 1px solid $outlinegrey;
+    border-radius: 0.75rem;
     font-size: 26px;
     text-transform: uppercase;
 }
@@ -58,18 +58,16 @@ body.pagelayout-report {
 body.pagelayout-course {
 
     .course-content ul li.section.main {
-        border-radius: 0;
-        padding: 0;
-        margin-top: 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
 
         .topics {
             margin-top: 0;
         }
 
         .header, .course-section-header {
-            padding-left: 0;
-            padding-right: 0;
-            border-radius: 0.5rem 0.5rem 0 0;
             box-sizing: border-box;
             background-color: $learnwebblue;
             color: white;
@@ -137,6 +135,9 @@ body.pagelayout-course {
 
     .course-section .section-item {
         padding: 0 0 1rem 0;
+        border-radius: 0.75rem;
+        overflow: clip;
+
         .course-content-item-content.content{
             padding-left: 0.5rem;
             padding-right: 0.5rem;
@@ -188,19 +189,6 @@ body.pagelayout-course {
 
 .btn.btn-icon.icons-collapse-expand {
     background-color: inherit;
-}
-
-.activity-item:not(.activityinline) {
-    padding: 0.5rem;
-    border: 1px solid var(--wwu-bg-1);
-
-    @media (min-width: 768px) {
-        padding: 0.5rem;
-    }
-}
-
-.activity-item.activityinline {
-    padding: 0.5rem;
 }
 
 .editing .activity-item:hover {

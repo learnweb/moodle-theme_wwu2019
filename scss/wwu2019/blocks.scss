@@ -28,12 +28,13 @@
 .block.card {
     background: var(--wwu-bg);
     word-break: break-word;
+    border-radius: 0.75rem;
+    overflow: clip;
 
     > .card-body {
         //border: 2px solid var(--wwu-outlinegrey);
 
         > .block-header {
-            border-radius: 0.25rem 0.25rem 0 0;
             background-color: $learnwebblue;
             color: white;
             padding: 0 12px;
@@ -44,6 +45,10 @@
             > .card-title {
                 margin: 4px 0;
                 font-size: 1em;
+            }
+
+            .menubar {
+                margin-top: 2px;
             }
         }
     }
