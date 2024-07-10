@@ -363,7 +363,8 @@ body.path-grade #region-main-body {
     display: inline-block;
 }
 
-.activity {
+.activity,
+.activity-item .activity-afterlink {
     border-color: var(--wwu-muted-bg);
 }
 
@@ -373,4 +374,8 @@ body.path-grade #region-main-body {
 
 .activity-item.hiddenactivity .description .course-description-item, .activity-item.hiddenactivity .activityiconcontainer, .activity-item.hiddenactivity .badge {
     mix-blend-mode: normal;
+}
+
+.divider .divider-content {
+    background: linear-gradient(transparent 40%, var(--wwu-bg) 40%, var(--wwu-bg) 60%, transparent 60%);
 }

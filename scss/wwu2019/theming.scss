@@ -916,6 +916,29 @@
     canvas.snow {
         opacity: 0.3 !important;
     }
+
+    .btn.add-content {
+        color: #5b8f9d;
+        background-color: #283133;
+
+        &:hover, &:focus {
+            color: #fff;
+            background-color: #006784;
+        }
+    }
+
+    .btn.add-section {
+        border-color: var(--wwu-muted-bg);
+
+        &:hover, &:focus {
+            background-color: var(--wwu-muted-bg);
+            color: var(--wwu-learnwebblue);
+        }
+    }
+
+    .activity-item .activity-groupmode-info {
+        filter: invert(1);
+    }
 }
 
 
