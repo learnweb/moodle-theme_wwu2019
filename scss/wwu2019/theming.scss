@@ -12,7 +12,7 @@
     --wwu-muted-fg: #ced4da;
     --wwu-contrast-fg: #000;
     --wwu-outlinegrey: #bec6c8;
-    --wwu-dividergrey: #423c39;
+    --wwu-dividergrey: #333f48;
     --wwu-learnwebblue: #{$learnwebblue};
     --wwu-learnwebblue-highlight: #{darken($learnwebblue, 15%)};
     --wwu-learnwebblue-og: #{$learnwebblue};
@@ -906,6 +906,10 @@
     // Evasys logo.
     a.wwu2019-evasys-button {
         filter: brightness(150%);
+    }
+
+    canvas.snow {
+        opacity: 0.3 !important;
     }
 }
 

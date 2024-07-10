@@ -113,11 +113,12 @@ $page-padding: 1rem;
         text-align: left;
         display: block;
         height: 81px;
-        width: 280px;
+        width: 302px;
         background-size: contain;
         background-position: left center;
         background-repeat: no-repeat;
         background-image: url("https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/unims.svg");
+        float: left;
 
         @media (max-width: $mobile-break-point) {
             background-position: -76px center;
@@ -136,6 +137,7 @@ $page-padding: 1rem;
         background-image: url(#{$wwwroot}/theme/wwu2019/pix/#{$logoprefix}_light.svg);
         background-repeat: no-repeat;
         background-size: contain;
+        float: right;
     }
 }
 
