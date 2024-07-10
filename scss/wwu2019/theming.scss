@@ -144,7 +144,11 @@
     }
 
     .text-dark {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg-1) !important;
+    }
+
+    a.text-dark:hover, a.text-dark:focus {
+        color: var(--wwu-fg) !important;
     }
 
     .icon.wwu-monologo {
@@ -965,6 +969,14 @@
         border-color: var(--wwu-bg-5);
     }
 
+}
+
+.action-menu .dropdown-subpanel.content-displayed {
+    background-color: var(--wwu-bg-2);
+}
+
+.text-primary {
+    color: var(--wwu-learnwebblue) !important;
 }
 
 :root {

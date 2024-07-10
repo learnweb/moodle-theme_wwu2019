@@ -372,8 +372,16 @@ body.path-grade #region-main-body {
     background-color: var(--wwu-bg);
 }
 
+.activity-item.hiddenactivity {
+    background-color: var(--wwu-bg-1);
+}
+
 .activity-item.hiddenactivity .description .course-description-item, .activity-item.hiddenactivity .activityiconcontainer, .activity-item.hiddenactivity .badge {
     mix-blend-mode: normal;
+}
+
+.course-section .availabilityinfo {
+    background-color: var(--wwu-bg-3);
 }
 
 .divider .divider-content {
