@@ -1428,9 +1428,6 @@ _paq.push(['trackPageView']);
     protected function render_image_icon(image_icon $icon) {
         $this->check_monologo($icon);
         $system = icon_system::instance(icon_system::STANDARD);
-        if (str_contains($icon->attributes['class'], 'activityicon')) {
-            var_dump($icon->attributes['class']);
-        }
         return $system->render_pix_icon($this, $icon);
     }
 
@@ -1439,19 +1436,17 @@ _paq.push(['trackPageView']);
      * @param pix_icon $icon
      */
     private function check_monologo(pix_icon $icon) {
-        if ($icon->pix === 'monologo' || $icon->pix === 'icon') {
-            if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
-                    substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
-                    strpos($icon->component, '_') === false
-                )
-            ) {
-                if ($location = $this->page->theme->resolve_image_location($icon->pix, $icon->component, null)) {
-                    if (substr_compare($location, 'monologo.svg', -12) === 0) {
-                        if (isset($icon->attributes['class'])) {
-                            $icon->attributes['class'] .= ' wwu-monologo ';
-                        } else {
-                            $icon->attributes['class'] = ' wwu-monologo ';
-                        }
+        if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
+                substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
+                !str_contains($icon->component, '_')
+            )
+        ) {
+            if ($location = $this->page->theme->resolve_image_location($icon->pix, $icon->component, null)) {
+                if (substr_compare($location, 'monologo.svg', -12) === 0) {
+                    if (isset($icon->attributes['class'])) {
+                        $icon->attributes['class'] .= ' wwu-monologo ';
+                    } else {
+                        $icon->attributes['class'] = ' wwu-monologo ';
                     }
                 }
             }

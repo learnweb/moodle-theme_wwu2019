@@ -275,7 +275,7 @@ footer#wwu-footer + div > div.container {
 
     .nav-link {
         border-radius: 0.5rem;
-        border: 2px solid transparent;
+        border: 1px solid transparent;
     }
     & > li {
         margin-left: 10px;
@@ -450,7 +450,7 @@ a:not([class]):focus,
     .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active, .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-tabs:not(.more-nav) .nav-link.active.dropdown-toggle, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active, .show > .nav-pills .nav-link.active.dropdown-toggle {
         color: var(--wwu-fg);
         background: var(--wwu-bg);
-        border: 2px solid var(--wwu-bg-5);
+        border: 1px solid var(--wwu-bg-5);
     }
     .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-tabs:not(.more-nav) .nav-link.active.dropdown-toggle:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled):active:focus, .nav-pills .nav-link.active:not(:disabled):not(.disabled).active:focus, .show > .nav-pills .nav-link.active.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(104, 111, 117, 0.5);

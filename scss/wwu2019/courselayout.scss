@@ -22,7 +22,7 @@
  */
 
 #region-main {
-    border: 2px solid $outlinegrey;
+    border: 1px solid $outlinegrey;
     border-radius: 0.5rem;
     background: var(--wwu-bg);
     padding: 1em;
@@ -33,7 +33,7 @@
     color: white; // Should be white both in light and dark theme.
     background: $learnwebblue;
     padding: 16px 16px 14px 16px;
-    border: 2px solid $outlinegrey;
+    border: 1px solid $outlinegrey;
     font-size: 26px;
     text-transform: uppercase;
 }
@@ -192,7 +192,7 @@ body.pagelayout-course {
 
 .activity-item:not(.activityinline) {
     padding: 0.5rem;
-    border: 2px solid var(--wwu-bg-1);
+    border: 1px solid var(--wwu-bg-1);
 
     @media (min-width: 768px) {
         padding: 0.5rem;
@@ -300,7 +300,7 @@ body.format-topcoll {
     }
 
     .course-content ul.ctopics li.section.main {
-        border-bottom: 2px solid $outlinegrey;
+        border-bottom: 1px solid $outlinegrey;
         margin-bottom: 16px;
 
         .header {
