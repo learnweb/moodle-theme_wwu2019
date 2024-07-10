@@ -137,6 +137,7 @@ body.pagelayout-course {
         padding: 0 0 1rem 0;
         border-radius: 0.75rem;
         overflow: clip;
+        border-color: var(--wwu-muted-bg);
 
         .course-content-item-content.content{
             padding-left: 0.5rem;
@@ -362,16 +363,12 @@ body.path-grade #region-main-body {
     display: inline-block;
 }
 
-.section li.activity:not(:last-child) {
-    border-bottom: 1px solid var(--wwu-muted-bg);
+.activity {
+    border-color: var(--wwu-muted-bg);
 }
 
-.activity-item.hiddenactivity {
-    background-color: var(--wwu-bg-1);
-}
-
-.activity-item.hiddenactivity:hover {
-    background-color: var(--wwu-bg-2);
+.activity-item {
+    background-color: var(--wwu-bg);
 }
 
 .activity-item.hiddenactivity .description .course-description-item, .activity-item.hiddenactivity .activityiconcontainer, .activity-item.hiddenactivity .badge {

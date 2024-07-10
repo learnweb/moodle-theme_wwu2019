@@ -194,6 +194,11 @@
     table.mod-data-default-template {
         color: var(--wwu-fg);
 
+        thead .sticky-column,
+        tbody tr:nth-of-type(2n) {
+            background-color: var(--wwu-bg);
+        }
+
         thead th,
         th,
         td {
