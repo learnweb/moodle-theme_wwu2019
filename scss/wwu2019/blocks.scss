@@ -29,10 +29,9 @@
     background: var(--wwu-bg);
     word-break: break-word;
     border-radius: 0.75rem;
-    overflow: clip;
+    border-color: var(--wwu-muted-bg);
 
     > .card-body {
-        //border: 2px solid var(--wwu-outlinegrey);
 
         > .block-header {
             background-color: $learnwebblue;
@@ -41,6 +40,7 @@
             font-size: 18px;
             display: flex;
             justify-content: space-between;
+            border-radius: 0.7rem 0.7rem 0 0;
 
             > .card-title {
                 margin: 4px 0;

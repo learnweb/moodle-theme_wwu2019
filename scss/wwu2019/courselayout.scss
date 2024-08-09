@@ -73,6 +73,7 @@ body.pagelayout-course {
             color: white;
             display: flex;
             width: 100%;
+            border-radius: 0.7rem 0.7rem 0 0;
 
             a,
             .btn-link {
@@ -136,7 +137,6 @@ body.pagelayout-course {
     .course-section .section-item {
         padding: 0 0 1rem 0;
         border-radius: 0.75rem;
-        overflow: clip;
         border-color: var(--wwu-muted-bg);
 
         .course-content-item-content.content{

@@ -280,6 +280,18 @@
         &:focus {
             color: var(--wwu-fg);
         }
+
+        &> img.icon {
+            filter: invert(1);
+        }
+    }
+
+    .dropdown-subpanel-content .bg-primary-light {
+        background-color: var(--wwu-bg-1);
+    }
+
+    .dropdown-subpanel-content .option-icon img {
+        filter: invert(1);
     }
 
     .activity-item .activityname a {
@@ -731,6 +743,22 @@
 
     .block_accessreview_table {
         border-color: var(--wwu-bg-3);
+    }
+
+    .bg-info {
+        background-color: var(--wwu-info-bg) !important;
+    }
+
+    .bg-warning {
+        background-color: var(--wwu-warn-bg) !important;
+    }
+
+    .bg-error {
+        background-color: var(--wwu-error-bg) !important;
+    }
+
+    .bg-success {
+        background-color: var(--wwu-success-bg) !important;
     }
 
     /** 3rd party plugin theme fixes **/
