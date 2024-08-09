@@ -22,8 +22,8 @@
  */
 
 #region-main {
-    border: 2px solid $outlinegrey;
-    border-radius: 0;
+    border: 1px solid $outlinegrey;
+    border-radius: 0.5rem;
     background: var(--wwu-bg);
     padding: 1em;
 }
@@ -33,7 +33,7 @@
     color: white; // Should be white both in light and dark theme.
     background: $learnwebblue;
     padding: 16px 16px 14px 16px;
-    border: 2px solid $outlinegrey;
+    border-radius: 0.75rem;
     font-size: 26px;
     text-transform: uppercase;
 }
@@ -58,12 +58,17 @@ body.pagelayout-report {
 body.pagelayout-course {
 
     .course-content ul li.section.main {
-        border-radius: 0;
-        padding: 0;
-        border: 2px solid $outlinegrey;
-        margin-bottom: 0.5rem;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        .topics {
+            margin-top: 0;
+        }
 
         .header, .course-section-header {
+            box-sizing: border-box;
             background-color: $learnwebblue;
             color: white;
             display: flex;
@@ -100,11 +105,11 @@ body.pagelayout-course {
 
         &> .content {
             margin: 0;
-            padding: 0 0.5rem 0.5rem;
             // overflow-x: auto;
 
             .section {
                 margin: 0;
+                padding: 0 0.5rem 0.5rem;
             }
 
             .summary-view-full {
@@ -125,6 +130,18 @@ body.pagelayout-course {
                 }
             }
             border-color: $wwugreen;
+        }
+    }
+
+    .course-section .section-item {
+        padding: 0 0 1rem 0;
+        border-radius: 0.75rem;
+        overflow: clip;
+        border-color: var(--wwu-muted-bg);
+
+        .course-content-item-content.content{
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
         }
     }
 
@@ -171,17 +188,8 @@ body.pagelayout-course {
     }
 }
 
-.activity-item:not(.activityinline) {
-    border: none;
-    padding: 0.5rem;
-
-    @media (min-width: 768px) {
-        padding: 0.5rem;
-    }
-}
-
-.activity-item.activityinline {
-    padding: 0.5rem;
+.btn.btn-icon.icons-collapse-expand {
+    background-color: inherit;
 }
 
 .editing .activity-item:hover {
@@ -281,7 +289,7 @@ body.format-topcoll {
     }
 
     .course-content ul.ctopics li.section.main {
-        border-bottom: 2px solid $outlinegrey;
+        border-bottom: 1px solid $outlinegrey;
         margin-bottom: 16px;
 
         .header {
@@ -355,18 +363,27 @@ body.path-grade #region-main-body {
     display: inline-block;
 }
 
-.section li.activity:not(:last-child) {
-    border-bottom: 1px solid var(--wwu-muted-bg);
+.activity,
+.activity-item .activity-afterlink {
+    border-color: var(--wwu-muted-bg);
+}
+
+.activity-item {
+    background-color: var(--wwu-bg);
 }
 
 .activity-item.hiddenactivity {
     background-color: var(--wwu-bg-1);
 }
 
-.activity-item.hiddenactivity:hover {
-    background-color: var(--wwu-bg-2);
-}
-
 .activity-item.hiddenactivity .description .course-description-item, .activity-item.hiddenactivity .activityiconcontainer, .activity-item.hiddenactivity .badge {
     mix-blend-mode: normal;
+}
+
+.course-section .availabilityinfo {
+    background-color: var(--wwu-bg-3);
+}
+
+.divider .divider-content {
+    background: linear-gradient(transparent 40%, var(--wwu-bg) 40%, var(--wwu-bg) 60%, transparent 60%);
 }

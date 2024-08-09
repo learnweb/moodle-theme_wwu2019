@@ -38,7 +38,7 @@ $plugin->component = 'theme_wwu2019';
 
 // This is a list of plugins, this plugin depends on (and their versions).
 $plugin->dependencies = [
-        'theme_classic' => 2019111800
+        'theme_classic' => 2019111800,
 ];
 
 // This is a stable release.

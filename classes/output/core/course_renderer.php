@@ -75,11 +75,6 @@ class course_renderer extends \core_course_renderer {
         $data->value = $value;
         $data->globalsearch = (new \moodle_url('/search/index.php'))->out(false);
 
-        if ($format != 'navbar') {
-            $helpicon = new \help_icon('coursesearch', 'core');
-            $data->helpicon = $helpicon->export_for_template($this);
-        }
-
         $output = $this->render_from_template('theme_wwu2019/course_search_form', $data);
         return $output;
     }

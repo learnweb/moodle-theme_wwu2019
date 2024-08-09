@@ -144,7 +144,11 @@
     }
 
     .text-dark {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg-1) !important;
+    }
+
+    a.text-dark:hover, a.text-dark:focus {
+        color: var(--wwu-fg) !important;
     }
 
     .icon.wwu-monologo {
@@ -193,6 +197,11 @@
     .generaltable,
     table.mod-data-default-template {
         color: var(--wwu-fg);
+
+        thead .sticky-column,
+        tbody tr:nth-of-type(2n) {
+            background-color: var(--wwu-bg);
+        }
 
         thead th,
         th,
@@ -911,6 +920,29 @@
     canvas.snow {
         opacity: 0.3 !important;
     }
+
+    .btn.add-content {
+        color: #5b8f9d;
+        background-color: #283133;
+
+        &:hover, &:focus {
+            color: #fff;
+            background-color: #006784;
+        }
+    }
+
+    .btn.add-section {
+        border-color: var(--wwu-muted-bg);
+
+        &:hover, &:focus {
+            background-color: var(--wwu-muted-bg);
+            color: var(--wwu-learnwebblue);
+        }
+    }
+
+    .activity-item .activity-groupmode-info {
+        filter: invert(1);
+    }
 }
 
 
@@ -937,6 +969,14 @@
         border-color: var(--wwu-bg-5);
     }
 
+}
+
+.action-menu .dropdown-subpanel.content-displayed {
+    background-color: var(--wwu-bg-2);
+}
+
+.text-primary {
+    color: var(--wwu-learnwebblue) !important;
 }
 
 :root {

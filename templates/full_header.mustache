@@ -40,9 +40,11 @@
             {{/pageheadingbutton}}
         </div>
         <div class="d-flex align-items-center">
-            <div class="mr-auto">
-                {{{contextheader}}}
-            </div>
+            {{#contextheader}}
+                <div class="mr-auto">
+                    {{{contextheader}}}
+                </div>
+            {{/contextheader}}
             <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                 {{#headeractions}}
                     <div class="header-action ml-2">{{{.}}}</div>

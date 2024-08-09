@@ -23,8 +23,8 @@
 
 /* Buttons */
 
-.btn {
-    border-radius: 0;
+.btn, .btn.btn-icon {
+    border-radius: 0.5rem;
     color: var(--wwu-fg);
 }
 
