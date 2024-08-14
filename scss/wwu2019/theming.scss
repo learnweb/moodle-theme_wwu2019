@@ -828,6 +828,10 @@
         }
     }
 
+    .opencast-vlist {
+        border-color: var(--wwu-muted-bg);
+    }
+
     #page-mod-quiz-view table.quizattemptsummary tr.bestrow td,
     body.path-mod-quiz .gradedattempt, body.path-mod-quiz table tbody tr.gradedattempt > td {
         background-color: var(--wwu-info-bg);
@@ -949,6 +953,17 @@
 
     .path-mod .activity-information .completion-info,
     .path-mod .activity-information .activity-dates {
+        border-color: var(--wwu-bg-4);
+    }
+
+    .activity-item .activity-altcontent.activity-description {
+        border-color: var(--wwu-muted-bg);
+    }
+
+    .activity-item .activity-completion button.btn,
+    .activity-item .activity-completion a[role="button"].btn {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
         border-color: var(--wwu-bg-4);
     }
 
