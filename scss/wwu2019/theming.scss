@@ -350,6 +350,15 @@
         border: 1px solid var(--wwu-bg);
     }
 
+    .filemanager-container, .filepicker-filelist {
+        border-color: var(--wwu-muted-bg);
+    }
+
+    .filepicker-filelist .filepicker-container,
+    .filemanager.fm-noitems .fm-empty-container {
+        border-color: var(--wwu-bg-5);
+    }
+
     .file-picker .fp-content,
     .fp-iconview .fp-filename-field .fp-filename,
     .filepicker-filelist .dndupload-target,
@@ -886,6 +895,10 @@
             background-color: var(--wwu-bg-1);
         }
 
+        .xp-border-gray-100 {
+            border-color: var(--wwu-bg-1);
+        }
+
         .xp-border-gray-200 {
             border-color: var(--wwu-bg-2);
         }
@@ -911,13 +924,21 @@
             filter: invert(1);
         }
 
-        .block_xp-level-grid .block_xp-level-no,
-        .block_xp-level-grid .block_xp-level-box {
-            background-color: var(--wwu-bg-1);
-        }
-
         .block_xp-level-grid .block_xp-level-no {
             color: black;
+        }
+
+        .block-xp-filters-wrapper .filter,
+        .block_xp-rulepicker-content .rule {
+            border-color: var(--wwu-muted-bg);
+        }
+
+        .block_xp-level-grid .block_xp-level-no,
+        .block_xp-level-grid .block_xp-level-box,
+        .block-xp-filters-wrapper .rule-type-ruleset > .rule-definition,
+        .block_xp-rulepicker-content .rule:focus,
+        .block_xp-rulepicker-content .rule:hover {
+            background-color: var(--wwu-bg-1);
         }
     }
 
