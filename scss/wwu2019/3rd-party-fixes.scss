@@ -54,16 +54,6 @@ body.path-mod-cas table.generaltable table[border]{
     border-color: var(--wwu-bg-3);
 }
 
-/* block_xp */
-.block_xp nav .nav-button,
-.block_xp .xp-test-gray900 {
-    color: var(--wwu-fg-1);
-}
-
-.block_xp nav .nav-button:hover {
-    background: var(--wwu-bg-1);
-}
-
 .block_xp-table tr.highlight-row > td {
     background-color: var(--wwu-info-bg);
 }
@@ -93,4 +83,25 @@ body.path-mod-cas table.generaltable table[border]{
     &::before {
         border-bottom-color: var(--wwu-muted-bg);
     }
+}
+
+/* mod_questionnaire */
+#page-mod-questionnaire-complete,
+#page-mod-questionnaire-preview,
+#page-mod-questionnaire-print,
+#page-mod-questionnaire-report .individual,
+#page-mod-questionnaire-myreport .individual {
+    .raterow {
+        background: var(--wwu-bg);
+    }
+}
+
+#page-mod-questionnaire-complete td.raterow:hover,
+#page-mod-questionnaire-preview td.raterow:hover {
+    background: var(--wwu-bg-1);
+    border-color: var(--wwu-bg-3);
+}
+
+#page-mod-questionnaire-complete .raterow:hover, #page-mod-questionnaire-preview .raterow:hover {
+    background-color: var(--wu-bg-1);
 }

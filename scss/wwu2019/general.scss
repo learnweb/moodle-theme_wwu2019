@@ -409,12 +409,11 @@ a:not([class]):focus,
 }
 
 .nav-tabs .nav-link {
+    border-radius: 0.5rem 0.5rem 0 0;
+
     &:focus,
     &:hover {
         background-color: var(--wwu-bg-1);
-    }
-    &:active {
-        border-radius: 0.5rem 0.5rem 0 0;
     }
 }
 
