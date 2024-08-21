@@ -104,21 +104,20 @@ body.pagelayout-course {
             }
         }
 
-        &> .content {
+        .content {
             margin: 0;
-            padding: 0 .5rem .5rem;
+            padding: 0 1rem;
             // overflow-x: auto;
-
-            .section {
-                margin: 0;
-                padding: 0 0.5rem 0.5rem;
-            }
 
             .summary-view-full {
                 font-size: .8203125rem;
                 display: block;
                 color: $learnwebblue;
                 text-decoration: underline;
+            }
+
+            .section li:first-child {
+                border: none;
             }
         }
 
