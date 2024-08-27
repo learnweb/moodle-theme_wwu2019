@@ -1395,15 +1395,15 @@ _paq.push(['trackPageView']);
         if (get_config('theme_wwu2019', 'darktheme_enabled') == '1') {
             $themepreference = get_user_preferences('theme_wwu2019_theme');
             if ($themepreference == 1) {
-                return parent::htmlattributes() . 'class="light"';
+                return parent::htmlattributes() . 'class="light-theme"';
             } else if ($themepreference == 2) {
-                return parent::htmlattributes() . 'class="dark"';
+                return parent::htmlattributes() . 'class="dark-theme"';
             } else {
                 // Use system setting.
                 return parent::htmlattributes();
             }
         } else {
-            return parent::htmlattributes() . 'class="light"';
+            return parent::htmlattributes() . 'class="light-theme"';
         }
     }
 

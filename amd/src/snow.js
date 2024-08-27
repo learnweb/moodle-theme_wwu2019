@@ -23,6 +23,7 @@
 
 import $ from 'jquery';
 import Ajax from 'core/ajax';
+import Notification from 'core/notification';
 
 let canvas;
 

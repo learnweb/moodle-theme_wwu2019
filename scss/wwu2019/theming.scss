@@ -234,7 +234,7 @@
 
         thead th,
         th,
-        td{
+        td {
             border-color: var(--wwu-bg-3);
         }
     }
@@ -281,7 +281,7 @@
             color: var(--wwu-fg);
         }
 
-        &> img.icon {
+        & > img.icon {
             filter: invert(1);
         }
     }
@@ -491,7 +491,6 @@
     }
 
 
-
     .path-grade-report-singleview div.reporttable,
     .path-grade-report-user .user-report-container,
     .grade-report-user .user-report-container,
@@ -646,7 +645,7 @@
 
     #page-question-type-match div[id^="fitem_id_"] {
         &[id*="subquestions_"],
-        &[id*="subanswers_"]{
+        &[id*="subanswers_"] {
             background-color: var(--wwu-bg-1);
             border-color: var(--wwu-bg-5);
         }
@@ -672,7 +671,7 @@
 
     #page-question-type-match div[id^="fitem_id_"] {
         &[id*="subanswers_"],
-        &[id*="subquestions_"]{
+        &[id*="subquestions_"] {
             background-color: var(--wwu-bg-1);
             border-color: var(--wwu-bg-5);
         }
@@ -736,21 +735,21 @@
     .block_accessreview_success,
     .block_accessreview.block_accessreview_success.hasinfo {
         color: var(--wwu-success-fg);
-        background:var(--wwu-success-bg);
+        background: var(--wwu-success-bg);
         border-color: var(--wwu-success-border);
     }
 
     .block_accessreview_danger,
     .block_accessreview.block_accessreview_danger.hasinfo {
         color: var(--wwu-error-fg);
-        background:var(--wwu-error-bg);
+        background: var(--wwu-error-bg);
         border-color: var(--wwu-error-border);
     }
 
     .block_accessreview_warning,
     .block_accessreview.block_accessreview_warning.hasinfo {
         color: var(--wwu-warn-fg);
-        background:var(--wwu-warn-bg);
+        background: var(--wwu-warn-bg);
         border-color: var(--wwu-warn-border);
     }
 
@@ -855,7 +854,7 @@
 
     #plugins-check-page .pluginupdateinfo,
     #plugins-control-panel .pluginupdateinfo {
-        background-color:var(--wwu-info-bg);
+        background-color: var(--wwu-info-bg);
     }
 
     /* block_xp */
@@ -1015,6 +1014,7 @@
 
     .yui3-skin-sam .yui3-datatable-even .yui3-datatable-cell {
         background: var(--wwu-bg);
+
         &.yui3-datatable-sorted {
             background: var(--wwu-bg-1);
         }
@@ -1022,6 +1022,7 @@
 
     .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
         background: var(--wwu-bg-1);
+
         &.yui3-datatable-sorted {
             background: var(--wwu-bg-2);
         }
@@ -1071,6 +1072,18 @@
     .bg-secondary.text-dark {
         color: white !important;
     }
+
+    // mod_margic
+    .margic_entry .ratingform {
+        background-color: var(--wwu-bg-3) !important;
+    }
+
+    // mod_mootimeter
+    .mootimetercontainer .mootimetercolpages {
+        background-color: #00091e;
+    }
+
+
 }
 
 
@@ -1115,18 +1128,23 @@
     @include light-colors;
     color-scheme: light dark;
 
-    &.dark {
+    &.dark-theme {
         @include dark-colors;
         color-scheme: dark;
     }
 
-    &.light {
+    &.light-theme {
         color-scheme: light;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not(.light) {
+    :root:not(.light-theme) {
         @include dark-colors;
     }
+}
+
+.mootimetercontainer {
+    @include light-colors;
+    color: var(--wwu-fg);
 }
