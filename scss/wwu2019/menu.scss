@@ -396,6 +396,8 @@ ul.main-menubar {
                 color: white;
                 background: $learnwebblue;
                 cursor: pointer;
+                max-width: unset;
+                max-height: unset;
             }
 
             #main-menu-left {
