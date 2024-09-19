@@ -23,7 +23,7 @@
 
 import $ from 'jquery';
 import Notification from 'core/notification';
-import {setUserPreference} from "../../../../user/amd/src/repository";
+import {setUserPreference} from "core_user/repository";
 
 /**
  * Init function
