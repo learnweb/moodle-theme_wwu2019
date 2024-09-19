@@ -1065,6 +1065,13 @@
         }
     }
 
+    .course-section.hidden .section-item {
+        background-color: var(--wwu-bg-1);
+    }
+    .section.hidden .divider .divider-content {
+        background: linear-gradient(transparent 40%,var(--wwu-bg-1) 40%,var(--wwu-bg-1) 60%,transparent 60%);
+    }
+
     .activity-item .activity-groupmode-info {
         filter: invert(1);
     }
