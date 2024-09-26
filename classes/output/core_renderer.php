@@ -1045,54 +1045,40 @@ class core_renderer extends \core_renderer {
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->headeractions = $this->page->get_header_actions();
+        $header->pageheading = $this->page_heading();
+        $header->coursecontentheader = $this->course_content_header();
+        $header->shouldshowheader = true;
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
-    /**
-     * Returns course-specific information to be output immediately above content on any course page
-     * (for the current course)
-     *
-     * @param bool $onlyifnotcalledbefore output content only if it has not been output before
-     * @return string
-     */
-    public function course_content_header($onlyifnotcalledbefore = false) {
-        $output = parent::course_content_header($onlyifnotcalledbefore);
-
-        if ($this->page->course->id == SITEID) {
-            return $output;
-        }
-
-        if (!self::is_examweb()) {
-            $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
-        } else {
-            $output .= '<div class="page-title">';
-            $output .= '<h1>' . $this->page->course->fullname . '</h1>';
-            if ($this->page->pagelayout == 'course') {
-                $handler = \core_customfield\handler::get_handler('core_course', 'course');
-                $datas = $handler->get_instance_data($this->page->course->id, true);
-                $metadata = [];
-                foreach ($datas as $data) {
-                    if (empty($data->get_value())) {
-                        continue;
-                    }
-                    $metadata[$data->get_field()->get('shortname')] = $data->get_value();
+    public function page_heading($tag = 'h1') {
+        if (self::is_examweb() && $this->page->pagelayout === 'course') {
+            $handler = \core_customfield\handler::get_handler('core_course', 'course');
+            $datas = $handler->get_instance_data($this->page->course->id, true);
+            $metadata = [];
+            foreach ($datas as $data) {
+                if (empty($data->get_value())) {
+                    continue;
                 }
+                $metadata[$data->get_field()->get('shortname')] = $data->get_value();
             }
 
             // If an exam date is set, append it to the course title.
-            if ($this->page->pagelayout == 'course' &&
-                array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
+            if (array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
                 $metadata['begin'] > 0 &&  $metadata['end'] > 0) {
-                $output .= '<div class="examdates">';
-                $output .= '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
-                    userdate($metadata['begin']) . '</h3>';
-                $output .= '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
-                    userdate($metadata['end']) . '</h3>';
-                $output .= '</div>';
+                return $this->page->heading . '<div class="examdates">' .
+                    '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['begin']) . '</h3>' .
+                    '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['end']) . '</h3>' .
+                    '</div>';
             }
-            $output .= '</div>';
         }
-        return $output;
+        return $this->page->heading;
+    }
+
+    public function course_content_header($onlyifnotcalledbefore = false) {
+        return parent::course_content_header($onlyifnotcalledbefore);
     }
 
     /**

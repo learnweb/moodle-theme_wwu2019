@@ -28,14 +28,30 @@
     padding: 1em;
 }
 
-.page-title {
-    font-weight: bold;
+.bg-learnweb {
     color: white; // Should be white both in light and dark theme.
     background: $learnwebblue;
     padding: 16px 16px 14px 16px;
     border-radius: 0.75rem;
+
+    .btn.bulkEnable.text-primary {
+        color: white !important;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.page-title {
+    font-weight: bold;
     font-size: 26px;
     text-transform: uppercase;
+}
+
+.bulkenabled .section {
+    margin-left: 0;
 }
 
 body.pagelayout-course {
@@ -155,10 +171,6 @@ body.pagelayout-course {
 
     h3.sectionname:first-child {
         padding-left: 8px;
-    }
-
-    .course-content .single-section {
-        overflow-y: hidden;
     }
 
     &:not(.editing) .course-content ul.topics li.section .left,
