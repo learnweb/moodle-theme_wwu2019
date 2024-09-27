@@ -155,6 +155,22 @@
         filter: invert(1);
     }
 
+    // MDL-67874
+    .aalink.focus,
+    .aalink:focus,
+    #page-footer a:not([class]).focus,
+    #page-footer a:not([class]):focus,
+    .arrow_link.focus,
+    .arrow_link:focus,
+    a:not([class]).focus,
+    a:not([class]):focus,
+    .activityinstance > a.focus,
+    .activityinstance > a:focus {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-info-bg);
+        box-shadow: 0 -.2rem var(--wwu-info-bg), 0 .2rem var(--wwu-fg);
+    }
+
     .list-group-item,
     [data-fieldtype="modgrade"],
     .moodle-dialogue-base .moodle-dialogue-wrap,
