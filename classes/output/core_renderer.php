@@ -1464,4 +1464,8 @@ _paq.push(['trackPageView']);
             return '';
         }
     }
+
+    public function learnweb_support_contact(): string {
+        return get_config('theme_wwu2019', 'footer_text') ?: '';
+    }
 }

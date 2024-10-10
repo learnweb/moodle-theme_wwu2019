@@ -66,7 +66,14 @@ if ($ADMIN->fulltree) {
         get_string('matomo_siteid_desc', 'theme_wwu2019'), '');
     $page->add($setting);
 
+    $page->add(new admin_setting_configtextarea('theme_wwu2019/footer_text',
+        get_string('footer_text', 'theme_wwu2019'),
+        '', ''));
+
     // Alerts.
+    $page->add(new admin_setting_heading('theme_wwu2019_alert',
+        get_string('alertheading', 'theme_wwu2019'), ''));
+
     $setting = new admin_setting_configcheckbox('theme_wwu2019/enable1alert',
         get_string('enable1alert', 'theme_wwu2019'),
         get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
