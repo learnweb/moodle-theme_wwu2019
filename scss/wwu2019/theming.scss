@@ -186,6 +186,10 @@
         border-color: var(--wwu-bg-3);
     }
 
+    .navbar.fixed-top {
+        border-color: var(--wwu-bg-2);
+    }
+
     .fp-navbar {
         background: var(--wwu-bg-2);
 
@@ -485,6 +489,19 @@
         .coursebox {
             border-color: var(--wwu-bg-3);
         }
+    }
+
+    .path-admin-reportbuilder.pagelayout-popup .dynamictabs .nav-tabs {
+        background-color: var(--wwu-bg);
+        box-shadow: 0 1.25rem 0 var(--wwu-bg);
+    }
+
+    .reportbuilder-sidebar-settings .list-group-item .icon {
+        color: var(--wwu-fg-1);
+    }
+
+    .list-group-item-action {
+        color: var(--wwu-fg);
     }
 
     /* Grade table */

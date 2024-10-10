@@ -58,11 +58,11 @@ select,
 .form-control:focus,
 .custom-select,
 input[type="submit"]:not(.btn),
+.input-group-text,
 .custom-file-label,
 .yui3-button,
 .custom-select.is-invalid,
-.custom-select:invalid {
-    border-radius: 0;
+.custom-select:invalid,{
     background-color: var(--wwu-bg);
     border-color: var(--wwu-muted-fg);
     color: var(--wwu-fg);

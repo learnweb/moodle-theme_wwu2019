@@ -139,6 +139,12 @@ $page-padding: 1rem;
     padding: 0;
 }
 
+body.pagelayout-popup #page {
+    max-width: unset;
+    padding: unset;
+    margin-top: 51px; // Make space for the top-nav.
+}
+
 /* Header and Logos */
 #logo-header {
     padding-bottom: 1.25rem;
