@@ -22,8 +22,8 @@
  */
 
 import $ from 'jquery';
-import Ajax from 'core/ajax';
 import Notification from 'core/notification';
+import {setUserPreference} from "core_user/repository";
 
 /**
  * Init function
@@ -42,11 +42,13 @@ function initThemeChooser() {
     const uselighttheme = $('#user-menu .wwu-uselighttheme');
     const useostheme = $('#user-menu .wwu-useostheme');
     const usedarktheme = $('#user-menu .wwu-usedarktheme');
+    const darkThemeClass = 'dark-theme';
+    const lightThemeClass = 'light-theme';
 
     let selected;
-    if (html.hasClass('dark')) {
+    if (html.hasClass(darkThemeClass)) {
         selected = usedarktheme;
-    } else if (html.hasClass('light')) {
+    } else if (html.hasClass(lightThemeClass)) {
         selected = uselighttheme;
     } else {
         selected = useostheme;
@@ -55,24 +57,24 @@ function initThemeChooser() {
 
     uselighttheme.click(function() {
         selected.removeClass('selectedtheme');
-        html.removeClass('dark');
-        html.addClass('light');
+        html.removeClass(darkThemeClass);
+        html.addClass(lightThemeClass);
         updateThemePreferenceAjax(1);
         selected = uselighttheme;
         selected.addClass('selectedtheme');
     });
     useostheme.click(function() {
         selected.removeClass('selectedtheme');
-        html.removeClass('dark');
-        html.removeClass('light');
+        html.removeClass(darkThemeClass);
+        html.removeClass(lightThemeClass);
         updateThemePreferenceAjax(null);
         selected = useostheme;
         selected.addClass('selectedtheme');
     });
     usedarktheme.click(function() {
         selected.removeClass('selectedtheme');
-        html.addClass('dark');
-        html.removeClass('light');
+        html.addClass(darkThemeClass);
+        html.removeClass(lightThemeClass);
         updateThemePreferenceAjax(2);
         selected = usedarktheme;
         selected.addClass('selectedtheme');
@@ -84,18 +86,8 @@ function initThemeChooser() {
  * @param {int} theme
  */
 function updateThemePreferenceAjax(theme) {
-    var request = {
-        methodname: 'core_user_update_user_preferences',
-        args: {
-            preferences: [{
-                type: 'theme_wwu2019_theme',
-                value: theme
-            }]
-        }
-    };
-
-    Ajax.call([request])[0]
-        .fail(Notification.exception);
+    setUserPreference('theme_wwu2019_theme', theme)
+        .catch(Notification.exception);
 }
 
 const onecolumnbreakpoint = 767;

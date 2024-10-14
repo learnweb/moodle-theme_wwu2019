@@ -46,7 +46,7 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
     public function get_core_icon_map() {
         $iconmap = parent::get_core_icon_map();
 
-        $override = array(
+        $override = [
                 'core:i/briefcase' => 'fa-briefcase',
                 'core:i/cogs' => 'fa-cogs',
                 'core:i/graduation-cap' => 'fa-graduation-cap',
@@ -65,8 +65,8 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
                 'core:i/sun' => 'fa-sun-o',
                 'core:i/moon' => 'fa-moon-o',
                 'core:i/magic' => 'fa-magic',
-                'core:i/theme' => 'fa-paint-brush'
-        );
+                'core:i/theme' => 'fa-paint-brush',
+        ];
 
         return array_merge($iconmap, $override);
     }

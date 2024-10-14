@@ -144,11 +144,31 @@
     }
 
     .text-dark {
-        color: var(--wwu-fg-1);
+        color: var(--wwu-fg-1) !important;
+    }
+
+    a.text-dark:hover, a.text-dark:focus {
+        color: var(--wwu-fg) !important;
     }
 
     .icon.wwu-monologo {
         filter: invert(1);
+    }
+
+    // MDL-67874
+    .aalink.focus,
+    .aalink:focus,
+    #page-footer a:not([class]).focus,
+    #page-footer a:not([class]):focus,
+    .arrow_link.focus,
+    .arrow_link:focus,
+    a:not([class]).focus,
+    a:not([class]):focus,
+    .activityinstance > a.focus,
+    .activityinstance > a:focus {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-info-bg);
+        box-shadow: 0 -.2rem var(--wwu-info-bg), 0 .2rem var(--wwu-fg);
     }
 
     .list-group-item,
@@ -194,6 +214,11 @@
     table.mod-data-default-template {
         color: var(--wwu-fg);
 
+        thead .sticky-column,
+        tbody tr:nth-of-type(2n) {
+            background-color: var(--wwu-bg);
+        }
+
         thead th,
         th,
         td {
@@ -225,7 +250,7 @@
 
         thead th,
         th,
-        td{
+        td {
             border-color: var(--wwu-bg-3);
         }
     }
@@ -271,6 +296,21 @@
         &:focus {
             color: var(--wwu-fg);
         }
+
+        & > img.icon {
+            filter: invert(1);
+        }
+    }
+
+    .dropdown-menu,
+    .dropdown-subpanel-content {
+        .bg-primary-light {
+            background-color: var(--wwu-bg-1);
+        }
+
+        .option-icon img {
+            filter: invert(1);
+        }
     }
 
     .activity-item .activityname a {
@@ -289,7 +329,8 @@
         background-color: var(--wwu-bg-1);
     }
 
-    .form-autocomplete-suggestions li {
+    .form-autocomplete-suggestions li,
+    .activity-item .activity-completion .completion-dialog {
         color: var(--wwu-fg-1);
     }
 
@@ -323,6 +364,15 @@
 
     .fp-iconview .fp-thumbnail {
         border: 1px solid var(--wwu-bg);
+    }
+
+    .filemanager-container, .filepicker-filelist {
+        border-color: var(--wwu-muted-bg);
+    }
+
+    .filepicker-filelist .filepicker-container,
+    .filemanager.fm-noitems .fm-empty-container {
+        border-color: var(--wwu-bg-5);
     }
 
     .file-picker .fp-content,
@@ -455,7 +505,6 @@
     .path-grade-report-grader .gradeparent .avg .cell {
         background-color: var(--wwu-bg-1);
     }
-
 
 
     .path-grade-report-singleview div.reporttable,
@@ -612,7 +661,7 @@
 
     #page-question-type-match div[id^="fitem_id_"] {
         &[id*="subquestions_"],
-        &[id*="subanswers_"]{
+        &[id*="subanswers_"] {
             background-color: var(--wwu-bg-1);
             border-color: var(--wwu-bg-5);
         }
@@ -638,7 +687,7 @@
 
     #page-question-type-match div[id^="fitem_id_"] {
         &[id*="subanswers_"],
-        &[id*="subquestions_"]{
+        &[id*="subquestions_"] {
             background-color: var(--wwu-bg-1);
             border-color: var(--wwu-bg-5);
         }
@@ -702,26 +751,42 @@
     .block_accessreview_success,
     .block_accessreview.block_accessreview_success.hasinfo {
         color: var(--wwu-success-fg);
-        background:var(--wwu-success-bg);
+        background: var(--wwu-success-bg);
         border-color: var(--wwu-success-border);
     }
 
     .block_accessreview_danger,
     .block_accessreview.block_accessreview_danger.hasinfo {
         color: var(--wwu-error-fg);
-        background:var(--wwu-error-bg);
+        background: var(--wwu-error-bg);
         border-color: var(--wwu-error-border);
     }
 
     .block_accessreview_warning,
     .block_accessreview.block_accessreview_warning.hasinfo {
         color: var(--wwu-warn-fg);
-        background:var(--wwu-warn-bg);
+        background: var(--wwu-warn-bg);
         border-color: var(--wwu-warn-border);
     }
 
     .block_accessreview_table {
         border-color: var(--wwu-bg-3);
+    }
+
+    .bg-info {
+        background-color: var(--wwu-info-bg) !important;
+    }
+
+    .bg-warning {
+        background-color: var(--wwu-warn-bg) !important;
+    }
+
+    .bg-error {
+        background-color: var(--wwu-error-bg) !important;
+    }
+
+    .bg-success {
+        background-color: var(--wwu-success-bg) !important;
     }
 
     /** 3rd party plugin theme fixes **/
@@ -787,6 +852,10 @@
         }
     }
 
+    .opencast-vlist {
+        border-color: var(--wwu-muted-bg);
+    }
+
     #page-mod-quiz-view table.quizattemptsummary tr.bestrow td,
     body.path-mod-quiz .gradedattempt, body.path-mod-quiz table tbody tr.gradedattempt > td {
         background-color: var(--wwu-info-bg);
@@ -801,27 +870,95 @@
 
     #plugins-check-page .pluginupdateinfo,
     #plugins-control-panel .pluginupdateinfo {
-        background-color:var(--wwu-info-bg);
+        background-color: var(--wwu-info-bg);
     }
 
-    /** block_xp */
+    /* block_xp */
+    .block.block_xp,
+    .block_xp {
+        nav {
+            border-color: var(--wwu-bg-3);
+        }
 
-    .block_xp .react-numeric-input > b {
-        filter: invert(1);
+        nav .nav-button {
+            color: var(--wwu-fg-2);
+        }
+
+        .xp-text-gray-50 {
+            color: var(--wwu-bg-1);
+        }
+
+        .xp-text-gray-900,
+        .xp-text-gray-600,
+        .xp-text-gray-500 {
+            color: var(--wwu-fg);
+        }
+
+        .xp-bg-gray-200 {
+            background-color: var(--wwu-bg-2);
+        }
+
+        :is(.hover\:xp-bg-gray-100:hover) {
+            background-color: var(--wwu-bg-2);
+        }
+
+        .xp-bg-gray-100 {
+            background-color: var(--wwu-bg-1);
+        }
+
+        :is(.hover\:xp-bg-gray-50:hover) {
+            background-color: var(--wwu-bg-1);
+        }
+
+        .xp-border-gray-100 {
+            border-color: var(--wwu-bg-1);
+        }
+
+        .xp-border-gray-200 {
+            border-color: var(--wwu-bg-2);
+        }
+
+        .xp-border-gray-300 {
+            border-color: var(--wwu-bg-3);
+        }
+
+        .xp-bg-white {
+            background-color: var(--wwu-bg);
+        }
+
+        .nav-button:hover {
+            background: var(--wwu-bg-1);
+        }
+
+        .block_xp-heading {
+            border-color: var(--wwu-bg-3);
+            color: var(--wwu-fg-1);
+        }
+
+        .react-numeric-input > b {
+            filter: invert(1);
+        }
+
+        .block_xp-level-grid .block_xp-level-no {
+            color: black;
+        }
+
+        .block-xp-filters-wrapper .filter,
+        .block_xp-rulepicker-content .rule {
+            border-color: var(--wwu-muted-bg);
+        }
+
+        .block_xp-level-grid .block_xp-level-no,
+        .block_xp-level-grid .block_xp-level-box,
+        .block-xp-filters-wrapper .rule-type-ruleset > .rule-definition,
+        .block_xp-rulepicker-content .rule:focus,
+        .block_xp-rulepicker-content .rule:hover {
+            background-color: var(--wwu-bg-1);
+        }
     }
 
-    .block_xp .xp-bg-gray-100,
-    .block_xp-level-grid .block_xp-level-no,
-    .block_xp-level-grid .block_xp-level-box {
-        color: black;
-    }
-
-    .block_xp .xp-bg-gray-200 {
-        color: var(--wwu-bg-5);
-    }
-
-    .block_xp .xp-text-gray-600 {
-        color: var(--wwu-fg);
+    .block_xp-table tr.highlight-row > td {
+        background-color: var(--wwu-warn-bg) !important;
     }
 
     /** mod_margic */
@@ -855,6 +992,17 @@
         border-color: var(--wwu-bg-4);
     }
 
+    .activity-item .activity-altcontent.activity-description {
+        border-color: var(--wwu-muted-bg);
+    }
+
+    .activity-item .activity-completion button.btn,
+    .activity-item .activity-completion a[role="button"].btn {
+        color: var(--wwu-fg);
+        background-color: var(--wwu-bg);
+        border-color: var(--wwu-bg-4);
+    }
+
     // File manager.
     .filemanager .yui3-datatable-header {
         background: var(--wwu-bg) !important;
@@ -882,6 +1030,7 @@
 
     .yui3-skin-sam .yui3-datatable-even .yui3-datatable-cell {
         background: var(--wwu-bg);
+
         &.yui3-datatable-sorted {
             background: var(--wwu-bg-1);
         }
@@ -889,6 +1038,7 @@
 
     .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
         background: var(--wwu-bg-1);
+
         &.yui3-datatable-sorted {
             background: var(--wwu-bg-2);
         }
@@ -911,6 +1061,52 @@
     canvas.snow {
         opacity: 0.3 !important;
     }
+
+    .btn.add-content {
+        color: #5b8f9d;
+        background-color: #283133;
+
+        &:hover, &:focus {
+            color: #fff;
+            background-color: #006784;
+        }
+    }
+
+    .btn.add-section {
+        border-color: var(--wwu-muted-bg);
+
+        &:hover, &:focus {
+            background-color: var(--wwu-muted-bg);
+            color: var(--wwu-learnwebblue);
+        }
+    }
+
+    .course-section.hidden .section-item {
+        background-color: var(--wwu-bg-1);
+    }
+    .section.hidden .divider .divider-content {
+        background: linear-gradient(transparent 40%,var(--wwu-bg-1) 40%,var(--wwu-bg-1) 60%,transparent 60%);
+    }
+
+    .activity-item .activity-groupmode-info {
+        filter: invert(1);
+    }
+
+    .bg-secondary.text-dark {
+        color: white !important;
+    }
+
+    // mod_margic
+    .margic_entry .ratingform {
+        background-color: var(--wwu-bg-3) !important;
+    }
+
+    // mod_mootimeter
+    .mootimetercontainer .mootimetercolpages {
+        background-color: #00091e;
+    }
+
+
 }
 
 
@@ -939,22 +1135,39 @@
 
 }
 
+.action-menu .dropdown-subpanel.content-displayed {
+    background-color: var(--wwu-bg-2);
+}
+
+.text-primary {
+    color: var(--wwu-learnwebblue) !important;
+}
+
+.bg-secondary.text-dark {
+    color: white !important;
+}
+
 :root {
     @include light-colors;
     color-scheme: light dark;
 
-    &.dark {
+    &.dark-theme {
         @include dark-colors;
         color-scheme: dark;
     }
 
-    &.light {
+    &.light-theme {
         color-scheme: light;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not(.light) {
+    :root:not(.light-theme) {
         @include dark-colors;
     }
+}
+
+.mootimetercontainer {
+    @include light-colors;
+    color: var(--wwu-fg);
 }

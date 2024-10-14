@@ -23,6 +23,20 @@
 
 #region-marketing .block.card .card-body .card-text {
     height: calc(100% - #{$block-header-height});
+    padding: 0;
+}
+
+#region-marketing > div {
+    gap: 10px;
+}
+
+#region-marketing .block.card {
+    padding: 0;
+}
+
+#region-marketing .block.card {
+    padding: 0;
+    flex: 1 1 calc(33.333% - 40px);
 }
 
 @media (max-width: $onecolumn-break-point) {

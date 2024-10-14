@@ -113,7 +113,6 @@ class layout {
         if ($snowenable == 1 || $snowenable == 2 && (
                         get_config('theme_wwu2019', 'snow_start') < time()
                         && get_config('theme_wwu2019', 'snow_end') > time())) {
-            user_preference_allow_ajax_update('theme_wwu2019_snow', PARAM_INT);
             $snowpreference = get_user_preferences('theme_wwu2019_snow', '1');
             $PAGE->requires->js_call_amd('theme_wwu2019/snow', 'init', [intval($snowpreference)]);
         }

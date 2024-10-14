@@ -24,88 +24,82 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'WWU 2019';
-$string['choosereadme'] = 'Dieses Theme basiert auf dem Classic-Theme von Moodle und ist hinsichtlich des Corporate Design der WWU Münster angepasst.';
-
-/* Main menu */
-$string['mycourses'] = 'Meine Kurse';
-$string['termindependent'] = 'Semesterunabhängig';
-$string['dashboard'] = 'Dashboard';
-
-$string['thiscourse'] = 'Dieser Kurs';
-$string['searchadmin'] = 'Administrationssuche';
-
-$string['openmainmenu'] = 'Hauptmenü öffnen';
-$string['mainmenu'] = 'Hauptmenü';
-
-/* User menu */
-$string['loggedinas'] = '{$a->real}, als {$a->fake}';
+$string['alert1text'] = 'Alert-Text (Alert 1)';
+$string['alert1title'] = 'Alert-Titel (Alert 1)';
+$string['alert1type'] = 'Alert-Typ (Alert 1)';
+$string['alert2text'] = 'Alert-Text (Alert 2)';
+$string['alert2title'] = 'Alert-Titel (Alert 2)';
+$string['alert2type'] = 'Alert-Typ (Alert 2)';
+$string['alert3text'] = 'Alert-Text (Alert 3)';
+$string['alert3title'] = 'Alert-Titel (Alert 3)';
+$string['alert3type'] = 'Alert-Typ (Alert 3)';
+$string['alert_general'] = 'Ankündigung';
+$string['alert_info'] = 'Info';
+$string['alert_warning'] = 'Warnung';
+$string['alerttext_desc'] = 'Zweiter Teil der Meldung.';
+$string['alerttitle_desc'] = 'Erster Teil der Meldung (wird fettgedruckt).';
+$string['alerttype_desc'] = 'Typ des Alerts (vgl. debug levels).';
 $string['badgepreferences'] = 'Badge';
-$string['mygrades'] = 'Meine Noten';
-
-$string['openusermenu'] = 'Nutzermenü öffnen';
-$string['usermenu'] = 'Nutzermenü';
-
-/* Settings */
-$string['helpurl'] = 'Hilfe-URL';
-$string['helpurl_desc'] = 'URL zu einer Hilfeseite, die im Usermenü verlinkt ist.';
-$string['matomo_siteurl'] = 'Analytics-URL';
-$string['matomo_siteurl_desc'] = 'Ihre "Matomo Analytics"-URL, aber ohne http(s) oder Slash am Ende. Beispiel: "mysite.com/analytics".';
-$string['matomo_siteid'] = 'Analytics-Site-ID';
-$string['matomo_siteid_desc'] = 'Ihre "Matomo Analytics" Site-ID.';
+$string['choosereadme'] = 'Dieses Theme basiert auf dem Classic-Theme von Moodle und ist hinsichtlich des Corporate Design der WWU Münster angepasst.';
+$string['choosetheme'] = 'Theme auswählen';
+$string['dark'] = 'Dunkel';
+$string['dashboard'] = 'Dashboard';
 $string['enable1alert'] = 'Alert 1 zeigen';
 $string['enable2alert'] = 'Alert 2 zeigen';
 $string['enable3alert'] = 'Alert 3 zeigen';
 $string['enablealert_desc'] = 'Ob der jeweilige Alert angezeigt wird.';
-$string['alert1type'] = 'Alert-Typ (Alert 1)';
-$string['alert1title'] = 'Alert-Titel (Alert 1)';
-$string['alert1text'] = 'Alert-Text (Alert 1)';
-$string['alert2type'] = 'Alert-Typ (Alert 2)';
-$string['alert2title'] = 'Alert-Titel (Alert 2)';
-$string['alert2text'] = 'Alert-Text (Alert 2)';
-$string['alert3type'] = 'Alert-Typ (Alert 3)';
-$string['alert3title'] = 'Alert-Titel (Alert 3)';
-$string['alert3text'] = 'Alert-Text (Alert 3)';
-$string['alerttype_desc'] = 'Typ des Alerts (vgl. debug levels).';
-$string['alerttitle_desc'] = 'Erster Teil der Meldung (wird fettgedruckt).';
-$string['alerttext_desc'] = 'Zweiter Teil der Meldung.';
-
-
-$string['alert_info'] = 'Info';
-$string['alert_warning'] = 'Warnung';
-$string['alert_general'] = 'Ankündigung';
-
-// Marketing Spots.
-$string['marketingheading'] = 'Marketing spots';
-$string['marketinginfodesc'] = 'Enter the settings for your marketing spot.';
-$string['marketingdesc'] = 'This theme provides the option of enabling three "marketing" or "ad" spots just under the slide show.  These allow you to easily identify core information to your users and provide direct links.';
+$string['exam:begin'] = 'Klausurbeginn:';
+$string['exam:end'] = 'Klausurende:';
+$string['examweb_description'] = 'Online-Prüfungssystem der WWU Münster';
+$string['helpurl'] = 'Hilfe-URL';
+$string['helpurl_desc'] = 'URL zu einer Hilfeseite, die im Usermenü verlinkt ist.';
+$string['light'] = 'Hell';
+$string['loggedinas'] = '{$a->real}, als {$a->fake}';
+$string['mainmenu'] = 'Hauptmenü';
 $string['marketing1'] = 'Marketing spot one';
 $string['marketing2'] = 'Marketing spot two';
 $string['marketing3'] = 'Marketing spot three';
-
-$string['marketingtitle'] = 'Titel';
-$string['marketingtitledesc'] = 'Title to show in this marketing spot';
 $string['marketingcontent'] = 'Beschreibung';
 $string['marketingcontentdesc'] = 'Content to display in the marketing box.  Keep it short and sweet.';
+$string['marketingdesc'] = 'This theme provides the option of enabling three "marketing" or "ad" spots just under the slide show.  These allow you to easily identify core information to your users and provide direct links.';
+$string['marketingheading'] = 'Marketing spots';
+$string['marketinginfodesc'] = 'Enter the settings for your marketing spot.';
+$string['marketingtitle'] = 'Titel';
+$string['marketingtitledesc'] = 'Title to show in this marketing spot';
+$string['matomo_siteid'] = 'Analytics-Site-ID';
+$string['matomo_siteid_desc'] = 'Ihre "Matomo Analytics" Site-ID.';
+$string['matomo_siteurl'] = 'Analytics-URL';
+$string['matomo_siteurl_desc'] = 'Ihre "Matomo Analytics"-URL, aber ohne http(s) oder Slash am Ende. Beispiel: "mysite.com/analytics".';
+$string['mycourses'] = 'Meine Kurse';
+$string['mygrades'] = 'Meine Noten';
+$string['openmainmenu'] = 'Hauptmenü öffnen';
+$string['openusermenu'] = 'Nutzermenü öffnen';
+$string['ostheme'] = 'Systemfarben';
+$string['ostheme_help'] = 'Wechselt zwischen hellem und dunklem Theme basierend auf den Systemeinstellungen.';
+$string['pluginname'] = 'WWU 2019';
+
+$string['searchadmin'] = 'Administrationssuche';
+$string['settings:darkthemeenabled'] = 'Sollte der Darktheme auswählbar sein?';
+$string['settings:isexamweb'] = 'Ist dies das Examweb?';
+$string['settings:isexamweb_desc'] = 'Bestimmt über das Seitenlogo, als auch verschiedene Dinge in Templates (z.B. keine Slideshow, ...)';
+$string['settings:prescss'] = 'Zusätzlicher Pre-SCSS Code';
+$string['settings:primarycolor'] = 'Primäre Themefarbe';
+$string['settings:secondarycolor'] = 'Sekundäre Themefarbe';
+$string['termindependent'] = 'Semesterunabhängig';
+
+$string['thiscourse'] = 'Dieser Kurs';
+
+
+
+$string['usermenu'] = 'Nutzermenü';
+
+
+
+
+
 
 $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
 
-// Theme switcher.
-$string['choosetheme'] = 'Theme auswählen';
-$string['light'] = 'Hell';
-$string['dark'] = 'Dunkel';
-$string['ostheme'] = 'Systemfarben';
-$string['ostheme_help'] = 'Wechselt zwischen hellem und dunklem Theme basierend auf den Systemeinstellungen.';
 
-$string['settings:isexamweb'] = 'Ist dies das Examweb?';
-$string['settings:isexamweb_desc'] = 'Bestimmt über das Seitenlogo, als auch verschiedene Dinge in Templates (z.B. keine Slideshow, ...)';
-$string['settings:primarycolor'] = 'Primäre Themefarbe';
-$string['settings:secondarycolor'] = 'Sekundäre Themefarbe';
-$string['settings:prescss'] = 'Zusätzlicher Pre-SCSS Code';
-$string['settings:darkthemeenabled'] = 'Sollte der Darktheme auswählbar sein?';
 
-// Examweb.
-$string['exam:begin'] = 'Klausurbeginn:';
-$string['exam:end'] = 'Klausurende:';
 
-$string['examweb_description'] = 'Online-Prüfungssystem der WWU Münster';

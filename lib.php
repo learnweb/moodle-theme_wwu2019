@@ -62,18 +62,22 @@ function theme_wwu2019_get_main_scss_content($theme) {
     return $pre . "\n" . $scss . "\n" . $post;
 }
 
+/**
+ * Save preferences for the snow.
+ * @return array
+ */
 function theme_wwu2019_user_preferences() {
     $preferences['theme_wwu2019_theme'] = [
             'null' => NULL_NOT_ALLOWED,
             'default' => 0,
             'type' => PARAM_INT,
-            'choices' => [0, 1, 2,]
+            'choices' => [0, 1, 2],
     ];
     $preferences['theme_wwu2019_snow'] = [
             'null' => NULL_NOT_ALLOWED,
             'default' => 1,
             'type' => PARAM_INT,
-            'choices' => [0, 1]
+            'choices' => [0, 1],
     ];
     return $preferences;
 }

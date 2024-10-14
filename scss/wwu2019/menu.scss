@@ -316,7 +316,7 @@ ul.main-menubar {
         margin-left: 4px;
 
         .sub-menu-scroll-wrapper {
-            border: 2px solid var(--wwu-dividergrey);
+            border: 1px solid var(--wwu-dividergrey);
             border-top: 0;
             right: 0;
             left: auto;
@@ -396,6 +396,8 @@ ul.main-menubar {
                 color: white;
                 background: $learnwebblue;
                 cursor: pointer;
+                max-width: unset;
+                max-height: unset;
             }
 
             #main-menu-left {

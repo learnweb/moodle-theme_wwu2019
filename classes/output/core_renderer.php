@@ -26,6 +26,7 @@ namespace theme_wwu2019\output;
 
 use action_link;
 use context_course;
+use core\output\icon_system;
 use image_icon;
 use moodle_page;
 use moodle_url;
@@ -72,11 +73,15 @@ class core_renderer extends \core_renderer {
         }
     }
 
+    /**
+     * @var null
+     */
     private static $isexamweb = null;
 
     /**
      * Returns whether this is the examweb.
      * @return bool
+     * @throws \dml_exception
      */
     public static function is_examweb(): bool {
         if (!self::$isexamweb) {
@@ -100,12 +105,13 @@ class core_renderer extends \core_renderer {
     /**
      * Renders logo heading.
      * @return string HTML string.
+     * @throws \moodle_exception
      */
     public function logo_header() {
         global $CFG;
 
         $templatecontext = [
-                'wwwroot' => $CFG->wwwroot
+                'wwwroot' => $CFG->wwwroot,
         ];
         return $this->render_from_template('theme_wwu2019/logo_header', $templatecontext);
     }
@@ -126,7 +132,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => true,
                     'isexpanded' => false,
                     'menu' => $this->add_breakers($courses),
-                    'icon' => (new pix_icon('i/graduation-cap', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/graduation-cap', ''))->export_for_pix(),
             ];
         }
 
@@ -137,7 +143,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => true,
                     'isexpanded' => false,
                     'menu' => $this->add_breakers($thiscourse),
-                    'icon' => (new pix_icon('i/book', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/book', ''))->export_for_pix(),
             ];
         }
 
@@ -148,7 +154,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => true,
                     'isexpanded' => false,
                     'menu' => $this->add_breakers($settings),
-                    'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
             ];
         }
 
@@ -208,6 +214,7 @@ class core_renderer extends \core_renderer {
      * @param moodle_url $url The URL + params to send through when clicking the button
      * @param string $method
      * @return string HTML the button
+     * @throws \coding_exception
      */
     public function edit_button(moodle_url $url, string $method = 'post'): string {
         $url->param('sesskey', sesskey());
@@ -221,7 +228,7 @@ class core_renderer extends \core_renderer {
             $editstring = get_string('turneditingon');
         }
 
-        return $this->single_button($url, $editstring, $method, array('class' => 'singlebutton ' . $class));
+        return $this->single_button($url, $editstring, $method, ['class' => 'singlebutton ' . $class]);
     }
 
     /**
@@ -261,6 +268,7 @@ class core_renderer extends \core_renderer {
      * TODO: n_herr03 Not all cases of the switch statement are tested. Moreover, there might exist pages that are currently ...
      * TODO cont. ... handeled by the default case but would require other url parameters.
      * @return object url with the required edit parameter
+     * @throws \coding_exception
      */
     private function get_edit_button_url_by_pagetype() {
         $pagetype = $this->page->pagetype;
@@ -379,10 +387,10 @@ class core_renderer extends \core_renderer {
         foreach ($nodecollection as $node) {
             if ($node->display) {
 
-                $templateformat = array(
+                $templateformat = [
                         'name' => $node->get_content(),
-                        'class' => ''
-                );
+                        'class' => '',
+                ];
 
                 if ($node->icon && !$node->hideicon) {
                     if ($node->icon->pix == 'i/navigationitem' && $node->has_children()) {
@@ -405,7 +413,8 @@ class core_renderer extends \core_renderer {
                         $children = $node->children;
                     } else {
                         // Create artificial first element in submenu that duplicates the parent's action.
-                        // We have to rewrite the entire collection because generally there is no way to prepend an item to the collection.
+                        // We have to rewrite the entire collection because generally there is no way ...
+                        // ... to prepend an item to the collection.
                         // That is, unless we know the first child's key, which does not always exist in any submenu.
                         $children = new navigation_node_collection();
                         $duplicatedaction = new navigation_node([
@@ -445,7 +454,7 @@ class core_renderer extends \core_renderer {
      */
     private function add_breakers(array $menuitems) {
         if (count($menuitems) == 0) {
-            return array();
+            return [];
         }
         $columntwo = intval(ceil(count($menuitems) / 2.0) - 1);
         $columnthree1 = intval(ceil(count($menuitems) / 3.0) - 1);
@@ -476,7 +485,7 @@ class core_renderer extends \core_renderer {
         $terms = [];
 
         // Create an array where the key points to the string representation of the customfield value.
-        if (($field = $DB->get_record('customfield_field', array('name' => 'Semester', 'type' => 'semester')))
+        if (($field = $DB->get_record('customfield_field', ['name' => 'Semester', 'type' => 'semester']))
                 && class_exists('customfield_semester\data_controller')) {
 
             $currenttermid = \customfield_semester\data_controller::get_semester_for_datetime(new \DateTime('now'));
@@ -505,11 +514,11 @@ class core_renderer extends \core_renderer {
                     'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
                     'dontescape' => !$course->visible,
                     'description' => $fullname,
-                    'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
+                    'href' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
                     'icon' => $course->visible ? $courseicon : $hiddencourseicon,
                     'class' => $course->visible ? '' : 'dimmed_text',
                     'hasmenu' => false,
-                    'menu' => null
+                    'menu' => null,
                 ];
             }
         } else {
@@ -523,11 +532,11 @@ class core_renderer extends \core_renderer {
                     'name' => $course->visible ? $course->shortname : '<i>' . htmlentities($course->shortname) . '</i>',
                     'dontescape' => !$course->visible,
                     'description' => $fullname,
-                    'href' => (new moodle_url('/course/view.php', array('id' => $course->id)))->out(false),
+                    'href' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
                     'icon' => $course->visible ? $courseicon : $hiddencourseicon,
                     'class' => $course->visible ? '' : 'dimmed_text',
                     'hasmenu' => false,
-                    'menu' => null
+                    'menu' => null,
                 ];
             }
         }
@@ -548,7 +557,7 @@ class core_renderer extends \core_renderer {
             'icon' => $calendaricon,
             'hasmenu' => true,
             'isexpanded' => false,
-            'menu' => []
+            'menu' => [],
         ];
     }
 
@@ -588,7 +597,7 @@ class core_renderer extends \core_renderer {
     private function get_activity_menu() {
         $activities = [];
         if (!isguestuser()) {
-            if (in_array($this->page->pagelayout, array('course', 'incourse', 'report', 'admin', 'standard')) &&
+            if (in_array($this->page->pagelayout, ['course', 'incourse', 'report', 'admin', 'standard']) &&
                     (!empty($this->page->course->id) && $this->page->course->id > 1)) {
 
                 $activities[] = [
@@ -596,7 +605,7 @@ class core_renderer extends \core_renderer {
                         'icon' => (new pix_icon('i/users', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/user/index.php', array('id' => $this->page->course->id)))->out(false)
+                        'href' => (new moodle_url('/user/index.php', ['id' => $this->page->course->id]))->out(false),
                 ];
 
                 $context = context_course::instance($this->page->course->id);
@@ -608,7 +617,7 @@ class core_renderer extends \core_renderer {
                             'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
                             'hasmenu' => false,
                             'menu' => null,
-                            'href' => (new moodle_url('/grade/report/index.php', array('id' => $this->page->course->id)))->out(false)
+                            'href' => (new moodle_url('/grade/report/index.php', ['id' => $this->page->course->id]))->out(false),
                     ];
                 }
                 $activities[] = [
@@ -616,7 +625,7 @@ class core_renderer extends \core_renderer {
                         'icon' => (new pix_icon('i/trophy', ''))->export_for_pix(),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/badges/view.php', array('id' => $this->page->course->id, 'type' => 2)))->out(false)
+                        'href' => (new moodle_url('/badges/view.php', ['id' => $this->page->course->id, 'type' => 2]))->out(false),
                 ];
 
                 $data = $this->get_course_activities();
@@ -627,7 +636,7 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('monologo', '', 'mod_page'))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url('/course/resources.php', array('id' => $this->page->course->id)))->out(false)
+                                'href' => (new moodle_url('/course/resources.php', ['id' => $this->page->course->id]))->out(false),
                         ];
                     } else {
                         $activities[] = [
@@ -635,7 +644,8 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('monologo', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url("/mod/$modname/index.php", array('id' => $this->page->course->id)))->out(false)
+                                'href' => (new moodle_url("/mod/$modname/index.php",
+                                    ['id' => $this->page->course->id]))->out(false),
                         ];
                     }
                 }
@@ -653,18 +663,18 @@ class core_renderer extends \core_renderer {
         $course = $this->page->course;
         $modinfo = get_fast_modinfo($course);
         $course = \course_get_format($course)->get_course();
-        $modfullnames = array();
-        $archetypes = array();
+        $modfullnames = [];
+        $archetypes = [];
 
         foreach ($modinfo->get_section_info_all() as $section => $thissection) {
-            if (((!empty($course->numsections)) and ($section > $course->numsections)) or (empty($modinfo->sections[$section]))) {
+            if (((!empty($course->numsections)) && ($section > $course->numsections)) || (empty($modinfo->sections[$section]))) {
                 // This is a stealth section or is empty.
                 continue;
             }
             foreach ($modinfo->sections[$thissection->section] as $modnumber) {
                 $cm = $modinfo->cms[$modnumber];
                 // Exclude activities which are not visible or have no link (=label).
-                if (!$cm->uservisible or !$cm->has_view()) {
+                if (!$cm->uservisible || !$cm->has_view()) {
                     continue;
                 }
                 if (array_key_exists($cm->modname, $modfullnames)) {
@@ -709,14 +719,14 @@ class core_renderer extends \core_renderer {
         $rolemenuitem = null;
         $rolename = null;
         if (\is_role_switched($course->id)) { // Has switched roles.
-            if ($role = $DB->get_record('role', array('id' => $USER->access['rsw'][$context->path]))) {
+            if ($role = $DB->get_record('role', ['id' => $USER->access['rsw'][$context->path]])) {
                 $rolemenuitem = [
                         'name' => get_string('switchrolereturn'),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id, 'sesskey' => sesskey(),
-                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false))))->out(false),
-                        'icon' => (new pix_icon('i/user', ''))->export_for_pix()
+                        'href' => (new moodle_url('/course/switchrole.php', ['id' => $course->id, 'sesskey' => sesskey(),
+                                'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false)]))->out(false),
+                        'icon' => (new pix_icon('i/user', ''))->export_for_pix(),
                 ];
                 $rolename = ' - '.role_get_name($role, $context);
             }
@@ -727,9 +737,9 @@ class core_renderer extends \core_renderer {
                         'name' => get_string('switchroleto'),
                         'hasmenu' => false,
                         'menu' => null,
-                        'href' => (new moodle_url('/course/switchrole.php', array('id' => $course->id,
-                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false))))->out(false),
-                        'icon' => (new pix_icon('i/users', ''))->export_for_pix()
+                        'href' => (new moodle_url('/course/switchrole.php', ['id' => $course->id,
+                                'switchrole' => -1, 'returnurl' => $this->page->url->out_as_local_url(false)]))->out(false),
+                        'icon' => (new pix_icon('i/users', ''))->export_for_pix(),
                 ];
             }
         }
@@ -739,20 +749,20 @@ class core_renderer extends \core_renderer {
             $realuser = \core\session\manager::get_realuser();
             $menucontent[] = [
                     'name' => get_string('loggedinas', 'theme_wwu2019',
-                            array('real' => fullname($realuser, true), 'fake' => fullname($USER, true))) .
+                            ['real' => fullname($realuser, true), 'fake' => fullname($USER, true)]) .
                             ($rolename ? $rolename : ''),
                     'hasmenu' => false,
                     'menu' => null,
-                    'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
-                    'icon' => (new pix_icon('i/key', ''))->export_for_pix()
+                    'href' => (new moodle_url('/user/profile.php', ['id' => $USER->id]))->out(false),
+                    'icon' => (new pix_icon('i/key', ''))->export_for_pix(),
             ];
         } else {
             $menucontent[] = [
                     'name' => fullname($USER, true) . ($rolename ? $rolename : ''),
                     'hasmenu' => false,
                     'menu' => null,
-                    'href' => (new moodle_url('/user/profile.php', array('id' => $USER->id)))->out(false),
-                    'icon' => (new pix_icon('i/user', ''))->export_for_pix()
+                    'href' => (new moodle_url('/user/profile.php', ['id' => $USER->id]))->out(false),
+                    'icon' => (new pix_icon('i/user', ''))->export_for_pix(),
             ];
         }
 
@@ -768,25 +778,26 @@ class core_renderer extends \core_renderer {
                                     'icon' => (new pix_icon('i/sun', ''))->export_for_pix(),
                                     'href' => null,
                                     'hasmenu' => false,
-                                    'class' => 'wwu-uselighttheme'
+                                    'class' => 'wwu-uselighttheme',
                             ],
                             [
-                                    'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'), ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
+                                    'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'),
+                                        ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
                                     'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
                                     'href' => null,
                                     'hasmenu' => false,
                                     'class' => 'wwu-useostheme',
-                                    'dontescape' => true
+                                    'dontescape' => true,
                             ],
                             [
                                     'name' => get_string('dark', 'theme_wwu2019'),
                                     'icon' => (new pix_icon('i/moon', ''))->export_for_pix(),
                                     'href' => null,
                                     'hasmenu' => false,
-                                    'class' => 'wwu-usedarktheme'
+                                    'class' => 'wwu-usedarktheme',
                             ],
                     ],
-                    'icon' => (new pix_icon('i/theme', ''))->export_for_pix()
+                    'icon' => (new pix_icon('i/theme', ''))->export_for_pix(),
             ];
         }
 
@@ -800,7 +811,7 @@ class core_renderer extends \core_renderer {
                 'hasmenu' => true,
                 'isexpanded' => false,
                 'menu' => $this->get_user_settings_submenu($context),
-                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix()
+                'icon' => (new pix_icon('i/cogs', ''))->export_for_pix(),
         ];
 
         $menucontent[count($menucontent) - 1]['class'] = 'divider';
@@ -813,7 +824,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'icon' => (new pix_icon('i/calendar', ''))->export_for_pix(),
-                        'href' => (new moodle_url('/calendar/view.php'))->out(false)
+                        'href' => (new moodle_url('/calendar/view.php'))->out(false),
                 ];
             }
         }
@@ -825,7 +836,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
                     'menu' => null,
                     'icon' => (new pix_icon('i/comment', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/message/index.php'))->out(false)
+                    'href' => (new moodle_url('/message/index.php'))->out(false),
             ];
         }
 
@@ -837,7 +848,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'icon' => (new pix_icon('i/files', ''))->export_for_pix(),
-                        'href' => (new moodle_url('/user/files.php'))->out(false)
+                        'href' => (new moodle_url('/user/files.php'))->out(false),
                 ];
             }
 
@@ -847,7 +858,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
                     'menu' => null,
                     'icon' => (new pix_icon('i/log', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/mod/forum/user.php', array('id' => $USER->id)))->out(false),
+                    'href' => (new moodle_url('/mod/forum/user.php', ['id' => $USER->id]))->out(false),
             ];
 
             if (has_capability('mod/forum:viewdiscussion', $context)) {
@@ -857,7 +868,7 @@ class core_renderer extends \core_renderer {
                         'menu' => null,
                         'icon' => (new pix_icon('i/list', ''))->export_for_pix(),
                         'href' => (new moodle_url('/mod/forum/user.php',
-                                array('id' => $USER->id, 'mode' => 'discussions')))->out(false)
+                                ['id' => $USER->id, 'mode' => 'discussions']))->out(false),
                 ];
             }
 
@@ -870,7 +881,7 @@ class core_renderer extends \core_renderer {
                     'menu' => null,
                     'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
                     'href' => (new moodle_url('/grade/report/overview/index.php',
-                            array('userid' => $USER->id)))->out(false)
+                            ['userid' => $USER->id]))->out(false),
             ];
 
             // Badges.
@@ -880,7 +891,7 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'icon' => (new pix_icon('i/badge', ''))->export_for_pix(),
-                        'href' => (new moodle_url('/badges/mybadges.php'))->out(false)
+                        'href' => (new moodle_url('/badges/mybadges.php'))->out(false),
                 ];
             }
         }
@@ -889,16 +900,16 @@ class core_renderer extends \core_renderer {
 
         // Logout.
         if (\core\session\manager::is_loggedinas()) {
-            $branchurl = new moodle_url('/course/loginas.php', array('id' => $course->id, 'sesskey' => sesskey()));
+            $branchurl = new moodle_url('/course/loginas.php', ['id' => $course->id, 'sesskey' => sesskey()]);
         } else {
-            $branchurl = new moodle_url('/login/logout.php', array('sesskey' => sesskey()));
+            $branchurl = new moodle_url('/login/logout.php', ['sesskey' => sesskey()]);
         }
         $menucontent[] = [
                 'name' => get_string('logout'),
                 'hasmenu' => false,
                 'menu' => null,
                 'icon' => (new pix_icon('i/logout', ''))->export_for_pix(),
-                'href' => $branchurl->out(false)
+                'href' => $branchurl->out(false),
         ];
 
         // Help link.
@@ -908,7 +919,7 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
                     'menu' => null,
                     'icon' => (new pix_icon('i/help', ''))->export_for_pix(),
-                    'href' => $url
+                    'href' => $url,
             ];
         }
 
@@ -917,7 +928,7 @@ class core_renderer extends \core_renderer {
         $usermenu = [
                 'name' => sprintf('%.1s. %s', $USER->firstname, $USER->lastname),
                 'pic' => $userpic->get_url($this->page)->out(true),
-                'menu' => $this->add_breakers($menucontent)
+                'menu' => $this->add_breakers($menucontent),
         ];
 
         return $usermenu;
@@ -939,7 +950,7 @@ class core_renderer extends \core_renderer {
         $menu[] = [
                 'name' => get_string('user'),
                 'icon' => (new pix_icon('i/user', ''))->export_for_pix(),
-                'href' => (new moodle_url('/user/preferences.php', array('userid' => $USER->id)))->out(false),
+                'href' => (new moodle_url('/user/preferences.php', ['userid' => $USER->id]))->out(false),
                 'hasmenu' => false,
         ];
 
@@ -947,7 +958,7 @@ class core_renderer extends \core_renderer {
             $menu[] = [
                     'name' => get_string('editmyprofile'),
                     'icon' => (new pix_icon('i/edit', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/user/edit.php', array('id' => $USER->id)))->out(false),
+                    'href' => (new moodle_url('/user/edit.php', ['id' => $USER->id]))->out(false),
                     'hasmenu' => false,
             ];
         }
@@ -964,7 +975,7 @@ class core_renderer extends \core_renderer {
             $menu[] = [
                     'name' => get_string('message', 'message'),
                     'icon' => (new pix_icon('i/comment', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/message/edit.php', array('id' => $USER->id)))->out(false),
+                    'href' => (new moodle_url('/message/edit.php', ['id' => $USER->id]))->out(false),
                     'hasmenu' => false,
             ];
         }
@@ -1006,7 +1017,7 @@ class core_renderer extends \core_renderer {
             $templateobj[] = [
                     'short' => $langtype,
                     'full' => $langname,
-                    'href' => (new moodle_url($this->page->url, array('lang' => $langtype)))->out(false)
+                    'href' => (new moodle_url($this->page->url, ['lang' => $langtype]))->out(false),
             ];
         }
         return $templateobj;
@@ -1034,54 +1045,40 @@ class core_renderer extends \core_renderer {
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->headeractions = $this->page->get_header_actions();
+        $header->pageheading = $this->page_heading();
+        $header->coursecontentheader = $this->course_content_header();
+        $header->shouldshowheader = true;
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
-    /**
-     * Returns course-specific information to be output immediately above content on any course page
-     * (for the current course)
-     *
-     * @param bool $onlyifnotcalledbefore output content only if it has not been output before
-     * @return string
-     */
-    public function course_content_header($onlyifnotcalledbefore = false) {
-        $output = parent::course_content_header($onlyifnotcalledbefore);
-
-        if ($this->page->course->id == SITEID) {
-            return $output;
-        }
-
-        if (!self::is_examweb()) {
-            $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
-        } else {
-            $output .= '<div class="page-title">';
-            $output .= '<h1>' . $this->page->course->fullname . '</h1>';
-            if ($this->page->pagelayout == 'course') {
-                $handler = \core_customfield\handler::get_handler('core_course', 'course');
-                $datas = $handler->get_instance_data($this->page->course->id, true);
-                $metadata = [];
-                foreach ($datas as $data) {
-                    if (empty($data->get_value())) {
-                        continue;
-                    }
-                    $metadata[$data->get_field()->get('shortname')] = $data->get_value();
+    public function page_heading($tag = 'h1') {
+        if (self::is_examweb() && $this->page->pagelayout === 'course') {
+            $handler = \core_customfield\handler::get_handler('core_course', 'course');
+            $datas = $handler->get_instance_data($this->page->course->id, true);
+            $metadata = [];
+            foreach ($datas as $data) {
+                if (empty($data->get_value())) {
+                    continue;
                 }
+                $metadata[$data->get_field()->get('shortname')] = $data->get_value();
             }
 
             // If an exam date is set, append it to the course title.
-            if ($this->page->pagelayout == 'course' &&
-                array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
+            if (array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
                 $metadata['begin'] > 0 &&  $metadata['end'] > 0) {
-                $output .= '<div class="examdates">';
-                $output .= '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
-                    userdate($metadata['begin']) . '</h3>';
-                $output .= '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
-                    userdate($metadata['end']) . '</h3>';
-                $output .= '</div>';
+                return $this->page->heading . '<div class="examdates">' .
+                    '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['begin']) . '</h3>' .
+                    '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['end']) . '</h3>' .
+                    '</div>';
             }
-            $output .= '</div>';
         }
-        return $output;
+        return $this->page->heading;
+    }
+
+    public function course_content_header($onlyifnotcalledbefore = false) {
+        return parent::course_content_header($onlyifnotcalledbefore);
     }
 
     /**
@@ -1158,9 +1155,9 @@ class core_renderer extends \core_renderer {
         // $wantsurl can contain parameters e.g. user/view.php?id=5&course=10
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
-        $params = array();
+        $params = [];
         parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
-        $paramsmustache = array();
+        $paramsmustache = [];
         foreach ($params as $key => $val) {
             $paramsmustache[] = ["key" => $key, "value" => $val];
         }
@@ -1184,10 +1181,10 @@ class core_renderer extends \core_renderer {
         if ((isset($pageinfo[1]->category)) || (isset($pageinfo[1]->fullname)) || (isset($pageinfo[2]->name))) {
             // Adds course category name.
             if (isset($pageinfo[1]->category)) {
-                if ($category = $DB->get_record('course_categories', array('id' => $pageinfo[1]->category))) {
+                if ($category = $DB->get_record('course_categories', ['id' => $pageinfo[1]->category])) {
                     $cats = explode("/", $category->path);
                     foreach (array_filter($cats) as $cat) {
-                        if ($categorydepth = $DB->get_record("course_categories", array("id" => $cat))) {
+                        if ($categorydepth = $DB->get_record("course_categories", ["id" => $cat])) {
                             $trackurl .= $categorydepth->name . '/';
                         }
                     }
@@ -1297,7 +1294,7 @@ _paq.push(['trackPageView']);
                 $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id || empty($_SESSION["theme_wwu2019_slides"])
             ) {
                 $allslides = \local_marketing\slide_manager::get_slides_for();
-                $slides = array();
+                $slides = [];
                 $index = 0;
                 foreach ($allslides as $slide) {
                     // Add slide index for slide navigation in the mustache template.
@@ -1311,14 +1308,14 @@ _paq.push(['trackPageView']);
                             'slidesfilearea', $slide->id, '/', $slideimage);
                         $slideimage = preg_replace('|^https?://|i', '//', $slideimage->out(false));
                     } else {
-                        $slideimage = self::pix_url('default_slide', 'theme');
+                        $slideimage = self::image_url('default_slide', 'theme');
                     }
                     $slide->slideimage = $slideimage;
 
                     // Attach tracking params for matomo.
                     $concatenate = strpos($slide->link, '?') !== false ? '&' : '?';
                     $titleslug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $slide->title)));
-                    if(strpos($slide->link, "#")!==false){
+                    if (strpos($slide->link, "#") !== false) {
                         $pos = strpos($slide->link, "#");
                         $slide->link = substr($slide->link, 0, $pos) . $concatenate . 'pk_medium=local_marketing&pk_campaign='
                             . $slide->id . '--' . $titleslug . substr($slide->link, $pos);
@@ -1340,16 +1337,20 @@ _paq.push(['trackPageView']);
 
             if ($slides) {
                 $this->page->requires->js_call_amd('theme_wwu2019/slideshow', 'init');
-                $output .= $this->render_from_template('theme_wwu2019/slideshow', array('slides' => $slides));
+                $output .= $this->render_from_template('theme_wwu2019/slideshow', ['slides' => $slides]);
             }
         }
         return $output;
     }
 
+    /**
+     * Show debugging Information for site administrators.
+     * @return string
+     */
     public function debug_footer_html() {
         if (is_siteadmin()) {
             return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()),
-                array('class' => 'hostname pt-2')) .
+                ['class' => 'hostname pt-2']) .
                 parent::debug_footer_html();
         } else {
             return '';
@@ -1369,20 +1370,25 @@ _paq.push(['trackPageView']);
         return $output;
     }
 
+    /**
+     * Returns the primary color of the theme.
+     * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public function htmlattributes() {
         if (get_config('theme_wwu2019', 'darktheme_enabled') == '1') {
-            user_preference_allow_ajax_update('theme_wwu2019_theme', PARAM_INT);
             $themepreference = get_user_preferences('theme_wwu2019_theme');
             if ($themepreference == 1) {
-                return parent::htmlattributes() . 'class="light"';
+                return parent::htmlattributes() . 'class="light-theme"';
             } else if ($themepreference == 2) {
-                return parent::htmlattributes() . 'class="dark"';
+                return parent::htmlattributes() . 'class="dark-theme"';
             } else {
                 // Use system setting.
                 return parent::htmlattributes();
             }
         } else {
-            return parent::htmlattributes() . 'class="light"';
+            return parent::htmlattributes() . 'class="light-theme"';
         }
     }
 
@@ -1394,7 +1400,7 @@ _paq.push(['trackPageView']);
      */
     protected function render_pix_icon(pix_icon $icon) {
         $this->check_monologo($icon);
-        $system = \core\output\icon_system::instance();
+        $system = icon_system::instance();
         return $system->render_pix_icon($this, $icon);
     }
 
@@ -1406,29 +1412,26 @@ _paq.push(['trackPageView']);
      */
     protected function render_image_icon(image_icon $icon) {
         $this->check_monologo($icon);
-        $system = \core\output\icon_system::instance(\core\output\icon_system::STANDARD);
+        $system = icon_system::instance(icon_system::STANDARD);
         return $system->render_pix_icon($this, $icon);
     }
 
     /**
+     * Check for the suitable logo.
      * @param pix_icon $icon
      */
     private function check_monologo(pix_icon $icon) {
-        global $PAGE;
-
-        if ($icon->pix === 'monologo' || $icon->pix === 'icon') {
-            if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
-                    substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
-                    strpos($icon->component, '_') === false
-                )
-            ) {
-                if ($location = $PAGE->theme->resolve_image_location($icon->pix, $icon->component, null)) {
-                    if (substr_compare($location, 'monologo.svg', -12) === 0) {
-                        if (isset($icon->attributes['class'])) {
-                            $icon->attributes['class'] .= ' wwu-monologo ';
-                        } else {
-                            $icon->attributes['class'] = ' wwu-monologo ';
-                        }
+        if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
+                substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
+                !str_contains($icon->component, '_')
+            )
+        ) {
+            if ($location = $this->page->theme->resolve_image_location($icon->pix, $icon->component, null)) {
+                if (substr_compare($location, 'monologo.svg', -12) === 0) {
+                    if (isset($icon->attributes['class'])) {
+                        $icon->attributes['class'] .= ' wwu-monologo ';
+                    } else {
+                        $icon->attributes['class'] = ' wwu-monologo ';
                     }
                 }
             }
@@ -1436,9 +1439,10 @@ _paq.push(['trackPageView']);
     }
 
     /**
+     * Check if doctype is necessay.
      * @return string Doctype string, if not already printed.
      */
-    public function doctype_if_necessary() : string {
+    public function doctype_if_necessary(): string {
         if (empty($this->contenttype)) {
             return $this->doctype();
         } else {

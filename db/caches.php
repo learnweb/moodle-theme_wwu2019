@@ -24,15 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$definitions = array(
+$definitions = [
 
     // Caches font awesome icons.
-    'fontawesomeiconmapping' => array(
+    'fontawesomeiconmapping' => [
         'mode' => cache_store::MODE_APPLICATION,
         'simplekeys' => true,
         'simpledata' => true,
         'staticacceleration' => true,
-        'staticaccelerationsize' => 1
-    ),
+        'staticaccelerationsize' => 1,
+    ],
 
-);
+];
