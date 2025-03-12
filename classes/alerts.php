@@ -24,8 +24,6 @@
 
 namespace theme_wwu2019;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Port of essential alerts to WWUCD theme.
  *

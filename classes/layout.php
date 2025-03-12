@@ -25,8 +25,6 @@ namespace theme_wwu2019;
 
 use theme_wwu2019\output\core_renderer;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * This class provides functions for the different layouts of the theme.
  * @package    theme_wwu2019

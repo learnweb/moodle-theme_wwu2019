@@ -34,8 +34,6 @@ use navigation_node;
 use navigation_node_collection;
 use pix_icon;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Renderer for WWU 2019 Theme
  *
