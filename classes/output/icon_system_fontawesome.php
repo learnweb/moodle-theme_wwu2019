@@ -23,8 +23,6 @@
  */
 namespace theme_wwu2019\output;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Additional Icons for WWU2019
  *
