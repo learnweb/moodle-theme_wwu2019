@@ -45,58 +45,27 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
         $iconmap = parent::get_core_icon_map();
 
         $override = [
-            'core:i/briefcase' => 'fa-solid fa-briefcase',
-            'core:i/cogs' => 'fa-solid fa-cogs',
-            'core:i/graduation-cap' => 'fa-solid fa-graduation-cap',
-            'core:i/navigationbranch' => 'fa-solid fa-wrench',
-            'core:i/navigationitem' => 'fa-solid fa-angle-double-right',
-            'core:i/book' => 'fa-solid fa-book',
-            'core:i/trophy' => 'fa-solid fa-trophy',
-            'core:i/key' => 'fa-solid fa-key',
-            'core:i/comment' => 'fa-solid fa-comment',
-            'core:i/rss-square' => 'fa-solid fa-rss-square',
-            'core:i/hidden' => 'fa-solid fa-eye-slash',
-            'core:i/list' => 'fa-solid fa-list',
-            'core:i/logout' => 'fa-solid fa-sign-out',
-            'core:i/help' => 'fa-solid fa-question-circle',
-            'core:i/hamburger' => 'fa-solid fa-bars',
-            'core:i/sun' => 'fa-solid fa-sun-o',
-            'core:i/moon' => 'fa-solid fa-moon-o',
-            'core:i/magic' => 'fa-solid fa-magic',
-            'core:i/theme' => 'fa-solid fa-paint-brush',
+            'core:i/briefcase' => 'fa-briefcase',
+            'core:i/cogs' => 'fa-cogs',
+            'core:i/graduation-cap' => 'fa-graduation-cap',
+            'core:i/navigationbranch' => 'fa-wrench',
+            'core:i/navigationitem' => 'fa-angle-double-right',
+            'core:i/book' => 'fa-book',
+            'core:i/trophy' => 'fa-trophy',
+            'core:i/key' => 'fa-key',
+            'core:i/comment' => 'fa-comment',
+            'core:i/rss-square' => 'fa-rss-square',
+            'core:i/hidden' => 'fa-eye-slash',
+            'core:i/list' => 'fa-list',
+            'core:i/logout' => 'fa-sign-out',
+            'core:i/help' => 'fa-question-circle',
+            'core:i/hamburger' => 'fa-bars',
+            'core:i/sun' => 'fa-sun-o',
+            'core:i/moon' => 'fa-moon-o',
+            'core:i/magic' => 'fa-magic',
+            'core:i/theme' => 'fa-paint-brush',
         ];
 
         return array_merge($iconmap, $override);
     }
-
-    /**
-     * Overridable function to get a mapping of all icons.
-     * Default is to do no mapping.
-     */
-    public function get_icon_name_map() {
-        if ($this->map === []) {
-            $cache = \cache::make('theme_wwu2019', 'fontawesomeiconmapping');
-
-            $this->map = $cache->get('mapping');
-
-            if (empty($this->map)) {
-                $this->map = $this->get_core_icon_map();
-                $callback = 'get_fontawesome_icon_map';
-
-                if ($pluginsfunction = get_plugins_with_function($callback)) {
-                    foreach ($pluginsfunction as $plugintype => $plugins) {
-                        foreach ($plugins as $pluginfunction) {
-                            $pluginmap = $pluginfunction();
-                            $this->map += $pluginmap;
-                        }
-                    }
-                }
-                $cache->set('mapping', $this->map);
-            }
-
-        }
-        return $this->map;
-    }
-
 }
-
