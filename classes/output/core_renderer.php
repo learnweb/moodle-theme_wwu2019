@@ -549,7 +549,11 @@ class core_renderer extends \core_renderer {
     private function create_term($termid) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
 
-        $name = \customfield_semester\data_controller::get_name_for_semester($termid);
+        if ($termid) {
+            $name = \customfield_semester\data_controller::get_name_for_semester($termid);
+        } else {
+            $name = get_string('no_semester_associated', 'theme_wwu2019');
+        }
         return [
             'name' => $name,
             'icon' => $calendaricon,
@@ -580,9 +584,8 @@ class core_renderer extends \core_renderer {
         // Get for each course where the user is enrolled the customfield value (here encoded as number).
         $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname,cs.fullname
                                 FROM {course} cs
-                                INNER JOIN {customfield_data} cd ON cs.id=cd.instanceid
+                                LEFT JOIN {customfield_data} cd ON cs.id=cd.instanceid AND cd.fieldid = :fieldid
                                 WHERE cs.id ' . $instring . '
-                                AND cd.fieldid = :fieldid
                                 ORDER BY cd.intvalue DESC, cs.shortname ASC';
         $params['fieldid'] = $fieldid;
         return $DB->get_records_sql($fromtable, $params);

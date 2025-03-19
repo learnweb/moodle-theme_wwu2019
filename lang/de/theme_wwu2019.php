@@ -72,6 +72,7 @@ $string['matomo_siteurl'] = 'Analytics-URL';
 $string['matomo_siteurl_desc'] = 'Ihre "Matomo Analytics"-URL, aber ohne http(s) oder Slash am Ende. Beispiel: "mysite.com/analytics".';
 $string['mycourses'] = 'Meine Kurse';
 $string['mygrades'] = 'Meine Noten';
+$string['no_semester_associated'] = 'Kein Semester eingetragen';
 $string['openmainmenu'] = 'Hauptmenü öffnen';
 $string['openusermenu'] = 'Nutzermenü öffnen';
 $string['ostheme'] = 'Systemfarben';
