@@ -45,12 +45,28 @@
                     {{{contextheader}}}
                 </div>
             {{/contextheader}}
+        </div>
+    </div>
+
+    <div class="col-12">
+        {{{ alerts }}}
+        {{{ coursecontentheader }}}
+        {{# shouldshowheader }}
+        <div class="d-flex bg-learnweb justify-content-between mb-3">
+            <span class="page-title">{{{pageheading}}}</span>
             <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                 {{#headeractions}}
                     <div class="header-action ml-2">{{{.}}}</div>
                 {{/headeractions}}
             </div>
         </div>
+        {{/ shouldshowheader }}
+        {{^ shouldshowheader }}
+            <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
+                {{#headeractions}}
+                    <div class="header-action ml-2">{{{.}}}</div>
+                {{/headeractions}}
+            </div>
+        {{/ shouldshowheader }}
     </div>
-
 </header>

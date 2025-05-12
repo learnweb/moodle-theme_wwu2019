@@ -34,8 +34,6 @@ use navigation_node;
 use navigation_node_collection;
 use pix_icon;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Renderer for WWU 2019 Theme
  *
@@ -551,7 +549,11 @@ class core_renderer extends \core_renderer {
     private function create_term($termid) {
         $calendaricon = (new pix_icon('i/calendar', ''))->export_for_pix();
 
-        $name = \customfield_semester\data_controller::get_name_for_semester($termid);
+        if ($termid) {
+            $name = \customfield_semester\data_controller::get_name_for_semester($termid);
+        } else {
+            $name = get_string('no_semester_associated', 'theme_wwu2019');
+        }
         return [
             'name' => $name,
             'icon' => $calendaricon,
@@ -582,9 +584,8 @@ class core_renderer extends \core_renderer {
         // Get for each course where the user is enrolled the customfield value (here encoded as number).
         $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname,cs.fullname
                                 FROM {course} cs
-                                INNER JOIN {customfield_data} cd ON cs.id=cd.instanceid
+                                LEFT JOIN {customfield_data} cd ON cs.id=cd.instanceid AND cd.fieldid = :fieldid
                                 WHERE cs.id ' . $instring . '
-                                AND cd.fieldid = :fieldid
                                 ORDER BY cd.intvalue DESC, cs.shortname ASC';
         $params['fieldid'] = $fieldid;
         return $DB->get_records_sql($fromtable, $params);
@@ -1045,54 +1046,40 @@ class core_renderer extends \core_renderer {
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->headeractions = $this->page->get_header_actions();
+        $header->pageheading = $this->page_heading();
+        $header->coursecontentheader = $this->course_content_header();
+        $header->shouldshowheader = true;
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
-    /**
-     * Returns course-specific information to be output immediately above content on any course page
-     * (for the current course)
-     *
-     * @param bool $onlyifnotcalledbefore output content only if it has not been output before
-     * @return string
-     */
-    public function course_content_header($onlyifnotcalledbefore = false) {
-        $output = parent::course_content_header($onlyifnotcalledbefore);
-
-        if ($this->page->course->id == SITEID) {
-            return $output;
-        }
-
-        if (!self::is_examweb()) {
-            $output .= '<h1 class="page-title">' . $this->page->course->fullname . '</h1>';
-        } else {
-            $output .= '<div class="page-title">';
-            $output .= '<h1>' . $this->page->course->fullname . '</h1>';
-            if ($this->page->pagelayout == 'course') {
-                $handler = \core_customfield\handler::get_handler('core_course', 'course');
-                $datas = $handler->get_instance_data($this->page->course->id, true);
-                $metadata = [];
-                foreach ($datas as $data) {
-                    if (empty($data->get_value())) {
-                        continue;
-                    }
-                    $metadata[$data->get_field()->get('shortname')] = $data->get_value();
+    public function page_heading($tag = 'h1') {
+        if (self::is_examweb() && $this->page->pagelayout === 'course') {
+            $handler = \core_customfield\handler::get_handler('core_course', 'course');
+            $datas = $handler->get_instance_data($this->page->course->id, true);
+            $metadata = [];
+            foreach ($datas as $data) {
+                if (empty($data->get_value())) {
+                    continue;
                 }
+                $metadata[$data->get_field()->get('shortname')] = $data->get_value();
             }
 
             // If an exam date is set, append it to the course title.
-            if ($this->page->pagelayout == 'course' &&
-                array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
+            if (array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
                 $metadata['begin'] > 0 &&  $metadata['end'] > 0) {
-                $output .= '<div class="examdates">';
-                $output .= '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
-                    userdate($metadata['begin']) . '</h3>';
-                $output .= '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
-                    userdate($metadata['end']) . '</h3>';
-                $output .= '</div>';
+                return $this->page->heading . '<div class="examdates">' .
+                    '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['begin']) . '</h3>' .
+                    '<h3>' . get_string('exam:end', 'theme_wwu2019') . ' ' .
+                    userdate($metadata['end']) . '</h3>' .
+                    '</div>';
             }
-            $output .= '</div>';
         }
-        return $output;
+        return $this->page->heading;
+    }
+
+    public function course_content_header($onlyifnotcalledbefore = false) {
+        return parent::course_content_header($onlyifnotcalledbefore);
     }
 
     /**
@@ -1301,13 +1288,12 @@ _paq.push(['trackPageView']);
 
         $output = '';
 
-        if (file_exists($CFG->dirroot . '/local/marketing/locallib.php')) {
+        if (file_exists($CFG->dirroot . '/local/marketing/classes/slide_manager.php')) {
             // Retrieve slides if none are cached.
             // Also, force re-cache if user has changed ID recently (i.e., a login has occurred).
             if (!isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
                 $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id || empty($_SESSION["theme_wwu2019_slides"])
             ) {
-                require_once($CFG->dirroot . '/local/marketing/locallib.php');
                 $allslides = \local_marketing\slide_manager::get_slides_for();
                 $slides = [];
                 $index = 0;

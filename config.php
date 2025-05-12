@@ -209,3 +209,5 @@ $THEME->iconsystem = '\\theme_wwu2019\\output\\icon_system_fontawesome';
 $THEME->requiredblocks = '';
 
 $THEME->haseditswitch = false;
+
+$THEME->usescourseindex = true;

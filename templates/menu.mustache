@@ -28,13 +28,13 @@
 <nav id="main-menu">
     <div id="main-menu-border">
         <div id="main-menu-hamburger">
-            <a id="hamburger-toggle" role="none" aria-haspopup="true" aria-expanded="false" aria-label="{{# str}}openmainmenu, theme_wwu2019{{/str}}">
+            <a id="hamburger-toggle" class="" role="none" aria-haspopup="true" aria-expanded="false" aria-label="{{# str}}openmainmenu, theme_wwu2019{{/str}}">
                 {{#pix }} i/hamburger {{/pix}}
             </a>
             <ul role="menubar" id="main-menu-left" aria-label="{{# str}}mainmenu, theme_wwu2019{{/str}}">
                 {{# left-menu }}
                     <li role="none" class="main-menu-item {{# class }}{{class}}{{/class}}">
-                        <a role="menuitem" tabindex="-1" {{# href }} href="{{ href }}"{{/href}}
+                        <a class="" role="menuitem" tabindex="-1" {{# href }} href="{{ href }}"{{/href}}
                             {{# hasmenu }} aria-haspopup="true" aria-expanded="{{# isexpanded }}{{isexpanded}}{{/isexpanded}}{{^isexpanded}}false{{/isexpanded}}" {{/hasmenu}}
                             {{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
                             {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
@@ -50,7 +50,7 @@
                                         <ul role="menu" class="sub-menu">
                                             {{# menu }}
                                                 <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}">
-                                                    <a role="menuitem" {{# href }} href="{{ href }}"{{/href}} tabindex="-1"
+                                                    <a role="menuitem" class="" {{# href }} href="{{ href }}"{{/href}} tabindex="-1"
                                                         {{# hasmenu }} aria-haspopup="true" aria-expanded="{{# isexpanded }}{{isexpanded}}{{/isexpanded}}{{^isexpanded}}false{{/isexpanded}}"
                                                         {{/hasmenu}}{{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}
                                                         {{# description }} title="{{description}}" {{/ description }}>
@@ -83,7 +83,7 @@
             <li class="main-menu-additions-item">{{{navbaradditions}}}</li>
             {{# right-menu-icons }}
             <li role="none" class="main-menu-icon-item">
-                <a role="menuitem" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
+                <a role="menuitem" class="" tabindex="0" {{# href }} href="{{ href }}"{{/href}}>
                     {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
                 </a>
             </li>
@@ -102,7 +102,7 @@
             {{/login}}
             {{# user-menu }}
                 <li role="none" id="user-menu">
-                    <a role="button" aria-haspopup="true" aria-expanded="false" tabindex="0" {{# href }} href="{{ href }}"{{/href}} aria-label="{{# str}}openusermenu, theme_wwu2019{{/str}}">
+                    <a role="button" class="" aria-haspopup="true" aria-expanded="false" tabindex="0" {{# href }} href="{{ href }}"{{/href}} aria-label="{{# str}}openusermenu, theme_wwu2019{{/str}}">
                         <img class="user-icon" src="{{pic}}" alt="PICTURE OF {{name}}" />
                         <span class="underline user-name">{{name}}</span>
                     </a>
@@ -112,7 +112,7 @@
                                 <ul role="menu" class="sub-menu" aria-label="{{# str}}usermenu, theme_wwu2019{{/str}}">
                                     {{# menu }}
                                         <li role="none" class="sub-menu-item {{# class }}{{class}}{{/class}}">
-                                            <a role="menuitem" {{# href }} href="{{ href }}"{{/href}} tabindex="-1" {{{ addatags }}}
+                                            <a role="menuitem" class="" {{# href }} href="{{ href }}"{{/href}} tabindex="-1" {{{ addatags }}}
                                                 {{# hasmenu }} aria-haspopup="true" aria-expanded="{{# isexpanded }}{{isexpanded}}{{/isexpanded}}{{^isexpanded}}false{{/isexpanded}}" {{/hasmenu}}
                                                 {{^ hasmenu }} aria-haspopup="false" {{/hasmenu}}>
                                                 {{# icon }} {{# pix }} {{ icon.key }}, {{ icon.component }}, {{ icon.title }} {{/ pix }} {{/ icon }}
