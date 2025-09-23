@@ -97,7 +97,6 @@ class core_renderer extends \core_renderer {
      */
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
-        navigation_node::require_admin_tree();
     }
 
     /**
