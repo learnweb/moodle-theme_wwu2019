@@ -214,18 +214,7 @@ class core_renderer extends \core_renderer {
      * @throws \coding_exception
      */
     public function edit_button(moodle_url $url, string $method = 'post'): string {
-        $url->param('sesskey', sesskey());
-        $class = '';
-        if ($this->page->user_is_editing()) {
-            $url->param('edit', 'off');
-            $editstring = get_string('turneditingoff');
-            $class = 'red-edit-button';
-        } else {
-            $url->param('edit', 'on');
-            $editstring = get_string('turneditingon');
-        }
-
-        return $this->single_button($url, $editstring, $method, ['class' => 'singlebutton ' . $class]);
+        return $this->edit_switch();
     }
 
     /**
@@ -966,7 +955,7 @@ class core_renderer extends \core_renderer {
         if (has_capability('moodle/user:changeownpassword', $context)) {
             $menu[] = [
                     'name' => get_string('changepassword'),
-                    'icon' => (new pix_icon('i/key', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/lock', ''))->export_for_pix(),
                     'href' => (new moodle_url('/login/change_password.php'))->out(false),
                     'hasmenu' => false,
             ];
@@ -1156,7 +1145,8 @@ class core_renderer extends \core_renderer {
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
         $params = [];
-        parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
+        $query = parse_url($wantsurl, PHP_URL_QUERY);
+        parse_str(is_string($query) ? $query : '', $params);
         $paramsmustache = [];
         foreach ($params as $key => $val) {
             $paramsmustache[] = ["key" => $key, "value" => $val];
