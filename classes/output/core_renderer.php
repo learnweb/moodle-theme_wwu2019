@@ -89,17 +89,6 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * core_renderer constructor.
-     * Overrides parent to require admin tree init in $PAGE->settingsnav
-     *
-     * @param moodle_page $page the page we are doing output for.
-     * @param string $target one of rendering target constants.
-     */
-    public function __construct(moodle_page $page, $target) {
-        parent::__construct($page, $target);
-    }
-
-    /**
      * Renders logo heading.
      * @return string HTML string.
      * @throws \moodle_exception
@@ -1040,6 +1029,15 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
+    /**
+     * Function to return the page heading.
+     *
+     * @param $tag
+     * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     */
     public function page_heading($tag = 'h1') {
         if (self::is_examweb() && $this->page->pagelayout === 'course') {
             $handler = \core_customfield\handler::get_handler('core_course', 'course');
@@ -1064,10 +1062,6 @@ class core_renderer extends \core_renderer {
             }
         }
         return $this->page->heading;
-    }
-
-    public function course_content_header($onlyifnotcalledbefore = false) {
-        return parent::course_content_header($onlyifnotcalledbefore);
     }
 
     /**
