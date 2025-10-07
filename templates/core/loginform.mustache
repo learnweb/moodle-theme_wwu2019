@@ -95,7 +95,7 @@
 
     {{#error}}
         <div class="row">
-            <div class="col-12 pr-0 pl-0">
+            <div class="col-12 pe-0 ps-0">
             <div class="loginerrors">
                 <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
                 <div class="alert alert-danger" role="alert" data-aria-autofocus="true">{{error}}</div>
@@ -105,7 +105,7 @@
     {{/error}}
 
     <div class="row">
-    <div class="col-12 col-md-6 pl-0 pr-0 pr-md-3">
+    <div class="col-12 col-md-6 ps-0 pe-0 pe-md-3">
         {{# isexamweb }}
         <section id="examwebdescription" class="block card mb-3">
             {{! Beginn Block Container }}
@@ -181,8 +181,8 @@
                 <div class="card-text content text-center p-3">
                     <div class="subcontent loginsub">
                         <form action="{{loginurl}}" method="post" id="login" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
-                            <div class="form-group row">
-                                <label for="username" class="col-5 col-form-label text-right">
+                            <div class="mb-3 row">
+                                <label for="username" class="col-5 col-form-label text-end">
                                         {{^canloginbyemail}}
                                             {{#str}} username {{/str}}
                                         {{/canloginbyemail}}
@@ -194,8 +194,8 @@
                                     <input type="text" class="form-control" id="username" name="username" value="{{username}}">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-5 col-form-label text-right">{{#str}} password {{/str}}</label>
+                            <div class="mb-3 row">
+                                <label for="password" class="col-5 col-form-label text-end">{{#str}} password {{/str}}</label>
                                 <div class="col-6">
                                     <input type="password" class="form-control" id="password" name="password" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
                                 </div>
@@ -244,7 +244,7 @@
         {{/isexamweb}}
     </div>
 
-    <div class="col-12 col-md-6 pl-0 pr-0">
+    <div class="col-12 col-md-6 ps-0 pe-0">
         {{#hasinstructions}}
             <section id="instructionsblock" class="block card mb-3">
                 {{! Beginn Block Container }}
@@ -288,16 +288,16 @@
                 {{! Block contents }}
                 <div class="card-text content p-3">
                     <p>
-                        <img style="float: right; margin: 5px 0px 5px 5px; max-width: 50%" title="Informationen zum Serverzertifikat in Google Chrome" alt="Informationen zum Serverzertifikat in Google Chrome" src="/imperia/md/content/iv-sicherheit/chrome.png" />
+                        <img class="float-end" style="margin: 5px 0px 5px 5px; max-width: 50%" title="Informationen zum Serverzertifikat in Google Chrome" alt="Informationen zum Serverzertifikat in Google Chrome" src="https://www.uni-muenster.de/imperia/md/images/wwuca/_v/ucamlogo.svg" />
                         Keine Person oder Einrichtung der Universität wird Sie in E-Mails nach Ihrem persönlichen Passwort fragen. Bitte geben Sie dieses nie an jemanden weiter. Geben Sie Kennung und Passwort nur auf Webseiten der Uni Münster ein, die sich per Serverzertifikat als vertrauenswürdig ausweisen! Klicken Sie zur Überprüfung auf das Schlosssymbol in der Adressleiste Ihres Browsers.
                     </p>
 
                     <h4>Weitere Informationen</h4>
-                    <p><a href="/IV-Sicherheit/flyer/"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
+                    <p><a href="https://www.uni-muenster.de//IV-Sicherheit/flyer/"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
                         IV-Sicherheitsflyer</a></p>
 
                     <h4>Passwort vergessen?</h4>
-                    <p><a href="/ZIV/MeinZIV/PasswortVergessen.html"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
+                    <p><a href="https://www.uni-muenster.de//ZIV/MeinZIV/PasswortVergessen.html"><span class="fa fa-arrow-circle-o-right" aria-hidden="true"></span>
                         Hinweise zum Wiedererlangen vergessener Passwörter und Nutzerkennungen</a></p>
 
                     <h4>Nutzerzertifikat beantragen?</h4>
