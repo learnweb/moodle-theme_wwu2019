@@ -1032,7 +1032,7 @@ class core_renderer extends \core_renderer {
     /**
      * Function to return the page heading.
      *
-     * @param $tag
+     * @param string $tag
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
