@@ -26,23 +26,9 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-// This is the version of the plugin.
-$plugin->version = 2025031400;
-
-// This is the version of Moodle this plugin requires.
-$plugin->requires = 2019111800.03;
-
-// This is the component name of the plugin - it always starts with 'theme_'
-// for themes and should be the same as the name of the folder.
+$plugin->version = 2025100700;
+$plugin->requires = 2022112819;
+$plugin->supported = [401, 500];
 $plugin->component = 'theme_wwu2019';
-
-// This is a list of plugins, this plugin depends on (and their versions).
-$plugin->dependencies = [
-        'theme_classic' => 2019111800,
-];
-
-// This is a stable release.
 $plugin->maturity = MATURITY_RC;
-
-// This is the named version.
-$plugin->release = '1.0.0-rc2';
+$plugin->release = 'v5.0-rc1';
