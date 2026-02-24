@@ -100,7 +100,4 @@ $string['usermenu'] = 'Nutzermenü';
 
 
 $string['viewfullsection'] = 'Kompletten Abschnitt anschauen';
-
-
-
-
+$string['copyrightwarning'] = 'Bitte beachten Sie, dass keine Dokumente bereitgestellt werden d&uuml;rfen, bei denen Urheberrechte Dritter verletzt werden. Dieses gilt insbesondere f&uuml;r Dokumente, die Sie nicht selbst erstellt haben. Weitere Hinweise finden Sie <a href="http://www.ulb.uni-muenster.de/bibliothek/recht/urhg-hinweise.html">hier</a> bzw. <a href="http://www.ulb.uni-muenster.de/service/esa/dozenten-info.html">hier</a>. Wenn Sie eine Urheberrechtsverletzung wegen unklarer Rechte nicht ausschlie&szlig;en k&ouml;nnen, sehen Sie bitte von der Bereitstellung ab.';
