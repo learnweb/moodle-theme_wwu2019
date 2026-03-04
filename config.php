@@ -210,4 +210,4 @@ $THEME->requiredblocks = '';
 
 $THEME->haseditswitch = false;
 
-$THEME->usescourseindex = true;
+$THEME->usescourseindex = false; // Has been true before (Justus?). I guess it was a (unsuccessfull) try to get the index displayed, but it prevents the activity_navigation to be displayed.
