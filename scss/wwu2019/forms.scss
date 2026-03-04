@@ -27,10 +27,6 @@
     border-radius: 0.5rem;
 }
 
-.btn:hover {
-    color: var(--wwu-fg);
-}
-
 @each $color, $value in $theme-colors {
     .btn-#{$color} {
         @include button-variant($value, $value);
