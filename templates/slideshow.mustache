@@ -24,10 +24,10 @@
     }
 }}
 
-<div id="wwuCarousel" class="carousel slide" data-interval="8000" data-ride="carousel">
+<div id="wwuCarousel" class="carousel slide" data-bs-interval="8000" data-bs-ride="carousel">
     <ol class="carousel-indicators d-flex">
         {{#slides}}
-            <li data-target="#wwuCarousel" data-slide-to="{{index}}" {{#active}}class="ml-auto active"{{/active}}></li>
+            <li data-bs-target="#wwuCarousel" data-bs-slide-to="{{index}}" {{#active}}class="ml-auto active"{{/active}}></li>
         {{/slides}}
     </ol>
     <div class="carousel-inner">
@@ -53,11 +53,11 @@
             {{/link}}
         {{/slides}}
     </div>
-    <a class="carousel-control carousel-control-prev" href="#wwuCarousel" role="button" data-slide="prev">
+    <a class="carousel-control carousel-control-prev" href="#wwuCarousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">{{# str }} prev {{/ str }}</span>
     </a>
-    <a class="carousel-control carousel-control-next" href="#wwuCarousel" role="button" data-slide="next">
+    <a class="carousel-control carousel-control-next" href="#wwuCarousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">{{# str }} next {{/ str }}</span>
     </a>
