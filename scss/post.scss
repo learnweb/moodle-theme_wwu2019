@@ -40,6 +40,45 @@ a {
     text-decoration: none;
 }
 
+/*
 html.dark-theme {
   color: #fff !important;
+}
+*/
+
+.dark-theme .card,
+.dark-theme .card .card-body,
+.dark-theme .card .card-title,
+.dark-theme .card .card-text {
+  color: white;
+}
+
+.dark-theme .opencast-bc-wrap {
+  color: white;
+}
+
+.dark-theme .form-text {
+  color: white;
+}
+
+.dark-theme .form-defaultinfo .text-muted {
+  color: white;
+}
+
+.dark-theme .text-muted, #main-menu .dimmed_text > a > span, #menu-bottom .dimmed_text > a > span, .section .activity .stealth {
+  color: white !important;
+}
+
+.dark-theme .form-shortname.d-block.small.text-muted {
+  color: white !important;
+}
+
+.dark-theme .activity-item .activity-dates {
+  color: white;
+}
+
+.dark-theme .btn .btn-secondary {
+  background-color: #868e96;
+  color: black;
+  border: none;
 }

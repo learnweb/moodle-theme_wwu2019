@@ -349,7 +349,7 @@ footer#wwu-footer + div > div.container {
 
 /* Turn editing off button red */
 .red-edit-button > form > button {
-    @extend .btn-danger;
+    @extend .btn-secondary;
 }
 
 /* Quiznavigation */
