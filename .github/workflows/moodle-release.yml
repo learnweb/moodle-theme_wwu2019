@@ -1,0 +1,12 @@
+name: Moodle Plugin Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  call-moodle-release-workflow:
+    uses: learnweb/moodle-workflows-learnweb/.github/workflows/moodle-release.yml@main
+    with:
+      plugin-name: 'theme_wwu2019'
+    secrets: inherit

@@ -140,7 +140,7 @@
 <div id="menu-bottom" class="pt-2 pb-3">
     <div>
         {{# isadmin }}
-            <form action="{{wwwroot}}/admin/search.php" method="get" class="form-inline search" id="admin-search">
+            <form action="{{wwwroot}}/admin/search.php" method="get" class="d-inline-flex align-items-center gap-1 search" id="admin-search">
                 <input class="form-control form-control-sm search-field hide-600" type="text" name="query" value="" size="12"
                         placeholder="{{#str}}searchadmin, theme_wwu2019{{/str}}"/>
                 <button type="submit" class="icon-button">
@@ -151,7 +151,7 @@
         {{/isadmin}}
     </div>
     <div class="d-inline-flex">
-            <form id="global-search" action="{{wwwroot}}/course/search.php" method="get" class="form-inline search">
+            <form id="global-search" action="{{wwwroot}}/course/search.php" method="get" class="d-inline-flex align-items-center gap-1 search">
                 <input class="form-control form-control-sm search-field hide-600" type="text" name="search" value="" size="12"
                         placeholder="{{#str}}search{{/str}}"/>
                 <button type="submit" class="icon-button">

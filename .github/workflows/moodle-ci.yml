@@ -1,0 +1,10 @@
+name: Moodle Plugin CI
+on: [ push, pull_request ]
+
+jobs:
+  call:
+    name: ""
+    uses: learnweb/moodle-workflows-learnweb/.github/workflows/moodle-ci.yml@main
+    with:
+      allow-mustache-lint-error: true
+      allow-grunt-error: true

@@ -89,17 +89,6 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * core_renderer constructor.
-     * Overrides parent to require admin tree init in $PAGE->settingsnav
-     *
-     * @param moodle_page $page the page we are doing output for.
-     * @param string $target one of rendering target constants.
-     */
-    public function __construct(moodle_page $page, $target) {
-        parent::__construct($page, $target);
-    }
-
-    /**
      * Renders logo heading.
      * @return string HTML string.
      * @throws \moodle_exception
@@ -214,18 +203,7 @@ class core_renderer extends \core_renderer {
      * @throws \coding_exception
      */
     public function edit_button(moodle_url $url, string $method = 'post'): string {
-        $url->param('sesskey', sesskey());
-        $class = '';
-        if ($this->page->user_is_editing()) {
-            $url->param('edit', 'off');
-            $editstring = get_string('turneditingoff');
-            $class = 'red-edit-button';
-        } else {
-            $url->param('edit', 'on');
-            $editstring = get_string('turneditingon');
-        }
-
-        return $this->single_button($url, $editstring, $method, ['class' => 'singlebutton ' . $class]);
+        return $this->edit_switch();
     }
 
     /**
@@ -966,7 +944,7 @@ class core_renderer extends \core_renderer {
         if (has_capability('moodle/user:changeownpassword', $context)) {
             $menu[] = [
                     'name' => get_string('changepassword'),
-                    'icon' => (new pix_icon('i/key', ''))->export_for_pix(),
+                    'icon' => (new pix_icon('i/lock', ''))->export_for_pix(),
                     'href' => (new moodle_url('/login/change_password.php'))->out(false),
                     'hasmenu' => false,
             ];
@@ -1051,6 +1029,15 @@ class core_renderer extends \core_renderer {
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
+    /**
+     * Function to return the page heading.
+     *
+     * @param string $tag
+     * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     */
     public function page_heading($tag = 'h1') {
         if (self::is_examweb() && $this->page->pagelayout === 'course') {
             $handler = \core_customfield\handler::get_handler('core_course', 'course');
@@ -1075,10 +1062,6 @@ class core_renderer extends \core_renderer {
             }
         }
         return $this->page->heading;
-    }
-
-    public function course_content_header($onlyifnotcalledbefore = false) {
-        return parent::course_content_header($onlyifnotcalledbefore);
     }
 
     /**
@@ -1156,7 +1139,8 @@ class core_renderer extends \core_renderer {
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
         $params = [];
-        parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
+        $query = parse_url($wantsurl, PHP_URL_QUERY);
+        parse_str(is_string($query) ? $query : '', $params);
         $paramsmustache = [];
         foreach ($params as $key => $val) {
             $paramsmustache[] = ["key" => $key, "value" => $val];

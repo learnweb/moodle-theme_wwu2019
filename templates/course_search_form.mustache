@@ -33,13 +33,13 @@
         "globalsearch": "https://moodlesite/search/index.php"
     }
 }}
-<form action="{{searchurl}}" id="{{id}}" method="get" class="form-inline">
+<form action="{{searchurl}}" id="{{id}}" method="get" class="d-inline-flex align-items-center gap-1">
     <fieldset class="coursesearchbox invisiblefieldset">
         <label for="{{inputid}}">{{#str}}searchcourses{{/str}}</label>
-        <input id="{{inputid}}" name="search" type="text" size="{{inputsize}}" value="{{value}}" class="form-control mb-1 mb-sm-0">
+        <input id="{{inputid}}" name="search" type="text" size="{{inputsize}}" value="{{value}}" class="form-control">
         <button class="btn btn-secondary" type="submit">{{#str}}go{{/str}}</button>
         {{#helpicon}}
-            {{>core/help_icon}}
+            {{> core/help_icon}}
         {{/helpicon}}
         <a href="{{globalsearch}}" class="text-nowrap">{{#str}} advancedsearch, mod_forum {{/str}}</a>
     </fieldset>
