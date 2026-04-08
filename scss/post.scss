@@ -65,12 +65,20 @@ html.dark-theme {
   color: white;
 }
 
-.dark-theme .text-muted, #main-menu .dimmed_text > a > span, #menu-bottom .dimmed_text > a > span, .section .activity .stealth {
-  color: white !important;
+.dark-theme .text-muted, .dark-theme .section .activity .stealth {
+  color: LightGray !important;
+}
+
+.dark-theme > #main-menu .dimmed_text > a > span {
+  color: LightGray !important;
+}
+
+.dark-theme > #menu-bottom .dimmed_text > a > span {
+  color: LightGray !important;
 }
 
 .dark-theme .form-shortname.d-block.small.text-muted {
-  color: white !important;
+  color: LightGray !important;
 }
 
 .dark-theme .activity-item .activity-dates {
