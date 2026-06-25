@@ -24,15 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['alert1text'] = 'Alert text (alert 1)';
-$string['alert1title'] = 'Alert title (alert 1)';
-$string['alert1type'] = 'Alert type (alert 1)';
-$string['alert2text'] = 'Alert text (alert 2)';
-$string['alert2title'] = 'Alert title (alert 2)';
-$string['alert2type'] = 'Alert type (alert 2)';
-$string['alert3text'] = 'Alert text (alert 3)';
-$string['alert3title'] = 'Alert title (alert 3)';
-$string['alert3type'] = 'Alert type (alert 3)';
+$string['alert'] = 'Alert';
+$string['alerttext'] = 'Text';
+$string['alerttitle'] = 'Title';
+$string['alerttype'] = 'Type';
 $string['alert_general'] = 'General';
 $string['alert_info'] = 'Info';
 $string['alert_warning'] = 'Warning';
@@ -40,13 +35,14 @@ $string['alerttext_desc'] = 'Second part of the alert.';
 $string['alerttitle_desc'] = 'First part of the alert (printed in bold).';
 $string['alerttype_desc'] = 'Type of alert (similar to debug levels).';
 $string['badgepreferences'] = 'Badge';
+$string['before'] = 'Before';
 $string['choosereadme'] = 'This theme is based on moodle\'s classic theme and aligned with the corporate design of the University of Münster';
 $string['choosetheme'] = 'Choose theme';
 $string['dark'] = 'Dark';
 $string['dashboard'] = 'Dashboard';
-$string['enable1alert'] = 'Show alert 1';
-$string['enable2alert'] = 'Show alert 2';
-$string['enable3alert'] = 'Show alert 3';
+$string['editcoursesettings'] = 'Edit course settings';
+$string['editcoursesettingshelp'] = 'Edit course names, start date, course category, semester etc.';
+$string['enablealert'] = 'Show alert';
 $string['enablealert_desc'] = 'Show/hide a specific alert.';
 $string['exam:begin'] = 'Start of exam:';
 $string['exam:end'] = 'End of exam:';

@@ -24,15 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['alert1text'] = 'Alert-Text (Alert 1)';
-$string['alert1title'] = 'Alert-Titel (Alert 1)';
-$string['alert1type'] = 'Alert-Typ (Alert 1)';
-$string['alert2text'] = 'Alert-Text (Alert 2)';
-$string['alert2title'] = 'Alert-Titel (Alert 2)';
-$string['alert2type'] = 'Alert-Typ (Alert 2)';
-$string['alert3text'] = 'Alert-Text (Alert 3)';
-$string['alert3title'] = 'Alert-Titel (Alert 3)';
-$string['alert3type'] = 'Alert-Typ (Alert 3)';
+$string['alert'] = 'Alert';
+$string['alerttext'] = 'Text';
+$string['alerttitle'] = 'Titel';
+$string['alerttype'] = 'Typ';
 $string['alert_general'] = 'Ankündigung';
 $string['alert_info'] = 'Info';
 $string['alert_warning'] = 'Warnung';
@@ -40,13 +35,14 @@ $string['alerttext_desc'] = 'Zweiter Teil der Meldung.';
 $string['alerttitle_desc'] = 'Erster Teil der Meldung (wird fettgedruckt).';
 $string['alerttype_desc'] = 'Typ des Alerts (vgl. debug levels).';
 $string['badgepreferences'] = 'Badge';
+$string['before'] = 'Davor';
 $string['choosereadme'] = 'Dieses Theme basiert auf dem Classic-Theme von Moodle und ist hinsichtlich des Corporate Design der WWU Münster angepasst.';
 $string['choosetheme'] = 'Theme auswählen';
 $string['dark'] = 'Dunkel';
 $string['dashboard'] = 'Dashboard';
-$string['enable1alert'] = 'Alert 1 zeigen';
-$string['enable2alert'] = 'Alert 2 zeigen';
-$string['enable3alert'] = 'Alert 3 zeigen';
+$string['editcoursesettings'] = 'Kurs-Einstellungen ändern';
+$string['editcoursesettingshelp'] = 'Bearbeiten Sie hier Kursnamen, Kursbeginndatum, Kursbereich, Semesterzuordnung etc.';
+$string['enablealert'] = 'Alert zeigen';
 $string['enablealert_desc'] = 'Ob der jeweilige Alert angezeigt wird.';
 $string['exam:begin'] = 'Klausurbeginn:';
 $string['exam:end'] = 'Klausurende:';
