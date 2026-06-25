@@ -76,7 +76,7 @@ class alerts {
             return '';
         }
 
-        $alertinfo = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-info fa-stack-1x fa-inverse"></span></span>';
+        $alertinfo = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-circle-info fa-2x"></span></span>';
         $alerterror = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-warning fa-stack-1x fa-inverse"></span></span>';
         $alertsuccess = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-bullhorn fa-stack-1x fa-inverse">' .
             '</span></span>';
@@ -99,8 +99,8 @@ class alerts {
             $alertstring .= '<button type="button" class="close" data-dismiss="alert">' .
                 '<span class="fa fa-times-circle" aria-hidden="true"></span></button>';
             $alert1icon = 'alert' . $pluginconfig->alert1type;
-            $alertstring .= $$alert1icon.'<span class="title">'.$pluginconfig->alert1title;
-            $alertstring .= '</span>'.$pluginconfig->alert1text;
+            $alertstring .= $$alert1icon.'<span class="title">' . format_string($pluginconfig->alert1title);
+            $alertstring .= '</span>' . format_string($pluginconfig->alert1text);
             $alertstring .= '</div>';
         }
 
