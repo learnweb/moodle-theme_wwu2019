@@ -67,73 +67,39 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     // Alerts.
-    $setting = new admin_setting_configcheckbox('theme_wwu2019/enable1alert',
-        get_string('enable1alert', 'theme_wwu2019'),
-        get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
-    $page->add($setting);
 
     $alertinfo = get_string('alert_info', 'theme_wwu2019');
     $alertwarning = get_string('alert_warning', 'theme_wwu2019');
     $alertgeneral = get_string('alert_general', 'theme_wwu2019');
     $alerttypedefault = 'info';
     $alerttypechoices = ['info' => $alertinfo, 'error' => $alertwarning, 'success' => $alertgeneral];
-    $setting = new admin_setting_configselect('theme_wwu2019/alert1type',
-        get_string('alert1type', 'theme_wwu2019'),
-        get_string('alerttype_desc', 'theme_wwu2019'),
-        $alerttypedefault, $alerttypechoices);
-    $page->add($setting);
 
-    $setting = new admin_setting_configtext('theme_wwu2019/alert1title',
-        get_string('alert1title', 'theme_wwu2019'),
-        get_string('alerttitle_desc', 'theme_wwu2019'), '');
-    $page->add($setting);
+    for ($i = 1; $i <= 3; $i++) {
 
-    $setting = new admin_setting_configtext('theme_wwu2019/alert1text',
-        get_string('alert1text', 'theme_wwu2019'),
-        get_string('alerttext_desc', 'theme_wwu2019'), '');
-    $page->add($setting);
+        $page->add(new admin_setting_heading('theme_wwu2019_alerts'.$i,
+            get_string('alert', 'theme_wwu2019')." ".$i, ''));
+        
+        $setting = new admin_setting_configcheckbox("theme_wwu2019/enable{$i}alert",
+           get_string("enablealert", 'theme_wwu2019'),
+           get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
+        $page->add($setting);
 
-    $setting = new admin_setting_configcheckbox('theme_wwu2019/enable2alert',
-        get_string('enable2alert', 'theme_wwu2019'),
-        get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
-    $page->add($setting);
+        $setting = new admin_setting_configselect("theme_wwu2019/alert{$i}type",
+            get_string("alerttype", 'theme_wwu2019'),
+            get_string('alerttype_desc', 'theme_wwu2019'),
+            $alerttypedefault, $alerttypechoices);
+        $page->add($setting);
 
-    $setting = new admin_setting_configselect('theme_wwu2019/alert2type',
-        get_string('alert2type', 'theme_wwu2019'),
-        get_string('alerttype_desc', 'theme_wwu2019'),
-        $alerttypedefault, $alerttypechoices);
-    $page->add($setting);
+        $setting = new admin_setting_configtext("theme_wwu2019/alert{$i}title",
+            get_string("alerttitle", 'theme_wwu2019'),
+            get_string('alerttitle_desc', 'theme_wwu2019'), '{mlang de}{mlang}{mlang other}{mlang}', PARAM_RAW, 60);
+        $page->add($setting);
 
-    $setting = new admin_setting_configtext('theme_wwu2019/alert2title',
-        get_string('alert2title', 'theme_wwu2019'),
-        get_string('alerttitle_desc', 'theme_wwu2019'), '');
-    $page->add($setting);
-
-    $setting = new admin_setting_configtext('theme_wwu2019/alert2text',
-        get_string('alert2text', 'theme_wwu2019'),
-        get_string('alerttext_desc', 'theme_wwu2019'), '');
-    $page->add($setting);
-
-    $setting = new admin_setting_configcheckbox('theme_wwu2019/enable3alert',
-        get_string('enable2alert', 'theme_wwu2019'),
-        get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
-    $page->add($setting);
-
-    $setting = new admin_setting_configselect('theme_wwu2019/alert3type',
-        get_string('alert3type', 'theme_wwu2019'),
-        get_string('alerttype_desc', 'theme_wwu2019'),
-        $alerttypedefault, $alerttypechoices);
-    $page->add($setting);
-
-    $setting = new admin_setting_configtext('theme_wwu2019/alert3title',
-        get_string('alert3title', 'theme_wwu2019'),
-        get_string('alerttitle_desc', 'theme_wwu2019'), '');
-    $page->add($setting);
-
-    $setting = new admin_setting_configtext('theme_wwu2019/alert3text',
-        get_string('alert3text', 'theme_wwu2019'),
-        get_string('alerttext_desc', 'theme_wwu2019'), '');
-    $page->add($setting);
+        $setting = new admin_setting_configtextarea("theme_wwu2019/alert{$i}text",
+            get_string("alerttext", 'theme_wwu2019'),
+            get_string('alerttext_desc', 'theme_wwu2019'), '{mlang de}{mlang}{mlang other}{mlang}', PARAM_RAW, 60, 3);
+        $page->add($setting);
+    }
 
     // Marketing spot settings.
     $page->add(new admin_setting_heading('theme_wwu2019_marketing',
