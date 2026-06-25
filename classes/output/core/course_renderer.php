@@ -23,6 +23,14 @@
  */
 
 namespace theme_wwu2019\output\core;
+
+use context_course;
+use core_course_category;
+use core_course_list_element;
+use core_tag_tag;
+use coursecat_helper;
+use html_writer;
+use moodle_url;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
@@ -77,6 +85,42 @@ class course_renderer extends \core_course_renderer {
 
         $output = $this->render_from_template('theme_wwu2019/course_search_form', $data);
         return $output;
+    }
+
+
+    /**
+     * Returns HTML to display course category name.
+     *
+     * @param coursecat_helper $chelper
+     * @param core_course_list_element $course
+     * @return string
+     */
+    protected function course_category_name(coursecat_helper $chelper, core_course_list_element $course): string {
+        $content = '';
+        // Display course category if necessary (for example in search results).
+        if ($chelper->get_show_courses() == self::COURSECAT_SHOW_COURSES_EXPANDED_WITH_CAT) {
+            if ($cat = core_course_category::get($course->category, IGNORE_MISSING)) {
+                $catname = $cat->get_formatted_name();
+                $content .= html_writer::start_tag('div', ['class' => 'coursecat']);
+                $content .= html_writer::start_tag('span', ['class' => 'fw-bold']);
+                $content .= get_string('category').': ';
+                $content .= html_writer::link(new moodle_url('/course/index.php', ['categoryid' => $cat->id]),
+                    $catname, ['class' => $cat->visible ? '' : 'dimmed']);
+                $content .= html_writer::end_tag('span');
+                if (str_contains($catname, 'Archiv ')) {
+                    if ($tags = core_tag_tag::get_item_tags('core', 'course', $course->id, true )) {
+                        $context = context_course::instance($course->id);
+                        foreach ($tags as $tag) {
+                            $tname = get_string('before', 'theme_wwu2019').": ".core_tag_tag::make_display_name($tag, false);
+                            $turl = core_tag_tag::make_url($tag->tagcollid, $tag->rawname, 0, $context->id);
+                            $content .= html_writer::link($turl, $tname, ['class' => 'ml-4 customfieldvalue']);
+                        }
+                    }
+                }
+                $content .= html_writer::end_tag('div');
+            }
+        }
+        return $content;
     }
 
 }
