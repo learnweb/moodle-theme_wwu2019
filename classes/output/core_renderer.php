@@ -214,6 +214,15 @@ class core_renderer extends \core_renderer {
      * @throws \coding_exception
      */
     public function edit_button(moodle_url $url, string $method = 'post'): string {
+        $out = "";
+        if ($id = optional_param('id', 0, PARAM_INT)) {
+            $out = \html_writer::link(new moodle_url('/course/edit.php', ['id' => $id]),
+                get_string('editcoursesettings'),
+                ['title' => get_string('editcoursesettingshelp', 'theme_wwu2019'),
+                    'class' => 'pt-2']);
+            $out .= $this->pix_icon('t/edit', get_string('editcoursesettingshelp', 'theme_wwu2019'), 'moodle',
+                ['class' => 'pt-2 mr-3 text-primary']);
+        }
         $url->param('sesskey', sesskey());
         $class = '';
         if ($this->page->user_is_editing()) {
@@ -224,8 +233,8 @@ class core_renderer extends \core_renderer {
             $url->param('edit', 'on');
             $editstring = get_string('turneditingon');
         }
-
-        return $this->single_button($url, $editstring, $method, ['class' => 'singlebutton ' . $class]);
+        $out .= $this->single_button($url, $editstring, $method, ['class' => 'singlebutton ' . $class]);
+        return $out;
     }
 
     /**
