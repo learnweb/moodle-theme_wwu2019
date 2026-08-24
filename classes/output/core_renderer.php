@@ -884,6 +884,15 @@ class core_renderer extends \core_renderer {
                             ['userid' => $USER->id]))->out(false),
             ];
 
+            // Eportfolio.
+            $menucontent[] = [
+                    'name' => get_string('navbar', 'local_eportfolio'),
+                    'hasmenu' => false,
+                    'menu' => null,
+                    'icon' => (new pix_icon('i/competencies', ''))->export_for_pix(),
+                    'href' => (new moodle_url('/local/eportfolio/index.php'))->out(false),
+            ];
+
             // Badges.
             if (!empty($CFG->enablebadges) && has_capability('moodle/badges:manageownbadges', $context)) {
                 $menucontent[] = [
