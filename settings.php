@@ -77,7 +77,7 @@ if ($ADMIN->fulltree) {
     for ($i = 1; $i <= 3; $i++) {
 
         $page->add(new admin_setting_heading('theme_wwu2019_alerts'.$i,
-            get_string('alert', 'theme_wwu2019')." ".$i, ''));
+            get_string('alert_heading', 'theme_wwu2019', $i), ''));
 
         $setting = new admin_setting_configcheckbox("theme_wwu2019/enable{$i}alert",
            get_string("enablealert", 'theme_wwu2019'),

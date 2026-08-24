@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['alert'] = 'Alert';
+$string['alert_heading'] = 'Alert {$a}';
 $string['alerttext'] = 'Text';
 $string['alerttitle'] = 'Title';
 $string['alerttype'] = 'Type';
