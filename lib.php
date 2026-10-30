@@ -42,9 +42,7 @@ function theme_wwu2019_get_main_scss_content($theme) {
     $pre .= file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/pre.scss');
 
     // Main SCSS - Boost's preset (design system tokens, FontAwesome, Bootstrap, Moodle core styles).
-    $scss = file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/pre.scss');
-    $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
-    $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/post.scss');
+    $scss = file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
 
     // Post SCSS - WWU rules, loaded after Boost.
     $post = file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/post.scss');

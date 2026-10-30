@@ -36,7 +36,7 @@ $string['alerttype'] = 'Type';
 $string['alerttype_desc'] = 'Type of alert (similar to debug levels).';
 $string['badgepreferences'] = 'Badge';
 $string['before'] = 'Before';
-$string['choosereadme'] = 'This theme is based on moodle\'s classic theme and aligned with the corporate design of the University of Münster';
+$string['choosereadme'] = 'Theme of the University of Münster, based on Moodle\'s Boost theme and aligned with the corporate design of the University of Münster.';
 $string['choosetheme'] = 'Choose theme';
 $string['copyrightwarning'] = 'Please note that no documents may be provided that infringe on third-party copyrights. This applies in particular to documents that you have not created yourself. Further information can be found <a href="http://www.ulb.uni-muenster.de/bibliothek/recht/urhg-hinweise.html">here</a> and <a href="http://www.ulb.uni-muenster.de/service/esa/dozenten-info.html">here</a>. If you cannot rule out copyright infringement due to unclear rights, please refrain from providing the document.';
 $string['dark'] = 'Dark';

@@ -28,7 +28,7 @@ if ($ADMIN->fulltree) {
         'themesettingwwu2019',
         get_string('pluginname', 'theme_wwu2019')
     );
-    $page = new admin_settingpage('theme_classic_wwu2019', get_string('generalsettings', 'theme_boost'));
+    $page = new admin_settingpage('theme_wwu2019_gimmickspage', get_string('generalsettings', 'theme_boost'));
 
     $page->add(new admin_setting_configcheckbox(
         'theme_wwu2019/isexamweb',

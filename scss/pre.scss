@@ -114,3 +114,12 @@ $theme-colors: map-merge((
     dark: $gray-800
 ), $theme-colors);
 // stylelint-enable
+
+// Boost positions sticky elements (anchor targets, sticky table headers) below a fixed navbar of this height.
+// The WWU header is not fixed, only the main menu sticks to the top, so a smaller offset is enough.
+$navbar-height: 50px;
+// Compact height of the secondary navigation ("More" menu).
+$moremenu-height: 50px;
+// Keep borders and spacing of the page header on pages with the "reset-style" body class (e.g. forum nested view).
+$allow-reset-style: false;
+

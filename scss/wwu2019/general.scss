@@ -136,6 +136,14 @@ $page-padding: 1rem;
     }
 }
 
+@media print {
+    // The block column is hidden when printing, so the content uses the full width.
+    #page-content.blocks-post .region-main {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
 .pagelayout-embedded #page {
     padding: 0;
 }
