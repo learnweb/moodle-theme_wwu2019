@@ -36,7 +36,7 @@ function theme_wwu2019_get_main_scss_content($theme) {
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
     // ...Export $wwwroot as scss-variable.
     $isexamweb = \theme_wwu2019\output\core_renderer::is_examweb();
-    $wwwnormalizedroot = preg_replace('/https?:\/\/(www|[xs]sso|sso\d?)\./i',  'https://www.', $CFG->wwwroot, 1);
+    $wwwnormalizedroot = preg_replace('/https?:\/\/(www|[xs]sso|sso\d?)\./i', 'https://www.', $CFG->wwwroot, 1);
     $pre = '$wwwroot: "' . $wwwnormalizedroot . '";' . "\n";
 
     $pre .= '$logoprefix: ' . ($isexamweb ? 'examweb' : 'learnweb') . ";\n";
@@ -97,12 +97,12 @@ function theme_wwu2019_extend_navigation_course($navigation, $course, $context) 
     }
 
     $node = navigation_node::create(
-            get_string('contentbank'),
-            new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
-            navigation_node::NODETYPE_LEAF,
-            null,
-            'contentbank',
-            new pix_icon('i/contentbank', '')
+        get_string('contentbank'),
+        new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
+        navigation_node::NODETYPE_LEAF,
+        null,
+        'contentbank',
+        new pix_icon('i/contentbank', '')
     );
 
     $navigation->add_node($node);

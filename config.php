@@ -200,7 +200,7 @@ $THEME->layouts = [
 ];
 
 // This is the function that returns the SCSS source for the main file in our theme.
-$THEME->scss = function($theme) {
+$THEME->scss = function ($theme) {
     return theme_wwu2019_get_main_scss_content($theme);
 };
 

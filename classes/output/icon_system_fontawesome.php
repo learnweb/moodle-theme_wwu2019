@@ -31,7 +31,6 @@ namespace theme_wwu2019\output;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
-
     /**
      * @var array $map Cached map of moodle icon names to font awesome icon names.
      */

@@ -24,46 +24,71 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingwwu2019',
-            get_string('pluginname', 'theme_wwu2019'));
+    $settings = new theme_boost_admin_settingspage_tabs(
+        'themesettingwwu2019',
+        get_string('pluginname', 'theme_wwu2019')
+    );
     $page = new admin_settingpage('theme_classic_wwu2019', get_string('generalsettings', 'theme_boost'));
 
-    $page->add(new admin_setting_configcheckbox('theme_wwu2019/isexamweb',
+    $page->add(new admin_setting_configcheckbox(
+        'theme_wwu2019/isexamweb',
         get_string('settings:isexamweb', 'theme_wwu2019'),
         get_string('settings:isexamweb_desc', 'theme_wwu2019'),
         '0'
     ));
 
-    $page->add(new admin_setting_configcolourpicker('theme_wwu2019/primarycolor',
-        get_string('settings:primarycolor', 'theme_wwu2019'), '',
-        '#006784'));
+    $page->add(new admin_setting_configcolourpicker(
+        'theme_wwu2019/primarycolor',
+        get_string('settings:primarycolor', 'theme_wwu2019'),
+        '',
+        '#006784'
+    ));
 
-    $page->add(new admin_setting_configcolourpicker('theme_wwu2019/secondarycolor',
-        get_string('settings:secondarycolor', 'theme_wwu2019'), '',
-        '#578014'));
+    $page->add(new admin_setting_configcolourpicker(
+        'theme_wwu2019/secondarycolor',
+        get_string('settings:secondarycolor', 'theme_wwu2019'),
+        '',
+        '#578014'
+    ));
 
-    $page->add(new admin_setting_configtextarea('theme_wwu2019/prescss',
-        get_string('settings:prescss', 'theme_wwu2019'), '', ''));
+    $page->add(new admin_setting_configtextarea(
+        'theme_wwu2019/prescss',
+        get_string('settings:prescss', 'theme_wwu2019'),
+        '',
+        ''
+    ));
 
-    $page->add(new admin_setting_configcheckbox('theme_wwu2019/darktheme_enabled',
-        get_string('settings:darkthemeenabled', 'theme_wwu2019'), '',
-        '1'));
+    $page->add(new admin_setting_configcheckbox(
+        'theme_wwu2019/darktheme_enabled',
+        get_string('settings:darkthemeenabled', 'theme_wwu2019'),
+        '',
+        '1'
+    ));
 
-    $setting = new admin_setting_configtext('theme_wwu2019/helpurl',
+    $setting = new admin_setting_configtext(
+        'theme_wwu2019/helpurl',
         get_string('helpurl', 'theme_wwu2019'),
-        get_string('helpurl_desc', 'theme_wwu2019'), '', PARAM_URL);
+        get_string('helpurl_desc', 'theme_wwu2019'),
+        '',
+        PARAM_URL
+    );
     $page->add($setting);
 
     // Matomo.
-    $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteurl',
+    $setting = new admin_setting_configtext(
+        'theme_wwu2019/matomo_siteurl',
         get_string('matomo_siteurl', 'theme_wwu2019'),
-        get_string('matomo_siteurl_desc', 'theme_wwu2019'), '');
+        get_string('matomo_siteurl_desc', 'theme_wwu2019'),
+        ''
+    );
     $page->add($setting);
 
-    $setting = new admin_setting_configtext('theme_wwu2019/matomo_siteid',
+    $setting = new admin_setting_configtext(
+        'theme_wwu2019/matomo_siteid',
         get_string('matomo_siteid', 'theme_wwu2019'),
-        get_string('matomo_siteid_desc', 'theme_wwu2019'), '');
+        get_string('matomo_siteid_desc', 'theme_wwu2019'),
+        ''
+    );
     $page->add($setting);
 
     // Alerts.
@@ -75,36 +100,59 @@ if ($ADMIN->fulltree) {
     $alerttypechoices = ['info' => $alertinfo, 'error' => $alertwarning, 'success' => $alertgeneral];
 
     for ($i = 1; $i <= 3; $i++) {
+        $page->add(new admin_setting_heading(
+            'theme_wwu2019_alerts' . $i,
+            get_string('alert_heading', 'theme_wwu2019', $i),
+            ''
+        ));
 
-        $page->add(new admin_setting_heading('theme_wwu2019_alerts'.$i,
-            get_string('alert_heading', 'theme_wwu2019', $i), ''));
-
-        $setting = new admin_setting_configcheckbox("theme_wwu2019/enable{$i}alert",
-           get_string("enablealert", 'theme_wwu2019'),
-           get_string('enablealert_desc', 'theme_wwu2019'), false, true, false);
+        $setting = new admin_setting_configcheckbox(
+            "theme_wwu2019/enable{$i}alert",
+            get_string("enablealert", 'theme_wwu2019'),
+            get_string('enablealert_desc', 'theme_wwu2019'),
+            false,
+            true,
+            false
+        );
         $page->add($setting);
 
-        $setting = new admin_setting_configselect("theme_wwu2019/alert{$i}type",
+        $setting = new admin_setting_configselect(
+            "theme_wwu2019/alert{$i}type",
             get_string("alerttype", 'theme_wwu2019'),
             get_string('alerttype_desc', 'theme_wwu2019'),
-            $alerttypedefault, $alerttypechoices);
+            $alerttypedefault,
+            $alerttypechoices
+        );
         $page->add($setting);
 
-        $setting = new admin_setting_configtext("theme_wwu2019/alert{$i}title",
+        $setting = new admin_setting_configtext(
+            "theme_wwu2019/alert{$i}title",
             get_string("alerttitle", 'theme_wwu2019'),
-            get_string('alerttitle_desc', 'theme_wwu2019'), '{mlang de}{mlang}{mlang other}{mlang}', PARAM_RAW, 60);
+            get_string('alerttitle_desc', 'theme_wwu2019'),
+            '{mlang de}{mlang}{mlang other}{mlang}',
+            PARAM_RAW,
+            60
+        );
         $page->add($setting);
 
-        $setting = new admin_setting_configtextarea("theme_wwu2019/alert{$i}text",
+        $setting = new admin_setting_configtextarea(
+            "theme_wwu2019/alert{$i}text",
             get_string("alerttext", 'theme_wwu2019'),
-            get_string('alerttext_desc', 'theme_wwu2019'), '{mlang de}{mlang}{mlang other}{mlang}', PARAM_RAW, 60, 3);
+            get_string('alerttext_desc', 'theme_wwu2019'),
+            '{mlang de}{mlang}{mlang other}{mlang}',
+            PARAM_RAW,
+            60,
+            3
+        );
         $page->add($setting);
     }
 
     // Marketing spot settings.
-    $page->add(new admin_setting_heading('theme_wwu2019_marketing',
+    $page->add(new admin_setting_heading(
+        'theme_wwu2019_marketing',
         get_string('marketingheading', 'theme_wwu2019'),
-        format_text(get_string('marketingdesc', 'theme_wwu2019'), FORMAT_MARKDOWN)));
+        format_text(get_string('marketingdesc', 'theme_wwu2019'), FORMAT_MARKDOWN)
+    ));
 
     foreach (range(1, 3) as $marketingspotnumber) {
         // This is the descriptor for Marketing Spot in $marketingspotnumber.
@@ -135,17 +183,29 @@ if ($ADMIN->fulltree) {
     $gimmickpage = new admin_settingpage('theme_wwu2019_gimmickspage', 'Gimmicks');
 
     $gimmickpage->add(new admin_setting_heading('theme_wwu2019_snow', 'Snow', null));
-    $gimmickpage->add(new admin_setting_configselect('theme_wwu2019/snow_enable', 'Enable snow', '',
-        0, [
+    $gimmickpage->add(new admin_setting_configselect(
+        'theme_wwu2019/snow_enable',
+        'Enable snow',
+        '',
+        0,
+        [
             0 => 'Disable snow',
             1 => 'Enable snow',
             2 => 'Enable snow within timelimits',
-    ]));
-    $gimmickpage->add(new admin_setting_configtext('theme_wwu2019/snow_start', 'Start snow',
-        'Of course a unixtimestamp. Because it is very convenient.', 0));
-    $gimmickpage->add(new admin_setting_configtext('theme_wwu2019/snow_end', 'End snow',
-        'Of course a unixtimestamp. Because it is very convenient.', 0));
+        ]
+    ));
+    $gimmickpage->add(new admin_setting_configtext(
+        'theme_wwu2019/snow_start',
+        'Start snow',
+        'Of course a unixtimestamp. Because it is very convenient.',
+        0
+    ));
+    $gimmickpage->add(new admin_setting_configtext(
+        'theme_wwu2019/snow_end',
+        'End snow',
+        'Of course a unixtimestamp. Because it is very convenient.',
+        0
+    ));
 
     $settings->add($gimmickpage);
-
 }
