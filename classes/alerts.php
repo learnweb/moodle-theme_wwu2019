@@ -77,7 +77,8 @@ class alerts {
         }
 
         $alertinfo = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-circle-info fa-2x"></span></span>';
-        $alerterror = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-warning fa-stack-1x fa-inverse"></span></span>';
+        $alerterror = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-triangle-exclamation fa-stack-1x fa-inverse">' .
+            '</span></span>';
         $alertsuccess = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-bullhorn fa-stack-1x fa-inverse">' .
             '</span></span>';
 

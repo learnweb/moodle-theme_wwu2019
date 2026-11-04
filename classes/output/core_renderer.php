@@ -381,7 +381,7 @@ class core_renderer extends \core_renderer {
      */
     private function add_endofpage_button() {
         $html = '';
-        $attributes['class'] = 'icon fa fa-arrow-circle-o-down';
+        $attributes['class'] = 'icon fa-regular fa-circle-down';
         $attributes['aria-hidden'] = 'true';
         $attributes['href'] = new moodle_url('#wwu-footer');
         $tag = \html_writer::tag('a', '', $attributes);

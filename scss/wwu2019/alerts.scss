@@ -116,7 +116,7 @@
     }
 
     .fa-info,
-    .fa-warning,
+    .fa-triangle-exclamation,
     .fa-bullhorn {
         background-color: transparent;
     }
@@ -129,7 +129,7 @@
         }
     }
 
-    .fa-warning {
+    .fa-triangle-exclamation {
         &,
         &:hover,
         &:focus {
