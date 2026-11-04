@@ -198,6 +198,20 @@ body.pagelayout-popup #page {
     }
 }
 
+// Hidden courses and activities in the breadcrumb look like normal items, so they are not mistaken for disabled links.
+.breadcrumb-item.dimmed_text {
+    color: inherit;
+
+    a,
+    a:link,
+    a:visited {
+        color: var(--wwu-learnwebblue);
+
+        &:hover {
+            color: var(--wwu-learnwebblue-highlight);
+        }
+    }
+}
 
 .hide-600 {
     @media (max-width: 600px) {
