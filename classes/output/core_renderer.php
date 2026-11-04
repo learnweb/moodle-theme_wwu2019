@@ -1201,7 +1201,7 @@ class core_renderer extends \core_renderer {
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
         $params = [];
-        parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
+        parse_str((string) parse_url($wantsurl, PHP_URL_QUERY), $params);
         $paramsmustache = [];
         foreach ($params as $key => $val) {
             $paramsmustache[] = ["key" => $key, "value" => $val];
