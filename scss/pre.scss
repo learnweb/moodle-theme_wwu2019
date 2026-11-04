@@ -86,13 +86,12 @@ $navbar-dark-hover-color:           rgba($white, 1) !default;
 $navbar-light-hover-color:          rgba($black, .9) !default;
 
 // Breadcrumbs
-$breadcrumb-padding-y:              .25rem !default;
-$breadcrumb-padding-x:              0 !default;
-$breadcrumb-item-padding:           .5rem !default;
-$breadcrumb-margin-bottom:          0 !default;
-$breadcrumb-bg:                     transparent !default;
+$breadcrumb-padding-y: .25rem !default;
+$breadcrumb-padding-x: 0 !default;
+$breadcrumb-item-padding-x: .5rem !default;
+$breadcrumb-margin-bottom: 0 !default;
+$breadcrumb-bg: transparent !default;
 $breadcrumb-divider: "/" !default;
-$breadcrumb-divider-rtl: "/" !default;
 
 // Menu
 $main-menu-height: 55px;
@@ -101,8 +100,6 @@ $main-menu-height: 55px;
 $alert-border-width:                0 !default;
 
 $card-group-margin: .25rem;
-
-$custom-select-indicator-color: #777;
 
 // stylelint-disable
 $theme-colors: () !default;

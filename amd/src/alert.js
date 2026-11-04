@@ -8,7 +8,7 @@ define(['jquery'], function($) {
     return {
         init: function() {
             $(document).ready(function($) {
-                $('.useralerts .close').on('click', function(e){
+                $('.useralerts .wwu-alert-close').on('click', function(e){
                     var elem = $(e.target).parentsUntil(".essentialalerts", ".useralerts")[0];
                     document.cookie = elem.id + '=closed;path=/';
                 });

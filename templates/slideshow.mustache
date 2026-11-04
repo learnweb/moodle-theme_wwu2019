@@ -27,7 +27,7 @@
 <div id="wwuCarousel" class="carousel slide" data-bs-interval="8000" data-bs-ride="carousel">
     <ol class="carousel-indicators d-flex">
         {{#slides}}
-            <li data-bs-target="#wwuCarousel" data-bs-slide-to="{{index}}" {{#active}}class="ml-auto active"{{/active}}></li>
+            <li data-bs-target="#wwuCarousel" data-bs-slide-to="{{index}}" {{#active}}class="ms-auto active"{{/active}}></li>
         {{/slides}}
     </ol>
     <div class="carousel-inner">
@@ -55,10 +55,10 @@
     </div>
     <a class="carousel-control carousel-control-prev" href="#wwuCarousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">{{# str }} prev {{/ str }}</span>
+        <span class="visually-hidden">{{# str }} prev {{/ str }}</span>
     </a>
     <a class="carousel-control carousel-control-next" href="#wwuCarousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">{{# str }} next {{/ str }}</span>
+        <span class="visually-hidden">{{# str }} next {{/ str }}</span>
     </a>
 </div>

@@ -40,7 +40,6 @@
 }
 
 select:disabled,
-.custom-select:disabled,
 .form-control:disabled,
 .form-control[readonly] {
     color: var(--wwu-fg-1);
@@ -51,13 +50,9 @@ select:disabled,
 select,
 .form-control,
 .form-control:focus,
-.custom-select,
 input[type="submit"]:not(.btn),
 .input-group-text,
-.custom-file-label,
-.yui3-button,
-.custom-select.is-invalid,
-.custom-select:invalid,{
+.yui3-button {
     background-color: var(--wwu-bg);
     border-color: var(--wwu-muted-fg);
     color: var(--wwu-fg);

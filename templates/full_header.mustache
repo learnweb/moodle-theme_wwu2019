@@ -34,14 +34,14 @@
                 </div>
             {{/hasnavbar}}
             {{#pageheadingbutton}}
-                <div class="ml-auto d-flex">
+                <div class="ms-auto d-flex">
                     {{{pageheadingbutton}}}
                 </div>
             {{/pageheadingbutton}}
         </div>
         <div class="d-flex align-items-center">
             {{#contextheader}}
-                <div class="mr-auto">
+                <div class="me-auto">
                     {{{contextheader}}}
                 </div>
             {{/contextheader}}
@@ -56,7 +56,7 @@
             <span class="page-title">{{{pageheading}}}</span>
             <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                 {{#headeractions}}
-                    <div class="header-action ml-2">{{{.}}}</div>
+                    <div class="header-action ms-2">{{{.}}}</div>
                 {{/headeractions}}
             </div>
         </div>
@@ -64,7 +64,7 @@
         {{^ shouldshowheader }}
             <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                 {{#headeractions}}
-                    <div class="header-action ml-2">{{{.}}}</div>
+                    <div class="header-action ms-2">{{{.}}}</div>
                 {{/headeractions}}
             </div>
         {{/ shouldshowheader }}

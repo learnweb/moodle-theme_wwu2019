@@ -371,7 +371,7 @@ select#menumovecategoriesto {
     &:focus,
     &.focus {
         outline: unset;
-        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($color), $color, 15%), .5);
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-contrast($color), $color, 15%), .5);
     }
 }
 

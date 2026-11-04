@@ -21,10 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-.useralerts .close {
-    margin-top: 4px;
-    margin-bottom: 0;
-}
 .useralerts [class^="fa-stack"] {
     margin-right: 5px;
 }
@@ -52,12 +48,25 @@
         color: var(--wwu-fg);
     }
 
-    .close {
+    .wwu-alert-close {
         position: absolute;
-        top: 12px;
+        top: 50%;
         right: 12px;
-        line-height: 12px;
+        display: flex;
         padding: 0;
+        font-size: $font-size-base * 1.5;
+        font-weight: $font-weight-bold;
+        color: $black;
+        text-shadow: 0 1px 0 $white;
+        background-color: transparent;
+        border: 0;
+        opacity: .5;
+        transform: translateY(-50%);
+
+        &:hover,
+        &:focus {
+            opacity: .75;
+        }
     }
 
     &.alert-success {
@@ -65,9 +74,9 @@
         border-color: var(--wwu-success-border);
         color: var(--wwu-success-fg);
 
-        .close,
-        .close:hover,
-        .close:focus {
+        .wwu-alert-close,
+        .wwu-alert-close:hover,
+        .wwu-alert-close:focus {
             &,
             .fa {
                 color: var(--wwu-success-fg);
@@ -80,9 +89,9 @@
         border-color: var(--wwu-info-border);
         color: var(--wwu-info-fg);
 
-        .close,
-        .close:hover,
-        .close:focus {
+        .wwu-alert-close,
+        .wwu-alert-close:hover,
+        .wwu-alert-close:focus {
             &,
             .fa {
                 color: var(--wwu-info-fg);
@@ -96,9 +105,9 @@
         border-color: var(--wwu-error-border);
         color: var(--wwu-error-fg);
 
-        .close,
-        .close:hover,
-        .close:focus {
+        .wwu-alert-close,
+        .wwu-alert-close:hover,
+        .wwu-alert-close:focus {
             &,
             .fa {
                 color: var(--wwu-error-fg);

@@ -182,7 +182,7 @@
                     <div class="subcontent loginsub">
                         <form action="{{loginurl}}" method="post" id="login" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
                             <div class="form-group row">
-                                <label for="username" class="col-5 col-form-label text-right">
+                                <label for="username" class="col-5 col-form-label text-end">
                                         {{^canloginbyemail}}
                                             {{#str}} username {{/str}}
                                         {{/canloginbyemail}}
@@ -195,7 +195,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="password" class="col-5 col-form-label text-right">{{#str}} password {{/str}}</label>
+                                <label for="password" class="col-5 col-form-label text-end">{{#str}} password {{/str}}</label>
                                 <div class="col-6">
                                     <input type="password" class="form-control" id="password" name="password" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
                                 </div>

@@ -225,7 +225,7 @@ class core_renderer extends \core_renderer {
                 't/edit',
                 get_string('editcoursesettingshelp', 'theme_wwu2019'),
                 'moodle',
-                ['class' => 'pt-2 mr-3 text-primary']
+                ['class' => 'pt-2 me-3 text-primary']
             );
         }
         $url->param('sesskey', sesskey());

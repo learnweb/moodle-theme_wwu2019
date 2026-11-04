@@ -115,7 +115,7 @@ class course_renderer extends \core_course_renderer {
                         foreach ($tags as $tag) {
                             $tname = get_string('before', 'theme_wwu2019') . ": " . core_tag_tag::make_display_name($tag, false);
                             $turl = core_tag_tag::make_url($tag->tagcollid, $tag->rawname, 0, $context->id);
-                            $content .= html_writer::link($turl, $tname, ['class' => 'ml-4 customfieldvalue']);
+                            $content .= html_writer::link($turl, $tname, ['class' => 'ms-4 customfieldvalue']);
                         }
                     }
                 }

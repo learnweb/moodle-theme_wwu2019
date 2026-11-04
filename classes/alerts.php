@@ -81,12 +81,14 @@ class alerts {
         $alertsuccess = '<span class="fa-stack"><span aria-hidden="true" class="fa fa-bullhorn fa-stack-1x fa-inverse">' .
             '</span></span>';
 
+        $closebutton = '<button type="button" class="wwu-alert-close" data-bs-dismiss="alert" aria-label="' .
+            s(get_string('closebuttontitle')) . '"><span class="fa fa-circle-xmark" aria-hidden="true"></span></button>';
+
         $alertstring = '<div class="essentialalerts">';
 
         if ($enablewartungsalert) {
             $alertstring .= '<div id="essentialalert-wartung" class="useralerts alert alert-success">';
-            $alertstring .= '<button type="button" class="close" data-dismiss="alert">' .
-                '<span class="fa fa-times-circle" aria-hidden="true"></span></button>';
+            $alertstring .= $closebutton;
             $alertwartungsicon = 'alertsuccess';
             $alertstring .= $$alertwartungsicon . '<span class="title">' . 'Wartungsarbeiten' . '</span>' .
                 $_SESSION["theme_essential_alert"]->name . ' &mdash; <a href="' . $CFG->wwwroot .
@@ -96,8 +98,7 @@ class alerts {
 
         if ($enable1alert) {
             $alertstring .= '<div id="essentialalert-1" class="useralerts alert alert-' . $pluginconfig->alert1type . '">';
-            $alertstring .= '<button type="button" class="close" data-dismiss="alert">' .
-                '<span class="fa fa-times-circle" aria-hidden="true"></span></button>';
+            $alertstring .= $closebutton;
             $alert1icon = 'alert' . $pluginconfig->alert1type;
             $alertstring .= $$alert1icon . '<span class="title">' . format_string($pluginconfig->alert1title);
             $alertstring .= '</span>' . format_string($pluginconfig->alert1text);
@@ -106,8 +107,7 @@ class alerts {
 
         if ($enable2alert) {
             $alertstring .= '<div id="essentialalert-2" class="useralerts alert alert-' . $pluginconfig->alert2type . '">';
-            $alertstring .= '<button type="button" class="close" data-dismiss="alert">' .
-                '<span class="fa fa-times-circle" aria-hidden="true"></span></button>';
+            $alertstring .= $closebutton;
             $alert2icon = 'alert' . $pluginconfig->alert2type;
             $alertstring .= $$alert2icon . '<span class="title">' . $pluginconfig->alert2title;
             $alertstring .= '</span>' . $pluginconfig->alert2text;
@@ -116,8 +116,7 @@ class alerts {
 
         if ($enable3alert) {
             $alertstring .= '<div id="essentialalert-3" class="useralerts alert alert-' . $pluginconfig->alert3type . '">';
-            $alertstring .= '<button type="button" class="close" data-dismiss="alert">' .
-                '<span class="fa fa-times-circle" aria-hidden="true"></span></button>';
+            $alertstring .= $closebutton;
             $alert3icon = 'alert' . $pluginconfig->alert3type;
             $alertstring .= $$alert3icon . '<span class="title">' . $pluginconfig->alert3title;
             $alertstring .= '</span>' . $pluginconfig->alert3text;
