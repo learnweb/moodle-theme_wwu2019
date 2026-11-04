@@ -310,6 +310,11 @@ footer#wwu-footer + div > div.container {
     color: map-get($theme-colors, 'light');
 }
 
+.wwu-copyright-warning {
+    padding-right: 6%;
+    padding-left: 16%;
+}
+
 .fp-navbar {
 
     background: #f2f2f2;
