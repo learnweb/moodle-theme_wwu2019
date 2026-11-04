@@ -28,14 +28,11 @@
     * error - Any errors in the form?,
     * forgotpasswordurl - Forgot password url,
     * hasidentityproviders - Flag, set to true to hide identity providers,
-    * hasinstructions - Flag, set to true to show instructions,
     * identityproviders - List of identiy providers,
     * instructions - Instructions,
     * instructionsformat - Format of instructions,
     * loginurl - Login url,
-    * rememberusername - Remeber username?,
     * signupurl - Signup url,
-    * cookieshelpiconformatted - Formatted html of cookies help icon,
     * errorformatted - Formatted error,
     * logintoken - Random token to protect login request.,
     * maintenance - Maintenance message
@@ -77,14 +74,12 @@
         "error": "",
         "forgotpasswordurl": "http://localhost/stable_master/login/forgot_password.php",
         "hasidentityproviders": false,
-        "hasinstructions": true,
         "identityproviders": [],
         "instructions": "For full access to this site, you first need to create an account.",
         "instructionsformat": "1",
         "loginurl": "http://localhost/stable_master/login/index.php",
-        "rememberusername": true,
         "signupurl": "http://localhost/stable_master/login/signup.php",
-        "cookieshelpiconformatted": "",
+        "cookieshelpicon": null,
         "errorformatted": "",
         "logintoken": "randomstring",
         "maintenance": "For full access to this site, you need to login in as an admin."
@@ -95,7 +90,7 @@
 
     {{#error}}
         <div class="row">
-            <div class="col-12 pr-0 pl-0">
+            <div class="col-12 px-0">
             <div class="loginerrors">
                 <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
                 <div class="alert alert-danger" role="alert" data-aria-autofocus="true">{{error}}</div>
@@ -105,7 +100,7 @@
     {{/error}}
 
     <div class="row">
-    <div class="col-12 col-md-6 pl-0 pr-0 pr-md-3">
+    <div class="col-12 col-md-6 px-0 pe-md-3">
         {{# isexamweb }}
         <section id="examwebdescription" class="block card mb-3">
             {{! Beginn Block Container }}
@@ -181,7 +176,7 @@
                 <div class="card-text content text-center p-3">
                     <div class="subcontent loginsub">
                         <form action="{{loginurl}}" method="post" id="login" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
-                            <div class="form-group row">
+                            <div class="row mb-3">
                                 <label for="username" class="col-5 col-form-label text-end">
                                         {{^canloginbyemail}}
                                             {{#str}} username {{/str}}
@@ -194,18 +189,12 @@
                                     <input type="text" class="form-control" id="username" name="username" value="{{username}}">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row mb-3">
                                 <label for="password" class="col-5 col-form-label text-end">{{#str}} password {{/str}}</label>
                                 <div class="col-6">
                                     <input type="password" class="form-control" id="password" name="password" value="" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
                                 </div>
                             </div>
-                            {{#rememberusername}}
-                                <div class="rememberpass">
-                                    <input type="checkbox" name="rememberusername" id="rememberusername" value="1" {{#username}}checked="checked"{{/username}} />
-                                    <label for="rememberusername">{{#str}} rememberusername, admin {{/str}}</label>
-                                </div>
-                            {{/rememberusername}}
                             <div class="clearer"><!-- --></div>
                             <input id="anchor" type="hidden" name="anchor" value="" />
                             <script>document.getElementById('anchor').value = location.hash;</script>
@@ -218,7 +207,7 @@
 
                         <div class="desc">
                             {{#str}} cookiesenabled {{/str}}
-                            {{{cookieshelpiconformatted}}}
+                            {{#cookieshelpicon}}{{>core/help_icon}}{{/cookieshelpicon}}
                         </div>
 
                     </div>
@@ -244,8 +233,8 @@
         {{/isexamweb}}
     </div>
 
-    <div class="col-12 col-md-6 pl-0 pr-0">
-        {{#hasinstructions}}
+    <div class="col-12 col-md-6 px-0">
+        {{#instructions}}
             <section id="instructionsblock" class="block card mb-3">
                 {{! Beginn Block Container }}
                 <div class="card-body p-0">
@@ -273,7 +262,7 @@
                 </div>
                 {{! End Block Container }}
             </section>
-        {{/hasinstructions}}
+        {{/instructions}}
 
         <section id="hintsblock" class="block card mb-3">
             {{! Beginn Block Container }}
