@@ -1185,16 +1185,15 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * Constructs and returns the trackurl for matomo (piwik).
-     * @return string
+     * Returns the document title reported to Matomo (category path, course, activity).
+     * @return string Plain text, must be encoded before it is written into JavaScript.
      * @throws \coding_exception
      * @throws \dml_exception
      */
     private function matomo_trackurl() {
         global $DB;
         $pageinfo = get_context_info_array($this->page->context->id);
-        // Adds page title.
-        $trackurl = "'";
+        $trackurl = '';
 
         if ((isset($pageinfo[1]->category)) || (isset($pageinfo[1]->fullname)) || (isset($pageinfo[2]->name))) {
             // Adds course category name.
@@ -1228,7 +1227,6 @@ class core_renderer extends \core_renderer {
             $trackurl .= $this->page->title;
         }
 
-        $trackurl .= "'";
         return $trackurl;
     }
 
@@ -1241,7 +1239,7 @@ class core_renderer extends \core_renderer {
 
         if (!empty($siteurl)) {
             $imagetrack = true;
-            $siteid = get_config('theme_wwu2019', 'matomo_siteid');
+            $siteid = (int) get_config('theme_wwu2019', 'matomo_siteid');
             $trackadmin = false;
             $useuserid = false;
             $cleanurl = true;
@@ -1265,7 +1263,9 @@ class core_renderer extends \core_renderer {
             }
 
             if ($cleanurl) {
-                $doctitle = "".PHP_EOL."_paq.push(['setDocumentTitle', " . $this->matomo_trackurl() . "]);";
+                $title = json_encode($this->matomo_trackurl(), JSON_HEX_TAG | JSON_HEX_APOS
+                    | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+                $doctitle = PHP_EOL . "_paq.push(['setDocumentTitle', " . $title . "]);";
             } else {
                 $doctitle = "";
             }
