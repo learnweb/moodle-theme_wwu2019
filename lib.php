@@ -31,30 +31,20 @@
 function theme_wwu2019_get_main_scss_content($theme) {
     global $CFG;
 
-    $scss = '';
-
-    // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
-    // ...Export $wwwroot as scss-variable.
+    // Pre SCSS - WWU variables, loaded before Boost so they override Boost's !default values.
     $isexamweb = \theme_wwu2019\output\core_renderer::is_examweb();
-    $wwwnormalizedroot = preg_replace('/https?:\/\/(www|[xs]sso|sso\d?)\./i',  'https://www.', $CFG->wwwroot, 1);
+    $wwwnormalizedroot = preg_replace('/https?:\/\/(www|[xs]sso|sso\d?)\./i', 'https://www.', $CFG->wwwroot, 1);
     $pre = '$wwwroot: "' . $wwwnormalizedroot . '";' . "\n";
-
     $pre .= '$logoprefix: ' . ($isexamweb ? 'examweb' : 'learnweb') . ";\n";
-    // ...Export $learnwebblue (themecolor) as scss-variable.
     $pre .= '$learnwebblue: ' . \theme_wwu2019\output\core_renderer::get_primary_color() . ";\n";
-
     $pre .= '$wwugreen: ' . \theme_wwu2019\output\core_renderer::get_secondary_color() . ";\n";
-
     $pre .= get_config('theme_wwu2019', 'prescss') ?? '';
-
     $pre .= file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/pre.scss');
 
-    // Main CSS - Get the CSS from theme Classic.
-    $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/pre.scss');
-    $scss .= file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/preset/default.scss');
-    $scss .= file_get_contents($CFG->dirroot . '/theme/classic/scss/classic/post.scss');
+    // Main SCSS - Boost's preset (design system tokens, FontAwesome, Bootstrap, Moodle core styles).
+    $scss = file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
 
-    // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
+    // Post SCSS - WWU rules, loaded after Boost.
     $post = file_get_contents($CFG->dirroot . '/theme/wwu2019/scss/post.scss');
 
     return $pre . "\n" . $scss . "\n" . $post;
@@ -97,12 +87,12 @@ function theme_wwu2019_extend_navigation_course($navigation, $course, $context) 
     }
 
     $node = navigation_node::create(
-            get_string('contentbank'),
-            new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
-            navigation_node::NODETYPE_LEAF,
-            null,
-            'contentbank',
-            new pix_icon('i/contentbank', '')
+        get_string('contentbank'),
+        new moodle_url('/contentbank/index.php', ['contextid' => $context->id]),
+        navigation_node::NODETYPE_LEAF,
+        null,
+        'contentbank',
+        new pix_icon('i/contentbank', '')
     );
 
     $navigation->add_node($node);

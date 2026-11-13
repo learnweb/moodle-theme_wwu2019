@@ -21,6 +21,37 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// General WWU adjustments (moved from the former scss/preset/default.scss).
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+}
+
+.filemanager-container,
+.filepicker-filelist {
+    border: $border-width solid $border-color;
+}
+
+// Rounded user pictures
+.userpicture {
+    border-radius: 50%;
+}
+
+.card {
+    background: var(--wwu-bg);
+}
+
+#page-my-index {
+    background-color: var(--wwu-bg);
+}
+
+// Reset the default styling back to the bootstrap defaults for
+// the secondary outline button because gray-200 is much too light
+// for an outline button.
+.btn-outline-secondary {
+    @include button-outline-variant($gray-600);
+    border-color: $border-color;
+}
+
 @import "wwu2019/theming";
 @import "wwu2019/general";
 @import "wwu2019/menu";
@@ -44,43 +75,43 @@ a {
 .dark-theme .card .card-body,
 .dark-theme .card .card-title,
 .dark-theme .card .card-text {
-  color: white;
+    color: white;
 }
 
 .dark-theme .opencast-bc-wrap {
-  color: white;
+    color: white;
 }
 
 .dark-theme .form-text {
-  color: white;
+    color: white;
 }
 
 .dark-theme .form-defaultinfo .text-muted {
-  color: white;
+    color: white;
 }
 
 .dark-theme .text-muted, .dark-theme .section .activity .stealth {
-  color: LightGray !important;
+    color: LightGray !important;
 }
 
 .dark-theme > #main-menu .dimmed_text > a > span {
-  color: LightGray !important;
+    color: LightGray !important;
 }
 
 .dark-theme > #menu-bottom .dimmed_text > a > span {
-  color: LightGray !important;
+    color: LightGray !important;
 }
 
 .dark-theme .form-shortname.d-block.small.text-muted {
-  color: LightGray !important;
+    color: LightGray !important;
 }
 
 .dark-theme .activity-item .activity-dates {
-  color: white;
+    color: white;
 }
 
 .dark-theme .btn .btn-secondary {
-  background-color: #868e96;
-  color: black;
-  border: none;
+    background-color: #868e96;
+    color: black;
+    border: none;
 }

@@ -17,10 +17,7 @@
 {{!
     @template theme_wwu2019/columns
 
-    Admin time setting template.
-
-    Classic 1-3 column layout template.
-
+    Page layout with the main content and an optional block column on the right (region side-post).
     Context variables required for this template:
     * sitename - The name of the site
     * output - The core renderer for the page
@@ -88,7 +85,7 @@
             </div>
 
             <div class="columnright blockcolumn {{#haspostblocks}} has-blocks {{/haspostblocks}}">
-                <section data-region="blocks-column" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
+                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
                     {{{ sidepostblocks }}}
                 </section>
             </div>

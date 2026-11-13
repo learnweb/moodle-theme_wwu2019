@@ -45,7 +45,6 @@ require_once($CFG->dirroot . '/course/renderer.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_renderer extends \core_course_renderer {
-
     /**
      * Renders html to display a course search form.
      *
@@ -61,16 +60,16 @@ class course_renderer extends \core_course_renderer {
         }
 
         switch ($format) {
-            case 'navbar' :
+            case 'navbar':
                 $formid = 'coursesearchnavbar';
                 $inputid = 'navsearchbox';
                 $inputsize = 20;
                 break;
-            case 'short' :
+            case 'short':
                 $inputid = 'shortsearchbox';
                 $inputsize = 12;
                 break;
-            default :
+            default:
                 $inputid = 'coursesearchbox';
                 $inputsize = 30;
         }
@@ -103,17 +102,20 @@ class course_renderer extends \core_course_renderer {
                 $catname = $cat->get_formatted_name();
                 $content .= html_writer::start_tag('div', ['class' => 'coursecat']);
                 $content .= html_writer::start_tag('span', ['class' => 'fw-bold']);
-                $content .= get_string('category').': ';
-                $content .= html_writer::link(new moodle_url('/course/index.php', ['categoryid' => $cat->id]),
-                    $catname, ['class' => $cat->visible ? '' : 'dimmed']);
+                $content .= get_string('category') . ': ';
+                $content .= html_writer::link(
+                    new moodle_url('/course/index.php', ['categoryid' => $cat->id]),
+                    $catname,
+                    ['class' => $cat->visible ? '' : 'dimmed']
+                );
                 $content .= html_writer::end_tag('span');
                 if (str_contains($catname, 'Archiv ')) {
-                    if ($tags = core_tag_tag::get_item_tags('core', 'course', $course->id, true )) {
+                    if ($tags = core_tag_tag::get_item_tags('core', 'course', $course->id, true)) {
                         $context = context_course::instance($course->id);
                         foreach ($tags as $tag) {
-                            $tname = get_string('before', 'theme_wwu2019').": ".core_tag_tag::make_display_name($tag, false);
+                            $tname = get_string('before', 'theme_wwu2019') . ": " . core_tag_tag::make_display_name($tag, false);
                             $turl = core_tag_tag::make_url($tag->tagcollid, $tag->rawname, 0, $context->id);
-                            $content .= html_writer::link($turl, $tname, ['class' => 'ml-4 customfieldvalue']);
+                            $content .= html_writer::link($turl, $tname, ['class' => 'ms-4 customfieldvalue']);
                         }
                     }
                 }
@@ -122,5 +124,4 @@ class course_renderer extends \core_course_renderer {
         }
         return $content;
     }
-
 }

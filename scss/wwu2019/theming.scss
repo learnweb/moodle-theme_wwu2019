@@ -92,16 +92,6 @@
         border-top-color: var(--wwu-bg-3) !important;
     }
 
-    .border-left {
-        //noinspection Stylelint
-        border-left-color: var(--wwu-bg-3) !important;
-    }
-
-    .border-right {
-        //noinspection Stylelint
-        border-right-color: var(--wwu-bg-3) !important;
-    }
-
     .bg-white {
         //noinspection Stylelint
         background-color: var(--wwu-bg) !important;
@@ -257,28 +247,6 @@
         th,
         td {
             border-color: var(--wwu-bg-3);
-        }
-    }
-
-    .custom-control-label {
-        &::before {
-            background-color: var(--wwu-bg);
-            border-color: var(--wwu-bg-5);
-        }
-
-        &::after {
-            background-color: var(--wwu-bg-5);
-        }
-    }
-
-    .custom-control-input:checked ~ .custom-control-label {
-        &::before {
-            border-color: var(--wwu-learnwebblue);
-            background-color: var(--wwu-learnwebblue);
-        }
-
-        &::after {
-            background-color: var(--wwu-bg);
         }
     }
 
@@ -442,10 +410,6 @@
         border-top-color: var(--wwu-bg-3);
     }
 
-    .close {
-        color: var(--wwu-fg);
-    }
-
     hr {
         border-color: rgba(white, 0.1);
     }
@@ -466,10 +430,6 @@
 
     .modchoosercontainer .optionscontainer .option .optioninfo a, .modchoosercontainer .searchresultitemscontainer .option .optioninfo a {
         color: var(--wwu-fg);
-    }
-
-    .toast .close {
-        color: black;
     }
 
     .forumpost.unread .row.header,

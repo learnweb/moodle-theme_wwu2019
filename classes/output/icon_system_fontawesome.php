@@ -31,7 +31,6 @@ namespace theme_wwu2019\output;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
-
     /**
      * @var array $map Cached map of moodle icon names to font awesome icon names.
      */
@@ -46,24 +45,24 @@ class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
 
         $override = [
             'core:i/briefcase' => 'fa-briefcase',
-            'core:i/cogs' => 'fa-cogs',
+            'core:i/cogs' => 'fa-gears',
             'core:i/graduation-cap' => 'fa-graduation-cap',
             'core:i/navigationbranch' => 'fa-wrench',
-            'core:i/navigationitem' => 'fa-angle-double-right',
+            'core:i/navigationitem' => 'fa-angles-right',
             'core:i/book' => 'fa-book',
             'core:i/trophy' => 'fa-trophy',
             'core:i/key' => 'fa-key',
             'core:i/comment' => 'fa-comment',
-            'core:i/rss-square' => 'fa-rss-square',
-            'core:i/hidden' => 'fa-eye-slash',
+            'core:i/rss-square' => 'fa-square-rss',
+            'core:i/hidden' => 'fa-regular fa-eye-slash',
             'core:i/list' => 'fa-list',
-            'core:i/logout' => 'fa-sign-out',
-            'core:i/help' => 'fa-question-circle',
+            'core:i/logout' => 'fa-right-from-bracket',
+            'core:i/help' => 'fa-circle-question',
             'core:i/hamburger' => 'fa-bars',
-            'core:i/sun' => 'fa-sun-o',
-            'core:i/moon' => 'fa-moon-o',
-            'core:i/magic' => 'fa-magic',
-            'core:i/theme' => 'fa-paint-brush',
+            'core:i/sun' => 'fa-regular fa-sun',
+            'core:i/moon' => 'fa-regular fa-moon',
+            'core:i/magic' => 'fa-wand-magic-sparkles',
+            'core:i/theme' => 'fa-paintbrush',
         ];
 
         return array_merge($iconmap, $override);

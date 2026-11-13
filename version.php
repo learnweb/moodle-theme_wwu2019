@@ -30,7 +30,9 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->version = 2025031400;
 
 // This is the version of Moodle this plugin requires.
-$plugin->requires = 2019111800.03;
+$plugin->requires = 2025100600; // Moodle 5.1.
+
+$plugin->supported = [501, 503];
 
 // This is the component name of the plugin - it always starts with 'theme_'
 // for themes and should be the same as the name of the folder.
@@ -38,7 +40,7 @@ $plugin->component = 'theme_wwu2019';
 
 // This is a list of plugins, this plugin depends on (and their versions).
 $plugin->dependencies = [
-        'theme_classic' => 2019111800,
+        'theme_boost' => 2025100600,
 ];
 
 // This is a stable release.

@@ -32,6 +32,14 @@
     border-color: var(--wwu-muted-bg);
 
     > .card-body {
+        // Core renders "p-3" on the card body and "mt-3" on the content.
+        // The WWU header bar spans the full block width, so the padding moves to the content.
+        padding: 0 !important; // stylelint-disable-line declaration-no-important
+
+        > .content {
+            margin-top: 0 !important; // stylelint-disable-line declaration-no-important
+            padding: 1rem;
+        }
 
         > .block-header {
             background-color: $learnwebblue;

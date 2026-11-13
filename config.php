@@ -41,18 +41,11 @@ $THEME->sheets = [];
 // as the previous setting - listing a file in the /styles/ folder.
 $THEME->editor_sheets = [];
 
-// This is a critical setting. We want to inherit from theme_classic because it provides a great starting point for SCSS bootstrap4
-// themes. We have added add more than one parent here to inherit from multiple parents, and if we did they would be processed in
-// order of importance (later themes overriding earlier ones). Things we will inherit from the parent theme include
-// styles and mustache templates and some (not all) settings.
-$THEME->parents = ['boost', 'classic'];
+// Boost is the only parent theme. Layouts, templates and SCSS are inherited from it.
+$THEME->parents = ['boost'];
 
-// A dock is a way to take blocks out of the page and put them in a persistent floating area on the side of the page.
-// does not support a dock so we won't either - but look at bootstrapbase for an example of a theme with a dock.
-$THEME->enable_dock = false;
-
-// This is an old setting used to load specific CSS for some YUI JS. We don't need it in Classic based themes because Classic
-// provides default styling for the YUI modules that we use. It is not recommended to use this setting anymore.
+// Theme config properties are not inherited from parents, so this must be set here (as Boost does).
+// Otherwise Moodle loads the legacy YUI CSS reset modules.
 $THEME->yuicssmodules = [];
 
 // Most themes will use this rendererfactory as this is the one that allows the theme to override any other renderer.
@@ -200,7 +193,7 @@ $THEME->layouts = [
 ];
 
 // This is the function that returns the SCSS source for the main file in our theme.
-$THEME->scss = function($theme) {
+$THEME->scss = function ($theme) {
     return theme_wwu2019_get_main_scss_content($theme);
 };
 

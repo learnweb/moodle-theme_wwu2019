@@ -32,7 +32,6 @@ use theme_wwu2019\output\core_renderer;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class layout {
-
     /**
      * Autologin if access takes place via SSO.
      */
@@ -85,8 +84,11 @@ class layout {
         }
 
         $templatecontext = [
-            'sitename' => format_string($SITE->shortname, true,
-                ['context' => \context_course::instance(SITEID), "escape" => false]),
+            'sitename' => format_string(
+                $SITE->shortname,
+                true,
+                ['context' => \context_course::instance(SITEID), "escape" => false]
+            ),
             'isexamweb' => core_renderer::is_examweb(),
             'output' => $renderer,
             'sidepostblocks' => $blockspost,
@@ -108,13 +110,13 @@ class layout {
     public static function handle_snow() {
         global $PAGE;
         $snowenable = get_config('theme_wwu2019', 'snow_enable');
-        if ($snowenable == 1 || $snowenable == 2 && (
+        if (
+            $snowenable == 1 || $snowenable == 2 && (
                         get_config('theme_wwu2019', 'snow_start') < time()
-                        && get_config('theme_wwu2019', 'snow_end') > time())) {
+                        && get_config('theme_wwu2019', 'snow_end') > time())
+        ) {
             $snowpreference = get_user_preferences('theme_wwu2019_snow', '1');
             $PAGE->requires->js_call_amd('theme_wwu2019/snow', 'init', [intval($snowpreference)]);
         }
     }
-
-
 }

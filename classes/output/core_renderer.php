@@ -42,7 +42,6 @@ use pix_icon;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends \core_renderer {
-
     /**
      * Returns the primary theme color.
      * @return string
@@ -216,12 +215,18 @@ class core_renderer extends \core_renderer {
     public function edit_button(moodle_url $url, string $method = 'post'): string {
         $out = "";
         if ($id = optional_param('id', 0, PARAM_INT)) {
-            $out = \html_writer::link(new moodle_url('/course/edit.php', ['id' => $id]),
+            $out = \html_writer::link(
+                new moodle_url('/course/edit.php', ['id' => $id]),
                 get_string('editcoursesettings'),
                 ['title' => get_string('editcoursesettingshelp', 'theme_wwu2019'),
-                    'class' => 'pt-2']);
-            $out .= $this->pix_icon('t/edit', get_string('editcoursesettingshelp', 'theme_wwu2019'), 'moodle',
-                ['class' => 'pt-2 mr-3 text-primary']);
+                'class' => 'pt-2']
+            );
+            $out .= $this->pix_icon(
+                't/edit',
+                get_string('editcoursesettingshelp', 'theme_wwu2019'),
+                'moodle',
+                ['class' => 'pt-2 me-3 text-primary']
+            );
         }
         $url->param('sesskey', sesskey());
         $class = '';
@@ -242,8 +247,11 @@ class core_renderer extends \core_renderer {
      * @return string HTML for evasys manager button
      */
     private function add_evasys_button() {
-        $link = \html_writer::link(new moodle_url('/blocks/evasys_sync/manageroverview.php'), '',
-            ['class' => 'wwu2019-evasys-button']);
+        $link = \html_writer::link(
+            new moodle_url('/blocks/evasys_sync/manageroverview.php'),
+            '',
+            ['class' => 'wwu2019-evasys-button']
+        );
         return \html_writer::div($link, 'nav-link');
     }
 
@@ -280,10 +288,12 @@ class core_renderer extends \core_renderer {
         $pagetype = $this->page->pagetype;
         if (strpos($pagetype, 'admin-setting') !== false) {
             $pagetype = 'admin-setting'; // Deal with all setting page types.
-        } else if ((strpos($pagetype, 'mod-') !== false) &&
+        } else if (
+            (strpos($pagetype, 'mod-') !== false) &&
             ((strpos($pagetype, 'edit') !== false) ||
                 (strpos($pagetype, 'view') !== false) ||
-                (strpos($pagetype, '-mod') !== false))) {
+                (strpos($pagetype, '-mod') !== false))
+        ) {
             $pagetype = 'mod-edit-view'; // Deal with all mod edit / view / -mod page types.
         } else if (strpos($pagetype, 'mod-data-field') !== false) {
             $pagetype = 'mod-data-field'; // Deal with all mod data field page types.
@@ -371,7 +381,7 @@ class core_renderer extends \core_renderer {
      */
     private function add_endofpage_button() {
         $html = '';
-        $attributes['class'] = 'icon fa fa-arrow-circle-o-down';
+        $attributes['class'] = 'icon fa-regular fa-circle-down';
         $attributes['aria-hidden'] = 'true';
         $attributes['href'] = new moodle_url('#wwu-footer');
         $tag = \html_writer::tag('a', '', $attributes);
@@ -392,7 +402,6 @@ class core_renderer extends \core_renderer {
         $navitemicon = (new pix_icon('i/navigationitem', ''))->export_for_pix();
         foreach ($nodecollection as $node) {
             if ($node->display) {
-
                 $templateformat = [
                         'name' => $node->get_content(),
                         'class' => '',
@@ -491,16 +500,19 @@ class core_renderer extends \core_renderer {
         $terms = [];
 
         // Create an array where the key points to the string representation of the customfield value.
-        if (($field = $DB->get_record('customfield_field', ['name' => 'Semester', 'type' => 'semester']))
-                && class_exists('customfield_semester\data_controller')) {
-
+        if (
+            ($field = $DB->get_record('customfield_field', ['name' => 'Semester', 'type' => 'semester']))
+                && class_exists('customfield_semester\data_controller')
+        ) {
             $currenttermid = \customfield_semester\data_controller::get_semester_for_datetime(new \DateTime('now'));
             $courseswithsemester = $this->get_courses_with_semester($field->id);
 
             // Render each course.
             foreach ($courseswithsemester as $course) {
-                if (!$course->visible &&
-                    !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
+                if (
+                    !$course->visible &&
+                    !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))
+                ) {
                     continue;
                 }
                 $termid = intval($course->value);
@@ -587,7 +599,7 @@ class core_renderer extends \core_renderer {
             return [];
         }
 
-        list ($instring, $params) = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED);
+         [$instring, $params] = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED);
 
         // Get for each course where the user is enrolled the customfield value (here encoded as number).
         $fromtable = 'SELECT cs.id,cs.visible,cd.value,cs.shortname,cs.fullname
@@ -606,9 +618,10 @@ class core_renderer extends \core_renderer {
     private function get_activity_menu() {
         $activities = [];
         if (!isguestuser()) {
-            if (in_array($this->page->pagelayout, ['course', 'incourse', 'report', 'admin', 'standard']) &&
-                    (!empty($this->page->course->id) && $this->page->course->id > 1)) {
-
+            if (
+                in_array($this->page->pagelayout, ['course', 'incourse', 'report', 'admin', 'standard']) &&
+                    (!empty($this->page->course->id) && $this->page->course->id > 1)
+            ) {
                 $activities[] = [
                         'name' => get_string('participants'),
                         'icon' => (new pix_icon('i/users', ''))->export_for_pix(),
@@ -618,9 +631,11 @@ class core_renderer extends \core_renderer {
                 ];
 
                 $context = context_course::instance($this->page->course->id);
-                if (((has_capability('gradereport/overview:view', $context) ||
+                if (
+                    ((has_capability('gradereport/overview:view', $context) ||
                                         has_capability('gradereport/user:view', $context)) &&
-                                $this->page->course->showgrades) || has_capability('gradereport/grader:view', $context)) {
+                                $this->page->course->showgrades) || has_capability('gradereport/grader:view', $context)
+                ) {
                     $activities[] = [
                             'name' => get_string('grades'),
                             'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
@@ -653,8 +668,10 @@ class core_renderer extends \core_renderer {
                                 'icon' => (new pix_icon('monologo', '', $modname))->export_for_pix(),
                                 'hasmenu' => false,
                                 'menu' => null,
-                                'href' => (new moodle_url("/mod/$modname/index.php",
-                                    ['id' => $this->page->course->id]))->out(false),
+                                'href' => (new moodle_url(
+                                    "/mod/$modname/index.php",
+                                    ['id' => $this->page->course->id]
+                                ))->out(false),
                         ];
                     }
                 }
@@ -737,7 +754,7 @@ class core_renderer extends \core_renderer {
                                 'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false)]))->out(false),
                         'icon' => (new pix_icon('i/user', ''))->export_for_pix(),
                 ];
-                $rolename = ' - '.role_get_name($role, $context);
+                $rolename = ' - ' . role_get_name($role, $context);
             }
         } else {
             $roles = \get_switchable_roles($context);
@@ -757,8 +774,11 @@ class core_renderer extends \core_renderer {
         if (\core\session\manager::is_loggedinas()) {
             $realuser = \core\session\manager::get_realuser();
             $menucontent[] = [
-                    'name' => get_string('loggedinas', 'theme_wwu2019',
-                            ['real' => fullname($realuser, true), 'fake' => fullname($USER, true)]) .
+                    'name' => get_string(
+                        'loggedinas',
+                        'theme_wwu2019',
+                        ['real' => fullname($realuser, true), 'fake' => fullname($USER, true)]
+                    ) .
                             ($rolename ? $rolename : ''),
                     'hasmenu' => false,
                     'menu' => null,
@@ -790,8 +810,11 @@ class core_renderer extends \core_renderer {
                                     'class' => 'wwu-uselighttheme',
                             ],
                             [
-                                    'name' => \html_writer::tag('abbr', get_string('ostheme', 'theme_wwu2019'),
-                                        ['title' => get_string('ostheme_help', 'theme_wwu2019')]),
+                                    'name' => \html_writer::tag(
+                                        'abbr',
+                                        get_string('ostheme', 'theme_wwu2019'),
+                                        ['title' => get_string('ostheme_help', 'theme_wwu2019')]
+                                    ),
                                     'icon' => (new pix_icon('i/magic', ''))->export_for_pix(),
                                     'href' => null,
                                     'hasmenu' => false,
@@ -876,8 +899,10 @@ class core_renderer extends \core_renderer {
                         'hasmenu' => false,
                         'menu' => null,
                         'icon' => (new pix_icon('i/list', ''))->export_for_pix(),
-                        'href' => (new moodle_url('/mod/forum/user.php',
-                                ['id' => $USER->id, 'mode' => 'discussions']))->out(false),
+                        'href' => (new moodle_url(
+                            '/mod/forum/user.php',
+                            ['id' => $USER->id, 'mode' => 'discussions']
+                        ))->out(false),
                 ];
             }
 
@@ -889,8 +914,10 @@ class core_renderer extends \core_renderer {
                     'hasmenu' => false,
                     'menu' => null,
                     'icon' => (new pix_icon('i/grades', ''))->export_for_pix(),
-                    'href' => (new moodle_url('/grade/report/overview/index.php',
-                            ['userid' => $USER->id]))->out(false),
+                    'href' => (new moodle_url(
+                        '/grade/report/overview/index.php',
+                        ['userid' => $USER->id]
+                    ))->out(false),
             ];
 
             // Eportfolio.
@@ -950,7 +977,6 @@ class core_renderer extends \core_renderer {
         ];
 
         return $usermenu;
-
     }
 
     /**
@@ -1052,9 +1078,9 @@ class core_renderer extends \core_renderer {
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
             $this->page->add_header_action(\html_writer::div(
-                    $this->region_main_settings_menu(),
-                    'd-print-none',
-                    ['id' => 'region-main-settings-menu']
+                $this->region_main_settings_menu(),
+                'd-print-none',
+                ['id' => 'region-main-settings-menu']
             ));
         }
 
@@ -1082,8 +1108,10 @@ class core_renderer extends \core_renderer {
             }
 
             // If an exam date is set, append it to the course title.
-            if (array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
-                $metadata['begin'] > 0 &&  $metadata['end'] > 0) {
+            if (
+                array_key_exists('begin', $metadata) && array_key_exists('end', $metadata) &&
+                $metadata['begin'] > 0 &&  $metadata['end'] > 0
+            ) {
                 return $this->page->heading . '<div class="examdates">' .
                     '<h3>' . get_string('exam:begin', 'theme_wwu2019') . ' ' .
                     userdate($metadata['begin']) . '</h3>' .
@@ -1133,7 +1161,6 @@ class core_renderer extends \core_renderer {
             $elements['policyurl'] = (new moodle_url('/admin/tool/policy/view.php', ['policyid' => 1]))->out();
         }
         return $elements;
-
     }
 
     /**
@@ -1174,7 +1201,7 @@ class core_renderer extends \core_renderer {
         // form method needs to be 'get', because an xsso forward would drop post values.
         // within the get action of a form query string values are dropped as well.
         $params = [];
-        parse_str(parse_url($wantsurl, PHP_URL_QUERY), $params);
+        parse_str((string) parse_url($wantsurl, PHP_URL_QUERY), $params);
         $paramsmustache = [];
         foreach ($params as $key => $val) {
             $paramsmustache[] = ["key" => $key, "value" => $val];
@@ -1247,7 +1274,7 @@ class core_renderer extends \core_renderer {
             $cleanurl = true;
 
             if ($imagetrack) {
-                $addition = '<noscript><p><img src="//'.$siteurl.'/piwik.php?idsite='.$siteid;
+                $addition = '<noscript><p><img src="//' . $siteurl . '/piwik.php?idsite=' . $siteid;
                 $addition .= '" style="border:0" alt="" /></p></noscript>';
             } else {
                 $addition = '';
@@ -1256,7 +1283,7 @@ class core_renderer extends \core_renderer {
             if ($useuserid) {
                 global $USER;
                 if ($USER->id) {
-                    $userid = "".PHP_EOL."_paq.push(['setUserId', '".$USER->id."']);";
+                    $userid = "" . PHP_EOL . "_paq.push(['setUserId', '" . $USER->id . "']);";
                 } else {
                     $userid = "";
                 }
@@ -1265,7 +1292,7 @@ class core_renderer extends \core_renderer {
             }
 
             if ($cleanurl) {
-                $doctitle = "".PHP_EOL."_paq.push(['setDocumentTitle', " . $this->matomo_trackurl() . "]);";
+                $doctitle = "" . PHP_EOL . "_paq.push(['setDocumentTitle', " . $this->matomo_trackurl() . "]);";
             } else {
                 $doctitle = "";
             }
@@ -1273,10 +1300,10 @@ class core_renderer extends \core_renderer {
             if (!is_siteadmin() || $trackadmin) {
                 $tracking = "
 <script type='text/javascript'>
-var _paq = _paq || [];".$doctitle."
+var _paq = _paq || [];" . $doctitle . "
 _paq.push(['setCookieDomain', '*.uni-muenster.de']);
 _paq.push(['setDomains', ['*.uni-muenster.de/LearnWeb']]);
-_paq.push(['enableLinkTracking']);".$userid."
+_paq.push(['enableLinkTracking']);" . $userid . "
 _paq.push(['trackPageView']);
 (function(){
     var u=(('https:' == document.location.protocol) ? 'https' : 'http') + '://" . $siteurl . "/';
@@ -1291,7 +1318,7 @@ _paq.push(['trackPageView']);
     g.src=u+'piwik.js';
     s.parentNode.insertBefore(g,s);
 })();
-</script>".$addition;
+</script>" . $addition;
             }
         }
         return $tracking;
@@ -1308,7 +1335,8 @@ _paq.push(['trackPageView']);
         if (file_exists($CFG->dirroot . '/local/marketing/classes/slide_manager.php')) {
             // Retrieve slides if none are cached.
             // Also, force re-cache if user has changed ID recently (i.e., a login has occurred).
-            if (!isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
+            if (
+                !isset($_SESSION["theme_wwu2019_slides"]) || !is_array($_SESSION["theme_wwu2019_slides"]) ||
                 $_SESSION["theme_wwu2019_slides_cachedfor"] !== $USER->id || empty($_SESSION["theme_wwu2019_slides"])
             ) {
                 $allslides = \local_marketing\slide_manager::get_slides_for();
@@ -1322,8 +1350,14 @@ _paq.push(['trackPageView']);
                     if ($slideimage) {
                         $component = 'local_marketing';
                         require_once($CFG->libdir . '/weblib.php');
-                        $slideimage = \moodle_url::make_pluginfile_url(1, $component,
-                            'slidesfilearea', $slide->id, '/', $slideimage);
+                        $slideimage = \moodle_url::make_pluginfile_url(
+                            1,
+                            $component,
+                            'slidesfilearea',
+                            $slide->id,
+                            '/',
+                            $slideimage
+                        );
                         $slideimage = preg_replace('|^https?://|i', '//', $slideimage->out(false));
                     } else {
                         $slideimage = self::image_url('default_slide', 'theme');
@@ -1367,8 +1401,11 @@ _paq.push(['trackPageView']);
      */
     public function debug_footer_html() {
         if (is_siteadmin()) {
-            return \html_writer::tag('div', sprintf("Hostname: %s", gethostname()),
-                ['class' => 'hostname pt-2']) .
+            return \html_writer::tag(
+                'div',
+                sprintf("Hostname: %s", gethostname()),
+                ['class' => 'hostname pt-2']
+            ) .
                 parent::debug_footer_html();
         } else {
             return '';
@@ -1439,7 +1476,8 @@ _paq.push(['trackPageView']);
      * @param pix_icon $icon
      */
     private function check_monologo(pix_icon $icon) {
-        if (!in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
+        if (
+            !in_array($icon->component, ['moodle', 'core', 'theme', null]) && (
                 substr_compare($icon->component, 'mod_', 0, 4) === 0 ||
                 !str_contains($icon->component, '_')
             )

@@ -33,3 +33,93 @@ $wwugreen: $wwugreen;
 $dividergrey: var(--wwu-dividergrey);
 $outlinegrey: var(--wwu-outlinegrey);
 $wwu-footer: #3e3e3c;
+
+// Bootstrap variables
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #373a3c !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$blue:    #1177d1 !default;
+$indigo:  #6610f2 !default;
+$purple:  #613d7c !default;
+$pink:    #e83e8c !default;
+$red:     #d9534f !default;
+$orange:  #f0ad4e !default;
+$yellow:  #ff7518 !default;
+$green:   #5cb85c !default;
+$teal:    #20c997 !default;
+$cyan:    #5bc0de !default;
+
+$primary:       $learnwebblue !default;
+$secondary:     $wwugreen !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;
+
+// Options
+$enable-rounded: true !default;
+
+// Body
+$body-color:    $gray-800 !default;
+
+// Blocks
+$block-header-height: 30px;
+
+// Fonts
+$font-size-base: 0.9375rem !default;
+$headings-font-weight:   300 !default;
+
+// Navbar
+$navbar-dark-hover-color:           rgba($white, 1) !default;
+$navbar-light-hover-color:          rgba($black, .9) !default;
+
+// Breadcrumbs
+$breadcrumb-padding-y: .25rem !default;
+$breadcrumb-padding-x: 0 !default;
+$breadcrumb-item-padding-x: .5rem !default;
+$breadcrumb-margin-bottom: 0 !default;
+$breadcrumb-bg: transparent !default;
+$breadcrumb-divider: "/" !default;
+
+// Menu
+$main-menu-height: 55px;
+
+// Alerts
+$alert-border-width:                0 !default;
+
+$card-group-margin: .25rem;
+
+// stylelint-disable
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    info: $info,
+    warning: $orange,
+    danger: $danger,
+    light: $gray-100,
+    dark: $gray-800
+), $theme-colors);
+// stylelint-enable
+
+// Boost positions sticky elements (anchor targets, sticky table headers) below a fixed navbar of this height.
+// The WWU header is not fixed, only the main menu sticks to the top, so a smaller offset is enough.
+$navbar-height: 50px;
+// Compact height of the secondary navigation ("More" menu).
+$moremenu-height: 50px;
+// Keep borders and spacing of the page header on pages with the "reset-style" body class (e.g. forum nested view).
+$allow-reset-style: false;
+
