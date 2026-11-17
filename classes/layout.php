@@ -95,7 +95,6 @@ class layout {
             'headercontent' => $headercontent,
             'bodyattributes' => $bodyattributes,
             'footer' => $renderer->get_footer_context(),
-            'alerts' => alerts::get_alerts(),
             'supportemail' => $CFG->supportemail,
         ];
 

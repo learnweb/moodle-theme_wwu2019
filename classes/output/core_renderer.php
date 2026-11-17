@@ -34,6 +34,8 @@ use navigation_node;
 use navigation_node_collection;
 use pix_icon;
 
+use theme_wwu2019\alerts;
+
 /**
  * Renderer for WWU 2019 Theme
  *
@@ -1066,6 +1068,7 @@ class core_renderer extends \core_renderer {
         $header->pageheading = $this->page_heading();
         $header->coursecontentheader = $this->course_content_header();
         $header->shouldshowheader = true;
+        $header->alerts = alerts::get_alerts();
         return $this->render_from_template('theme_wwu2019/full_header', $header);
     }
 
