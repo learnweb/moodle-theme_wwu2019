@@ -1,88 +1,25 @@
-$wwu-messages-width: 560px;
-
-.wwu-message-drawer {
-    display: flex;
-    flex-direction: column;
-
-    &.drawer {
-        z-index: $zindex-sticky;
-        position: fixed;
-        top: 10%;
-        left: 50%;
-        right: 0;
-        margin-left: -#{$wwu-messages-width/2};
-        height: 80%;
-        width: $wwu-messages-width;
-        box-shadow: 0 3px 7px rgba(0, 0, 0, .3);
-        padding: 0;
-        visibility: visible;
-        opacity: 1;
-        border-radius: .4rem;
-
-        @media (max-width: $wwu-messages-width) {
-            left: 0;
-            top: 0;
-            margin: 0;
-            height: 100%;
-            width: 100%;
-        }
-    }
-
-    &.hidden {
-        display: block;
-        right: $wwu-messages-width * -1;
-        // Turn off visibility so that nothing in the drawer can receive focus when
-        // it is hidden.
-        visibility: hidden;
-        opacity: 0;
-        // Delay visibility changes until after the slide right animation has completed.
-        @include transition(right .2s ease-in-out, visibility 0s ease-in-out .2s, opacity 0s ease-in-out .2s);
-    }
-
-    .header-container {
-        flex-grow: 0;
-    }
-
-    .body-container {
-        overflow-y: hidden;
-    }
-
-    .footer-container {
-        border-top: 0 none;
-    }
-
-    .footer-container > div {
-        flex-grow: 1;
-    }
-
-    .overview-section-toggle {
-        .collapsed-icon-container {
-            display: none;
-        }
-        .expanded-icon-container {
-            display: inline-block;
-        }
-
-        &.collapsed {
-            .collapsed-icon-container {
-                display: inline-block;
-            }
-            .expanded-icon-container {
-                display: none;
-            }
-        }
-    }
+// Core positions the right-hand drawer (message drawer) below Boost's fixed navbar.
+// The WWU header is not fixed, so the drawer uses the full viewport height.
+[data-region="right-hand-drawer"].drawer {
+    top: 0;
+    height: 100vh;
 }
 
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: #{$zindex-sticky - 10};
-    background-color: #000;
-    opacity: 0.5;
+// The drawer now starts at the top of the viewport: give the close button some room and a larger icon and click target.
+.message-app .closewidget {
+    padding-top: map-get($spacers, 2);
+
+    a {
+        display: inline-block;
+        padding: map-get($spacers, 1);
+    }
+
+    .icon {
+        font-size: map-get($iconsizes, 3);
+        width: map-get($iconwidthsizes, 3);
+        height: map-get($iconsizes, 3);
+        margin: 0;
+    }
 }
 
 #page-message-index {

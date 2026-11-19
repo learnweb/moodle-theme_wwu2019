@@ -61,7 +61,7 @@ export function init(snowValue) {
         localStorage.removeItem('theme_wwu2019/enable-snow');
     }
 
-    $('<div class="mr-3" id="snow-toggle">' +
+    $('<div class="me-3" id="snow-toggle">' +
         '<img style="margin-top: -6px; cursor: pointer" width="35">' +
         '</div>').insertAfter('#main-menu-right .main-menu-additions-item');
 

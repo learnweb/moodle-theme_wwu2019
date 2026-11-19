@@ -136,6 +136,14 @@ $page-padding: 1rem;
     }
 }
 
+@media print {
+    // The block column is hidden when printing, so the content uses the full width.
+    #page-content.blocks-post .region-main {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
 .pagelayout-embedded #page {
     padding: 0;
 }
@@ -198,6 +206,20 @@ body.pagelayout-popup #page {
     }
 }
 
+// Hidden courses and activities in the breadcrumb look like normal items, so they are not mistaken for disabled links.
+.breadcrumb-item.dimmed_text {
+    color: inherit;
+
+    a,
+    a:link,
+    a:visited {
+        color: var(--wwu-learnwebblue);
+
+        &:hover {
+            color: var(--wwu-learnwebblue-highlight);
+        }
+    }
+}
 
 .hide-600 {
     @media (max-width: 600px) {
@@ -296,6 +318,11 @@ footer#wwu-footer + div > div.container {
     color: map-get($theme-colors, 'light');
 }
 
+.wwu-copyright-warning {
+    padding-right: 6%;
+    padding-left: 16%;
+}
+
 .fp-navbar {
 
     background: #f2f2f2;
@@ -371,7 +398,7 @@ select#menumovecategoriesto {
     &:focus,
     &.focus {
         outline: unset;
-        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($color), $color, 15%), .5);
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-contrast($color), $color, 15%), .5);
     }
 }
 

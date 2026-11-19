@@ -24,20 +24,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['alert_heading'] = 'Alert {$a}';
-$string['alerttext'] = 'Text';
-$string['alerttitle'] = 'Title';
-$string['alerttype'] = 'Type';
 $string['alert_general'] = 'General';
+$string['alert_heading'] = 'Alert {$a}';
 $string['alert_info'] = 'Info';
 $string['alert_warning'] = 'Warning';
+$string['alerttext'] = 'Text';
 $string['alerttext_desc'] = 'Second part of the alert.';
+$string['alerttitle'] = 'Title';
 $string['alerttitle_desc'] = 'First part of the alert (printed in bold).';
+$string['alerttype'] = 'Type';
 $string['alerttype_desc'] = 'Type of alert (similar to debug levels).';
 $string['badgepreferences'] = 'Badge';
 $string['before'] = 'Before';
-$string['choosereadme'] = 'This theme is based on moodle\'s classic theme and aligned with the corporate design of the University of Münster';
+$string['choosereadme'] = 'Theme of the University of Münster, based on Moodle\'s Boost theme and aligned with the corporate design of the University of Münster.';
 $string['choosetheme'] = 'Choose theme';
+$string['copyrightwarning'] = 'Please note that no documents may be provided that infringe on third-party copyrights. This applies in particular to documents that you have not created yourself. Further information can be found <a href="http://www.ulb.uni-muenster.de/bibliothek/recht/urhg-hinweise.html">here</a> and <a href="http://www.ulb.uni-muenster.de/service/esa/dozenten-info.html">here</a>. If you cannot rule out copyright infringement due to unclear rights, please refrain from providing the document.';
 $string['dark'] = 'Dark';
 $string['dashboard'] = 'Dashboard';
 $string['editcoursesettings'] = 'Edit course settings';
@@ -85,4 +86,3 @@ $string['termindependent'] = 'Semester independent';
 $string['thiscourse'] = 'This Course';
 $string['usermenu'] = 'User menu';
 $string['viewfullsection'] = 'View full section';
-$string['copyrightwarning'] = 'Please note that no documents may be provided that infringe on third-party copyrights. This applies in particular to documents that you have not created yourself. Further information can be found <a href="http://www.ulb.uni-muenster.de/bibliothek/recht/urhg-hinweise.html">here</a> and <a href="http://www.ulb.uni-muenster.de/service/esa/dozenten-info.html">here</a>. If you cannot rule out copyright infringement due to unclear rights, please refrain from providing the document.';
